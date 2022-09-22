@@ -6,9 +6,10 @@ import SwiftUI
 
 @main
 struct TreasureHuntApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
+  var body: some Scene {
+    WindowGroup {
+      ContentView()
+        .environmentObject(LocationProvider())
     }
+  }
 }

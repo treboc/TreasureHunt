@@ -11,6 +11,14 @@
 		F212393328CA539C006754E3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F212393228CA539C006754E3 /* ContentView.swift */; };
 		F212393528CA539E006754E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F212393428CA539E006754E3 /* Assets.xcassets */; };
 		F212393828CA539E006754E3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F212393728CA539E006754E3 /* Preview Assets.xcassets */; };
+		F2A056A528DB7957007D7FFF /* LocationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A056A428DB7957007D7FFF /* LocationProvider.swift */; };
+		F2A056A728DB7983007D7FFF /* CLLocationCoordinate2DExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A056A628DB7983007D7FFF /* CLLocationCoordinate2DExtension.swift */; };
+		F2A056A928DB7A04007D7FFF /* DirectionDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A056A828DB7A04007D7FFF /* DirectionDistance.swift */; };
+		F2A056AB28DB7A63007D7FFF /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A056AA28DB7A63007D7FFF /* Coordinate.swift */; };
+		F2A056AD28DB8712007D7FFF /* StationsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A056AC28DB8712007D7FFF /* StationsStore.swift */; };
+		F2A056AF28DB8741007D7FFF /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A056AE28DB8740007D7FFF /* Station.swift */; };
+		F2A056B128DB9850007D7FFF /* FileManagerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A056B028DB9850007D7FFF /* FileManagerExtension.swift */; };
+		F2A056B528DB9B45007D7FFF /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A056B428DB9B45007D7FFF /* InputView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +27,14 @@
 		F212393228CA539C006754E3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F212393428CA539E006754E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F212393728CA539E006754E3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		F2A056A428DB7957007D7FFF /* LocationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationProvider.swift; sourceTree = "<group>"; };
+		F2A056A628DB7983007D7FFF /* CLLocationCoordinate2DExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLLocationCoordinate2DExtension.swift; sourceTree = "<group>"; };
+		F2A056A828DB7A04007D7FFF /* DirectionDistance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionDistance.swift; sourceTree = "<group>"; };
+		F2A056AA28DB7A63007D7FFF /* Coordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
+		F2A056AC28DB8712007D7FFF /* StationsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsStore.swift; sourceTree = "<group>"; };
+		F2A056AE28DB8740007D7FFF /* Station.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
+		F2A056B028DB9850007D7FFF /* FileManagerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerExtension.swift; sourceTree = "<group>"; };
+		F2A056B428DB9B45007D7FFF /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +68,10 @@
 			isa = PBXGroup;
 			children = (
 				F212393028CA539C006754E3 /* TreasureHuntApp.swift */,
-				F212393228CA539C006754E3 /* ContentView.swift */,
+				F2A056B228DB99B9007D7FFF /* Model */,
+				F2A056B328DB99CE007D7FFF /* Search */,
+				F2A056B628DB9B5E007D7FFF /* Input */,
+				F2A056B028DB9850007D7FFF /* FileManagerExtension.swift */,
 				F212393428CA539E006754E3 /* Assets.xcassets */,
 				F212393628CA539E006754E3 /* Preview Content */,
 			);
@@ -65,6 +84,35 @@
 				F212393728CA539E006754E3 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		F2A056B228DB99B9007D7FFF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F2A056AA28DB7A63007D7FFF /* Coordinate.swift */,
+				F2A056AC28DB8712007D7FFF /* StationsStore.swift */,
+				F2A056AE28DB8740007D7FFF /* Station.swift */,
+				F2A056A428DB7957007D7FFF /* LocationProvider.swift */,
+				F2A056A628DB7983007D7FFF /* CLLocationCoordinate2DExtension.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F2A056B328DB99CE007D7FFF /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				F212393228CA539C006754E3 /* ContentView.swift */,
+				F2A056A828DB7A04007D7FFF /* DirectionDistance.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		F2A056B628DB9B5E007D7FFF /* Input */ = {
+			isa = PBXGroup;
+			children = (
+				F2A056B428DB9B45007D7FFF /* InputView.swift */,
+			);
+			path = Input;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,8 +185,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2A056A528DB7957007D7FFF /* LocationProvider.swift in Sources */,
+				F2A056B128DB9850007D7FFF /* FileManagerExtension.swift in Sources */,
 				F212393328CA539C006754E3 /* ContentView.swift in Sources */,
+				F2A056AF28DB8741007D7FFF /* Station.swift in Sources */,
 				F212393128CA539C006754E3 /* TreasureHuntApp.swift in Sources */,
+				F2A056A728DB7983007D7FFF /* CLLocationCoordinate2DExtension.swift in Sources */,
+				F2A056A928DB7A04007D7FFF /* DirectionDistance.swift in Sources */,
+				F2A056B528DB9B45007D7FFF /* InputView.swift in Sources */,
+				F2A056AD28DB8712007D7FFF /* StationsStore.swift in Sources */,
+				F2A056AB28DB7A63007D7FFF /* Coordinate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,6 +326,7 @@
 				DEVELOPMENT_TEAM = Q6PD97MRX4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Show direction and distance to next station.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -299,6 +356,7 @@
 				DEVELOPMENT_TEAM = Q6PD97MRX4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Show direction and distance to next station.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
