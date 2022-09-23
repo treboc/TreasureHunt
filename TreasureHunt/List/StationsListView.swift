@@ -6,7 +6,7 @@ import SwiftUI
 
 struct StationsListView: View {
 
-  var stationStore: StationsStore
+  @ObservedObject var stationStore: StationsStore
 
   var body: some View {
     NavigationView {

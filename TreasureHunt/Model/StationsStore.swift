@@ -4,7 +4,7 @@
 
 import Foundation
 
-class StationsStore {
+class StationsStore: ObservableObject {
 
   var index: Int = -1
 
