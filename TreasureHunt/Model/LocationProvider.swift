@@ -22,7 +22,7 @@ class LocationProvider: NSObject, ObservableObject {
   @Published var distance: Double = 0
   @Published var wrongAuthorization: Bool = false
   @Published var reachedStation: Bool = false
-  @Published var region: MKCoordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), latitudinalMeters: 1000, longitudinalMeters: 1000)
+  var region: MKCoordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), latitudinalMeters: 1000, longitudinalMeters: 1000)
   private var cancellables = Set<AnyCancellable>()
   
 //  var address: String? = nil {
@@ -88,10 +88,8 @@ extension LocationProvider: CLLocationManagerDelegate {
   }
   
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-    location = locations.last
-
-    if let location = location {
-      region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
+    if let location = locations.last {
+      self.location = location
     }
   }
   
