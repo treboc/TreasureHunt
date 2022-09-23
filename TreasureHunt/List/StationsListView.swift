@@ -6,13 +6,10 @@ import SwiftUI
 
 struct StationsListView: View {
 
-  var stationStore: StationsStore
+  @ObservedObject var stationStore: StationsStore
 
   var body: some View {
-    VStack {
-      Text("Stationen")
-        .font(.headline)
-        .padding()
+    NavigationView {
       List {
         ForEach(stationStore.stations) { station in
           VStack(alignment: .leading) {
@@ -28,6 +25,7 @@ struct StationsListView: View {
           }
         }
       }
+      .navigationTitle("Stationen")
     }
   }
 }
