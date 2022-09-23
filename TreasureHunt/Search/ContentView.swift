@@ -9,7 +9,7 @@ import MapKit
 struct ContentView: View {
 
   @EnvironmentObject private var locationProvider: LocationProvider
-  let stationsStore = StationsStore()
+  @State var stationsStore = StationsStore()
   @State var name: String = ""
   @State var showInput = false
   @State var showList = false
