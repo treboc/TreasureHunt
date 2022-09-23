@@ -5,7 +5,6 @@
 import SwiftUI
 
 struct StationsListView: View {
-
   @ObservedObject var stationStore: StationsStore
 
   var body: some View {
@@ -19,11 +18,7 @@ struct StationsListView: View {
               .font(.footnote)
           }
         }
-        .onDelete { indexSet in
-          if let index = indexSet.first {
-            stationStore.stations.remove(at: index)
-          }
-        }
+        .onDelete(perform: stationStore.delete)
       }
       .navigationTitle("Stationen")
     }

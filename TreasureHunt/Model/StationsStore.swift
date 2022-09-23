@@ -45,4 +45,8 @@ class StationsStore: ObservableObject {
     index = index - 1
     return stations[index]
   }
+
+  func delete(at offsets: IndexSet) {
+    stations.remove(atOffsets: offsets)
+  }
 }
