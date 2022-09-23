@@ -7,34 +7,60 @@ import MapKit
 
 struct InputView: View {
 
+  @Environment(\.presentationMode) var presentationMode
   @State var name: String = ""
   let location: CLLocation
-  @State var region: MKCoordinateRegion = .init(center: CLLocationCoordinate2D(latitude: 50, longitude: 6), latitudinalMeters: 200, longitudinalMeters: 200)
+  let stationsStore: StationsStore
+  @State var region: MKCoordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), latitudinalMeters: 1000, longitudinalMeters: 1000)
 
-  init(location: CLLocation) {
+  init(location: CLLocation, stationsStore: StationsStore) {
     self.location = location
-
-    region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 500, longitudinalMeters: 500)
+    self.stationsStore = stationsStore
   }
 
   var body: some View {
     VStack {
-      Map(coordinateRegion: $region)
-        .frame(height: 300)
+      ZStack {
+        Map(coordinateRegion: $region)
 
-      VStack {
+        Image(systemName: "circle")
+      }
+      .frame(height: 300)
+
+      VStack(spacing: 5) {
         TextField("Name", text: $name)
+
+        Text("\(region.center.latitude), \(region.center.longitude)")
+          .font(.footnote)
+          .monospacedDigit()
+
+        Button {
+
+          let station = Station(clCoordinate: region.center, name: name)
+          stationsStore.stations.append(station)
+
+          presentationMode.wrappedValue.dismiss()
+        } label: {
+          Text("Save")
+        }
+        .buttonStyle(.bordered)
+        .padding()
       }
       .padding()
 
       Spacer()
     }
     .edgesIgnoringSafeArea(.top)
+    .onAppear {
+      region = MKCoordinateRegion(center: location.coordinate,
+                                  latitudinalMeters: 1000,
+                                  longitudinalMeters: 1000)
+    }
   }
 }
 
 struct InputView_Previews: PreviewProvider {
   static var previews: some View {
-    InputView(location: CLLocation(latitude: 50, longitude: 6))
+    InputView(location: CLLocation(latitude: 50, longitude: 6), stationsStore: StationsStore())
   }
 }

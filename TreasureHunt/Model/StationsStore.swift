@@ -6,6 +6,8 @@ import Foundation
 
 class StationsStore {
 
+  var index: Int = -1
+
   var stations: [Station] {
     didSet {
       do {
@@ -25,5 +27,22 @@ class StationsStore {
     } catch {
       self.stations = []
     }
+  }
+
+  func next() -> Station? {
+    let nextIndex = index + 1
+    guard stations.count > nextIndex else {
+      return nil
+    }
+    index = nextIndex
+    return stations[nextIndex]
+  }
+
+  func previous() -> Station? {
+    guard index > 0 else {
+      return nil
+    }
+    index = index - 1
+    return stations[index]
   }
 }

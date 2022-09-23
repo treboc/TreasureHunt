@@ -3,9 +3,16 @@
 //
 
 import Foundation
+import CoreLocation
 
-struct Station: Codable {
+struct Station: Codable, Identifiable {
+  var id: UUID = UUID()
   let coordinate: Coordinate
   let name: String
   var question: String?
+
+  init(clCoordinate: CLLocationCoordinate2D, name: String) {
+    self.coordinate = Coordinate(clCoordinate: clCoordinate)
+    self.name = name
+  }
 }

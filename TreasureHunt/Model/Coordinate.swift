@@ -3,8 +3,19 @@
 //
 
 import Foundation
+import CoreLocation
 
 struct Coordinate: Codable {
   let latitude: Double
   let longitude: Double
+
+  init(latitude: Double, longitude: Double) {
+    self.latitude = latitude
+    self.longitude = longitude
+  }
+
+  init(clCoordinate: CLLocationCoordinate2D) {
+    latitude = clCoordinate.latitude
+    longitude = clCoordinate.longitude
+  }
 }

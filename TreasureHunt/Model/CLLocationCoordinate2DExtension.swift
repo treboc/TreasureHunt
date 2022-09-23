@@ -12,7 +12,7 @@ func rad2deg(_ number: Double) -> Double {
   return number * 180 / .pi
 }
 
-extension CLLocationCoordinate2D {  
+extension CLLocationCoordinate2D {
   
   // https://stackoverflow.com/q/3925942/498796
   func bearing(to coordinate: CLLocationCoordinate2D) -> Double {

@@ -3,35 +3,68 @@
 //
 
 import SwiftUI
+import CoreLocation
+import MapKit
 
 struct ContentView: View {
 
-  @State var showInput = false {
-    didSet {
-      print("showInput: \(showInput)")
-    }
-  }
-  let stationsStore = StationsStore()
   @EnvironmentObject private var locationProvider: LocationProvider
+  let stationsStore = StationsStore()
+  @State var name: String = ""
+  @State var showInput = false
+  @State var showList = false
 
   var body: some View {
     NavigationView {
-      VStack {
-        Text("Name of the station")
-        DirectionDistance(angle: 30, error: nil, distance: 30)
-      }
-      .navigationBarItems(trailing:
-                            Button(action: {
-        showInput.toggle()
-      }) {
-        Image(systemName: "plus")
-      })
-      .sheet(isPresented: $showInput) {
-        if let location = locationProvider.location {
-          InputView(location: location)
-        } else {
-          EmptyView()
+      ZStack {
+
+        Map(coordinateRegion: $locationProvider.region, showsUserLocation: true)
+          .opacity(0.5)
+          .edgesIgnoringSafeArea(.all)
+
+        VStack {
+          Spacer()
+
+          DirectionDistance(angle: locationProvider.angle, error: nil, distance: locationProvider.distance)
+
+          Spacer()
+
+          Button("Nächste Station") {
+            if let station = stationsStore.next() {
+              name = station.name
+
+              let coordinate = station.coordinate
+              locationProvider.nextLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+            }
+          }
+          .buttonStyle(.borderedProminent)
         }
+      }
+      .navigationBarItems(
+        leading:
+          Button(action: {
+            showList.toggle()
+          }, label: {
+            Image(systemName: "list.dash")
+              .padding()
+          }),
+        trailing:
+          Button(action: {
+            showInput.toggle()
+          }) {
+            Image(systemName: "plus")
+              .padding()
+          })
+      .navigationTitle(name)
+      .fullScreenCover(isPresented: $showInput, content: {
+        if let location = locationProvider.location {
+          InputView(location: location, stationsStore: stationsStore)
+//        } else {
+//          EmptyView()
+        }
+      })
+      .sheet(isPresented: $showList) {
+        StationsListView(stationStore: stationsStore)
       }
     }
   }

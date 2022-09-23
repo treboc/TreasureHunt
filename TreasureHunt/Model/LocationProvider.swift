@@ -5,6 +5,7 @@
 import UIKit
 import CoreLocation
 import Combine
+import MapKit
 
 enum LocationProviderError: Error {
   case noLocation
@@ -14,27 +15,29 @@ class LocationProvider: NSObject, ObservableObject {
   
   private let locationManager: CLLocationManager
   @Published var location: CLLocation?
-  @Published var addressLocation: CLLocation?
+  var nextLocation: CLLocation?
   @Published var error: Error?
   @Published var angle: Double = 0
   @Published var heading: CLHeading? = nil
   @Published var distance: Double = 0
   @Published var wrongAuthorization: Bool = false
+  @Published var reachedStation: Bool = false
+  @Published var region: MKCoordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), latitudinalMeters: 1000, longitudinalMeters: 1000)
   private var cancellables = Set<AnyCancellable>()
   
-  var address: String? = nil {
-    didSet {
-      if let address = address {
-        CLGeocoder().geocodeAddressString(address) { placementMarks, error in
-          if let placementMark = placementMarks?.first, let location = placementMark.location {
-            self.addressLocation = location
-          } else {
-            self.error = error
-          }
-        }
-      }
-    }
-  }
+//  var address: String? = nil {
+//    didSet {
+//      if let address = address {
+//        CLGeocoder().geocodeAddressString(address) { placementMarks, error in
+//          if let placementMark = placementMarks?.first, let location = placementMark.location {
+//            self.nextLocation = location
+//          } else {
+//            self.error = error
+//          }
+//        }
+//      }
+//    }
+//  }
   
   init(locationManager: CLLocationManager = CLLocationManager()) {
     
@@ -46,7 +49,7 @@ class LocationProvider: NSObject, ObservableObject {
     locationManager.delegate = self
     
     $location.sink(receiveValue: updateLocation).store(in: &cancellables)
-    $addressLocation.sink(receiveValue: updateAddressLocation).store(in: &cancellables)
+//    $nextLocation.sink(receiveValue: updateAddressLocation).store(in: &cancellables)
     $heading.sink(receiveValue: update).store(in: &cancellables)
   }
   
@@ -65,7 +68,7 @@ class LocationProvider: NSObject, ObservableObject {
   }
   
   func reset() {
-    addressLocation = nil
+    nextLocation = nil
     distance = 0
   }
 }
@@ -74,18 +77,22 @@ extension LocationProvider: CLLocationManagerDelegate {
   func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
     
     switch manager.authorizationStatus {
-    case .authorizedWhenInUse:
-      wrongAuthorization = false
-      print("authorizedWhenInUse")
+      case .authorizedWhenInUse:
+        wrongAuthorization = false
+        print("authorizedWhenInUse")
         start()
-    default:
-      wrongAuthorization = true
-      print("No authorization")
+      default:
+        wrongAuthorization = true
+        print("No authorization")
     }
   }
   
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     location = locations.last
+
+    if let location = location {
+      region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
+    }
   }
   
   func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
@@ -98,21 +105,21 @@ extension LocationProvider: CLLocationManagerDelegate {
   
   private func updateLocation(location: CLLocation?) {
     updateAngle(heading: heading)
-    updateDistance(location: location, addressLocation: addressLocation)
+    updateDistance(location: location, nextLocation: nextLocation)
   }
   
   private func updateAddressLocation(addressLocation: CLLocation?) {
     updateAngle(heading: heading)
-    updateDistance(location: location, addressLocation: addressLocation)
+    updateDistance(location: location, nextLocation: addressLocation)
   }
   
   private func update(heading: CLHeading?) {
     updateAngle(heading: heading)
-    updateDistance(location: location, addressLocation: addressLocation)
+    updateDistance(location: location, nextLocation: nextLocation)
   }
   
   func updateAngle(heading: CLHeading?) {
-    if let coordinate = addressLocation?.coordinate,
+    if let coordinate = nextLocation?.coordinate,
           let myCoordinate = location?.coordinate,
           let heading = heading {
       
@@ -123,11 +130,17 @@ extension LocationProvider: CLLocationManagerDelegate {
     }
   }
   
-  func updateDistance(location: CLLocation?, addressLocation: CLLocation?) {
+  func updateDistance(location: CLLocation?, nextLocation: CLLocation?) {
     if let location = location,
-       let addressLocation = addressLocation {
+       let nextLocation = nextLocation {
       
-      distance = location.distance(from: addressLocation)
+      distance = location.distance(from: nextLocation)
+
+      if distance < 5 {
+        reachedStation = true
+      } else {
+        reachedStation = false
+      }
     }
   }
 
