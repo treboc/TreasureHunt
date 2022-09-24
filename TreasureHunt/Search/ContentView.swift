@@ -11,11 +11,11 @@ struct ContentView: View {
   @EnvironmentObject private var stationsStore: StationsStore
   @State var showInput = false
   @State var showList = false
+  @State private var userTrackingMode: MapUserTrackingMode = .follow
 
   var body: some View {
     NavigationView {
       ZStack {
-
         Map(coordinateRegion: $locationProvider.region, showsUserLocation: true)
           .opacity(0.5)
           .edgesIgnoringSafeArea(.all)
@@ -61,11 +61,9 @@ struct ContentView: View {
       .navigationTitle(stationsStore.currentStation?.name ?? "")
       .fullScreenCover(isPresented: $showInput) {
         if let location = locationProvider.location {
-          InputView(location: location, stationsStore: stationsStore)
-//        } else {
-//          EmptyView()
+          InputView(location: location)
         }
-      })
+      }
       .sheet(isPresented: $showList) {
         StationsListView(stationStore: stationsStore)
       }

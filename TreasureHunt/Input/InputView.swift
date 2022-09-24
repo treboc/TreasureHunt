@@ -6,16 +6,16 @@ import SwiftUI
 import MapKit
 
 struct InputView: View {
-
-  @Environment(\.presentationMode) var presentationMode
+  @EnvironmentObject private var stationsStore: StationsStore
+  @Environment(\.dismiss) private var dismiss
   @State var name: String = ""
-  let location: CLLocation
-  let stationsStore: StationsStore
-  @State var region: MKCoordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), latitudinalMeters: 1000, longitudinalMeters: 1000)
+  @State var region: MKCoordinateRegion
 
-  init(location: CLLocation, stationsStore: StationsStore) {
-    self.location = location
-    self.stationsStore = stationsStore
+  init(location: CLLocation) {
+    let region = MKCoordinateRegion(center: location.coordinate,
+                                latitudinalMeters: 1000,
+                                longitudinalMeters: 1000)
+    _region = State(initialValue: region)
   }
 
   var body: some View {
@@ -35,11 +35,9 @@ struct InputView: View {
           .monospacedDigit()
 
         Button {
-
           let station = Station(clCoordinate: region.center, name: name)
           stationsStore.stations.append(station)
-
-          presentationMode.wrappedValue.dismiss()
+          dismiss()
         } label: {
           Text("Save")
         }
@@ -51,16 +49,19 @@ struct InputView: View {
       Spacer()
     }
     .edgesIgnoringSafeArea(.top)
-    .onAppear {
-      region = MKCoordinateRegion(center: location.coordinate,
-                                  latitudinalMeters: 1000,
-                                  longitudinalMeters: 1000)
-    }
   }
 }
 
 struct InputView_Previews: PreviewProvider {
   static var previews: some View {
-    InputView(location: CLLocation(latitude: 50, longitude: 6), stationsStore: StationsStore())
+    InputView(location: CLLocation(latitude: 50, longitude: 6))
+      .environmentObject(StationsStore())
+  }
+}
+
+extension InputView {
+  private func saveButtonTapped() {
+    let location = region.center
+    stationsStore.newStation(with: name, and: location)
   }
 }

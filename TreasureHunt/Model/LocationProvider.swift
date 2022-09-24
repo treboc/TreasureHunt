@@ -21,22 +21,8 @@ class LocationProvider: NSObject, ObservableObject {
   @Published var distance: Double = 0
   @Published var wrongAuthorization: Bool = false
   @Published var reachedStation: Bool = false
-  @Published var region: MKCoordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), latitudinalMeters: 1000, longitudinalMeters: 1000)
+  var region: MKCoordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), latitudinalMeters: 1000, longitudinalMeters: 1000)
   private var cancellables = Set<AnyCancellable>()
-  
-//  var address: String? = nil {
-//    didSet {
-//      if let address = address {
-//        CLGeocoder().geocodeAddressString(address) { placementMarks, error in
-//          if let placementMark = placementMarks?.first, let location = placementMark.location {
-//            self.nextLocation = location
-//          } else {
-//            self.error = error
-//          }
-//        }
-//      }
-//    }
-//  }
   
   init(locationManager: CLLocationManager = CLLocationManager()) {
     self.locationManager = locationManager
@@ -47,7 +33,7 @@ class LocationProvider: NSObject, ObservableObject {
     locationManager.delegate = self
     
     $location.sink(receiveValue: updateLocation).store(in: &cancellables)
-//    $nextLocation.sink(receiveValue: updateAddressLocation).store(in: &cancellables)
+    //    $nextLocation.sink(receiveValue: updateAddressLocation).store(in: &cancellables)
     $heading.sink(receiveValue: update).store(in: &cancellables)
   }
   
@@ -75,13 +61,13 @@ extension LocationProvider: CLLocationManagerDelegate {
   func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
     
     switch manager.authorizationStatus {
-      case .authorizedWhenInUse:
-        wrongAuthorization = false
-        print("authorizedWhenInUse")
-        start()
-      default:
-        wrongAuthorization = true
-        print("No authorization")
+    case .authorizedWhenInUse:
+      wrongAuthorization = false
+      print("authorizedWhenInUse")
+      start()
+    default:
+      wrongAuthorization = true
+      print("No authorization")
     }
   }
   
@@ -118,13 +104,13 @@ extension LocationProvider: CLLocationManagerDelegate {
   
   func updateAngle(heading: CLHeading?) {
     if let coordinate = nextLocation?.coordinate,
-          let myCoordinate = location?.coordinate,
-          let heading = heading {
+       let myCoordinate = location?.coordinate,
+       let heading = heading {
       
       let bearing = myCoordinate.bearing(to: coordinate)
       angle = bearing - heading.magneticHeading
-//    } else {
-//      print("missing value \(addressLocation?.coordinate), \(location?.coordinate), \(heading)")
+      //    } else {
+      //      print("missing value \(addressLocation?.coordinate), \(location?.coordinate), \(heading)")
     }
   }
   
@@ -146,8 +132,8 @@ extension LocationProvider: CLLocationManagerDelegate {
 
     guard let deviceCoordinate = deviceCoordinate,
           let heading = heading else {
-            return 0
-          }
+      return 0
+    }
     let clCoordinate = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
     let bearing = deviceCoordinate.coordinate.bearing(to: clCoordinate)
     return bearing - heading

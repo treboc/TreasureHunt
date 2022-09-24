@@ -2,36 +2,45 @@
 //  
 //
 
+import Combine
 import Foundation
+import CoreLocation
 
 class StationsStore: ObservableObject {
-
+  var cancellable: AnyCancellable?
   var index: Int = -1
   
   @Published var stations: [Station] = []
   @Published var currentStation: Station?
-  
+
   init() {
     loadStationsFromDisk()
     if let station = stations.first {
       currentStation = station
     }
-    
+
     cancellable = $stations
       .receive(on: RunLoop.main)
       .sink { [weak self] _ in
         self?.writeStationsToDisk()
       }
-    }
   }
 
-  init() {
-
+  private func loadStationsFromDisk() {
     do {
       let data = try Data(contentsOf: FileManager.default.stationsURL())
       self.stations = try JSONDecoder().decode([Station].self, from: data)
     } catch {
       self.stations = []
+    }
+  }
+
+  private func writeStationsToDisk() {
+    do {
+      let data = try JSONEncoder().encode(stations)
+      try data.write(to: FileManager.default.stationsURL())
+    } catch {
+      print("\(#file), \(#line): \(error)")
     }
   }
 
