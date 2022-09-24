@@ -5,7 +5,6 @@
 import SwiftUI
 
 struct StationsListView: View {
-
   @ObservedObject var stationStore: StationsStore
 
   var body: some View {

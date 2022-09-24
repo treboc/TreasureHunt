@@ -1,5 +1,5 @@
 //  Created by Dominik Hauser on 21.09.22.
-//  
+//
 //
 
 import Combine
