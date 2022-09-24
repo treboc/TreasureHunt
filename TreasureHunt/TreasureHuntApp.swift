@@ -6,10 +6,12 @@ import SwiftUI
 
 @main
 struct TreasureHuntApp: App {
+  @StateObject private var locationProvider = LocationProvider()
+    
   var body: some Scene {
     WindowGroup {
       ContentView()
-        .environmentObject(LocationProvider())
+        .environmentObject(locationProvider)
     }
   }
 }

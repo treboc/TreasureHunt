@@ -8,7 +8,7 @@ class StationsStore: ObservableObject {
 
   var index: Int = -1
 
-  var stations: [Station] {
+  @Published var stations: [Station] {
     didSet {
       do {
         let data = try JSONEncoder().encode(stations)
