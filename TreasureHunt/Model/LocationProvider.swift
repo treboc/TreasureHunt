@@ -14,7 +14,7 @@ enum LocationProviderError: Error {
 class LocationProvider: NSObject, ObservableObject {
   
   private let locationManager: CLLocationManager
-  @Published var location: CLLocation?
+  var location: CLLocation?
   var nextLocation: CLLocation?
   @Published var error: Error?
   @Published var angle: Double = 0
@@ -48,7 +48,6 @@ class LocationProvider: NSObject, ObservableObject {
     locationManager.requestWhenInUseAuthorization()
     locationManager.delegate = self
     
-    $location.sink(receiveValue: updateLocation).store(in: &cancellables)
 //    $nextLocation.sink(receiveValue: updateAddressLocation).store(in: &cancellables)
     $heading.sink(receiveValue: update).store(in: &cancellables)
   }
@@ -88,10 +87,8 @@ extension LocationProvider: CLLocationManagerDelegate {
   }
   
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-    location = locations.last
-
-    if let location = location {
-      region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
+    if let location = locations.last {
+      updateLocation(location: location)
     }
   }
   

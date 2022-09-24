@@ -13,12 +13,12 @@ struct ContentView: View {
   @State var name: String = ""
   @State var showInput = false
   @State var showList = false
+  @State private var userTrackingMode: MapUserTrackingMode = .follow
 
   var body: some View {
     NavigationView {
       ZStack {
-
-        Map(coordinateRegion: $locationProvider.region, showsUserLocation: true)
+        Map(coordinateRegion: $locationProvider.region, showsUserLocation: true, userTrackingMode: $userTrackingMode)
           .opacity(0.5)
           .edgesIgnoringSafeArea(.all)
 
