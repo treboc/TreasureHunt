@@ -8,11 +8,14 @@ import CoreLocation
 struct Station: Codable, Identifiable {
   var id: UUID = UUID()
   let coordinate: Coordinate
+  let triggerDistance: Double
   let name: String
-  var question: String?
+  let question: String
 
-  init(clCoordinate: CLLocationCoordinate2D, name: String) {
+  init(clCoordinate: CLLocationCoordinate2D, triggerDistance: Double = 5, name: String, question: String = "") {
     self.coordinate = Coordinate(clCoordinate: clCoordinate)
+    self.triggerDistance = triggerDistance
     self.name = name
+    self.question = question
   }
 }
