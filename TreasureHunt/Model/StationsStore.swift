@@ -7,14 +7,20 @@ import Foundation
 class StationsStore: ObservableObject {
 
   var index: Int = -1
-
-  var stations: [Station] {
-    didSet {
-      do {
-        let data = try JSONEncoder().encode(stations)
-        try data.write(to: FileManager.default.stationsURL())
-      } catch {
-        print("\(#file), \(#line): \(error)")
+  
+  @Published var stations: [Station] = []
+  @Published var currentStation: Station?
+  
+  init() {
+    loadStationsFromDisk()
+    if let station = stations.first {
+      currentStation = station
+    }
+    
+    cancellable = $stations
+      .receive(on: RunLoop.main)
+      .sink { [weak self] _ in
+        self?.writeStationsToDisk()
       }
     }
   }
@@ -44,5 +50,18 @@ class StationsStore: ObservableObject {
     }
     index = index - 1
     return stations[index]
+  }
+
+  func setNextStation() {
+    currentStation = next()
+  }
+
+  func newStation(with name: String, and location: CLLocationCoordinate2D) {
+    let station = Station(clCoordinate: location, name: name)
+    stations.append(station)
+  }
+
+  func deleteStation(at offsets: IndexSet) {
+    stations.remove(atOffsets: offsets)
   }
 }

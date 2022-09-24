@@ -12,7 +12,6 @@ enum LocationProviderError: Error {
 }
 
 class LocationProvider: NSObject, ObservableObject {
-  
   private let locationManager: CLLocationManager
   @Published var location: CLLocation?
   var nextLocation: CLLocation?
@@ -40,7 +39,6 @@ class LocationProvider: NSObject, ObservableObject {
 //  }
   
   init(locationManager: CLLocationManager = CLLocationManager()) {
-    
     self.locationManager = locationManager
     
     super.init()

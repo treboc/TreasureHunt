@@ -6,10 +6,11 @@ import SwiftUI
 import MapKit
 
 struct DirectionDistance: View {
-  
-  let angle: Double
-  let error: Error?
-  let distance: Double
+  @Binding var angle: Double
+  @Binding var distance: Double
+
+  let error: Error? = nil
+
   private let distanceFormatter: MKDistanceFormatter = {
     let formatter = MKDistanceFormatter()
     formatter.unitStyle = MKDistanceFormatter.DistanceUnitStyle.default
@@ -43,7 +44,7 @@ struct DirectionDistance: View {
 
 struct DirectionDistance_Previews: PreviewProvider {
     static var previews: some View {
-      DirectionDistance(angle: 20, error: nil, distance: 30)
-        .previewLayout(.sizeThatFits)
+      DirectionDistance(angle: .constant(30), distance: .constant(30))
+      .previewLayout(.sizeThatFits)
     }
 }

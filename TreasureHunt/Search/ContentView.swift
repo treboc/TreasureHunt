@@ -7,10 +7,8 @@ import CoreLocation
 import MapKit
 
 struct ContentView: View {
-
   @EnvironmentObject private var locationProvider: LocationProvider
-  @State var stationsStore = StationsStore()
-  @State var name: String = ""
+  @EnvironmentObject private var stationsStore: StationsStore
   @State var showInput = false
   @State var showList = false
 
@@ -25,17 +23,22 @@ struct ContentView: View {
         VStack {
           Spacer()
 
-          DirectionDistance(angle: locationProvider.angle, error: nil, distance: locationProvider.distance)
+          DirectionDistance(angle: $locationProvider.angle, distance: $locationProvider.distance)
 
           Spacer()
 
           Button("Nächste Station") {
-            if let station = stationsStore.next() {
-              name = station.name
-
-              let coordinate = station.coordinate
-              locationProvider.nextLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+            stationsStore.setNextStation()
+            if let station = stationsStore.currentStation {
+              let location: CLLocation = .init(latitude: station.coordinate.latitude,
+                                                           longitude: station.coordinate.longitude)
+              locationProvider.nextLocation = location
             }
+          }
+          .buttonStyle(.borderedProminent)
+
+          Button("Center") {
+            userTrackingMode = .follow
           }
           .buttonStyle(.borderedProminent)
         }
@@ -55,8 +58,8 @@ struct ContentView: View {
             Image(systemName: "plus")
               .padding()
           })
-      .navigationTitle(name)
-      .fullScreenCover(isPresented: $showInput, content: {
+      .navigationTitle(stationsStore.currentStation?.name ?? "")
+      .fullScreenCover(isPresented: $showInput) {
         if let location = locationProvider.location {
           InputView(location: location, stationsStore: stationsStore)
 //        } else {
