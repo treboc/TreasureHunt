@@ -19,11 +19,7 @@ struct StationsListView: View {
               .font(.footnote)
           }
         }
-        .onDelete { indexSet in
-          if let index = indexSet.first {
-            stationStore.stations.remove(at: index)
-          }
-        }
+        .onDelete(perform: stationStore.deleteStation)
       }
       .navigationTitle("Stationen")
     }
