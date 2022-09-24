@@ -65,7 +65,8 @@ class StationsStore: ObservableObject {
     currentStation = next()
   }
 
-  func newStation(with name: String, and location: CLLocationCoordinate2D) {
+  func newStation(with name: String, question: String, and location: CLLocationCoordinate2D) {
+    
     let station = Station(clCoordinate: location, name: name)
     stations.append(station)
   }

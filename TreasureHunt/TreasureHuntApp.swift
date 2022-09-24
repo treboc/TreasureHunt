@@ -11,7 +11,7 @@ struct TreasureHuntApp: App {
 
   var body: some Scene {
     WindowGroup {
-      ContentView()
+      MainView()
         .environmentObject(locationProvider)
         .environmentObject(stationsStore)
         .onAppear {

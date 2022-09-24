@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8ADA85BB28DEF68500CDFF5B /* AddNewStationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADA85BA28DEF68500CDFF5B /* AddNewStationView.swift */; };
 		F212393128CA539C006754E3 /* TreasureHuntApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F212393028CA539C006754E3 /* TreasureHuntApp.swift */; };
-		F212393328CA539C006754E3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F212393228CA539C006754E3 /* ContentView.swift */; };
+		F212393328CA539C006754E3 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F212393228CA539C006754E3 /* MainView.swift */; };
 		F212393528CA539E006754E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F212393428CA539E006754E3 /* Assets.xcassets */; };
 		F212393828CA539E006754E3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F212393728CA539E006754E3 /* Preview Assets.xcassets */; };
 		F2231E9928DDABC70049C73C /* StationsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2231E9828DDABC70049C73C /* StationsListView.swift */; };
@@ -19,13 +20,13 @@
 		F2A056AD28DB8712007D7FFF /* StationsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A056AC28DB8712007D7FFF /* StationsStore.swift */; };
 		F2A056AF28DB8741007D7FFF /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A056AE28DB8740007D7FFF /* Station.swift */; };
 		F2A056B128DB9850007D7FFF /* FileManagerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A056B028DB9850007D7FFF /* FileManagerExtension.swift */; };
-		F2A056B528DB9B45007D7FFF /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A056B428DB9B45007D7FFF /* InputView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8ADA85BA28DEF68500CDFF5B /* AddNewStationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewStationView.swift; sourceTree = "<group>"; };
 		F212392D28CA539C006754E3 /* TreasureHunt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TreasureHunt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F212393028CA539C006754E3 /* TreasureHuntApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreasureHuntApp.swift; sourceTree = "<group>"; };
-		F212393228CA539C006754E3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F212393228CA539C006754E3 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		F212393428CA539E006754E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F212393728CA539E006754E3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		F2231E9828DDABC70049C73C /* StationsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsListView.swift; sourceTree = "<group>"; };
@@ -36,7 +37,6 @@
 		F2A056AC28DB8712007D7FFF /* StationsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsStore.swift; sourceTree = "<group>"; };
 		F2A056AE28DB8740007D7FFF /* Station.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
 		F2A056B028DB9850007D7FFF /* FileManagerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerExtension.swift; sourceTree = "<group>"; };
-		F2A056B428DB9B45007D7FFF /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,7 +112,7 @@
 		F2A056B328DB99CE007D7FFF /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				F212393228CA539C006754E3 /* ContentView.swift */,
+				F212393228CA539C006754E3 /* MainView.swift */,
 				F2A056A828DB7A04007D7FFF /* DirectionDistance.swift */,
 			);
 			path = Search;
@@ -121,7 +121,7 @@
 		F2A056B628DB9B5E007D7FFF /* Input */ = {
 			isa = PBXGroup;
 			children = (
-				F2A056B428DB9B45007D7FFF /* InputView.swift */,
+				8ADA85BA28DEF68500CDFF5B /* AddNewStationView.swift */,
 			);
 			path = Input;
 			sourceTree = "<group>";
@@ -198,14 +198,14 @@
 			files = (
 				F2A056A528DB7957007D7FFF /* LocationProvider.swift in Sources */,
 				F2A056B128DB9850007D7FFF /* FileManagerExtension.swift in Sources */,
-				F212393328CA539C006754E3 /* ContentView.swift in Sources */,
+				F212393328CA539C006754E3 /* MainView.swift in Sources */,
 				F2A056AF28DB8741007D7FFF /* Station.swift in Sources */,
 				F212393128CA539C006754E3 /* TreasureHuntApp.swift in Sources */,
 				F2A056A728DB7983007D7FFF /* CLLocationCoordinate2DExtension.swift in Sources */,
 				F2A056A928DB7A04007D7FFF /* DirectionDistance.swift in Sources */,
 				F2231E9928DDABC70049C73C /* StationsListView.swift in Sources */,
-				F2A056B528DB9B45007D7FFF /* InputView.swift in Sources */,
 				F2A056AD28DB8712007D7FFF /* StationsStore.swift in Sources */,
+				8ADA85BB28DEF68500CDFF5B /* AddNewStationView.swift in Sources */,
 				F2A056AB28DB7A63007D7FFF /* Coordinate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
