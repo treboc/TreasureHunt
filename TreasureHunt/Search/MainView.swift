@@ -21,12 +21,12 @@ struct MainView: View {
 
   var body: some View {
     NavigationView {
-      Map(coordinateRegion: $viewModel.region, showsUserLocation: true, userTrackingMode: $viewModel.userTrackingMode)
-//        .opacity(locationProvider.distance < (stationsStore.currentStation?.triggerDistance ?? 5) * 2 ? 1.0 : 0.0)
-        .edgesIgnoringSafeArea(.all)
-        .overlay {
+//      Map(coordinateRegion: $viewModel.region, showsUserLocation: true, userTrackingMode: $viewModel.userTrackingMode)
+////        .opacity(locationProvider.distance < (stationsStore.currentStation?.triggerDistance ?? 5) * 2 ? 1.0 : 0.0)
+//        .edgesIgnoringSafeArea(.all)
+//        .overlay {
           mapOverlay
-        }
+//        }
         .toolbar(content: toolbarContent)
         .navigationTitle(stationsStore.currentStation?.name ?? "")
     }
