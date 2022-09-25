@@ -12,6 +12,7 @@ final class MainViewModel: ObservableObject {
   @Published var stationsListIsShown = false
   @Published var questionIsShown = false
   @Published var userTrackingMode: MapUserTrackingMode = .follow
+  @Published var mapOpacity = 0.0
 }
 
 struct MainView: View {
@@ -21,14 +22,20 @@ struct MainView: View {
 
   var body: some View {
     NavigationView {
-//      Map(coordinateRegion: $viewModel.region, showsUserLocation: true, userTrackingMode: $viewModel.userTrackingMode)
-////        .opacity(locationProvider.distance < (stationsStore.currentStation?.triggerDistance ?? 5) * 2 ? 1.0 : 0.0)
-//        .edgesIgnoringSafeArea(.all)
-//        .overlay {
+//      let g = DragGesture(minimumDistance: 0, coordinateSpace: .local).onChanged({ _ in
+//        viewModel.mapOpacity = 1.0
+//      }).onEnded({ _ in
+//        viewModel.mapOpacity = 0.0
+//      })
+      Map(coordinateRegion: $viewModel.region, showsUserLocation: true, userTrackingMode: $viewModel.userTrackingMode)
+        .opacity(viewModel.mapOpacity)
+        .edgesIgnoringSafeArea(.all)
+        .overlay {
           mapOverlay
-//        }
+        }
         .toolbar(content: toolbarContent)
         .navigationTitle(stationsStore.currentStation?.name ?? "")
+//        .gesture(g)
     }
     .fullScreenCover(isPresented: $viewModel.newStationViewIsShown) {
       if let station = stationsStore.stations.last {
@@ -90,18 +97,34 @@ extension MainView {
   }
 
   private var mapOverlay: some View {
-    VStack {
+    VStack(spacing: 10) {
       DirectionDistance(angle: $locationProvider.angle, distance: $locationProvider.distance)
 
       Spacer()
 
       nextStationButton
 
-      Button("Center") {
-        viewModel.userTrackingMode = .follow
+//      Button("Center") {
+//        viewModel.userTrackingMode = .follow
+//      }
+//      .buttonStyle(.borderedProminent)
+
+      HStack {
+
+        Spacer()
+
+        Text("Karte?")
+          .gesture(
+            DragGesture(minimumDistance: 0, coordinateSpace: .local).onChanged({ foo in
+              viewModel.mapOpacity = 1.0
+            }).onEnded({ _ in
+              viewModel.mapOpacity = 0.0
+            })
+          )
+          .padding()
       }
-      .buttonStyle(.borderedProminent)
     }
+    .padding()
   }
 
   @ToolbarContentBuilder
