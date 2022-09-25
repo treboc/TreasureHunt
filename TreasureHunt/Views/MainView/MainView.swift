@@ -7,11 +7,9 @@ import CoreLocation
 import MapKit
 
 final class MainViewModel: ObservableObject {
-  @Published var region = MKCoordinateRegion(center: .init(), latitudinalMeters: 1000, longitudinalMeters: 1000)
   @Published var newStationViewIsShown = false
   @Published var stationsListIsShown = false
   @Published var questionIsShown = false
-  @Published var userTrackingMode: MapUserTrackingMode = .follow
   @Published var mapIsHidden: Bool = true
 }
 
@@ -22,7 +20,7 @@ struct MainView: View {
 
   var body: some View {
     NavigationView {
-      Map(coordinateRegion: $viewModel.region, showsUserLocation: true, userTrackingMode: $viewModel.userTrackingMode)
+      Map(coordinateRegion: $locationProvider.region, showsUserLocation: true, userTrackingMode: .constant(.follow))
         .opacity(viewModel.mapIsHidden ? 0.0 : 1.0)
         .animation(.easeInOut, value: viewModel.mapIsHidden)
         .edgesIgnoringSafeArea(.all)
