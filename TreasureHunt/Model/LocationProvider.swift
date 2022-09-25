@@ -19,21 +19,23 @@ class LocationProvider: NSObject, ObservableObject {
     locManager.delegate = self
     return locManager
   }()
-
-  var location: CLLocation?
+  
+  var location: CLLocation? {
+    locationManager.location
+  }
   var nextLocation: CLLocation? {
     didSet {
       reachedStation = false
     }
   }
-
+  
   @Published var region: MKCoordinateRegion = .init()
   @Published var error: LocationProviderError?
   @Published var angle: Double = 0
   @Published var heading: CLHeading? = nil
   @Published var distance: Double = 0
   @Published var reachedStation: Bool = false
-
+  
   var triggerDistance: Double = 5
   private var cancellables = Set<AnyCancellable>()
   
@@ -89,7 +91,6 @@ extension LocationProvider: CLLocationManagerDelegate {
   }
   
   private func updateLocation(location: CLLocation) {
-    self.location = location
     updateAngle(heading: heading)
     updateDistance(location: location, nextLocation: nextLocation)
   }
@@ -111,8 +112,6 @@ extension LocationProvider: CLLocationManagerDelegate {
       
       let bearing = myCoordinate.bearing(to: coordinate)
       angle = bearing - heading.magneticHeading
-      //    } else {
-      //      print("missing value \(addressLocation?.coordinate), \(location?.coordinate), \(heading)")
     }
   }
   
@@ -121,7 +120,7 @@ extension LocationProvider: CLLocationManagerDelegate {
        let nextLocation = nextLocation {
       
       distance = location.distance(from: nextLocation)
-
+      
       if distance < triggerDistance {
         reachedStation = true
         stop()
@@ -131,9 +130,9 @@ extension LocationProvider: CLLocationManagerDelegate {
       }
     }
   }
-
+  
   static func angle(coordinate: Coordinate, heading: CLLocationDirection?, deviceCoordinate: CLLocation?) -> Double {
-
+    
     guard let deviceCoordinate = deviceCoordinate,
           let heading = heading else {
       return 0
