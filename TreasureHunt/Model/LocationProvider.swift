@@ -14,13 +14,18 @@ enum LocationProviderError: Error {
 class LocationProvider: NSObject, ObservableObject {
   private let locationManager: CLLocationManager
   var location: CLLocation?
-  var nextLocation: CLLocation?
+  var nextLocation: CLLocation? {
+    didSet {
+      reachedStation = false
+    }
+  }
   @Published var error: Error?
   @Published var angle: Double = 0
   @Published var heading: CLHeading? = nil
   @Published var distance: Double = 0
   @Published var wrongAuthorization: Bool = false
   @Published var reachedStation: Bool = false
+  var triggerDistance: Double = 5
   private var cancellables = Set<AnyCancellable>()
   
   init(locationManager: CLLocationManager = CLLocationManager()) {
@@ -118,10 +123,12 @@ extension LocationProvider: CLLocationManagerDelegate {
       
       distance = location.distance(from: nextLocation)
 
-      if distance < 5 {
+      if distance < triggerDistance {
         reachedStation = true
+        stop()
       } else {
         reachedStation = false
+        start()
       }
     }
   }

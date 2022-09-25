@@ -77,7 +77,7 @@ struct InputView_Previews: PreviewProvider {
 extension AddNewStationView {
   private func saveButtonTapped() {
     let location = region.center
-    stationsStore.newStation(with: name, question: question, and: location)
+    stationsStore.newStation(with: name, triggerDistance: triggerDistance, question: question, and: location)
     dismiss.callAsFunction()
   }
 

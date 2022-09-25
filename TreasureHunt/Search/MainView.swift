@@ -10,6 +10,7 @@ final class MainViewModel: ObservableObject {
   @Published var region = MKCoordinateRegion(center: .init(), latitudinalMeters: 1000, longitudinalMeters: 1000)
   @Published var newStationViewIsShown = false
   @Published var stationsListIsShown = false
+  @Published var questionIsShown = false
   @Published var userTrackingMode: MapUserTrackingMode = .follow
 }
 
@@ -21,7 +22,7 @@ struct MainView: View {
   var body: some View {
     NavigationView {
       Map(coordinateRegion: $viewModel.region, showsUserLocation: true, userTrackingMode: $viewModel.userTrackingMode)
-        .opacity(0.5)
+//        .opacity(locationProvider.distance < (stationsStore.currentStation?.triggerDistance ?? 5) * 2 ? 1.0 : 0.0)
         .edgesIgnoringSafeArea(.all)
         .overlay {
           mapOverlay
@@ -37,6 +38,27 @@ struct MainView: View {
     .sheet(isPresented: $viewModel.stationsListIsShown) {
       StationsListView(stationStore: stationsStore)
     }
+    .sheet(isPresented: $viewModel.questionIsShown) {
+      nextStation()
+    } content: {
+      if let station = stationsStore.currentStation {
+        QuestionView(station: station)
+      } else {
+        Text("Foo")
+      }
+    }
+    .onChange(of: locationProvider.reachedStation) { newValue in
+      guard newValue else {
+        return
+      }
+      if let station = stationsStore.currentStation,
+          false == station.question.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+        viewModel.questionIsShown = true
+      } else {
+        nextStation()
+      }
+    }
+
   }
 }
 
@@ -49,14 +71,20 @@ struct ContentView_Previews: PreviewProvider {
 extension MainView {
   private var nextStationButton: some View {
     Button("Nächste Station") {
-      stationsStore.setNextStation()
-      if let station = stationsStore.currentStation {
-        let location: CLLocation = .init(latitude: station.coordinate.latitude,
-                                         longitude: station.coordinate.longitude)
-        locationProvider.nextLocation = location
-      }
+      nextStation()
     }
     .buttonStyle(.borderedProminent)
+  }
+
+  private func nextStation() {
+    stationsStore.setNextStation()
+    if let station = stationsStore.currentStation {
+      let location: CLLocation = .init(latitude: station.coordinate.latitude,
+                                       longitude: station.coordinate.longitude)
+      locationProvider.nextLocation = location
+      locationProvider.triggerDistance = station.triggerDistance
+      locationProvider.start()
+    }
   }
 
   private var mapOverlay: some View {

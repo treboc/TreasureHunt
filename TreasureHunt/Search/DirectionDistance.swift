@@ -23,7 +23,6 @@ struct DirectionDistance: View {
           .resizable()
           .aspectRatio(contentMode: .fit)
           .rotationEffect(Angle(degrees: angle))
-          .opacity(0.6)
           .frame(height: 150)
           .accessibilityHidden(true)
           .padding()

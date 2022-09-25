@@ -15,10 +15,7 @@ class StationsStore: ObservableObject {
 
   init() {
     loadStationsFromDisk()
-    if let station = stations.first {
-      currentStation = station
-    }
-
+    
     cancellable = $stations
       .receive(on: RunLoop.main)
       .sink { [weak self] _ in
@@ -65,9 +62,9 @@ class StationsStore: ObservableObject {
     currentStation = next()
   }
 
-  func newStation(with name: String, question: String, and location: CLLocationCoordinate2D) {
+  func newStation(with name: String, triggerDistance: Double, question: String, and location: CLLocationCoordinate2D) {
     
-    let station = Station(clCoordinate: location, name: name)
+    let station = Station(clCoordinate: location, triggerDistance: triggerDistance, name: name, question: question)
     stations.append(station)
   }
 
