@@ -117,6 +117,7 @@ extension MainView {
           .gesture(
             DragGesture(minimumDistance: 0, coordinateSpace: .local).onChanged({ foo in
               viewModel.mapOpacity = 1.0
+              viewModel.userTrackingMode = .follow
             }).onEnded({ _ in
               viewModel.mapOpacity = 0.0
             })
