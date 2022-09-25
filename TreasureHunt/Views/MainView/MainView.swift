@@ -6,34 +6,6 @@ import SwiftUI
 import CoreLocation
 import MapKit
 
-final class MainViewModel: ObservableObject {
-  enum Sheet {
-    case newStation
-    case stationsList
-    case question(Station)
-  }
-
-  @Published var mapIsHidden: Bool = true
-  @Published var sheetIsShowing = false
-  @Published var sheetState: Sheet? = nil {
-    willSet { sheetIsShowing = newValue != nil }
-  }
-
-  @ViewBuilder
-  func sheetContent() -> some View {
-    switch sheetState {
-    case .newStation:
-      AddNewStationView()
-    case .stationsList:
-      StationsListView()
-    case .question(let station):
-      QuestionView(station: station)
-    case .none:
-      EmptyView()
-    }
-  }
-}
-
 struct MainView: View {
   @EnvironmentObject private var locationProvider: LocationProvider
   @EnvironmentObject private var stationsStore: StationsStore
