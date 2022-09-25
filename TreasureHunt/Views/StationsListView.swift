@@ -5,8 +5,8 @@
 import SwiftUI
 
 struct StationsListView: View {
-  @ObservedObject var stationStore: StationsStore
   @EnvironmentObject private var locationProvider: LocationProvider
+  @EnvironmentObject private var stationStore: StationsStore
 
   var body: some View {
     NavigationView {
@@ -34,6 +34,6 @@ struct StationsListView: View {
 
 struct StationsListView_Previews: PreviewProvider {
   static var previews: some View {
-    StationsListView(stationStore: StationsStore())
+    StationsListView()
   }
 }
