@@ -22,11 +22,6 @@ struct MainView: View {
 
   var body: some View {
     NavigationView {
-//      let g = DragGesture(minimumDistance: 0, coordinateSpace: .local).onChanged({ _ in
-//        viewModel.mapOpacity = 1.0
-//      }).onEnded({ _ in
-//        viewModel.mapOpacity = 0.0
-//      })
       Map(coordinateRegion: $viewModel.region, showsUserLocation: true, userTrackingMode: $viewModel.userTrackingMode)
         .opacity(viewModel.mapOpacity)
         .edgesIgnoringSafeArea(.all)
@@ -35,7 +30,6 @@ struct MainView: View {
         }
         .toolbar(content: toolbarContent)
         .navigationTitle(stationsStore.currentStation?.name ?? "")
-//        .gesture(g)
     }
     .fullScreenCover(isPresented: $viewModel.newStationViewIsShown) {
       if let station = stationsStore.stations.last {
@@ -104,26 +98,17 @@ extension MainView {
 
       nextStationButton
 
-//      Button("Center") {
-//        viewModel.userTrackingMode = .follow
-//      }
-//      .buttonStyle(.borderedProminent)
-
-      HStack {
-
-        Spacer()
-
-        Text("Karte?")
-          .gesture(
-            DragGesture(minimumDistance: 0, coordinateSpace: .local).onChanged({ foo in
-              viewModel.mapOpacity = 1.0
-              viewModel.userTrackingMode = .follow
-            }).onEnded({ _ in
-              viewModel.mapOpacity = 0.0
-            })
-          )
-          .padding()
-      }
+      Text("Karte?")
+        .gesture(
+          DragGesture(minimumDistance: 0, coordinateSpace: .local).onChanged({ foo in
+            viewModel.mapOpacity = 1.0
+            viewModel.userTrackingMode = .follow
+          }).onEnded({ _ in
+            viewModel.mapOpacity = 0.0
+          })
+        )
+        .padding()
+        .frame(maxWidth: .infinity, alignment: .trailing)
     }
     .padding()
   }
