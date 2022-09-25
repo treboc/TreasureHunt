@@ -19,7 +19,7 @@ class LocationProvider: NSObject, ObservableObject {
     locManager.delegate = self
     return locManager
   }()
-  
+
   var location: CLLocation? {
     locationManager.location
   }
@@ -28,14 +28,14 @@ class LocationProvider: NSObject, ObservableObject {
       reachedStation = false
     }
   }
-  
+
   @Published var region: MKCoordinateRegion = .init()
   @Published var error: LocationProviderError?
   @Published var angle: Double = 0
   @Published var heading: CLHeading? = nil
   @Published var distance: Double = 0
   @Published var reachedStation: Bool = false
-  
+
   var triggerDistance: Double = 5
   private var cancellables = Set<AnyCancellable>()
   
@@ -120,7 +120,7 @@ extension LocationProvider: CLLocationManagerDelegate {
        let nextLocation = nextLocation {
       
       distance = location.distance(from: nextLocation)
-      
+
       if distance < triggerDistance {
         reachedStation = true
         stop()
@@ -130,9 +130,13 @@ extension LocationProvider: CLLocationManagerDelegate {
       }
     }
   }
-  
+
+  func distanceTo(_ location: CLLocation) -> CLLocationDistance? {
+    self.location?.distance(from: location)
+  }
+
   static func angle(coordinate: Coordinate, heading: CLLocationDirection?, deviceCoordinate: CLLocation?) -> Double {
-    
+
     guard let deviceCoordinate = deviceCoordinate,
           let heading = heading else {
       return 0

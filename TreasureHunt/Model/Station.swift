@@ -18,4 +18,8 @@ struct Station: Codable, Identifiable {
     self.name = name
     self.question = question
   }
+
+  var location: CLLocation {
+    return CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+  }
 }

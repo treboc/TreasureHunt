@@ -3,6 +3,7 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct StationsListView: View {
   @EnvironmentObject private var locationProvider: LocationProvider
@@ -11,29 +12,24 @@ struct StationsListView: View {
   var body: some View {
     NavigationView {
       List {
-        ForEach(stationStore.stations) { station in
-          VStack(alignment: .leading) {
-            Text(station.name)
-
-            Text("\(station.coordinate.latitude), \(station.coordinate.longitude)")
-              .font(.footnote)
-          }
+        ForEach(0..<stationStore.stations.count, id: \.self) { index in
+          StationsListRowView(id: index + 1, station: stationStore.stations[index])
         }
         .onDelete(perform: stationStore.deleteStation)
       }
       .navigationTitle("Stationen")
     }
-    .onAppear {
-      locationProvider.stop()
-    }
-    .onDisappear {
-      locationProvider.start()
-    }
+    .onAppear(perform: locationProvider.stop)
+    .onDisappear(perform: locationProvider.start)
   }
 }
 
 struct StationsListView_Previews: PreviewProvider {
   static var previews: some View {
     StationsListView()
+      .environmentObject(StationsStore())
+      .environmentObject(LocationProvider())
   }
 }
+
+

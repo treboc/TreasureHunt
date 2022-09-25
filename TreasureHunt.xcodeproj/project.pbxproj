@@ -16,6 +16,7 @@
 		8A52025428E0A23200C49779 /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A52025228E0A23200C49779 /* FileManager+Extension.swift */; };
 		8AD1768928E0AE0C00A12948 /* Button+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD1768828E0AE0C00A12948 /* Button+Extension.swift */; };
 		8AD1768B28E0C58200A12948 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD1768A28E0C58200A12948 /* MainViewModel.swift */; };
+		8AD1768E28E0F14600A12948 /* StationsListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD1768D28E0F14600A12948 /* StationsListRowView.swift */; };
 		F212393128CA539C006754E3 /* TreasureHuntApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F212393028CA539C006754E3 /* TreasureHuntApp.swift */; };
 		F212393528CA539E006754E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F212393428CA539E006754E3 /* Assets.xcassets */; };
 		F212393828CA539E006754E3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F212393728CA539E006754E3 /* Preview Assets.xcassets */; };
@@ -36,6 +37,7 @@
 		8A52025228E0A23200C49779 /* FileManager+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
 		8AD1768828E0AE0C00A12948 /* Button+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Button+Extension.swift"; sourceTree = "<group>"; };
 		8AD1768A28E0C58200A12948 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		8AD1768D28E0F14600A12948 /* StationsListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsListRowView.swift; sourceTree = "<group>"; };
 		F212392D28CA539C006754E3 /* TreasureHunt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TreasureHunt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F212393028CA539C006754E3 /* TreasureHuntApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreasureHuntApp.swift; sourceTree = "<group>"; };
 		F212393428CA539E006754E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -65,7 +67,7 @@
 				8A52024428E0A21900C49779 /* AddNewStationView.swift */,
 				8A52024528E0A21900C49779 /* QuestionView.swift */,
 				8A52024628E0A21900C49779 /* DirectionDistanceView.swift */,
-				8A52024728E0A21900C49779 /* StationsListView.swift */,
+				8AD1768C28E0F13300A12948 /* StationsListView */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -95,6 +97,15 @@
 				8A52025128E0A23200C49779 /* Button+PressActionsModifier.swift */,
 			);
 			path = ViewModifier;
+			sourceTree = "<group>";
+		};
+		8AD1768C28E0F13300A12948 /* StationsListView */ = {
+			isa = PBXGroup;
+			children = (
+				8A52024728E0A21900C49779 /* StationsListView.swift */,
+				8AD1768D28E0F14600A12948 /* StationsListRowView.swift */,
+			);
+			path = StationsListView;
 			sourceTree = "<group>";
 		};
 		F212392428CA539C006754E3 = {
@@ -224,6 +235,7 @@
 				8AD1768B28E0C58200A12948 /* MainViewModel.swift in Sources */,
 				F2A056A728DB7983007D7FFF /* CLLocationCoordinate2DExtension.swift in Sources */,
 				8A52024C28E0A21900C49779 /* DirectionDistanceView.swift in Sources */,
+				8AD1768E28E0F14600A12948 /* StationsListRowView.swift in Sources */,
 				8AD1768928E0AE0C00A12948 /* Button+Extension.swift in Sources */,
 				8A52024E28E0A21900C49779 /* MainView.swift in Sources */,
 				8A52024B28E0A21900C49779 /* QuestionView.swift in Sources */,
