@@ -12,7 +12,8 @@ final class MainViewModel: ObservableObject {
   @Published var stationsListIsShown = false
   @Published var questionIsShown = false
   @Published var userTrackingMode: MapUserTrackingMode = .follow
-  @Published var mapOpacity = 0.0
+  @Published var mapIsHidden: Bool = true
+//  @Published var mapOpacity = 0.0
 }
 
 struct MainView: View {
@@ -23,7 +24,8 @@ struct MainView: View {
   var body: some View {
     NavigationView {
       Map(coordinateRegion: $viewModel.region, showsUserLocation: true, userTrackingMode: $viewModel.userTrackingMode)
-        .opacity(viewModel.mapOpacity)
+        .opacity(viewModel.mapIsHidden ? 0.0 : 1.0)
+        .animation(.easeInOut, value: viewModel.mapIsHidden)
         .edgesIgnoringSafeArea(.all)
         .overlay {
           mapOverlay
@@ -92,22 +94,17 @@ extension MainView {
 
   private var mapOverlay: some View {
     VStack(spacing: 10) {
-      DirectionDistance(angle: $locationProvider.angle, distance: $locationProvider.distance)
+      DirectionDistanceView(angle: $locationProvider.angle, distance: $locationProvider.distance)
 
       Spacer()
 
       nextStationButton
 
       Text("Karte?")
-        .gesture(
-          DragGesture(minimumDistance: 0, coordinateSpace: .local).onChanged({ foo in
-            viewModel.mapOpacity = 1.0
-            viewModel.userTrackingMode = .follow
-          }).onEnded({ _ in
-            viewModel.mapOpacity = 0.0
-          })
-        )
-        .padding()
+        .padding(.vertical, 5)
+        .padding(.horizontal, 10)
+        .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 4))
+        .pressAction(onPress: showMap, onRelease: hideMap)
         .frame(maxWidth: .infinity, alignment: .trailing)
     }
     .padding()
@@ -134,4 +131,12 @@ extension MainView {
     }
   }
 
+
+  private func showMap() {
+    viewModel.mapIsHidden = false
+  }
+
+  private func hideMap() {
+    viewModel.mapIsHidden = true
+  }
 }
