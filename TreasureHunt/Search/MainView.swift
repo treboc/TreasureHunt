@@ -31,7 +31,9 @@ struct MainView: View {
         .navigationTitle(stationsStore.currentStation?.name ?? "")
     }
     .fullScreenCover(isPresented: $viewModel.newStationViewIsShown) {
-      if let location = locationProvider.location {
+      if let station = stationsStore.stations.last {
+        AddNewStationView(location: CLLocation(latitude: station.coordinate.latitude, longitude: station.coordinate.longitude))
+      } else if let location = locationProvider.location {
         AddNewStationView(location: location)
       }
     }

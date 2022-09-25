@@ -6,6 +6,7 @@ import SwiftUI
 
 struct StationsListView: View {
   @ObservedObject var stationStore: StationsStore
+  @EnvironmentObject private var locationProvider: LocationProvider
 
   var body: some View {
     NavigationView {
@@ -21,6 +22,12 @@ struct StationsListView: View {
         .onDelete(perform: stationStore.deleteStation)
       }
       .navigationTitle("Stationen")
+    }
+    .onAppear {
+      locationProvider.stop()
+    }
+    .onDisappear {
+      locationProvider.start()
     }
   }
 }
