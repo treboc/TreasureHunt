@@ -13,7 +13,6 @@ final class MainViewModel: ObservableObject {
   @Published var questionIsShown = false
   @Published var userTrackingMode: MapUserTrackingMode = .follow
   @Published var mapIsHidden: Bool = true
-//  @Published var mapOpacity = 0.0
 }
 
 struct MainView: View {
@@ -34,11 +33,7 @@ struct MainView: View {
         .navigationTitle(stationsStore.currentStation?.name ?? "")
     }
     .fullScreenCover(isPresented: $viewModel.newStationViewIsShown) {
-      if let station = stationsStore.stations.last {
-        AddNewStationView(location: CLLocation(latitude: station.coordinate.latitude, longitude: station.coordinate.longitude))
-      } else if let location = locationProvider.location {
-        AddNewStationView(location: location)
-      }
+      AddNewStationView()
     }
     .sheet(isPresented: $viewModel.stationsListIsShown) {
       StationsListView(stationStore: stationsStore)

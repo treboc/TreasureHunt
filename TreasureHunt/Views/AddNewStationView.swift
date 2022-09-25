@@ -8,19 +8,14 @@ import MapKit
 struct AddNewStationView: View {
   @EnvironmentObject private var stationsStore: StationsStore
   @Environment(\.dismiss) private var dismiss
+
   @State private var name: String = ""
   @State private var question: String = ""
   @State private var triggerDistance: Double = 5
-  @State private var region: MKCoordinateRegion
+  @State private var region: MKCoordinateRegion = .init()
+
   private var saveButtonIsDisabled: Bool {
     return name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
-  }
-
-  init(location: CLLocation) {
-    let region = MKCoordinateRegion(center: location.coordinate,
-                                latitudinalMeters: 1000,
-                                longitudinalMeters: 1000)
-    _region = State(initialValue: region)
   }
 
   var body: some View {
@@ -37,8 +32,9 @@ struct AddNewStationView: View {
                 .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 5))
                 .padding(.bottom, 10)
               , alignment: .bottom
-              )
+            )
             .frame(height: 300)
+            .onAppear(perform: setLocation)
         }
         .listRowBackground(Color.clear)
         .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
@@ -67,12 +63,6 @@ struct AddNewStationView: View {
   }
 }
 
-struct InputView_Previews: PreviewProvider {
-  static var previews: some View {
-    AddNewStationView(location: CLLocation(latitude: 50, longitude: 6))
-      .environmentObject(StationsStore())
-  }
-}
 
 extension AddNewStationView {
   private func saveButtonTapped() {
@@ -83,5 +73,12 @@ extension AddNewStationView {
 
   private var cancelButton: some View {
     Button("Abbrechen", action: dismiss.callAsFunction)
+  }
+
+  private func setLocation() {
+    if let lastStationCoordinate = stationsStore.stations.last?.coordinate {
+      self.region.center = .init(latitude: lastStationCoordinate.latitude, longitude: lastStationCoordinate.longitude)
+      self.region.span = .init(latitudeDelta: 50, longitudeDelta: 50)
+    }
   }
 }
