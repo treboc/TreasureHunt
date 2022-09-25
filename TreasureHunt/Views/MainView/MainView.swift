@@ -7,10 +7,31 @@ import CoreLocation
 import MapKit
 
 final class MainViewModel: ObservableObject {
-  @Published var newStationViewIsShown = false
-  @Published var stationsListIsShown = false
-  @Published var questionIsShown = false
+  enum Sheet {
+    case newStation
+    case stationsList
+    case question(Station)
+  }
+
   @Published var mapIsHidden: Bool = true
+  @Published var sheetIsShowing = false
+  @Published var sheetState: Sheet? = nil {
+    willSet { sheetIsShowing = newValue != nil }
+  }
+
+  @ViewBuilder
+  func sheetContent() -> some View {
+    switch sheetState {
+    case .newStation:
+      AddNewStationView()
+    case .stationsList:
+      StationsListView()
+    case .question(let station):
+      QuestionView(station: station)
+    case .none:
+      EmptyView()
+    }
+  }
 }
 
 struct MainView: View {
@@ -30,33 +51,16 @@ struct MainView: View {
         .toolbar(content: toolbarContent)
         .navigationTitle(stationsStore.currentStation?.name ?? "")
     }
-    .fullScreenCover(isPresented: $viewModel.newStationViewIsShown) {
-      AddNewStationView()
-    }
-    .sheet(isPresented: $viewModel.stationsListIsShown) {
-      StationsListView(stationStore: stationsStore)
-    }
-    .sheet(isPresented: $viewModel.questionIsShown) {
-      nextStation()
-    } content: {
-      if let station = stationsStore.currentStation {
-        QuestionView(station: station)
-      } else {
-        Text("Foo")
-      }
-    }
-    .onChange(of: locationProvider.reachedStation) { newValue in
-      guard newValue else {
-        return
-      }
+    .sheet(isPresented: $viewModel.sheetIsShowing, content: viewModel.sheetContent)
+    .onChange(of: locationProvider.reachedStation) { hasReachedStation in
+      guard hasReachedStation else { return }
       if let station = stationsStore.currentStation,
-          false == station.question.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-        viewModel.questionIsShown = true
+         station.question.isEmpty == false {
+        viewModel.sheetState = .question(station)
       } else {
-        nextStation()
+        // show alert if next station should be shown, because there's no question
       }
     }
-
   }
 }
 
@@ -107,7 +111,7 @@ extension MainView {
   func toolbarContent() -> some ToolbarContent {
     ToolbarItem(placement: .navigationBarTrailing) {
       Button(action: {
-        viewModel.newStationViewIsShown = true
+        viewModel.sheetState = .newStation
       }) {
         Image(systemName: "plus")
           .padding()
@@ -116,7 +120,7 @@ extension MainView {
 
     ToolbarItem(placement: .navigationBarLeading) {
       Button(action: {
-        viewModel.stationsListIsShown = true
+        viewModel.sheetState = .stationsList
       }, label: {
         Image(systemName: "list.dash")
           .padding()
