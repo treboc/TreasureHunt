@@ -87,7 +87,7 @@ extension MainView {
 
   private var mapOverlay: some View {
     VStack(spacing: 10) {
-      DirectionDistanceView(angle: $locationProvider.angle, distance: $locationProvider.distance)
+      DirectionDistanceView(angle: locationProvider.angle, distance: locationProvider.distance)
 
       Spacer()
 
