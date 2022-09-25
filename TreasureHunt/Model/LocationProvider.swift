@@ -2,12 +2,12 @@
 //  Copyright © 2021 dasdom. All rights reserved.
 //
 
-import UIKit
-import CoreLocation
 import Combine
 import MapKit
+import UIKit
 
 enum LocationProviderError: Error {
+  case wrongAuthorization(CLAuthorizationStatus)
   case noLocation
 }
 
@@ -63,14 +63,12 @@ class LocationProvider: NSObject, ObservableObject {
 
 extension LocationProvider: CLLocationManagerDelegate {
   func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-    
     switch manager.authorizationStatus {
     case .authorizedWhenInUse:
-      wrongAuthorization = false
       print("authorizedWhenInUse")
       start()
     default:
-      wrongAuthorization = true
+      self.error = .wrongAuthorization(manager.authorizationStatus)
       print("No authorization")
     }
   }
