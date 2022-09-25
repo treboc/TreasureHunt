@@ -14,6 +14,7 @@
 		8A52024E28E0A21900C49779 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A52024928E0A21900C49779 /* MainView.swift */; };
 		8A52025328E0A23200C49779 /* Button+PressActionsModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A52025128E0A23200C49779 /* Button+PressActionsModifier.swift */; };
 		8A52025428E0A23200C49779 /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A52025228E0A23200C49779 /* FileManager+Extension.swift */; };
+		8AD1768928E0AE0C00A12948 /* Button+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD1768828E0AE0C00A12948 /* Button+Extension.swift */; };
 		F212393128CA539C006754E3 /* TreasureHuntApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F212393028CA539C006754E3 /* TreasureHuntApp.swift */; };
 		F212393528CA539E006754E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F212393428CA539E006754E3 /* Assets.xcassets */; };
 		F212393828CA539E006754E3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F212393728CA539E006754E3 /* Preview Assets.xcassets */; };
@@ -32,6 +33,7 @@
 		8A52024928E0A21900C49779 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		8A52025128E0A23200C49779 /* Button+PressActionsModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Button+PressActionsModifier.swift"; sourceTree = "<group>"; };
 		8A52025228E0A23200C49779 /* FileManager+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
+		8AD1768828E0AE0C00A12948 /* Button+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Button+Extension.swift"; sourceTree = "<group>"; };
 		F212392D28CA539C006754E3 /* TreasureHunt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TreasureHunt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F212393028CA539C006754E3 /* TreasureHuntApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreasureHuntApp.swift; sourceTree = "<group>"; };
 		F212393428CA539E006754E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -57,11 +59,11 @@
 		8A52024328E0A21900C49779 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8A52024828E0A21900C49779 /* MainView */,
 				8A52024428E0A21900C49779 /* AddNewStationView.swift */,
 				8A52024528E0A21900C49779 /* QuestionView.swift */,
 				8A52024628E0A21900C49779 /* DirectionDistanceView.swift */,
 				8A52024728E0A21900C49779 /* StationsListView.swift */,
-				8A52024828E0A21900C49779 /* MainView */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -77,6 +79,7 @@
 		8A52024F28E0A23200C49779 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				8AD1768828E0AE0C00A12948 /* Button+Extension.swift */,
 				8A52025028E0A23200C49779 /* ViewModifier */,
 				8A52025228E0A23200C49779 /* FileManager+Extension.swift */,
 			);
@@ -217,6 +220,7 @@
 				8A52025328E0A23200C49779 /* Button+PressActionsModifier.swift in Sources */,
 				F2A056A728DB7983007D7FFF /* CLLocationCoordinate2DExtension.swift in Sources */,
 				8A52024C28E0A21900C49779 /* DirectionDistanceView.swift in Sources */,
+				8AD1768928E0AE0C00A12948 /* Button+Extension.swift in Sources */,
 				8A52024E28E0A21900C49779 /* MainView.swift in Sources */,
 				8A52024B28E0A21900C49779 /* QuestionView.swift in Sources */,
 				F2A056AD28DB8712007D7FFF /* StationsStore.swift in Sources */,
@@ -351,7 +355,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TreasureHunt/Preview Content\"";
-				DEVELOPMENT_TEAM = Q6PD97MRX4;
+				DEVELOPMENT_TEAM = X9DJ8STXP5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Show direction and distance to next station.";
