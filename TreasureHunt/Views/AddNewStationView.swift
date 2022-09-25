@@ -75,8 +75,6 @@ extension AddNewStationView {
     reset()
   }
 
-
-
   private func dismissFocus() {
     self.focusedField = nil
   }
@@ -90,6 +88,8 @@ extension AddNewStationView {
   private func setLocation() {
     if let lastStationCoordinate = stationsStore.stations.last?.coordinate {
       region.center = .init(latitude: lastStationCoordinate.latitude, longitude: lastStationCoordinate.longitude)
+    } else if let location = locationProvider.location?.coordinate {
+      region.center = location
     }
     region.span = .init(latitudeDelta: 0.005, longitudeDelta: 0.005)
   }

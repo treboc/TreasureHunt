@@ -5,7 +5,6 @@
 import SwiftUI
 
 struct QuestionView: View {
-
   let station: Station
 
   var body: some View {
