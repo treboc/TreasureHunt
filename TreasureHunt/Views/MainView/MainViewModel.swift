@@ -23,6 +23,10 @@ extension MainViewModel {
     case question(Station)
   }
 
+  func showSheet(_ sheet: Sheet) {
+    sheetState = sheet
+  }
+
   @ViewBuilder
   func sheetContent() -> some View {
     switch sheetState {

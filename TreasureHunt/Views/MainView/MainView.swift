@@ -17,15 +17,14 @@ struct MainView: View {
         .opacity(viewModel.mapIsHidden ? 0.0 : 1.0)
         .animation(.easeInOut, value: viewModel.mapIsHidden)
         .edgesIgnoringSafeArea(.all)
-        .overlay {
-          mapOverlay
-        }
+        .overlay(alignment: .center, content: arrowOverlay)
+        .overlay(alignment: .bottomTrailing, content: showMapButton)
+        .overlay(alignment: .bottom, content: nextStationButton)
         .toolbar(content: toolbarContent)
         .navigationTitle(stationsStore.currentStation?.name ?? "")
     }
     .sheet(isPresented: $viewModel.sheetIsShowing, content: viewModel.sheetContent)
     .onChange(of: locationProvider.reachedStation) { hasReachedStation in
-      guard hasReachedStation else { return }
       if let station = stationsStore.currentStation,
          station.question.isEmpty == false {
         viewModel.sheetState = .question(station)
@@ -43,11 +42,12 @@ struct ContentView_Previews: PreviewProvider {
 }
 
 extension MainView {
-  private var nextStationButton: some View {
+  private func nextStationButton() -> some View {
     Button("Nächste Station") {
       nextStation()
     }
     .buttonStyle(.borderedProminent)
+    .padding(.bottom, 50)
   }
 
   private func nextStation() {
@@ -61,45 +61,25 @@ extension MainView {
     }
   }
 
-  private var mapOverlay: some View {
+  private func arrowOverlay() -> some View {
     VStack(spacing: 10) {
-      DirectionDistanceView(angle: locationProvider.angle, distance: locationProvider.distance)
-
-      Spacer()
-
-      nextStationButton
-
-      Text("Karte?")
-        .padding(.vertical, 5)
-        .padding(.horizontal, 10)
-        .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 4))
-        .pressAction(onPress: showMap, onRelease: hideMap)
-        .frame(maxWidth: .infinity, alignment: .trailing)
-    }
-    .padding()
-  }
-
-  @ToolbarContentBuilder
-  func toolbarContent() -> some ToolbarContent {
-    ToolbarItem(placement: .navigationBarTrailing) {
-      Button(action: {
-        viewModel.sheetState = .newStation
-      }) {
-        Image(systemName: "plus")
-          .padding()
+      if stationsStore.stations.isEmpty == false {
+        DirectionDistanceView(angle: locationProvider.angle, distance: locationProvider.distance)
       }
     }
-
-    ToolbarItem(placement: .navigationBarLeading) {
-      Button(action: {
-        viewModel.sheetState = .stationsList
-      }, label: {
-        Image(systemName: "list.dash")
-          .padding()
-      })
-    }
+    .frame(maxHeight: .infinity, alignment: .top)
   }
 
+
+
+  private func showMapButton() -> some View {
+    Text("Karte?")
+      .padding(.vertical, 5)
+      .padding(.horizontal, 10)
+      .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 4))
+      .pressAction(onPress: showMap, onRelease: hideMap)
+      .frame(maxWidth: .infinity, alignment: .trailing)
+  }
 
   private func showMap() {
     viewModel.mapIsHidden = false
@@ -107,5 +87,25 @@ extension MainView {
 
   private func hideMap() {
     viewModel.mapIsHidden = true
+  }
+
+  // MARK: - ToolbarItems
+  @ToolbarContentBuilder
+  func toolbarContent() -> some ToolbarContent {
+    ToolbarItem(placement: .navigationBarTrailing) {
+      Button {
+        viewModel.showSheet(.newStation)
+      } label: {
+        Image(systemName: "plus")
+      }
+    }
+
+    ToolbarItem(placement: .navigationBarLeading) {
+      Button {
+        viewModel.showSheet(.stationsList)
+      } label: {
+        Image(systemName: "list.dash")
+      }
+    }
   }
 }
