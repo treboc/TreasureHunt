@@ -12,32 +12,33 @@ enum LocationProviderError: Error {
 }
 
 class LocationProvider: NSObject, ObservableObject {
-  private let locationManager: CLLocationManager
+  lazy var locationManager: CLLocationManager = {
+    let locManager = CLLocationManager()
+    locManager.distanceFilter = 10
+    locManager.requestWhenInUseAuthorization()
+    locManager.delegate = self
+    return locManager
+  }()
+
   var location: CLLocation?
   var nextLocation: CLLocation? {
     didSet {
       reachedStation = false
     }
   }
-  @Published var error: Error?
+
+  @Published var region: MKCoordinateRegion = .init()
+  @Published var error: LocationProviderError?
   @Published var angle: Double = 0
   @Published var heading: CLHeading? = nil
   @Published var distance: Double = 0
-  @Published var wrongAuthorization: Bool = false
   @Published var reachedStation: Bool = false
+
   var triggerDistance: Double = 5
   private var cancellables = Set<AnyCancellable>()
   
-  init(locationManager: CLLocationManager = CLLocationManager()) {
-    self.locationManager = locationManager
-    
+  override init() {
     super.init()
-    
-    locationManager.requestWhenInUseAuthorization()
-    locationManager.delegate = self
-    
-//    $location.sink(receiveValue: updateLocation).store(in: &cancellables)
-    //    $nextLocation.sink(receiveValue: updateAddressLocation).store(in: &cancellables)
     $heading.sink(receiveValue: update).store(in: &cancellables)
   }
   
@@ -75,7 +76,6 @@ extension LocationProvider: CLLocationManagerDelegate {
   
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     if let location = locations.last {
-      self.location = location
       updateLocation(location: location)
     }
   }
@@ -88,7 +88,8 @@ extension LocationProvider: CLLocationManagerDelegate {
     print("error \(error)")
   }
   
-  private func updateLocation(location: CLLocation?) {
+  private func updateLocation(location: CLLocation) {
+    self.location = location
     updateAngle(heading: heading)
     updateDistance(location: location, nextLocation: nextLocation)
   }
