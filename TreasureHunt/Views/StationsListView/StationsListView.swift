@@ -5,33 +5,10 @@
 import SwiftUI
 import MapKit
 
-final class StationsListViewModel: ObservableObject {
-  @Published var chosenStations: [Station] = []
-  @Published var huntIsStarted: Bool = false
-
-  func toggleStationChosenState(_ station: Station) {
-    withAnimation {
-      if let index = chosenStations.firstIndex(of: station) {
-        chosenStations.remove(at: index)
-      } else {
-        chosenStations.append(station)
-      }
-    }
-  }
-
-  func positionOf(_ station: Station) -> Int? {
-    if let index = chosenStations.firstIndex(of: station) {
-      return index + 1
-    } else {
-      return nil
-    }
-  }
-}
-
 struct StationsListView: View {
-  @StateObject private var viewModel = StationsListViewModel()
+  @Environment(\.editMode) private var editMode
   @EnvironmentObject private var stationStore: StationsStore
-  @State private var newStationSheetIsShown: Bool = false
+  @StateObject private var viewModel = StationsListViewModel()
 
   var body: some View {
     NavigationView {
