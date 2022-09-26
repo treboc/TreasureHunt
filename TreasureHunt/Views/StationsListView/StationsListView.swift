@@ -5,7 +5,28 @@
 import SwiftUI
 import MapKit
 
+final class StationsListViewModel: ObservableObject {
+  @Published var chosenStations: [Station] = []
+
+  func toggleStationChosenState(_ station: Station) {
+    if let index = chosenStations.firstIndex(of: station) {
+      chosenStations.remove(at: index)
+    } else {
+      chosenStations.append(station)
+    }
+  }
+
+  func positionOf(_ station: Station) -> Int? {
+    if let index = chosenStations.firstIndex(of: station) {
+      return index + 1
+    } else {
+      return nil
+    }
+  }
+}
+
 struct StationsListView: View {
+  @StateObject private var viewModel = StationsListViewModel()
   @EnvironmentObject private var locationProvider: LocationProvider
   @EnvironmentObject private var stationStore: StationsStore
   @State private var newStationSheetIsShown: Bool = false
@@ -13,11 +34,15 @@ struct StationsListView: View {
   var body: some View {
     NavigationView {
       List {
-        ForEach(0..<stationStore.stations.count, id: \.self) { index in
-          StationsListRowView(id: index + 1, station: stationStore.stations[index])
+        ForEach(stationStore.allStations) { station in
+          StationsListRowView(position: viewModel.positionOf(station), station: station)
+
+            .onTapGesture {
+              viewModel.toggleStationChosenState(station)
+            }
         }
         .onDelete(perform: stationStore.deleteStation)
-        .onMove(perform: move)
+        .onMove(perform: stationStore.moveStation)
       }
       .listStyle(.plain)
       .navigationTitle("Stationen")
@@ -28,9 +53,7 @@ struct StationsListView: View {
     .onDisappear(perform: locationProvider.start)
   }
 
-  func move(from source: IndexSet, to destination: Int) {
-    stationStore.stations.move(fromOffsets: source, toOffset: destination)
-  }
+
 }
 
 struct StationsListView_Previews: PreviewProvider {

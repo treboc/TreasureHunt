@@ -9,31 +9,30 @@ import MapKit
 import SwiftUI
 
 struct StationsListRowView: View {
-  @EnvironmentObject private var locationProvider: LocationProvider
-  let id: Int
+  let position: Int?
   let station: Station
 
-  var distanceToStation: String {
-    let distanceFormatter: MKDistanceFormatter = {
-      let formatter = MKDistanceFormatter()
-      formatter.unitStyle = MKDistanceFormatter.DistanceUnitStyle.default
-      return formatter
-    }()
+  var circleColor: Color {
+    isChosen ? Color.accentColor : Color.primary
+  }
 
-    return distanceFormatter.string(fromDistance: locationProvider.distanceTo(station.location) ?? 0)
+  @State private var fillCircle: CGFloat = 0
+  var isChosen: Bool {
+    position != nil
   }
 
   var body: some View {
-    HStack(spacing: 10) { 
-        Text(id, format: .number)
-          .font(.system(.title2, design: .rounded))
-          .monospacedDigit()
-          .padding()
-          .background(
-            Circle()
-              .strokeBorder(.tint, lineWidth: 3)
-          )
-          .padding(.horizontal, 3)
+    HStack(spacing: 10) {
+      ZStack {
+        animatedCircle
+
+        if let position = position {
+          Text("\(position)")
+            .font(.system(.headline, design: .rounded))
+            .monospacedDigit()
+        }
+      }
+      .frame(width: 40, height: 40)
 
       VStack(alignment: .leading, spacing: 5) {
         Text(station.name)
@@ -41,15 +40,38 @@ struct StationsListRowView: View {
           .fontWeight(.semibold)
 
         if !station.question.isEmpty {
-          Text("**Aufgabe:** *\(station.question)*")
+          Text("**A:** *\(station.question)*")
             .foregroundColor(.secondary)
         } else {
           Text("Keine Aufgabe für diese Station gestellt.")
             .italic()
             .foregroundColor(.secondary)
         }
+      }
+    }
+    .frame(maxWidth: .infinity, alignment: .leading)
+    .contentShape(.interaction, Rectangle())
+  }
+}
 
-        Text("Von hier aus: \(distanceToStation)")
+extension StationsListRowView {
+  private var animatedCircle: some View {
+    ZStack {
+      Circle()
+        .stroke(.primary, lineWidth: 3)
+
+      Circle()
+        .trim(from: 0, to: fillCircle)
+        .stroke(.tint, lineWidth: 3)
+        .rotationEffect(.degrees(-90))
+    }
+    .onChange(of: isChosen) { _ in
+      withAnimation {
+        if isChosen {
+          fillCircle = 0
+        } else {
+          fillCircle = 1
+        }
       }
     }
   }
@@ -59,7 +81,7 @@ struct StationsListRowView_Previews: PreviewProvider {
   static let station = Station(clCoordinate: .init(latitude: 20, longitude: 20), triggerDistance: 30, name: "Random", question: "This could be a wonderful question!")
 
   static var previews: some View {
-    StationsListRowView(id: 0, station: station)
+    StationsListRowView(position: 2, station: station)
       .environmentObject(StationsStore())
       .environmentObject(LocationProvider())
       .padding()
