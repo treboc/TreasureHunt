@@ -23,6 +23,7 @@ class LocationProvider: NSObject, ObservableObject {
   var location: CLLocation? {
     locationManager.location
   }
+
   var nextLocation: CLLocation? {
     didSet {
       reachedStation = false
@@ -136,7 +137,6 @@ extension LocationProvider: CLLocationManagerDelegate {
   }
 
   static func angle(coordinate: Coordinate, heading: CLLocationDirection?, deviceCoordinate: CLLocation?) -> Double {
-
     guard let deviceCoordinate = deviceCoordinate,
           let heading = heading else {
       return 0

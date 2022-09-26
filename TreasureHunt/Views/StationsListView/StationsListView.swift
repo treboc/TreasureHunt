@@ -7,6 +7,7 @@ import MapKit
 
 final class StationsListViewModel: ObservableObject {
   @Published var chosenStations: [Station] = []
+  @Published var huntIsStarted: Bool = false
 
   func toggleStationChosenState(_ station: Station) {
     withAnimation {
@@ -29,7 +30,6 @@ final class StationsListViewModel: ObservableObject {
 
 struct StationsListView: View {
   @StateObject private var viewModel = StationsListViewModel()
-  @EnvironmentObject private var locationProvider: LocationProvider
   @EnvironmentObject private var stationStore: StationsStore
   @State private var newStationSheetIsShown: Bool = false
 
@@ -51,10 +51,11 @@ struct StationsListView: View {
       .listStyle(.plain)
       .navigationTitle("Stationen")
       .sheet(isPresented: $newStationSheetIsShown, onDismiss: nil, content: AddNewStationView.init)
+      .fullScreenCover(isPresented: $viewModel.huntIsStarted) {
+        HuntView(stations: viewModel.chosenStations)
+      }
       .toolbar(content: toolbarContent)
     }
-    .onAppear(perform: locationProvider.stop)
-    .onDisappear(perform: locationProvider.start)
   }
 }
 
@@ -70,8 +71,8 @@ extension StationsListView {
   @ViewBuilder
   private var startHuntButton: some View {
     if !viewModel.chosenStations.isEmpty {
-      NavigationLink("Suche starten!") {
-        HuntView(stations: viewModel.chosenStations)
+      Button("Suche starten!") {
+        viewModel.huntIsStarted = true
       }
       .buttonStyle(.borderedProminent)
       .controlSize(.large)

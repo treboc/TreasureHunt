@@ -7,7 +7,7 @@ import CoreLocation
 import MapKit
 
 struct HuntView: View {
-  @EnvironmentObject private var locationProvider: LocationProvider
+  @Environment(\.dismiss) private var dismiss
   @StateObject private var viewModel = HuntViewModel()
   @StateObject private var huntManager: HuntManager
 
@@ -16,27 +16,26 @@ struct HuntView: View {
   }
 
   var body: some View {
-    Map(coordinateRegion: $locationProvider.region, showsUserLocation: true, userTrackingMode: .constant(.follow))
-      .opacity(viewModel.mapIsHidden ? 0.0 : 1.0)
-      .animation(.easeInOut, value: viewModel.mapIsHidden)
-      .edgesIgnoringSafeArea(.all)
-      .overlay(alignment: .center, content: arrowOverlay)
-      .overlay(alignment: .bottomTrailing, content: showMapButton)
-      .overlay(alignment: .bottom, content: nextStationButton)
-      .navigationTitle(huntManager.currentStation?.name ?? "")
-      .sheet(isPresented: $viewModel.questionSheetIsShown, onDismiss: huntManager.setNextStation) {
-        if let station = huntManager.currentStation {
-          QuestionView(station: station)
+    NavigationView {
+      Map(coordinateRegion: $huntManager.region, showsUserLocation: true, userTrackingMode: .constant(.follow))
+        .opacity(viewModel.mapIsHidden ? 0.0 : 1.0)
+        .animation(.easeInOut, value: viewModel.mapIsHidden)
+        .edgesIgnoringSafeArea(.all)
+        .overlay(alignment: .center, content: arrowOverlay)
+        .overlay(alignment: .bottomTrailing, content: showMapButton)
+        .overlay(alignment: .bottom, content: nextStationButton)
+        .navigationTitle(huntManager.currentStation?.name ?? "")
+        .sheet(isPresented: $huntManager.questionSheetIsShown, onDismiss: huntManager.setNextStation) {
+          if let station = huntManager.currentStation {
+            QuestionView(station: station)
+          }
         }
-      }
-      .onChange(of: locationProvider.reachedStation) { hasReachedStation in
-        if let station = huntManager.currentStation,
-           station.question.isEmpty == false {
-          viewModel.questionSheetIsShown = true
-        } else {
-          // show alert if next station should be shown, because there's no question
+        .toolbar {
+          ToolbarItem(placement: .navigationBarLeading) {
+            Button("Beenden", action: dismiss.callAsFunction)
+          }
         }
-      }
+    }
   }
 }
 
@@ -57,19 +56,13 @@ extension HuntView {
 
   private func nextStation() {
     huntManager.setNextStation()
-    if let station = huntManager.currentStation {
-      let location: CLLocation = .init(latitude: station.coordinate.latitude,
-                                       longitude: station.coordinate.longitude)
-      locationProvider.nextLocation = location
-      locationProvider.triggerDistance = station.triggerDistance
-      locationProvider.start()
-    }
+
   }
 
   private func arrowOverlay() -> some View {
     VStack(spacing: 10) {
       if let _ = huntManager.currentStation {
-        DirectionDistanceView(angle: locationProvider.angle, distance: locationProvider.distance)
+        DirectionDistanceView(angle: $huntManager.angle, distance: $huntManager.distance)
       }
     }
     .frame(maxHeight: .infinity, alignment: .top)
