@@ -46,17 +46,15 @@ struct ContentView_Previews: PreviewProvider {
 }
 
 extension HuntView {
+  @ViewBuilder
   private func nextStationButton() -> some View {
-    Button("Nächste Station") {
-      nextStation()
+    if huntManager.distance < 50 {
+      Button("Nächste Station") {
+        huntManager.setNextStation()
+      }
+      .buttonStyle(.borderedProminent)
+      .padding(.bottom, 50)
     }
-    .buttonStyle(.borderedProminent)
-    .padding(.bottom, 50)
-  }
-
-  private func nextStation() {
-    huntManager.setNextStation()
-
   }
 
   private func arrowOverlay() -> some View {
@@ -68,8 +66,6 @@ extension HuntView {
     .frame(maxHeight: .infinity, alignment: .top)
   }
 
-
-
   private func showMapButton() -> some View {
     Text("Karte?")
       .padding(.vertical, 5)
@@ -77,6 +73,7 @@ extension HuntView {
       .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 4))
       .pressAction(onPress: showMap, onRelease: hideMap)
       .frame(maxWidth: .infinity, alignment: .trailing)
+      .padding()
   }
 
   private func showMap() {
