@@ -9,10 +9,12 @@ final class StationsListViewModel: ObservableObject {
   @Published var chosenStations: [Station] = []
 
   func toggleStationChosenState(_ station: Station) {
-    if let index = chosenStations.firstIndex(of: station) {
-      chosenStations.remove(at: index)
-    } else {
-      chosenStations.append(station)
+    withAnimation {
+      if let index = chosenStations.firstIndex(of: station) {
+        chosenStations.remove(at: index)
+      } else {
+        chosenStations.append(station)
+      }
     }
   }
 
@@ -36,13 +38,15 @@ struct StationsListView: View {
       List {
         ForEach(stationStore.allStations) { station in
           StationsListRowView(position: viewModel.positionOf(station), station: station)
-
             .onTapGesture {
               viewModel.toggleStationChosenState(station)
             }
         }
         .onDelete(perform: stationStore.deleteStation)
         .onMove(perform: stationStore.moveStation)
+      }
+      .overlay(alignment: .bottom) {
+        startHuntButton
       }
       .listStyle(.plain)
       .navigationTitle("Stationen")
@@ -52,8 +56,6 @@ struct StationsListView: View {
     .onAppear(perform: locationProvider.stop)
     .onDisappear(perform: locationProvider.start)
   }
-
-
 }
 
 struct StationsListView_Previews: PreviewProvider {
@@ -65,14 +67,25 @@ struct StationsListView_Previews: PreviewProvider {
 }
 
 extension StationsListView {
+  @ViewBuilder
+  private var startHuntButton: some View {
+    if !viewModel.chosenStations.isEmpty {
+      NavigationLink("Suche starten!") {
+        HuntView()
+      }
+      .buttonStyle(.borderedProminent)
+      .controlSize(.large)
+      .padding(.bottom, 30)
+      .transition(.opacity.combined(with: .move(edge: .bottom)))
+    }
+  }
+
   // MARK: - ToolbarItems
   @ToolbarContentBuilder
   func toolbarContent() -> some ToolbarContent {
     ToolbarItem(placement: .navigationBarTrailing) {
-      Button {
+      Button(iconName: "plus") {
         newStationSheetIsShown = true
-      } label: {
-        Image(systemName: "plus")
       }
     }
 
