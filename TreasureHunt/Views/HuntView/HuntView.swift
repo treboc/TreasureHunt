@@ -6,10 +6,10 @@ import SwiftUI
 import CoreLocation
 import MapKit
 
-struct MainView: View {
+struct HuntView: View {
   @EnvironmentObject private var locationProvider: LocationProvider
   @EnvironmentObject private var stationsStore: StationsStore
-  @StateObject private var viewModel = MainViewModel()
+  @StateObject private var viewModel = HuntViewModel()
 
   var body: some View {
     NavigationView {
@@ -20,14 +20,17 @@ struct MainView: View {
         .overlay(alignment: .center, content: arrowOverlay)
         .overlay(alignment: .bottomTrailing, content: showMapButton)
         .overlay(alignment: .bottom, content: nextStationButton)
-        .toolbar(content: toolbarContent)
         .navigationTitle(stationsStore.currentStation?.name ?? "")
     }
-    .sheet(isPresented: $viewModel.sheetIsShowing, content: viewModel.sheetContent)
+    .sheet(isPresented: $viewModel.questionSheetIsShown, onDismiss: nil) {
+      if let station = stationsStore.currentStation {
+        QuestionView(station: station)
+      }
+    }
     .onChange(of: locationProvider.reachedStation) { hasReachedStation in
       if let station = stationsStore.currentStation,
          station.question.isEmpty == false {
-        viewModel.sheetState = .question(station)
+        viewModel.questionSheetIsShown = true
       } else {
         // show alert if next station should be shown, because there's no question
       }
@@ -37,11 +40,11 @@ struct MainView: View {
 
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
-    MainView()
+    HuntView()
   }
 }
 
-extension MainView {
+extension HuntView {
   private func nextStationButton() -> some View {
     Button("Nächste Station") {
       nextStation()
@@ -89,23 +92,4 @@ extension MainView {
     viewModel.mapIsHidden = true
   }
 
-  // MARK: - ToolbarItems
-  @ToolbarContentBuilder
-  func toolbarContent() -> some ToolbarContent {
-    ToolbarItem(placement: .navigationBarTrailing) {
-      Button {
-        viewModel.showSheet(.newStation)
-      } label: {
-        Image(systemName: "plus")
-      }
-    }
-
-    ToolbarItem(placement: .navigationBarLeading) {
-      Button {
-        viewModel.showSheet(.stationsList)
-      } label: {
-        Image(systemName: "list.dash")
-      }
-    }
-  }
 }
