@@ -71,7 +71,7 @@ extension StationsListView {
   private var startHuntButton: some View {
     if !viewModel.chosenStations.isEmpty {
       NavigationLink("Suche starten!") {
-        HuntView()
+        HuntView(stations: viewModel.chosenStations)
       }
       .buttonStyle(.borderedProminent)
       .controlSize(.large)

@@ -11,7 +11,6 @@ class StationsStore: ObservableObject {
   var index: Int = -1
   
   @Published var allStations: [Station] = []
-  @Published var currentStation: Station?
 
   init() {
     loadStationsFromDisk()
@@ -41,26 +40,7 @@ class StationsStore: ObservableObject {
     }
   }
 
-  func next() -> Station? {
-    let nextIndex = index + 1
-    guard allStations.count > nextIndex else {
-      return nil
-    }
-    index = nextIndex
-    return allStations[nextIndex]
-  }
 
-  func previous() -> Station? {
-    guard index > 0 else {
-      return nil
-    }
-    index = index - 1
-    return allStations[index]
-  }
-
-  func setNextStation() {
-    currentStation = next()
-  }
 
   func newStation(with name: String, triggerDistance: Double, question: String, and location: CLLocationCoordinate2D) {
     let station = Station(clCoordinate: location, triggerDistance: triggerDistance, name: name, question: question)

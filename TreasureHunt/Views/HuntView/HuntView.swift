@@ -8,39 +8,41 @@ import MapKit
 
 struct HuntView: View {
   @EnvironmentObject private var locationProvider: LocationProvider
-  @EnvironmentObject private var stationsStore: StationsStore
   @StateObject private var viewModel = HuntViewModel()
+  @StateObject private var huntManager: HuntManager
+
+  init(stations: [Station]) {
+    _huntManager = StateObject(wrappedValue: HuntManager(stations))
+  }
 
   var body: some View {
-    NavigationView {
-      Map(coordinateRegion: $locationProvider.region, showsUserLocation: true, userTrackingMode: .constant(.follow))
-        .opacity(viewModel.mapIsHidden ? 0.0 : 1.0)
-        .animation(.easeInOut, value: viewModel.mapIsHidden)
-        .edgesIgnoringSafeArea(.all)
-        .overlay(alignment: .center, content: arrowOverlay)
-        .overlay(alignment: .bottomTrailing, content: showMapButton)
-        .overlay(alignment: .bottom, content: nextStationButton)
-        .navigationTitle(stationsStore.currentStation?.name ?? "")
-    }
-    .sheet(isPresented: $viewModel.questionSheetIsShown, onDismiss: nil) {
-      if let station = stationsStore.currentStation {
-        QuestionView(station: station)
+    Map(coordinateRegion: $locationProvider.region, showsUserLocation: true, userTrackingMode: .constant(.follow))
+      .opacity(viewModel.mapIsHidden ? 0.0 : 1.0)
+      .animation(.easeInOut, value: viewModel.mapIsHidden)
+      .edgesIgnoringSafeArea(.all)
+      .overlay(alignment: .center, content: arrowOverlay)
+      .overlay(alignment: .bottomTrailing, content: showMapButton)
+      .overlay(alignment: .bottom, content: nextStationButton)
+      .navigationTitle(huntManager.currentStation?.name ?? "")
+      .sheet(isPresented: $viewModel.questionSheetIsShown, onDismiss: huntManager.setNextStation) {
+        if let station = huntManager.currentStation {
+          QuestionView(station: station)
+        }
       }
-    }
-    .onChange(of: locationProvider.reachedStation) { hasReachedStation in
-      if let station = stationsStore.currentStation,
-         station.question.isEmpty == false {
-        viewModel.questionSheetIsShown = true
-      } else {
-        // show alert if next station should be shown, because there's no question
+      .onChange(of: locationProvider.reachedStation) { hasReachedStation in
+        if let station = huntManager.currentStation,
+           station.question.isEmpty == false {
+          viewModel.questionSheetIsShown = true
+        } else {
+          // show alert if next station should be shown, because there's no question
+        }
       }
-    }
   }
 }
 
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
-    HuntView()
+    HuntView(stations: [])
   }
 }
 
@@ -54,8 +56,8 @@ extension HuntView {
   }
 
   private func nextStation() {
-    stationsStore.setNextStation()
-    if let station = stationsStore.currentStation {
+    huntManager.setNextStation()
+    if let station = huntManager.currentStation {
       let location: CLLocation = .init(latitude: station.coordinate.latitude,
                                        longitude: station.coordinate.longitude)
       locationProvider.nextLocation = location
@@ -66,7 +68,7 @@ extension HuntView {
 
   private func arrowOverlay() -> some View {
     VStack(spacing: 10) {
-      if stationsStore.allStations.isEmpty == false {
+      if let _ = huntManager.currentStation {
         DirectionDistanceView(angle: locationProvider.angle, distance: locationProvider.distance)
       }
     }
