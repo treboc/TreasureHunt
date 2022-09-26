@@ -68,7 +68,9 @@ extension StationsListView {
     }
 
     ToolbarItem(placement: .navigationBarLeading) {
-      EditButton()
+      if stationStore.allStations.isEmpty == false {
+        EditButton()
+      }
     }
   }
 }
