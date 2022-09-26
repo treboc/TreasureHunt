@@ -29,8 +29,9 @@ struct StationsListView: View {
       }
       .listStyle(.plain)
       .navigationTitle("Stationen")
-      .sheet(isPresented: $newStationSheetIsShown, onDismiss: nil, content: AddNewStationView.init)
-      .fullScreenCover(isPresented: $viewModel.huntIsStarted) {
+      .roundedNavigationTitle()
+      .sheet(isPresented: $viewModel.newStationSheetIsShown, onDismiss: nil, content: AddNewStationView.init)
+      .fullScreenCover(isPresented: $viewModel.huntIsStarted, onDismiss: viewModel.resetState) {
         HuntView(stations: viewModel.chosenStations)
       }
       .toolbar(content: toolbarContent)
@@ -65,7 +66,7 @@ extension StationsListView {
   func toolbarContent() -> some ToolbarContent {
     ToolbarItem(placement: .navigationBarTrailing) {
       Button(iconName: "plus") {
-        newStationSheetIsShown = true
+        viewModel.newStationSheetIsShown = true
       }
     }
 
