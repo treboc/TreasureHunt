@@ -5,7 +5,7 @@
 import Foundation
 import CoreLocation
 
-struct Station: Codable, Identifiable {
+struct Station: Codable, Identifiable, Equatable {
   var id: UUID = UUID()
   let coordinate: Coordinate
   let triggerDistance: Double
@@ -21,5 +21,9 @@ struct Station: Codable, Identifiable {
 
   var location: CLLocation {
     return CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+  }
+
+  static func == (lhs: Station, rhs: Station) -> Bool {
+    lhs.id == rhs.id
   }
 }
