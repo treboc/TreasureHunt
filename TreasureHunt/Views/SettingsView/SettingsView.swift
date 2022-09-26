@@ -13,6 +13,7 @@ struct SettingsView: View {
       Form {
         Section {
           AppearancePicker()
+          ArrowIconPicker()
         }
       }
       .navigationTitle("Settings")
@@ -26,3 +27,6 @@ struct SettingsView_Previews: PreviewProvider {
     SettingsView()
   }
 }
+
+
+

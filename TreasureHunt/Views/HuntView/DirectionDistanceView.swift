@@ -6,8 +6,25 @@ import SwiftUI
 import MapKit
 
 struct DirectionDistanceView: View {
+  @AppStorage("arrowIcon") private var arrowIcon: ArrowIconPicker.ArrowIcon = .arrow
+
   @Binding var angle: Double
   @Binding var distance: Double
+
+  private var arrowColor: Color {
+    switch distance {
+    case 0..<50:
+      return .green
+    case 50..<100:
+      return .yellow
+    case 100..<250:
+      return .orange
+    case 250...:
+      return .red
+    default:
+      return .accentColor
+    }
+  }
   let error: Error? = nil
 
   private let distanceFormatter: MKDistanceFormatter = {
@@ -18,13 +35,14 @@ struct DirectionDistanceView: View {
   
   var body: some View {
     VStack {
-      Image(systemName: "arrow.up")
+      Image(systemName: arrowIcon.systemImageName)
         .resizable()
         .aspectRatio(contentMode: .fit)
         .rotationEffect(Angle(degrees: angle))
         .frame(height: 150)
         .accessibilityHidden(true)
         .padding()
+        .foregroundColor(arrowColor)
 
       if let error = error {
         Text(verbatim: "\(error.localizedDescription)")
