@@ -16,6 +16,7 @@ class StationsStore: ObservableObject {
     loadStationsFromDisk()
     
     cancellable = $allStations
+      .dropFirst()
       .receive(on: RunLoop.main)
       .sink { [weak self] _ in
         self?.writeStationsToDisk()
