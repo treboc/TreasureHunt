@@ -6,6 +6,7 @@ import SwiftUI
 
 @main
 struct TreasureHuntApp: App {
+  @StateObject private var appearanceManager = AppearanceManager()
   @StateObject private var locationProvider = LocationProvider()
   @StateObject private var stationsStore = StationsStore()
 
@@ -14,7 +15,9 @@ struct TreasureHuntApp: App {
       MainTabView()
         .environmentObject(locationProvider)
         .environmentObject(stationsStore)
+        .environmentObject(appearanceManager)
         .onAppear {
+          appearanceManager.setAppearance()
           UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
         }
     }

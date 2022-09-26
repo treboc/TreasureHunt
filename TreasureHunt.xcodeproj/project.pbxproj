@@ -12,6 +12,8 @@
 		8A4C4F9428E1D9BB00721C50 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4C4F9328E1D9BB00721C50 /* Array+Extension.swift */; };
 		8A4C4F9628E1F9B300721C50 /* StationsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4C4F9528E1F9B300721C50 /* StationsListViewModel.swift */; };
 		8A4C4F9828E1FBFE00721C50 /* RoundedNavigationTitle-ViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4C4F9728E1FBFE00721C50 /* RoundedNavigationTitle-ViewModifier.swift */; };
+		8A4C4F9B28E207C200721C50 /* AppearanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4C4F9A28E207C200721C50 /* AppearanceManager.swift */; };
+		8A4C4F9D28E2083500721C50 /* AppearancePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4C4F9C28E2083500721C50 /* AppearancePicker.swift */; };
 		8A52024A28E0A21900C49779 /* AddNewStationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A52024428E0A21900C49779 /* AddNewStationView.swift */; };
 		8A52024B28E0A21900C49779 /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A52024528E0A21900C49779 /* QuestionView.swift */; };
 		8A52024C28E0A21900C49779 /* DirectionDistanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A52024628E0A21900C49779 /* DirectionDistanceView.swift */; };
@@ -38,6 +40,8 @@
 		8A4C4F9328E1D9BB00721C50 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		8A4C4F9528E1F9B300721C50 /* StationsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsListViewModel.swift; sourceTree = SOURCE_ROOT; };
 		8A4C4F9728E1FBFE00721C50 /* RoundedNavigationTitle-ViewModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RoundedNavigationTitle-ViewModifier.swift"; sourceTree = "<group>"; };
+		8A4C4F9A28E207C200721C50 /* AppearanceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearanceManager.swift; sourceTree = "<group>"; };
+		8A4C4F9C28E2083500721C50 /* AppearancePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearancePicker.swift; sourceTree = "<group>"; };
 		8A52024428E0A21900C49779 /* AddNewStationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewStationView.swift; sourceTree = "<group>"; };
 		8A52024528E0A21900C49779 /* QuestionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
 		8A52024628E0A21900C49779 /* DirectionDistanceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectionDistanceView.swift; sourceTree = "<group>"; };
@@ -78,6 +82,23 @@
 			path = SettingsView;
 			sourceTree = "<group>";
 		};
+		8A4C4F9928E207AA00721C50 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				8A4C4F9E28E2086300721C50 /* Appearance */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		8A4C4F9E28E2086300721C50 /* Appearance */ = {
+			isa = PBXGroup;
+			children = (
+				8A4C4F9A28E207C200721C50 /* AppearanceManager.swift */,
+				8A4C4F9C28E2083500721C50 /* AppearancePicker.swift */,
+			);
+			path = Appearance;
+			sourceTree = "<group>";
+		};
 		8A52024328E0A21900C49779 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -105,8 +126,8 @@
 			children = (
 				8AD1768828E0AE0C00A12948 /* Button+Extension.swift */,
 				8A4C4F9328E1D9BB00721C50 /* Array+Extension.swift */,
-				8A52025028E0A23200C49779 /* ViewModifier */,
 				8A52025228E0A23200C49779 /* FileManager+Extension.swift */,
+				8A52025028E0A23200C49779 /* ViewModifier */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -162,6 +183,7 @@
 				8A52024328E0A21900C49779 /* Views */,
 				F2A056B228DB99B9007D7FFF /* Model */,
 				8A52024F28E0A23200C49779 /* Extensions */,
+				8A4C4F9928E207AA00721C50 /* Utils */,
 				F212393428CA539E006754E3 /* Assets.xcassets */,
 				F212393628CA539E006754E3 /* Preview Content */,
 			);
@@ -265,6 +287,7 @@
 				8A4C4F9128E1C0F100721C50 /* SettingsView.swift in Sources */,
 				F212393128CA539C006754E3 /* TreasureHuntApp.swift in Sources */,
 				8A52025328E0A23200C49779 /* Button+PressActionsModifier.swift in Sources */,
+				8A4C4F9D28E2083500721C50 /* AppearancePicker.swift in Sources */,
 				8AD1768B28E0C58200A12948 /* HuntViewModel.swift in Sources */,
 				F2A056A728DB7983007D7FFF /* CLLocationCoordinate2DExtension.swift in Sources */,
 				8A52024C28E0A21900C49779 /* DirectionDistanceView.swift in Sources */,
@@ -277,6 +300,7 @@
 				8A4C4F9628E1F9B300721C50 /* StationsListViewModel.swift in Sources */,
 				F2A056AD28DB8712007D7FFF /* StationsStore.swift in Sources */,
 				8A52025428E0A23200C49779 /* FileManager+Extension.swift in Sources */,
+				8A4C4F9B28E207C200721C50 /* AppearanceManager.swift in Sources */,
 				8A52024D28E0A21900C49779 /* StationsListView.swift in Sources */,
 				F2A056AB28DB7A63007D7FFF /* Coordinate.swift in Sources */,
 			);

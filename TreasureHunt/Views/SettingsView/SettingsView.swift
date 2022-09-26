@@ -9,7 +9,15 @@ import SwiftUI
 
 struct SettingsView: View {
   var body: some View {
-    Text("Settings")
+    NavigationView {
+      Form {
+        Section {
+          AppearancePicker()
+        }
+      }
+      .navigationTitle("Settings")
+      .roundedNavigationTitle()
+    }
   }
 }
 
