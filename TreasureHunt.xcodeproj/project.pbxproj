@@ -26,6 +26,7 @@
 		8AD1768B28E0C58200A12948 /* HuntViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD1768A28E0C58200A12948 /* HuntViewModel.swift */; };
 		8AD1768E28E0F14600A12948 /* StationsListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD1768D28E0F14600A12948 /* StationsListRowView.swift */; };
 		8AE029C328E211FF009B5F4B /* StationAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE029C228E211FF009B5F4B /* StationAnnotationView.swift */; };
+		8AFCFF3928E225ED000D1A0B /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFCFF3828E225ED000D1A0B /* MapView.swift */; };
 		F212393128CA539C006754E3 /* TreasureHuntApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F212393028CA539C006754E3 /* TreasureHuntApp.swift */; };
 		F212393528CA539E006754E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F212393428CA539E006754E3 /* Assets.xcassets */; };
 		F212393828CA539E006754E3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F212393728CA539E006754E3 /* Preview Assets.xcassets */; };
@@ -56,6 +57,7 @@
 		8AD1768A28E0C58200A12948 /* HuntViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuntViewModel.swift; sourceTree = "<group>"; };
 		8AD1768D28E0F14600A12948 /* StationsListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsListRowView.swift; sourceTree = "<group>"; };
 		8AE029C228E211FF009B5F4B /* StationAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationAnnotationView.swift; sourceTree = "<group>"; };
+		8AFCFF3828E225ED000D1A0B /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		F212392D28CA539C006754E3 /* TreasureHunt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TreasureHunt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F212393028CA539C006754E3 /* TreasureHuntApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreasureHuntApp.swift; sourceTree = "<group>"; };
 		F212393428CA539E006754E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				8A52024828E0A21900C49779 /* HuntView */,
 				8A4C4F9228E1C0F700721C50 /* SettingsView */,
 				8A52024528E0A21900C49779 /* QuestionView.swift */,
+				8AFCFF3828E225ED000D1A0B /* MapView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -311,6 +314,7 @@
 				8A4C4F8F28E1C0E100721C50 /* MainTabView.swift in Sources */,
 				8A4C4F9428E1D9BB00721C50 /* Array+Extension.swift in Sources */,
 				8AD1768928E0AE0C00A12948 /* Button+Extension.swift in Sources */,
+				8AFCFF3928E225ED000D1A0B /* MapView.swift in Sources */,
 				8A52024E28E0A21900C49779 /* HuntView.swift in Sources */,
 				8A52024B28E0A21900C49779 /* QuestionView.swift in Sources */,
 				8A4C4F9628E1F9B300721C50 /* StationsListViewModel.swift in Sources */,

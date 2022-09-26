@@ -29,7 +29,7 @@ struct AddNewStationView: View {
     NavigationView {
       Form {
         Section {
-          Map(coordinateRegion: $region, interactionModes: .all, showsUserLocation: false)
+          MapView(region: $region, radius: $triggerDistance)
             .overlay(Image(systemName: "circle"))
             .overlay(alignment: .bottom, content: locationCoordinates)
             .frame(height: focusedField != nil ? 100 : 300)
