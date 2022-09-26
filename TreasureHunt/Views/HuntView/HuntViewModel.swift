@@ -9,10 +9,6 @@ import Combine
 import SwiftUI
 import MapKit
 
-final class HuntViewModel: ObservableObject {
-  @Published var mapIsHidden: Bool = true
-}
-
 final class HuntManager: ObservableObject {
   private var cancellables = Set<AnyCancellable>()
   private var locationManager = LocationProvider()
@@ -23,6 +19,7 @@ final class HuntManager: ObservableObject {
   @Published var distance: Double = 0
   @Published var questionSheetIsShown: Bool = false
   @Published var region: MKCoordinateRegion = .init()
+  @Published var mapIsHidden: Bool = true
 
   init(_ stations: [Station]) {
     self.stations = stations
@@ -46,6 +43,17 @@ final class HuntManager: ObservableObject {
     locationManager
       .$angle
       .assign(to: &$angle)
+
+    $distance
+      .dropFirst()
+      .sink { [weak self] newDistance in
+        if newDistance < 20 {
+          withAnimation {
+            self?.mapIsHidden = false
+          }
+        }
+      }
+      .store(in: &cancellables)
 
     $currentStation
       .sink { [weak self] station in

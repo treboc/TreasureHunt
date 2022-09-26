@@ -8,7 +8,6 @@ import MapKit
 
 struct HuntView: View {
   @Environment(\.dismiss) private var dismiss
-  @StateObject private var viewModel = HuntViewModel()
   @StateObject private var huntManager: HuntManager
 
   init(stations: [Station]) {
@@ -17,24 +16,34 @@ struct HuntView: View {
 
   var body: some View {
     NavigationView {
-      Map(coordinateRegion: $huntManager.region, showsUserLocation: true, userTrackingMode: .constant(.follow))
-        .opacity(viewModel.mapIsHidden ? 0.0 : 1.0)
-        .animation(.easeInOut, value: viewModel.mapIsHidden)
-        .edgesIgnoringSafeArea(.all)
-        .overlay(alignment: .center, content: arrowOverlay)
-        .overlay(alignment: .bottomTrailing, content: showMapButton)
-        .overlay(alignment: .bottom, content: nextStationButton)
-        .navigationTitle(huntManager.currentStation?.name ?? "")
-        .sheet(isPresented: $huntManager.questionSheetIsShown, onDismiss: huntManager.setNextStation) {
-          if let station = huntManager.currentStation {
-            QuestionView(station: station)
-          }
+      Map(coordinateRegion: $huntManager.region,
+          showsUserLocation: true,
+          userTrackingMode: .constant(.follow),
+          annotationItems: huntManager.stations,
+          annotationContent: { station in
+        MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: station.coordinate.latitude, longitude: station.coordinate.longitude)) {
+          StationAnnotationView(station: station)
+            .shadow(radius: 10)
         }
-        .toolbar {
-          ToolbarItem(placement: .navigationBarLeading) {
-            Button("Beenden", action: dismiss.callAsFunction)
-          }
+      })
+      .allowsHitTesting(false)
+      .opacity(huntManager.mapIsHidden ? 0.0 : 1.0)
+      .animation(.easeInOut, value: huntManager.mapIsHidden)
+      .edgesIgnoringSafeArea(.all)
+      .overlay(alignment: .center, content: arrowOverlay)
+      .overlay(alignment: .bottomTrailing, content: showMapButton)
+      .overlay(alignment: .bottom, content: nextStationButton)
+      .navigationTitle(huntManager.currentStation?.name ?? "")
+      .sheet(isPresented: $huntManager.questionSheetIsShown, onDismiss: huntManager.setNextStation) {
+        if let station = huntManager.currentStation {
+          QuestionView(station: station)
         }
+      }
+      .toolbar {
+        ToolbarItem(placement: .navigationBarLeading) {
+          Button("Beenden", action: dismiss.callAsFunction)
+        }
+      }
     }
   }
 }
@@ -77,11 +86,11 @@ extension HuntView {
   }
 
   private func showMap() {
-    viewModel.mapIsHidden = false
+    huntManager.mapIsHidden = false
   }
 
   private func hideMap() {
-    viewModel.mapIsHidden = true
+    huntManager.mapIsHidden = true
   }
 
 }
