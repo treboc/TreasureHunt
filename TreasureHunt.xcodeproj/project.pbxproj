@@ -14,7 +14,7 @@
 		8A4C4F9828E1FBFE00721C50 /* RoundedNavigationTitle-ViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4C4F9728E1FBFE00721C50 /* RoundedNavigationTitle-ViewModifier.swift */; };
 		8A4C4F9B28E207C200721C50 /* AppearanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4C4F9A28E207C200721C50 /* AppearanceManager.swift */; };
 		8A4C4F9D28E2083500721C50 /* AppearancePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4C4F9C28E2083500721C50 /* AppearancePicker.swift */; };
-		8A4C4FA128E20CD100721C50 /* ArrowIconPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4C4FA028E20CD100721C50 /* ArrowIconPicker.swift */; };
+		8A4C4FA328E20FB100721C50 /* ArrowIconPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4C4FA228E20FB100721C50 /* ArrowIconPicker.swift */; };
 		8A52024A28E0A21900C49779 /* AddNewStationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A52024428E0A21900C49779 /* AddNewStationView.swift */; };
 		8A52024B28E0A21900C49779 /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A52024528E0A21900C49779 /* QuestionView.swift */; };
 		8A52024C28E0A21900C49779 /* DirectionDistanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A52024628E0A21900C49779 /* DirectionDistanceView.swift */; };
@@ -25,6 +25,7 @@
 		8AD1768928E0AE0C00A12948 /* Button+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD1768828E0AE0C00A12948 /* Button+Extension.swift */; };
 		8AD1768B28E0C58200A12948 /* HuntViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD1768A28E0C58200A12948 /* HuntViewModel.swift */; };
 		8AD1768E28E0F14600A12948 /* StationsListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD1768D28E0F14600A12948 /* StationsListRowView.swift */; };
+		8AE029C328E211FF009B5F4B /* StationAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE029C228E211FF009B5F4B /* StationAnnotationView.swift */; };
 		F212393128CA539C006754E3 /* TreasureHuntApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F212393028CA539C006754E3 /* TreasureHuntApp.swift */; };
 		F212393528CA539E006754E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F212393428CA539E006754E3 /* Assets.xcassets */; };
 		F212393828CA539E006754E3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F212393728CA539E006754E3 /* Preview Assets.xcassets */; };
@@ -43,7 +44,7 @@
 		8A4C4F9728E1FBFE00721C50 /* RoundedNavigationTitle-ViewModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RoundedNavigationTitle-ViewModifier.swift"; sourceTree = "<group>"; };
 		8A4C4F9A28E207C200721C50 /* AppearanceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearanceManager.swift; sourceTree = "<group>"; };
 		8A4C4F9C28E2083500721C50 /* AppearancePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearancePicker.swift; sourceTree = "<group>"; };
-		8A4C4FA028E20CD100721C50 /* ArrowIconPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowIconPicker.swift; sourceTree = "<group>"; };
+		8A4C4FA228E20FB100721C50 /* ArrowIconPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrowIconPicker.swift; sourceTree = "<group>"; };
 		8A52024428E0A21900C49779 /* AddNewStationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewStationView.swift; sourceTree = "<group>"; };
 		8A52024528E0A21900C49779 /* QuestionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
 		8A52024628E0A21900C49779 /* DirectionDistanceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectionDistanceView.swift; sourceTree = "<group>"; };
@@ -54,6 +55,7 @@
 		8AD1768828E0AE0C00A12948 /* Button+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Button+Extension.swift"; sourceTree = "<group>"; };
 		8AD1768A28E0C58200A12948 /* HuntViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuntViewModel.swift; sourceTree = "<group>"; };
 		8AD1768D28E0F14600A12948 /* StationsListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsListRowView.swift; sourceTree = "<group>"; };
+		8AE029C228E211FF009B5F4B /* StationAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationAnnotationView.swift; sourceTree = "<group>"; };
 		F212392D28CA539C006754E3 /* TreasureHunt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TreasureHunt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F212393028CA539C006754E3 /* TreasureHuntApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreasureHuntApp.swift; sourceTree = "<group>"; };
 		F212393428CA539E006754E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -105,7 +107,7 @@
 		8A4C4F9F28E20CBA00721C50 /* ArrowIconManager */ = {
 			isa = PBXGroup;
 			children = (
-				8A4C4FA028E20CD100721C50 /* ArrowIconPicker.swift */,
+				8A4C4FA228E20FB100721C50 /* ArrowIconPicker.swift */,
 			);
 			path = ArrowIconManager;
 			sourceTree = "<group>";
@@ -128,6 +130,7 @@
 				8A52024928E0A21900C49779 /* HuntView.swift */,
 				8AD1768A28E0C58200A12948 /* HuntViewModel.swift */,
 				8A52024628E0A21900C49779 /* DirectionDistanceView.swift */,
+				8AE029C228E211FF009B5F4B /* StationAnnotationView.swift */,
 			);
 			path = HuntView;
 			sourceTree = "<group>";
@@ -300,9 +303,10 @@
 				8A52025328E0A23200C49779 /* Button+PressActionsModifier.swift in Sources */,
 				8A4C4F9D28E2083500721C50 /* AppearancePicker.swift in Sources */,
 				8AD1768B28E0C58200A12948 /* HuntViewModel.swift in Sources */,
+				8AE029C328E211FF009B5F4B /* StationAnnotationView.swift in Sources */,
 				F2A056A728DB7983007D7FFF /* CLLocationCoordinate2DExtension.swift in Sources */,
-				8A4C4FA128E20CD100721C50 /* ArrowIconPicker.swift in Sources */,
 				8A52024C28E0A21900C49779 /* DirectionDistanceView.swift in Sources */,
+				8A4C4FA328E20FB100721C50 /* ArrowIconPicker.swift in Sources */,
 				8AD1768E28E0F14600A12948 /* StationsListRowView.swift in Sources */,
 				8A4C4F8F28E1C0E100721C50 /* MainTabView.swift in Sources */,
 				8A4C4F9428E1D9BB00721C50 /* Array+Extension.swift in Sources */,

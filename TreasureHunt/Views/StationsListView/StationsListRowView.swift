@@ -33,19 +33,22 @@ struct StationsListRowView: View {
         }
       }
       .frame(width: 40, height: 40)
+      .padding(.trailing)
 
       VStack(alignment: .leading, spacing: 5) {
         Text(station.name)
-          .font(.title3)
+          .font(.headline)
           .fontWeight(.semibold)
 
         if !station.question.isEmpty {
           Text("**A:** *\(station.question)*")
             .foregroundColor(.secondary)
+            .font(.caption)
         } else {
           Text("Keine Aufgabe für diese Station gestellt.")
             .italic()
             .foregroundColor(.secondary)
+            .font(.caption)
         }
       }
     }
