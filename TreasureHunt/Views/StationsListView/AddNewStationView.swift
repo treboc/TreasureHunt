@@ -31,15 +31,7 @@ struct AddNewStationView: View {
         Section {
           Map(coordinateRegion: $region, interactionModes: .all, showsUserLocation: false)
             .overlay(Image(systemName: "circle"))
-            .overlay(
-              Text("\(region.center.latitude), \(region.center.longitude)")
-                .font(.footnote)
-                .monospacedDigit()
-                .padding(3)
-                .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 5))
-                .padding(.bottom, 10)
-              , alignment: .bottom
-            )
+            .overlay(alignment: .bottom, content: locationCoordinates)
             .frame(height: focusedField != nil ? 100 : 300)
             .animation(.none, value: focusedField)
             .onAppear(perform: setLocation)
@@ -49,19 +41,23 @@ struct AddNewStationView: View {
         .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
 
         Section {
-          TextField("Name", text: $name)
+          TextField("Name der Station", text: $name)
             .focused($focusedField, equals: .name)
-          TextField("Frage", text: $question)
+          TextField("Aufgabe an der Station", text: $question)
             .focused($focusedField, equals: .question)
           Stepper(value: $triggerDistance, in: 5...50, step: 5) {
-            VStack(alignment: .leading) {
-              Text("Auslöseentfernung:")
+            HStack {
+              Text("Min. Distanz:")
               Text("\(triggerDistance.formatted(.number))")
+                .font(.headline)
             }
           }
+        } footer: {
+          Text("Distanz, die unterschritten werden muss, um diese Station zu aktivieren.")
         }
       }
       .toolbar(content: toolbarContent)
+      .navigationBarTitleDisplayMode(.inline)
       .navigationTitle("Neue Station")
     }
   }
@@ -94,6 +90,22 @@ extension AddNewStationView {
     region.span = .init(latitudeDelta: 0.005, longitudeDelta: 0.005)
   }
 
+  private func centerLocation() {
+    if let location = locationProvider.location?.coordinate {
+      region.center = location
+      region.span = .init(latitudeDelta: 0.005, longitudeDelta: 0.005)
+    }
+  }
+
+  // MARK: - Views
+  func locationCoordinates() -> some View {
+    Text("\(region.center.latitude), \(region.center.longitude)")
+      .font(.footnote)
+      .monospacedDigit()
+      .padding(3)
+      .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 5))
+      .padding(.bottom, 10)
+  }
   @ToolbarContentBuilder
   func toolbarContent() -> some ToolbarContent {
     ToolbarItem(placement: .navigationBarLeading) {
@@ -102,6 +114,19 @@ extension AddNewStationView {
 
     ToolbarItem(placement: .navigationBarTrailing) {
       Button("Speichern", action: saveButtonTapped)
+        .disabled(saveButtonIsDisabled)
     }
+  }
+
+  private var centerMapButton: some View {
+    Button(action: centerLocation) {
+      Label("Karte zentrieren", systemImage: "mappin.circle")
+        .labelStyle(.iconOnly)
+        .font(.title2)
+        .frame(width: 50, height: 50)
+        .background(.green)
+        .contentShape(Circle())
+    }
+    .padding()
   }
 }
