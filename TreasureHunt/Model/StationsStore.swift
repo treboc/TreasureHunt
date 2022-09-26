@@ -35,13 +35,11 @@ class StationsStore: ObservableObject {
   private func writeStationsToDisk() {
     do {
       let data = try JSONEncoder().encode(allStations)
-      try data.write(to: FileManager.default.stationsURL())
+      try data.write(to: FileManager.default.stationsURL(), options: .atomic)
     } catch {
       print("\(#file), \(#line): \(error)")
     }
   }
-
-
 
   func newStation(with name: String, triggerDistance: Double, question: String, and location: CLLocationCoordinate2D) {
     let station = Station(clCoordinate: location, triggerDistance: triggerDistance, name: name, question: question)
