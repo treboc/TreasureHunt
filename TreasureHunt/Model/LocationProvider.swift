@@ -16,6 +16,7 @@ class LocationProvider: NSObject, ObservableObject {
     let locManager = CLLocationManager()
     locManager.distanceFilter = 10
     locManager.requestWhenInUseAuthorization()
+    locManager.desiredAccuracy = kCLLocationAccuracyBest
     locManager.delegate = self
     return locManager
   }()
