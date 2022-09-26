@@ -33,4 +33,8 @@ final class StationsListViewModel: ObservableObject {
   func resetState() {
     chosenStations.removeAll()
   }
+
+  func showNewStationSheet() {
+    newStationSheetIsShown = true
+  }
 }

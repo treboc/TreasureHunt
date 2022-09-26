@@ -12,22 +12,13 @@ struct StationsListView: View {
 
   var body: some View {
     NavigationView {
-      List {
-        ForEach(stationStore.allStations) { station in
-          StationsListRowView(position: viewModel.positionOf(station), station: station)
-            .onTapGesture {
-              if editMode?.wrappedValue.isEditing == false {
-                viewModel.toggleStationChosenState(station)
-              }
-            }
+      ZStack {
+        if stationStore.allStations.isEmpty {
+          noStationsPlaceholder
+        } else {
+          stationsList
         }
-        .onDelete(perform: stationStore.deleteStation)
-        .onMove(perform: stationStore.moveStation)
       }
-      .overlay(alignment: .bottom) {
-        startHuntButton
-      }
-      .listStyle(.plain)
       .navigationTitle("Stationen")
       .roundedNavigationTitle()
       .sheet(isPresented: $viewModel.newStationSheetIsShown, onDismiss: nil, content: AddNewStationView.init)
@@ -65,9 +56,7 @@ extension StationsListView {
   @ToolbarContentBuilder
   func toolbarContent() -> some ToolbarContent {
     ToolbarItem(placement: .navigationBarTrailing) {
-      Button(iconName: "plus") {
-        viewModel.newStationSheetIsShown = true
-      }
+      Button(iconName: "plus", action: viewModel.showNewStationSheet)
     }
 
     ToolbarItem(placement: .navigationBarLeading) {
@@ -76,4 +65,37 @@ extension StationsListView {
       }
     }
   }
+
+  private var noStationsPlaceholder: some View {
+    VStack(spacing: 30) {
+      Text("Du hast noch keine Stationen erstellt, aber fang' doch gleich damit an, in dem du hier, oder oben rechts auf das \"+\" tippst.")
+        .multilineTextAlignment(.center)
+        .font(.system(.headline, design: .rounded))
+      Button("Erstelle eine Station", action: viewModel.showNewStationSheet)
+        .foregroundColor(Color(uiColor: .systemBackground))
+        .buttonStyle(.borderedProminent)
+        .controlSize(.regular)
+    }
+    .padding(.horizontal, 50)
+  }
+
+  private var stationsList: some View {
+    List {
+      ForEach(stationStore.allStations) { station in
+        StationsListRowView(position: viewModel.positionOf(station), station: station)
+          .onTapGesture {
+            if editMode?.wrappedValue.isEditing == false {
+              viewModel.toggleStationChosenState(station)
+            }
+          }
+      }
+      .onDelete(perform: stationStore.deleteStation)
+      .onMove(perform: stationStore.moveStation)
+    }
+    .overlay(alignment: .bottom) {
+      startHuntButton
+    }
+    .listStyle(.plain)
+  }
+
 }
