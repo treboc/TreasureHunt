@@ -16,7 +16,7 @@ struct SettingsView: View {
           ArrowIconPicker()
         }
       }
-      .navigationTitle("Settings")
+      .navigationTitle("Einstellungen")
       .roundedNavigationTitle()
     }
   }
@@ -27,6 +27,3 @@ struct SettingsView_Previews: PreviewProvider {
     SettingsView()
   }
 }
-
-
-
