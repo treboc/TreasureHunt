@@ -7,15 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A4C4F8F28E1C0E100721C50 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4C4F8E28E1C0E100721C50 /* MainTabView.swift */; };
+		8A4C4F9128E1C0F100721C50 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4C4F9028E1C0F100721C50 /* SettingsView.swift */; };
 		8A52024A28E0A21900C49779 /* AddNewStationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A52024428E0A21900C49779 /* AddNewStationView.swift */; };
 		8A52024B28E0A21900C49779 /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A52024528E0A21900C49779 /* QuestionView.swift */; };
 		8A52024C28E0A21900C49779 /* DirectionDistanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A52024628E0A21900C49779 /* DirectionDistanceView.swift */; };
 		8A52024D28E0A21900C49779 /* StationsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A52024728E0A21900C49779 /* StationsListView.swift */; };
-		8A52024E28E0A21900C49779 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A52024928E0A21900C49779 /* MainView.swift */; };
+		8A52024E28E0A21900C49779 /* HuntView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A52024928E0A21900C49779 /* HuntView.swift */; };
 		8A52025328E0A23200C49779 /* Button+PressActionsModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A52025128E0A23200C49779 /* Button+PressActionsModifier.swift */; };
 		8A52025428E0A23200C49779 /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A52025228E0A23200C49779 /* FileManager+Extension.swift */; };
 		8AD1768928E0AE0C00A12948 /* Button+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD1768828E0AE0C00A12948 /* Button+Extension.swift */; };
-		8AD1768B28E0C58200A12948 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD1768A28E0C58200A12948 /* MainViewModel.swift */; };
+		8AD1768B28E0C58200A12948 /* HuntViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD1768A28E0C58200A12948 /* HuntViewModel.swift */; };
 		8AD1768E28E0F14600A12948 /* StationsListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD1768D28E0F14600A12948 /* StationsListRowView.swift */; };
 		F212393128CA539C006754E3 /* TreasureHuntApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F212393028CA539C006754E3 /* TreasureHuntApp.swift */; };
 		F212393528CA539E006754E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F212393428CA539E006754E3 /* Assets.xcassets */; };
@@ -28,15 +30,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8A4C4F8E28E1C0E100721C50 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		8A4C4F9028E1C0F100721C50 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		8A52024428E0A21900C49779 /* AddNewStationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewStationView.swift; sourceTree = "<group>"; };
 		8A52024528E0A21900C49779 /* QuestionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
 		8A52024628E0A21900C49779 /* DirectionDistanceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectionDistanceView.swift; sourceTree = "<group>"; };
 		8A52024728E0A21900C49779 /* StationsListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationsListView.swift; sourceTree = "<group>"; };
-		8A52024928E0A21900C49779 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		8A52024928E0A21900C49779 /* HuntView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HuntView.swift; sourceTree = "<group>"; };
 		8A52025128E0A23200C49779 /* Button+PressActionsModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Button+PressActionsModifier.swift"; sourceTree = "<group>"; };
 		8A52025228E0A23200C49779 /* FileManager+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
 		8AD1768828E0AE0C00A12948 /* Button+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Button+Extension.swift"; sourceTree = "<group>"; };
-		8AD1768A28E0C58200A12948 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		8AD1768A28E0C58200A12948 /* HuntViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuntViewModel.swift; sourceTree = "<group>"; };
 		8AD1768D28E0F14600A12948 /* StationsListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsListRowView.swift; sourceTree = "<group>"; };
 		F212392D28CA539C006754E3 /* TreasureHunt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TreasureHunt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F212393028CA539C006754E3 /* TreasureHuntApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreasureHuntApp.swift; sourceTree = "<group>"; };
@@ -60,25 +64,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8A4C4F9228E1C0F700721C50 /* SettingsView */ = {
+			isa = PBXGroup;
+			children = (
+				8A4C4F9028E1C0F100721C50 /* SettingsView.swift */,
+			);
+			path = SettingsView;
+			sourceTree = "<group>";
+		};
 		8A52024328E0A21900C49779 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				8A52024828E0A21900C49779 /* MainView */,
-				8A52024428E0A21900C49779 /* AddNewStationView.swift */,
+				8AD1768F28E1C08000A12948 /* MainTabView */,
+				8AD1768C28E0F13300A12948 /* StationsListView */,
+				8A52024828E0A21900C49779 /* HuntView */,
+				8A4C4F9228E1C0F700721C50 /* SettingsView */,
 				8A52024528E0A21900C49779 /* QuestionView.swift */,
 				8A52024628E0A21900C49779 /* DirectionDistanceView.swift */,
-				8AD1768C28E0F13300A12948 /* StationsListView */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
-		8A52024828E0A21900C49779 /* MainView */ = {
+		8A52024828E0A21900C49779 /* HuntView */ = {
 			isa = PBXGroup;
 			children = (
-				8A52024928E0A21900C49779 /* MainView.swift */,
-				8AD1768A28E0C58200A12948 /* MainViewModel.swift */,
+				8A52024928E0A21900C49779 /* HuntView.swift */,
+				8AD1768A28E0C58200A12948 /* HuntViewModel.swift */,
 			);
-			path = MainView;
+			path = HuntView;
 			sourceTree = "<group>";
 		};
 		8A52024F28E0A23200C49779 /* Extensions */ = {
@@ -104,8 +117,17 @@
 			children = (
 				8A52024728E0A21900C49779 /* StationsListView.swift */,
 				8AD1768D28E0F14600A12948 /* StationsListRowView.swift */,
+				8A52024428E0A21900C49779 /* AddNewStationView.swift */,
 			);
 			path = StationsListView;
+			sourceTree = "<group>";
+		};
+		8AD1768F28E1C08000A12948 /* MainTabView */ = {
+			isa = PBXGroup;
+			children = (
+				8A4C4F8E28E1C0E100721C50 /* MainTabView.swift */,
+			);
+			path = MainTabView;
 			sourceTree = "<group>";
 		};
 		F212392428CA539C006754E3 = {
@@ -230,14 +252,16 @@
 				F2A056A528DB7957007D7FFF /* LocationProvider.swift in Sources */,
 				F2A056AF28DB8741007D7FFF /* Station.swift in Sources */,
 				8A52024A28E0A21900C49779 /* AddNewStationView.swift in Sources */,
+				8A4C4F9128E1C0F100721C50 /* SettingsView.swift in Sources */,
 				F212393128CA539C006754E3 /* TreasureHuntApp.swift in Sources */,
 				8A52025328E0A23200C49779 /* Button+PressActionsModifier.swift in Sources */,
-				8AD1768B28E0C58200A12948 /* MainViewModel.swift in Sources */,
+				8AD1768B28E0C58200A12948 /* HuntViewModel.swift in Sources */,
 				F2A056A728DB7983007D7FFF /* CLLocationCoordinate2DExtension.swift in Sources */,
 				8A52024C28E0A21900C49779 /* DirectionDistanceView.swift in Sources */,
 				8AD1768E28E0F14600A12948 /* StationsListRowView.swift in Sources */,
+				8A4C4F8F28E1C0E100721C50 /* MainTabView.swift in Sources */,
 				8AD1768928E0AE0C00A12948 /* Button+Extension.swift in Sources */,
-				8A52024E28E0A21900C49779 /* MainView.swift in Sources */,
+				8A52024E28E0A21900C49779 /* HuntView.swift in Sources */,
 				8A52024B28E0A21900C49779 /* QuestionView.swift in Sources */,
 				F2A056AD28DB8712007D7FFF /* StationsStore.swift in Sources */,
 				8A52025428E0A23200C49779 /* FileManager+Extension.swift in Sources */,
