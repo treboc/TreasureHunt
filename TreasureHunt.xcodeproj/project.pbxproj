@@ -10,6 +10,7 @@
 		8A4C4F8F28E1C0E100721C50 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4C4F8E28E1C0E100721C50 /* MainTabView.swift */; };
 		8A4C4F9128E1C0F100721C50 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4C4F9028E1C0F100721C50 /* SettingsView.swift */; };
 		8A4C4F9428E1D9BB00721C50 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4C4F9328E1D9BB00721C50 /* Array+Extension.swift */; };
+		8A4C4F9628E1F9B300721C50 /* StationsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4C4F9528E1F9B300721C50 /* StationsListViewModel.swift */; };
 		8A4C4F9828E1FBFE00721C50 /* RoundedNavigationTitle-ViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4C4F9728E1FBFE00721C50 /* RoundedNavigationTitle-ViewModifier.swift */; };
 		8A52024A28E0A21900C49779 /* AddNewStationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A52024428E0A21900C49779 /* AddNewStationView.swift */; };
 		8A52024B28E0A21900C49779 /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A52024528E0A21900C49779 /* QuestionView.swift */; };
@@ -35,6 +36,7 @@
 		8A4C4F8E28E1C0E100721C50 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		8A4C4F9028E1C0F100721C50 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		8A4C4F9328E1D9BB00721C50 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
+		8A4C4F9528E1F9B300721C50 /* StationsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsListViewModel.swift; sourceTree = SOURCE_ROOT; };
 		8A4C4F9728E1FBFE00721C50 /* RoundedNavigationTitle-ViewModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RoundedNavigationTitle-ViewModifier.swift"; sourceTree = "<group>"; };
 		8A52024428E0A21900C49779 /* AddNewStationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewStationView.swift; sourceTree = "<group>"; };
 		8A52024528E0A21900C49779 /* QuestionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				8A52024728E0A21900C49779 /* StationsListView.swift */,
+				8A4C4F9528E1F9B300721C50 /* StationsListViewModel.swift */,
 				8AD1768D28E0F14600A12948 /* StationsListRowView.swift */,
 				8A52024428E0A21900C49779 /* AddNewStationView.swift */,
 			);
@@ -271,6 +274,7 @@
 				8AD1768928E0AE0C00A12948 /* Button+Extension.swift in Sources */,
 				8A52024E28E0A21900C49779 /* HuntView.swift in Sources */,
 				8A52024B28E0A21900C49779 /* QuestionView.swift in Sources */,
+				8A4C4F9628E1F9B300721C50 /* StationsListViewModel.swift in Sources */,
 				F2A056AD28DB8712007D7FFF /* StationsStore.swift in Sources */,
 				8A52025428E0A23200C49779 /* FileManager+Extension.swift in Sources */,
 				8A52024D28E0A21900C49779 /* StationsListView.swift in Sources */,

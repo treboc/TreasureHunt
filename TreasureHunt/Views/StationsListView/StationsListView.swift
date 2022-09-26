@@ -16,7 +16,9 @@ struct StationsListView: View {
         ForEach(stationStore.allStations) { station in
           StationsListRowView(position: viewModel.positionOf(station), station: station)
             .onTapGesture {
-              viewModel.toggleStationChosenState(station)
+              if editMode?.wrappedValue.isEditing == false {
+                viewModel.toggleStationChosenState(station)
+              }
             }
         }
         .onDelete(perform: stationStore.deleteStation)
