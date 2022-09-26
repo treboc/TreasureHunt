@@ -86,7 +86,7 @@ extension AddNewStationView {
   }
 
   private func setLocation() {
-    if let lastStationCoordinate = stationsStore.stations.last?.coordinate {
+    if let lastStationCoordinate = stationsStore.allStations.last?.coordinate {
       region.center = .init(latitude: lastStationCoordinate.latitude, longitude: lastStationCoordinate.longitude)
     } else if let location = locationProvider.location?.coordinate {
       region.center = location

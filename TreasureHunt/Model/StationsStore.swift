@@ -10,13 +10,13 @@ class StationsStore: ObservableObject {
   var cancellable: AnyCancellable?
   var index: Int = -1
   
-  @Published var stations: [Station] = []
+  @Published var allStations: [Station] = []
   @Published var currentStation: Station?
 
   init() {
     loadStationsFromDisk()
     
-    cancellable = $stations
+    cancellable = $allStations
       .receive(on: RunLoop.main)
       .sink { [weak self] _ in
         self?.writeStationsToDisk()
@@ -26,15 +26,15 @@ class StationsStore: ObservableObject {
   private func loadStationsFromDisk() {
     do {
       let data = try Data(contentsOf: FileManager.default.stationsURL())
-      self.stations = try JSONDecoder().decode([Station].self, from: data)
+      self.allStations = try JSONDecoder().decode([Station].self, from: data)
     } catch {
-      self.stations = []
+      self.allStations = []
     }
   }
 
   private func writeStationsToDisk() {
     do {
-      let data = try JSONEncoder().encode(stations)
+      let data = try JSONEncoder().encode(allStations)
       try data.write(to: FileManager.default.stationsURL())
     } catch {
       print("\(#file), \(#line): \(error)")
@@ -43,11 +43,11 @@ class StationsStore: ObservableObject {
 
   func next() -> Station? {
     let nextIndex = index + 1
-    guard stations.count > nextIndex else {
+    guard allStations.count > nextIndex else {
       return nil
     }
     index = nextIndex
-    return stations[nextIndex]
+    return allStations[nextIndex]
   }
 
   func previous() -> Station? {
@@ -55,7 +55,7 @@ class StationsStore: ObservableObject {
       return nil
     }
     index = index - 1
-    return stations[index]
+    return allStations[index]
   }
 
   func setNextStation() {
@@ -63,12 +63,15 @@ class StationsStore: ObservableObject {
   }
 
   func newStation(with name: String, triggerDistance: Double, question: String, and location: CLLocationCoordinate2D) {
-    
     let station = Station(clCoordinate: location, triggerDistance: triggerDistance, name: name, question: question)
-    stations.append(station)
+    allStations.append(station)
   }
 
   func deleteStation(at offsets: IndexSet) {
-    stations.remove(atOffsets: offsets)
+    allStations.remove(atOffsets: offsets)
+  }
+
+  func moveStation(from source: IndexSet, to destination: Int) {
+    allStations.move(fromOffsets: source, toOffset: destination)
   }
 }

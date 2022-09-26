@@ -66,7 +66,7 @@ extension HuntView {
 
   private func arrowOverlay() -> some View {
     VStack(spacing: 10) {
-      if stationsStore.stations.isEmpty == false {
+      if stationsStore.allStations.isEmpty == false {
         DirectionDistanceView(angle: locationProvider.angle, distance: locationProvider.distance)
       }
     }
