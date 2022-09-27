@@ -69,7 +69,7 @@ final class HuntManager: ObservableObject {
   }
 
   private func showQuestion() {
-    if let _ = currentStation?.question {
+    if currentStation?.question.isEmpty == false {
       questionSheetIsShown = true
     }
   }
