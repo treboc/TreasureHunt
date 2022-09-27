@@ -25,14 +25,25 @@ struct AddNewStationView: View {
     return name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
   }
 
+  private var mapSpanInMeters: CLLocationDistance {
+    return triggerDistance * 10
+  }
+
   var body: some View {
     NavigationView {
       Form {
         Section {
-          MapView(region: $region, radius: $triggerDistance)
+//          MapView(region: $region, radius: $triggerDistance)
+          Map(coordinateRegion: $region)
             .overlay(
-              Image(systemName: "circle")
+              Image(systemName: "plus")
                 .allowsHitTesting(false)
+            )
+            .overlay(
+              Circle()
+                .strokeBorder(Color.red, lineWidth: 1)
+                .background(Circle().foregroundColor(Color.black.opacity(0.1)))
+                .frame(width: 60, height: 60)
             )
             .overlay(alignment: .bottom, content: locationCoordinates)
             .frame(height: focusedField != nil ? 100 : 300)
@@ -62,6 +73,12 @@ struct AddNewStationView: View {
       .toolbar(content: toolbarContent)
       .navigationBarTitleDisplayMode(.inline)
       .navigationTitle("Neue Station")
+      .onChange(of: triggerDistance) { newValue in
+        setSpanOfMap()
+      }
+      .onAppear {
+        setSpanOfMap()
+      }
     }
   }
 }
@@ -84,19 +101,23 @@ extension AddNewStationView {
     self.focusedField = .name
   }
 
+  private func setSpanOfMap() {
+    region = MKCoordinateRegion(center: region.center, latitudinalMeters: mapSpanInMeters, longitudinalMeters: mapSpanInMeters)
+  }
+
   private func setLocation() {
     if let lastStationCoordinate = stationsStore.allStations.last?.coordinate {
       region.center = .init(latitude: lastStationCoordinate.latitude, longitude: lastStationCoordinate.longitude)
     } else if let location = locationProvider.location?.coordinate {
       region.center = location
     }
-    region.span = .init(latitudeDelta: 0.005, longitudeDelta: 0.005)
+    setSpanOfMap()
   }
 
   private func centerLocation() {
     if let location = locationProvider.location?.coordinate {
       region.center = location
-      region.span = .init(latitudeDelta: 0.005, longitudeDelta: 0.005)
+      setSpanOfMap()
     }
   }
 
