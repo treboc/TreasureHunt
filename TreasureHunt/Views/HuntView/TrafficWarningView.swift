@@ -27,11 +27,15 @@ struct TrafficWarningView: View {
         }
 
         Text("Achte bei der Suche immer auf deine Umgebung und den Verkehr.")
+          .frame(maxWidth: .infinity, alignment: .leading)
 
         Button("Verstanden") {
-          warningRead = true
+          withAnimation {
+            warningRead = true
+          }
         }
         .buttonStyle(.borderedProminent)
+        .padding(.bottom)
       }
       .padding()
       .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 16))

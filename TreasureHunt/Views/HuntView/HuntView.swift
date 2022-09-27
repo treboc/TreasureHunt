@@ -38,6 +38,8 @@ struct HuntView: View {
 
         if warningRead == false {
           TrafficWarningView(warningRead: $warningRead)
+            .transition(.opacity.combined(with: .scale))
+            .zIndex(2)
         }
       }
       .ignoresSafeArea()
