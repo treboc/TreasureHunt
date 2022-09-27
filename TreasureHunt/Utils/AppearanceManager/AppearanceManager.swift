@@ -26,7 +26,7 @@ class AppearanceManager: ObservableObject {
       case .light:
         return "Hell"
       case .system:
-        return "Standard"
+        return "System"
       }
     }
   }

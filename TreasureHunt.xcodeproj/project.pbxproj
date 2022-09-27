@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8A1CBD7428E350BE00E0AE4B /* SettingsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1CBD7328E350BE00E0AE4B /* SettingsKeys.swift */; };
 		8A1CBD7628E36EC300E0AE4B /* TrafficWarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1CBD7528E36EC300E0AE4B /* TrafficWarningView.swift */; };
+		8A1CBD7828E3795300E0AE4B /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1CBD7728E3795300E0AE4B /* Color+Extension.swift */; };
 		8A4C4F8F28E1C0E100721C50 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4C4F8E28E1C0E100721C50 /* MainTabView.swift */; };
 		8A4C4F9128E1C0F100721C50 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4C4F9028E1C0F100721C50 /* SettingsView.swift */; };
 		8A4C4F9428E1D9BB00721C50 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4C4F9328E1D9BB00721C50 /* Array+Extension.swift */; };
@@ -42,6 +43,7 @@
 /* Begin PBXFileReference section */
 		8A1CBD7328E350BE00E0AE4B /* SettingsKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsKeys.swift; sourceTree = "<group>"; };
 		8A1CBD7528E36EC300E0AE4B /* TrafficWarningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrafficWarningView.swift; sourceTree = "<group>"; };
+		8A1CBD7728E3795300E0AE4B /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		8A4C4F8E28E1C0E100721C50 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		8A4C4F9028E1C0F100721C50 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		8A4C4F9328E1D9BB00721C50 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 				8AD1768828E0AE0C00A12948 /* Button+Extension.swift */,
 				8A4C4F9328E1D9BB00721C50 /* Array+Extension.swift */,
 				8A52025228E0A23200C49779 /* FileManager+Extension.swift */,
+				8A1CBD7728E3795300E0AE4B /* Color+Extension.swift */,
 				8A52025028E0A23200C49779 /* ViewModifier */,
 			);
 			path = Extensions;
@@ -310,6 +313,7 @@
 				8A4C4F9128E1C0F100721C50 /* SettingsView.swift in Sources */,
 				F212393128CA539C006754E3 /* TreasureHuntApp.swift in Sources */,
 				8A52025328E0A23200C49779 /* Button+PressActionsModifier.swift in Sources */,
+				8A1CBD7828E3795300E0AE4B /* Color+Extension.swift in Sources */,
 				8A4C4F9D28E2083500721C50 /* AppearancePicker.swift in Sources */,
 				8AD1768B28E0C58200A12948 /* HuntViewModel.swift in Sources */,
 				8AE029C328E211FF009B5F4B /* StationAnnotationView.swift in Sources */,
@@ -455,7 +459,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = PrimaryAccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TreasureHunt/Preview Content\"";
@@ -466,8 +470,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -477,7 +480,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -485,7 +488,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = PrimaryAccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TreasureHunt/Preview Content\"";
@@ -496,8 +499,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -507,7 +509,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

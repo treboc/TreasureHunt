@@ -11,18 +11,11 @@ struct AppearancePicker: View {
   @EnvironmentObject var appearanceManager: AppearanceManager
 
   var body: some View {
-    HStack {
-      Text("Farbschema")
-      Spacer()
-      Menu {
-        Picker("Wähle ein Theme", selection: $appearanceManager.appearance) {
-          ForEach(AppearanceManager.Appearance.allCases, id: \.self) {
-            Text($0.title)
-          }
-        }
-      } label: {
-        Text(appearanceManager.appearance.title)
+    Picker("Farbschema", selection: $appearanceManager.appearance) {
+      ForEach(AppearanceManager.Appearance.allCases, id: \.self) {
+        Text($0.title)
       }
     }
+    .pickerStyle(.menu)
   }
 }

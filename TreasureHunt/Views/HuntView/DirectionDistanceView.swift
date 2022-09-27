@@ -22,7 +22,7 @@ struct DirectionDistanceView: View {
     case 250...:
       return .red
     default:
-      return .accentColor
+      return .primaryAccentColor
     }
   }
   let error: Error? = nil
