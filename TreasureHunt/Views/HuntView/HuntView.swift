@@ -44,6 +44,12 @@ struct HuntView: View {
           Button("Beenden", action: dismiss.callAsFunction)
         }
       }
+      .onAppear {
+        UIApplication.shared.isIdleTimerDisabled = huntManager.idleDimmingDisabled
+      }
+      .onDisappear {
+        UIApplication.shared.isIdleTimerDisabled = false
+      }
     }
   }
 }

@@ -8,12 +8,15 @@
 import SwiftUI
 
 struct SettingsView: View {
+  @AppStorage(SettingsKeys.idleDimmingDisabled) private var idleDimmingDisabled: Bool = true
+
   var body: some View {
     NavigationView {
       Form {
         Section {
           AppearancePicker()
           ArrowIconPicker()
+          idleDimmingToggle
         }
       }
       .navigationTitle("Einstellungen")
@@ -25,5 +28,11 @@ struct SettingsView: View {
 struct SettingsView_Previews: PreviewProvider {
   static var previews: some View {
     SettingsView()
+  }
+}
+
+extension SettingsView {
+  private var idleDimmingToggle: some View {
+    Toggle("Abschaltung des Displays während einer Suche verhindern", isOn: $idleDimmingDisabled)
   }
 }

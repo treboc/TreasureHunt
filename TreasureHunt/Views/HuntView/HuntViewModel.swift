@@ -13,6 +13,7 @@ final class HuntManager: ObservableObject {
   private var cancellables = Set<AnyCancellable>()
   private var locationManager = LocationProvider()
 
+  @AppStorage(SettingsKeys.idleDimmingDisabled) var idleDimmingDisabled: Bool = false
   @Published var stations: [Station] = []
   @Published var currentStation: Station?
   @Published var angle: Double = 0
@@ -81,6 +82,7 @@ final class HuntManager: ObservableObject {
 
     if let nextStation = stations[safe: currentIndex + 1] {
       currentStation = nextStation
+      mapIsHidden = true
     }
   }
 
