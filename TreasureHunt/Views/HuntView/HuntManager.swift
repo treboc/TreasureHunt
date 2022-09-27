@@ -1,5 +1,5 @@
 //
-//  HuntViewModel.swift
+//  HuntManager.swift
 //  TreasureHunt
 //
 //  Created by Marvin Lee Kobert on 25.09.22.

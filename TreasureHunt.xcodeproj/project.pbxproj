@@ -26,7 +26,7 @@
 		8A52025328E0A23200C49779 /* Button+PressActionsModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A52025128E0A23200C49779 /* Button+PressActionsModifier.swift */; };
 		8A52025428E0A23200C49779 /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A52025228E0A23200C49779 /* FileManager+Extension.swift */; };
 		8AD1768928E0AE0C00A12948 /* Button+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD1768828E0AE0C00A12948 /* Button+Extension.swift */; };
-		8AD1768B28E0C58200A12948 /* HuntViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD1768A28E0C58200A12948 /* HuntViewModel.swift */; };
+		8AD1768B28E0C58200A12948 /* HuntManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD1768A28E0C58200A12948 /* HuntManager.swift */; };
 		8AD1768E28E0F14600A12948 /* StationsListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD1768D28E0F14600A12948 /* StationsListRowView.swift */; };
 		8AE029C328E211FF009B5F4B /* StationAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE029C228E211FF009B5F4B /* StationAnnotationView.swift */; };
 		8AFCFF3928E225ED000D1A0B /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFCFF3828E225ED000D1A0B /* MapView.swift */; };
@@ -60,7 +60,7 @@
 		8A52025128E0A23200C49779 /* Button+PressActionsModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Button+PressActionsModifier.swift"; sourceTree = "<group>"; };
 		8A52025228E0A23200C49779 /* FileManager+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
 		8AD1768828E0AE0C00A12948 /* Button+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Button+Extension.swift"; sourceTree = "<group>"; };
-		8AD1768A28E0C58200A12948 /* HuntViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuntViewModel.swift; sourceTree = "<group>"; };
+		8AD1768A28E0C58200A12948 /* HuntManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuntManager.swift; sourceTree = "<group>"; };
 		8AD1768D28E0F14600A12948 /* StationsListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsListRowView.swift; sourceTree = "<group>"; };
 		8AE029C228E211FF009B5F4B /* StationAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationAnnotationView.swift; sourceTree = "<group>"; };
 		8AFCFF3828E225ED000D1A0B /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
@@ -138,7 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				8A52024928E0A21900C49779 /* HuntView.swift */,
-				8AD1768A28E0C58200A12948 /* HuntViewModel.swift */,
+				8AD1768A28E0C58200A12948 /* HuntManager.swift */,
 				8A52024628E0A21900C49779 /* DirectionDistanceView.swift */,
 				8AE029C228E211FF009B5F4B /* StationAnnotationView.swift */,
 				8A1CBD7528E36EC300E0AE4B /* TrafficWarningView.swift */,
@@ -315,7 +315,7 @@
 				8A52025328E0A23200C49779 /* Button+PressActionsModifier.swift in Sources */,
 				8A1CBD7828E3795300E0AE4B /* Color+Extension.swift in Sources */,
 				8A4C4F9D28E2083500721C50 /* AppearancePicker.swift in Sources */,
-				8AD1768B28E0C58200A12948 /* HuntViewModel.swift in Sources */,
+				8AD1768B28E0C58200A12948 /* HuntManager.swift in Sources */,
 				8AE029C328E211FF009B5F4B /* StationAnnotationView.swift in Sources */,
 				F2A056A728DB7983007D7FFF /* CLLocationCoordinate2DExtension.swift in Sources */,
 				8A52024C28E0A21900C49779 /* DirectionDistanceView.swift in Sources */,
@@ -463,7 +463,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TreasureHunt/Preview Content\"";
-				DEVELOPMENT_TEAM = Q6PD97MRX4;
+				DEVELOPMENT_TEAM = X9DJ8STXP5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Show direction and distance to next station.";
@@ -492,7 +492,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TreasureHunt/Preview Content\"";
-				DEVELOPMENT_TEAM = Q6PD97MRX4;
+				DEVELOPMENT_TEAM = X9DJ8STXP5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Show direction and distance to next station.";
