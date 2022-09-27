@@ -8,6 +8,7 @@ import MapKit
 
 struct HuntView: View {
   @Environment(\.dismiss) private var dismiss
+  @State private var warningRead: Bool = false
   @StateObject private var huntManager: HuntManager
 
   init(stations: [Station]) {
@@ -16,23 +17,33 @@ struct HuntView: View {
 
   var body: some View {
     NavigationView {
-      Map(coordinateRegion: $huntManager.region,
-          showsUserLocation: true,
-          userTrackingMode: .constant(.follow),
-          annotationItems: huntManager.stations,
-          annotationContent: { station in
-        MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: station.coordinate.latitude, longitude: station.coordinate.longitude)) {
-          StationAnnotationView(station: station)
-            .shadow(radius: 10)
+      ZStack {
+        Map(coordinateRegion: $huntManager.region,
+            showsUserLocation: true,
+            userTrackingMode: .constant(.follow),
+            annotationItems: huntManager.stations,
+            annotationContent: { station in
+          MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: station.coordinate.latitude, longitude: station.coordinate.longitude)) {
+            StationAnnotationView(station: station)
+              .shadow(radius: 10)
+          }
+        })
+        .allowsHitTesting(false)
+        .opacity(huntManager.mapIsHidden ? 0.0 : 1.0)
+        .animation(.easeInOut, value: huntManager.mapIsHidden)
+
+        arrowOverlay()
+        showMapButton()
+        nextStationButton()
+
+//          .overlay(alignment: .bottomTrailing, content: showMapButton)
+//        .overlay(alignment: .bottom, content: nextStationButton)
+
+        if warningRead == false {
+          TrafficWarningView(warningRead: $warningRead)
         }
-      })
-      .allowsHitTesting(false)
-      .opacity(huntManager.mapIsHidden ? 0.0 : 1.0)
-      .animation(.easeInOut, value: huntManager.mapIsHidden)
-      .edgesIgnoringSafeArea(.all)
-      .overlay(alignment: .center, content: arrowOverlay)
-      .overlay(alignment: .bottomTrailing, content: showMapButton)
-      .overlay(alignment: .bottom, content: nextStationButton)
+      }
+      .ignoresSafeArea()
       .navigationTitle(huntManager.currentStation?.name ?? "")
       .sheet(isPresented: $huntManager.questionSheetIsShown, onDismiss: huntManager.setNextStation) {
         if let station = huntManager.currentStation {
@@ -50,6 +61,7 @@ struct HuntView: View {
       .onDisappear {
         UIApplication.shared.isIdleTimerDisabled = false
       }
+
     }
   }
 }
@@ -62,23 +74,12 @@ struct ContentView_Previews: PreviewProvider {
 
 extension HuntView {
   @ViewBuilder
-  private func nextStationButton() -> some View {
-    if huntManager.distance < 50 {
-      Button("Nächste Station") {
-        huntManager.setNextStation()
-      }
-      .buttonStyle(.borderedProminent)
-      .padding(.bottom, 50)
-    }
-  }
-
   private func arrowOverlay() -> some View {
-    VStack(spacing: 10) {
-      if let _ = huntManager.currentStation {
-        DirectionDistanceView(angle: $huntManager.angle, distance: $huntManager.distance)
-      }
+    if let _ = huntManager.currentStation {
+      DirectionDistanceView(angle: $huntManager.angle, distance: $huntManager.distance)
+        .shadow(radius: 5)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
     }
-    .frame(maxHeight: .infinity, alignment: .top)
   }
 
   private func showMapButton() -> some View {
@@ -87,8 +88,19 @@ extension HuntView {
       .padding(.horizontal, 10)
       .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 4))
       .pressAction(onPress: showMap, onRelease: hideMap)
-      .frame(maxWidth: .infinity, alignment: .trailing)
-      .padding()
+      .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
+      .padding([.bottom, .trailing], 40)
+  }
+
+  @ViewBuilder
+  private func nextStationButton() -> some View {
+    if huntManager.distance < 50 {
+      Button("Nächste Station") {
+        huntManager.setNextStation()
+      }
+      .buttonStyle(.borderedProminent)
+      .padding(.bottom, 50)
+    }
   }
 
   private func showMap() {
