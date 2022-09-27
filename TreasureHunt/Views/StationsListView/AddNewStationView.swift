@@ -18,7 +18,7 @@ struct AddNewStationView: View {
   @State private var region: MKCoordinateRegion = .init()
   @State private var name: String = ""
   @State private var question: String = ""
-  @State private var triggerDistance: Double = 5
+  @State private var triggerDistance: Double = 50
   @FocusState private var focusedField: Field?
 
   private var saveButtonIsDisabled: Bool {
@@ -30,7 +30,10 @@ struct AddNewStationView: View {
       Form {
         Section {
           MapView(region: $region, radius: $triggerDistance)
-            .overlay(Image(systemName: "circle"))
+            .overlay(
+              Image(systemName: "circle")
+                .allowsHitTesting(false)
+            )
             .overlay(alignment: .bottom, content: locationCoordinates)
             .frame(height: focusedField != nil ? 100 : 300)
             .animation(.none, value: focusedField)

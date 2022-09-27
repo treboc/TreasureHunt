@@ -15,13 +15,14 @@ struct MapView: UIViewRepresentable {
   func makeUIView(context: Context) -> MKMapView {
     let mapView = MKMapView(frame: .zero)
     mapView.showsUserLocation = false
+    mapView.showsTraffic = false
+    mapView.delegate = context.coordinator
     return mapView
   }
 
-  func updateUIView(_ view: MKMapView, context: Context) {
-    view.setRegion(region, animated: true)
-    view.delegate = context.coordinator
-    addCircle(on: view)
+  func updateUIView(_ mapView: MKMapView, context: Context) {
+    mapView.setRegion(region, animated: false)
+    addCircle(on: mapView)
   }
 
   func makeCoordinator() -> MapViewCoordinator {
@@ -30,8 +31,8 @@ struct MapView: UIViewRepresentable {
 
   func addCircle(on mapView: MKMapView) {
     mapView.removeOverlays(mapView.overlays)
-    let overlay = MKCircle(center: region.center, radius: radius)
-    mapView.addOverlay(overlay)
+    let circle = MKCircle(center: region.center, radius: radius)
+    mapView.addOverlay(circle)
   }
 }
 
