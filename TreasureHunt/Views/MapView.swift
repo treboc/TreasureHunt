@@ -10,7 +10,6 @@ import SwiftUI
 
 struct MapView: UIViewRepresentable {
   @Binding var region: MKCoordinateRegion
-  @Binding var radius: CLLocationDistance
 
   func makeUIView(context: Context) -> MKMapView {
     let mapView = MKMapView(frame: .zero)
@@ -22,17 +21,10 @@ struct MapView: UIViewRepresentable {
 
   func updateUIView(_ mapView: MKMapView, context: Context) {
     mapView.setRegion(region, animated: false)
-    addCircle(on: mapView)
   }
 
   func makeCoordinator() -> MapViewCoordinator {
     MapViewCoordinator(self)
-  }
-
-  func addCircle(on mapView: MKMapView) {
-    mapView.removeOverlays(mapView.overlays)
-    let circle = MKCircle(center: region.center, radius: radius)
-    mapView.addOverlay(circle)
   }
 }
 
@@ -45,16 +37,5 @@ class MapViewCoordinator: NSObject, MKMapViewDelegate {
 
   func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
     mapViewController.region = mapView.region
-  }
-
-  func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-    if let overlay = overlay as? MKCircle {
-      let circleRenderer = MKCircleRenderer(circle: overlay)
-      circleRenderer.lineWidth = 2
-      circleRenderer.fillColor = UIColor.primaryAccentColor.withAlphaComponent(0.1)
-      circleRenderer.strokeColor = .black
-      return circleRenderer
-    }
-    return MKOverlayRenderer(overlay: overlay)
   }
 }
