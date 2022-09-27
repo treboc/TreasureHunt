@@ -11,14 +11,20 @@ struct ArrowIconPicker: View {
   @AppStorage("arrowIcon") private var arrowIcon: ArrowIcon = .arrow
 
   var body: some View {
-    VStack(alignment: .leading) {
-      Text("Wähle einen Pfeil")
-      Picker("Pfeil", selection: $arrowIcon) {
-        ForEach(ArrowIcon.allCases, id: \.self) { icon in
-          Image(systemName: icon.systemImageName)
+    HStack {
+      Text("Pfeilsymbol")
+      Spacer()
+      Menu {
+        Picker("Pfeil", selection: $arrowIcon) {
+          ForEach(ArrowIcon.allCases, id: \.self) { icon in
+            Label(icon.name, systemImage: icon.systemImage)
+              .labelStyle(.titleAndIcon)
+          }
         }
+      } label: {
+        Text(arrowIcon.name)
+          .animation(.none, value: arrowIcon)
       }
-      .pickerStyle(.segmented)
     }
   }
 }
@@ -30,7 +36,20 @@ extension ArrowIconPicker {
     case triangleOutlined
     case arrowMerged
 
-    var systemImageName: String {
+    var name: String {
+      switch self {
+      case .arrow:
+        return "Pfeil"
+      case .triangleFilled:
+        return "Dreieck (gefüllt)"
+      case .triangleOutlined:
+        return "Dreieck"
+      case .arrowMerged:
+        return "Pfeil, verbunden"
+      }
+    }
+
+    var systemImage: String {
       switch self {
       case .arrow:
         return "arrow.up"

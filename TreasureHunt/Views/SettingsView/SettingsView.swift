@@ -17,6 +17,10 @@ struct SettingsView: View {
           AppearancePicker()
           ArrowIconPicker()
           idleDimmingToggle
+        } footer: {
+          Text("Ist diese Option aktiviert, so wird das Display während der Schatzsuche nicht automatisch deaktiviert.")
+            .font(.caption)
+            .italic()
         }
       }
       .navigationTitle("Einstellungen")
@@ -33,6 +37,6 @@ struct SettingsView_Previews: PreviewProvider {
 
 extension SettingsView {
   private var idleDimmingToggle: some View {
-    Toggle("Abschaltung des Displays während einer Suche verhindern", isOn: $idleDimmingDisabled)
+    Toggle("Display aktiv lassen", isOn: $idleDimmingDisabled)
   }
 }

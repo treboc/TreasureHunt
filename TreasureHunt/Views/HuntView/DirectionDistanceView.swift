@@ -35,7 +35,7 @@ struct DirectionDistanceView: View {
   
   var body: some View {
     VStack {
-      Image(systemName: arrowIcon.systemImageName)
+      Image(systemName: arrowIcon.systemImage)
         .resizable()
         .aspectRatio(contentMode: .fit)
         .rotationEffect(Angle(degrees: angle))
