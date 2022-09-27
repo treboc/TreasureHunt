@@ -33,7 +33,6 @@ struct StationsListRowView: View {
         }
       }
       .frame(width: 40, height: 40)
-      .padding(.trailing)
 
       VStack(alignment: .leading, spacing: 5) {
         Text(station.name)
