@@ -36,9 +36,6 @@ struct HuntView: View {
         showMapButton()
         nextStationButton()
 
-//          .overlay(alignment: .bottomTrailing, content: showMapButton)
-//        .overlay(alignment: .bottom, content: nextStationButton)
-
         if warningRead == false {
           TrafficWarningView(warningRead: $warningRead)
         }
@@ -99,6 +96,7 @@ extension HuntView {
         huntManager.setNextStation()
       }
       .buttonStyle(.borderedProminent)
+      .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
       .padding(.bottom, 50)
     }
   }
