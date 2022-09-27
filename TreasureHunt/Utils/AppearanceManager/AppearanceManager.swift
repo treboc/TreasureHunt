@@ -8,7 +8,7 @@
 import SwiftUI
 
 class AppearanceManager: ObservableObject {
-  @AppStorage("Appearance") var appearance: Appearance = .system {
+  @AppStorage(SettingsKeys.selectedAppearance) var appearance: Appearance = .system {
     didSet {
       setAppearance()
     }
