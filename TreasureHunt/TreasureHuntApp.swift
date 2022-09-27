@@ -20,6 +20,7 @@ struct TreasureHuntApp: App {
           appearanceManager.setAppearance()
           UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
         }
+        .tint(.primaryAccentColor)
     }
   }
 }

@@ -51,7 +51,7 @@ class MapViewCoordinator: NSObject, MKMapViewDelegate {
     if let overlay = overlay as? MKCircle {
       let circleRenderer = MKCircleRenderer(circle: overlay)
       circleRenderer.lineWidth = 2
-      circleRenderer.fillColor = UIColor.tintColor.withAlphaComponent(0.1)
+      circleRenderer.fillColor = UIColor.primaryAccentColor.withAlphaComponent(0.1)
       circleRenderer.strokeColor = .black
       return circleRenderer
     }

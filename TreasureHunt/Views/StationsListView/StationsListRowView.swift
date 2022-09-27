@@ -13,7 +13,7 @@ struct StationsListRowView: View {
   let station: Station
 
   var circleColor: Color {
-    isChosen ? Color.accentColor : Color.primary
+    isChosen ? Color.primaryAccentColor : Color.primary
   }
 
   @State private var fillCircle: CGFloat = 0
@@ -33,7 +33,6 @@ struct StationsListRowView: View {
         }
       }
       .frame(width: 40, height: 40)
-      .padding(.trailing)
 
       VStack(alignment: .leading, spacing: 5) {
         Text(station.name)
@@ -65,7 +64,7 @@ extension StationsListRowView {
 
       Circle()
         .trim(from: 0, to: fillCircle)
-        .stroke(.tint, lineWidth: 3)
+        .stroke(Color.primaryAccentColor, lineWidth: 3)
         .rotationEffect(.degrees(-90))
     }
     .onChange(of: isChosen) { _ in

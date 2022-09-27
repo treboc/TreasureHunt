@@ -11,7 +11,7 @@ struct AppearancePicker: View {
   @EnvironmentObject var appearanceManager: AppearanceManager
 
   var body: some View {
-    Picker("Wähle ein Theme", selection: $appearanceManager.appearance) {
+    Picker("Farbschema", selection: $appearanceManager.appearance) {
       ForEach(AppearanceManager.Appearance.allCases, id: \.self) {
         Text($0.title)
       }
