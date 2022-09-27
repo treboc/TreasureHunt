@@ -11,7 +11,7 @@ struct AddNewStationView: View {
   }
 
   @EnvironmentObject private var stationsStore: StationsStore
-  @EnvironmentObject private var locationProvider: LocationProvider
+  @StateObject private var locationProvider = LocationProvider()
 
   @Environment(\.dismiss) private var dismiss
 
@@ -33,23 +33,10 @@ struct AddNewStationView: View {
     NavigationView {
       Form {
         Section {
-//          MapView(region: $region, radius: $triggerDistance)
-          Map(coordinateRegion: $region)
-            .overlay(
-              Image(systemName: "plus")
-                .allowsHitTesting(false)
-            )
-            .overlay(
-              Circle()
-                .strokeBorder(Color.red, lineWidth: 1)
-                .background(Circle().foregroundColor(Color.black.opacity(0.1)))
-                .frame(width: 60, height: 60)
-            )
-            .overlay(alignment: .bottom, content: locationCoordinates)
-            .frame(height: focusedField != nil ? 100 : 300)
-            .animation(.none, value: focusedField)
-            .onAppear(perform: setLocation)
-            .onTapGesture(perform: dismissFocus)
+          ZStack(alignment: .topTrailing) {
+            mapView
+            centerMapButton
+          }
         }
         .listRowBackground(Color.clear)
         .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
@@ -59,13 +46,7 @@ struct AddNewStationView: View {
             .focused($focusedField, equals: .name)
           TextField("Aufgabe an der Station", text: $question)
             .focused($focusedField, equals: .question)
-          Stepper(value: $triggerDistance, in: 5...50, step: 5) {
-            HStack {
-              Text("Min. Distanz:")
-              Text("\(triggerDistance.formatted(.number))")
-                .font(.headline)
-            }
-          }
+          distanceSlider
         } footer: {
           Text("Distanz, die unterschritten werden muss, um diese Station zu aktivieren.")
         }
@@ -85,6 +66,7 @@ struct AddNewStationView: View {
 
 
 extension AddNewStationView {
+  // MARK: - Methods
   private func saveButtonTapped() {
     let location = region.center
     stationsStore.newStation(with: name, triggerDistance: triggerDistance, question: question, and: location)
@@ -120,8 +102,31 @@ extension AddNewStationView {
       setSpanOfMap()
     }
   }
+}
 
+extension AddNewStationView {
   // MARK: - Views
+  private var mapView: some View {
+    Map(coordinateRegion: $region, interactionModes: [.pan])
+      .overlay(
+        Image(systemName: "plus")
+          .allowsHitTesting(false)
+      )
+      .overlay(
+        Circle()
+          .strokeBorder(Color.red, lineWidth: 1)
+          .background(Circle().foregroundColor(Color.black.opacity(0.1)))
+          .frame(width: 60, height: 60)
+          .allowsHitTesting(false)
+      )
+      .overlay(alignment: .bottom, content: locationCoordinates)
+      .frame(height: focusedField != nil ? 100 : 300)
+      .animation(.none, value: focusedField)
+      .onAppear(perform: setLocation)
+      .onTapGesture(perform: dismissFocus)
+  }
+
+
   func locationCoordinates() -> some View {
     Text("\(region.center.latitude), \(region.center.longitude)")
       .font(.footnote)
@@ -130,6 +135,7 @@ extension AddNewStationView {
       .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 5))
       .padding(.bottom, 10)
   }
+
   @ToolbarContentBuilder
   func toolbarContent() -> some ToolbarContent {
     ToolbarItem(placement: .navigationBarLeading) {
@@ -144,13 +150,28 @@ extension AddNewStationView {
 
   private var centerMapButton: some View {
     Button(action: centerLocation) {
-      Label("Karte zentrieren", systemImage: "mappin.circle")
-        .labelStyle(.iconOnly)
-        .font(.title2)
-        .frame(width: 50, height: 50)
-        .background(.green)
-        .contentShape(Circle())
+      ZStack {
+        Circle()
+          .fill(.background)
+        Image(systemName: "mappin.and.ellipse")
+          .foregroundColor(.primary)
+      }
+      .frame(width: 32, height: 32)
     }
     .padding()
+    .contentShape(Circle())
+  }
+
+  private var distanceSlider: some View {
+    VStack {
+      Slider(value: $triggerDistance, in: 5...300, step: 5)
+      HStack {
+        Text("Min. Distanz:")
+        Spacer()
+        Text("\(triggerDistance.formatted(.number))")
+          .font(.headline)
+      }
+    }
+    .padding(.vertical)
   }
 }
