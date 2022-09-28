@@ -77,13 +77,15 @@ extension HuntView {
   }
 
   private func showMapButton() -> some View {
-    Text("Karte?")
-      .padding(.vertical, 5)
-      .padding(.horizontal, 10)
-      .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 4))
+    Image(systemName: "map")
+      .resizable()
+      .padding(10)
+      .background(.thinMaterial, in: Circle())
+      .frame(width: 44, height: 44, alignment: .center)
+      .foregroundColor(.primaryAccentColor)
       .pressAction(onPress: showMap, onRelease: hideMap)
       .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
-      .padding([.bottom, .trailing], 40)
+      .padding([.bottom, .trailing], 20)
   }
 
   @ViewBuilder
