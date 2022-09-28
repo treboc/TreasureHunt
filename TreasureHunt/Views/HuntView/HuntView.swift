@@ -30,7 +30,6 @@ struct HuntView: View {
         })
         .allowsHitTesting(false)
         .opacity(huntManager.mapIsHidden ? 0.0 : 1.0)
-        .animation(.easeInOut, value: huntManager.mapIsHidden)
 
         arrowOverlay()
         showMapButton()
@@ -42,6 +41,7 @@ struct HuntView: View {
             .zIndex(2)
         }
       }
+      .animation(.default, value: huntManager.mapIsHidden)
       .ignoresSafeArea()
       .navigationTitle(huntManager.currentStation?.name ?? "")
       .sheet(isPresented: $huntManager.questionSheetIsShown, onDismiss: huntManager.setNextStation) {
@@ -54,14 +54,9 @@ struct HuntView: View {
           Button("Beenden", action: dismiss.callAsFunction)
         }
       }
-      .onAppear {
-        UIApplication.shared.isIdleTimerDisabled = huntManager.idleDimmingDisabled
-      }
-      .onDisappear {
-        UIApplication.shared.isIdleTimerDisabled = false
-      }
-
     }
+    .onAppear(perform: applyIdleDimmingSetting)
+    .onDisappear(perform: disableIdleDimming)
   }
 }
 
@@ -111,4 +106,11 @@ extension HuntView {
     huntManager.mapIsHidden = true
   }
 
+  private func applyIdleDimmingSetting() {
+    UIApplication.shared.isIdleTimerDisabled = huntManager.idleDimmingDisabled
+  }
+
+  private func disableIdleDimming() {
+    UIApplication.shared.isIdleTimerDisabled = false
+  }
 }
