@@ -14,13 +14,13 @@ final class HuntManager: ObservableObject {
   private var locationManager = LocationProvider()
 
   @AppStorage(SettingsKeys.idleDimmingDisabled) var idleDimmingDisabled: Bool = false
+  @Published var region: MKCoordinateRegion = .init()
   @Published var stations: [Station] = []
   @Published var currentStation: Station?
   @Published var angle: Double = 0
   @Published var distance: Double = 0
   @Published var questionSheetIsShown: Bool = false
-  @Published var region: MKCoordinateRegion = .init()
-  @Published var mapIsHidden: Bool = true
+  @Published var isNearCurrentStation: Bool = false
 
   init(_ stations: [Station]) {
     self.stations = stations
@@ -45,16 +45,12 @@ final class HuntManager: ObservableObject {
       .$angle
       .assign(to: &$angle)
 
-    $distance
-      .dropFirst()
-      .sink { [weak self] newDistance in
-        if newDistance < 20 {
-          withAnimation {
-            self?.mapIsHidden = false
-          }
-        }
+    locationManager
+      .$distance
+      .map { [weak self] in
+        return $0 < self?.currentStation?.triggerDistance ?? 20
       }
-      .store(in: &cancellables)
+      .assign(to: &$isNearCurrentStation)
 
     $currentStation
       .sink { [weak self] station in
@@ -82,7 +78,7 @@ final class HuntManager: ObservableObject {
 
     if let nextStation = stations[safe: currentIndex + 1] {
       currentStation = nextStation
-      mapIsHidden = true
+      isNearCurrentStation = false
     }
   }
 

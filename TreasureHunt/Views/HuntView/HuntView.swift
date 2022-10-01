@@ -29,7 +29,7 @@ struct HuntView: View {
           }
         })
         .allowsHitTesting(false)
-        .opacity(huntManager.mapIsHidden ? 0.0 : 1.0)
+        .opacity(huntManager.isNearCurrentStation ? 1.0 : 0.0)
 
         arrowOverlay()
         showMapButton()
@@ -41,7 +41,7 @@ struct HuntView: View {
             .zIndex(2)
         }
       }
-      .animation(.default, value: huntManager.mapIsHidden)
+      .animation(.default, value: huntManager.isNearCurrentStation)
       .ignoresSafeArea()
       .navigationTitle(huntManager.currentStation?.name ?? "")
       .sheet(isPresented: $huntManager.questionSheetIsShown, onDismiss: huntManager.setNextStation) {
@@ -69,23 +69,27 @@ struct ContentView_Previews: PreviewProvider {
 extension HuntView {
   @ViewBuilder
   private func arrowOverlay() -> some View {
-    if let _ = huntManager.currentStation {
-      DirectionDistanceView(angle: $huntManager.angle, distance: $huntManager.distance)
+    if let _ = huntManager.currentStation,
+       huntManager.isNearCurrentStation == false {
+      DirectionDistanceView(angle: huntManager.angle, distance: huntManager.distance)
         .shadow(radius: 5)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
     }
   }
 
+  @ViewBuilder
   private func showMapButton() -> some View {
-    Image(systemName: "map")
-      .resizable()
-      .padding(10)
-      .background(.thinMaterial, in: Circle())
-      .frame(width: 44, height: 44, alignment: .center)
-      .foregroundColor(.primaryAccentColor)
-      .pressAction(onPress: showMap, onRelease: hideMap)
-      .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
-      .padding([.bottom, .trailing], 20)
+    if huntManager.isNearCurrentStation == false {
+      Image(systemName: "map")
+        .resizable()
+        .padding(10)
+        .background(.thinMaterial, in: Circle())
+        .frame(width: 44, height: 44, alignment: .center)
+        .foregroundColor(.primaryAccentColor)
+        .pressAction(onPress: showMap, onRelease: hideMap)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
+        .padding([.bottom, .trailing], 20)
+    }
   }
 
   @ViewBuilder
@@ -101,11 +105,11 @@ extension HuntView {
   }
 
   private func showMap() {
-    huntManager.mapIsHidden = false
+    huntManager.isNearCurrentStation = false
   }
 
   private func hideMap() {
-    huntManager.mapIsHidden = true
+    huntManager.isNearCurrentStation = true
   }
 
   private func applyIdleDimmingSetting() {
