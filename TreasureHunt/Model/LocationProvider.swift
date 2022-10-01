@@ -15,7 +15,7 @@ class LocationProvider: NSObject, ObservableObject {
   lazy var locationManager: CLLocationManager = {
     let locManager = CLLocationManager()
     locManager.distanceFilter = 10
-    locManager.headingFilter = 0.5
+    locManager.headingFilter = 2
     locManager.requestWhenInUseAuthorization()
     locManager.desiredAccuracy = kCLLocationAccuracyBest
     locManager.delegate = self
@@ -94,25 +94,18 @@ extension LocationProvider: CLLocationManagerDelegate {
   }
   
   private func updateLocation(location: CLLocation) {
-    updateAngle(heading: heading)
     updateDistance(location: location, nextLocation: nextLocation)
   }
-  
-  private func updateAddressLocation(addressLocation: CLLocation?) {
-    updateAngle(heading: heading)
-    updateDistance(location: location, nextLocation: addressLocation)
-  }
-  
+
   private func update(heading: CLHeading?) {
     updateAngle(heading: heading)
-    updateDistance(location: location, nextLocation: nextLocation)
   }
   
   func updateAngle(heading: CLHeading?) {
     if let coordinate = nextLocation?.coordinate,
        let myCoordinate = location?.coordinate,
        let heading = heading {
-      
+
       let bearing = myCoordinate.bearing(to: coordinate)
       angle = bearing - heading.magneticHeading
     }
@@ -121,7 +114,7 @@ extension LocationProvider: CLLocationManagerDelegate {
   func updateDistance(location: CLLocation?, nextLocation: CLLocation?) {
     if let location = location,
        let nextLocation = nextLocation {
-      
+
       distance = location.distance(from: nextLocation)
 
       if distance < triggerDistance {
