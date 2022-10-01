@@ -15,6 +15,7 @@ class LocationProvider: NSObject, ObservableObject {
   lazy var locationManager: CLLocationManager = {
     let locManager = CLLocationManager()
     locManager.distanceFilter = 10
+    locManager.headingFilter = 0.5
     locManager.requestWhenInUseAuthorization()
     locManager.desiredAccuracy = kCLLocationAccuracyBest
     locManager.delegate = self
