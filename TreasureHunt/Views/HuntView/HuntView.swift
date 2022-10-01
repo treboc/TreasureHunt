@@ -8,8 +8,9 @@ import MapKit
 
 struct HuntView: View {
   @Environment(\.dismiss) private var dismiss
-  @State private var warningRead: Bool = false
   @StateObject private var huntManager: HuntManager
+  @State private var warningRead: Bool = false
+  @State private var endSessionAlertIsShown: Bool = false
 
   init(stations: [Station]) {
     _huntManager = StateObject(wrappedValue: HuntManager(stations))
@@ -32,7 +33,17 @@ struct HuntView: View {
         .opacity(huntManager.isNearCurrentStation ? 1.0 : 0.0)
 
         arrowOverlay()
+
         showMapButton()
+        endHuntButton()
+          .alert("Bist du sicher?", isPresented: $endSessionAlertIsShown) {
+            Button("Abbrechen", role: .cancel) {}
+            Button("Ja, beenden", role: .destructive) { dismiss.callAsFunction() }
+          } message: {
+            Text("Damit wird die Suche beendet, dein Fortschritt ist nicht gespeichert.")
+          }
+
+
         nextStationButton()
 
         if warningRead == false {
@@ -43,7 +54,7 @@ struct HuntView: View {
       }
       .animation(.default, value: huntManager.isNearCurrentStation)
       .ignoresSafeArea()
-      .navigationTitle(huntManager.currentStation?.name ?? "")
+      .navigationBarHidden(true)
       .sheet(isPresented: $huntManager.questionSheetIsShown, onDismiss: huntManager.setNextStation) {
         if let station = huntManager.currentStation {
           QuestionView(station: station)
@@ -69,12 +80,24 @@ struct ContentView_Previews: PreviewProvider {
 extension HuntView {
   @ViewBuilder
   private func arrowOverlay() -> some View {
+  private func endHuntButton() -> some View {
+    Image(systemName: "xmark")
+      .resizable()
+      .padding(10)
+      .background(.thinMaterial, in: Circle())
+      .frame(width: 44, height: 44, alignment: .center)
+      .foregroundColor(.primaryAccentColor)
+      .onTapGesture(perform: endHuntButtonTapped)
+      .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
+      .padding([.bottom, .leading], 20)
+  }
+
     if let _ = huntManager.currentStation,
-       huntManager.isNearCurrentStation == false {
       DirectionDistanceView(angle: huntManager.angle, distance: huntManager.distance)
+       huntManager.isNearCurrentStation == false {
         .shadow(radius: 5)
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
     }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
   }
 
   @ViewBuilder
@@ -118,5 +141,9 @@ extension HuntView {
 
   private func disableIdleDimming() {
     UIApplication.shared.isIdleTimerDisabled = false
+  }
+
+  private func endHuntButtonTapped() {
+    endSessionAlertIsShown = true
   }
 }
