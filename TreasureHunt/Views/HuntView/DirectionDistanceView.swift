@@ -8,8 +8,8 @@ import MapKit
 struct DirectionDistanceView: View {
   @AppStorage("arrowIcon") private var arrowIcon: ArrowIconPicker.ArrowIcon = .arrow
 
-  @Binding var angle: Double
-  @Binding var distance: Double
+  let angle: Double
+  let distance: Double
 
   private var arrowColor: Color {
     switch distance {
