@@ -31,11 +31,6 @@ struct StationAnnotationView: View {
         .offset(y: -3)
         .padding(.bottom, 40)
     }
-    .overlay(alignment: .top) {
-      Text(station.name)
-        .font(.caption)
-        .offset(y: -20)
-    }
   }
 }
 
