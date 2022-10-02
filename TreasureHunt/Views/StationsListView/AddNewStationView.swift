@@ -11,7 +11,7 @@ struct AddNewStationView: View {
   }
 
   @EnvironmentObject private var stationsStore: StationsStore
-  @StateObject private var locationProvider = LocationProvider()
+  private var locationProvider = LocationProvider()
 
   @Environment(\.dismiss) private var dismiss
 
