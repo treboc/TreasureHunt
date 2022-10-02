@@ -57,9 +57,7 @@ struct AddNewStationView: View {
       .onChange(of: triggerDistance) { newValue in
         setSpanOfMap()
       }
-      .onAppear {
-        setSpanOfMap()
-      }
+      .onAppear(perform: setSpanOfMap)
     }
   }
 }
@@ -106,36 +104,6 @@ extension AddNewStationView {
 
 extension AddNewStationView {
   // MARK: - Views
-  private var mapView: some View {
-    Map(coordinateRegion: $region, interactionModes: [.pan])
-      .overlay(
-        Image(systemName: "plus")
-          .allowsHitTesting(false)
-      )
-      .overlay(
-        Circle()
-          .strokeBorder(Color.red, lineWidth: 1)
-          .background(Circle().foregroundColor(Color.black.opacity(0.1)))
-          .frame(width: 60, height: 60)
-          .allowsHitTesting(false)
-      )
-      .overlay(alignment: .bottom, content: locationCoordinates)
-      .frame(height: focusedField != nil ? 100 : 300)
-      .animation(.none, value: focusedField)
-      .onAppear(perform: setLocation)
-      .onTapGesture(perform: dismissFocus)
-  }
-
-
-  func locationCoordinates() -> some View {
-    Text("\(region.center.latitude), \(region.center.longitude)")
-      .font(.footnote)
-      .monospacedDigit()
-      .padding(3)
-      .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 5))
-      .padding(.bottom, 10)
-  }
-
   @ToolbarContentBuilder
   func toolbarContent() -> some ToolbarContent {
     ToolbarItem(placement: .navigationBarLeading) {
@@ -146,6 +114,37 @@ extension AddNewStationView {
       Button("Speichern", action: saveButtonTapped)
         .disabled(saveButtonIsDisabled)
     }
+  }
+
+  private var mapView: some View {
+    GeometryReader { proxy in
+      Map(coordinateRegion: $region, interactionModes: [.pan])
+        .overlay(
+          Image(systemName: "plus")
+            .allowsHitTesting(false)
+        )
+        .overlay(
+          Circle()
+            .strokeBorder(Color.red, lineWidth: 1)
+            .background(Circle().foregroundColor(Color.black.opacity(0.1)))
+            .frame(width: proxy.size.width / 5, height: proxy.size.width / 5)
+            .allowsHitTesting(false)
+        )
+        .overlay(alignment: .bottom, content: locationCoordinates)
+        .animation(.none, value: focusedField)
+        .onAppear(perform: setLocation)
+        .onTapGesture(perform: dismissFocus)
+    }
+    .frame(minHeight: 100, idealHeight: 300, maxHeight: 300)
+  }
+
+  func locationCoordinates() -> some View {
+    Text("\(region.center.latitude), \(region.center.longitude)")
+      .font(.footnote)
+      .monospacedDigit()
+      .padding(3)
+      .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 5))
+      .padding(.bottom, 10)
   }
 
   private var centerMapButton: some View {
