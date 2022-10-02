@@ -29,20 +29,13 @@ struct HuntView: View {
               .shadow(radius: 10)
           }
         })
+        .ignoresSafeArea()
         .allowsHitTesting(false)
-        .opacity(huntManager.isNearCurrentStation ? 1.0 : 0.0)
+        .blur(radius: huntManager.isNearCurrentStation ? 0 : 20)
 
         arrowOverlay()
-
         showMapButton()
         endHuntButton()
-          .alert("Bist du sicher?", isPresented: $endSessionAlertIsShown) {
-            Button("Abbrechen", role: .cancel) {}
-            Button("Ja, beenden", role: .destructive) { dismiss.callAsFunction() }
-          } message: {
-            Text("Damit wird die Suche beendet, dein Fortschritt ist nicht gespeichert.")
-          }
-
 
         nextStationButton()
 
@@ -53,8 +46,13 @@ struct HuntView: View {
         }
       }
       .animation(.default, value: huntManager.isNearCurrentStation)
-      .ignoresSafeArea()
       .navigationBarHidden(true)
+      .alert("Bist du sicher?", isPresented: $endSessionAlertIsShown) {
+        Button("Abbrechen", role: .cancel) {}
+        Button("Ja, beenden", role: .destructive) { dismiss.callAsFunction() }
+      } message: {
+        Text("Damit wird die Suche beendet, dein Fortschritt ist nicht gespeichert.")
+      }
       .sheet(isPresented: $huntManager.questionSheetIsShown, onDismiss: huntManager.setNextStation) {
         if let station = huntManager.currentStation {
           QuestionView(station: station)
@@ -80,6 +78,14 @@ struct ContentView_Previews: PreviewProvider {
 extension HuntView {
   @ViewBuilder
   private func arrowOverlay() -> some View {
+    if let _ = huntManager.currentStation {
+      DirectionDistanceView(huntManager: huntManager)
+        .shadow(radius: 5)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+    }
+  }
+
+  @ViewBuilder
   private func endHuntButton() -> some View {
     Image(systemName: "xmark")
       .resizable()
@@ -92,32 +98,22 @@ extension HuntView {
       .padding([.bottom, .leading], 20)
   }
 
-    if let _ = huntManager.currentStation,
-      DirectionDistanceView(angle: huntManager.angle, distance: huntManager.distance)
-       huntManager.isNearCurrentStation == false {
-        .shadow(radius: 5)
-    }
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-  }
-
   @ViewBuilder
   private func showMapButton() -> some View {
-    if huntManager.isNearCurrentStation == false {
-      Image(systemName: "map")
-        .resizable()
-        .padding(10)
-        .background(.thinMaterial, in: Circle())
-        .frame(width: 44, height: 44, alignment: .center)
-        .foregroundColor(.primaryAccentColor)
-        .pressAction(onPress: showMap, onRelease: hideMap)
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
-        .padding([.bottom, .trailing], 20)
-    }
+    Image(systemName: "map")
+      .resizable()
+      .padding(10)
+      .background(.thinMaterial, in: Circle())
+      .frame(width: 44, height: 44, alignment: .center)
+      .foregroundColor(.primaryAccentColor)
+      .pressAction(onPress: showMap, onRelease: hideMap)
+      .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
+      .padding([.bottom, .trailing], 20)
   }
 
   @ViewBuilder
   private func nextStationButton() -> some View {
-    if huntManager.distance < 50 {
+    if huntManager.distanceToCurrentStation < 50 {
       Button("Nächste Station") {
         huntManager.setNextStation()
       }
@@ -128,11 +124,11 @@ extension HuntView {
   }
 
   private func showMap() {
-    huntManager.isNearCurrentStation = false
+      huntManager.isNearCurrentStation = true
   }
 
   private func hideMap() {
-    huntManager.isNearCurrentStation = true
+      huntManager.isNearCurrentStation = false
   }
 
   private func applyIdleDimmingSetting() {

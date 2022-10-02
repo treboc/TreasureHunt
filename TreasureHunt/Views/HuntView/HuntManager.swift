@@ -11,14 +11,15 @@ import MapKit
 
 final class HuntManager: ObservableObject {
   private var cancellables = Set<AnyCancellable>()
-  private var locationManager = LocationProvider()
+  var locationManager = LocationProvider()
 
   @AppStorage(SettingsKeys.idleDimmingDisabled) var idleDimmingDisabled: Bool = false
   @Published var region: MKCoordinateRegion = .init()
   @Published var stations: [Station] = []
   @Published var currentStation: Station?
-  @Published var angle: Double = 0
-  @Published var distance: Double = 0
+  @Published var angleToCurrentStation: Double = 0
+  @Published var distanceToCurrentStation: Double = 0
+
   @Published var questionSheetIsShown: Bool = false
   @Published var isNearCurrentStation: Bool = false
 
@@ -29,28 +30,19 @@ final class HuntManager: ObservableObject {
     }
 
     locationManager
-      .$reachedStation
-      .sink { [weak self] reachedStation in
-        if reachedStation {
-          self?.showQuestion()
-        }
-      }
-      .store(in: &cancellables)
-
-    locationManager
       .$distance
-      .assign(to: &$distance)
+      .assign(to: &$distanceToCurrentStation)
 
     locationManager
       .$angle
-      .assign(to: &$angle)
+      .assign(to: &$angleToCurrentStation)
 
     locationManager
       .$distance
-      .map { [weak self] in
-        return $0 < self?.currentStation?.triggerDistance ?? 20
-      }
-      .assign(to: &$isNearCurrentStation)
+      .subscribe(on: RunLoop.current)
+      .receive(on: RunLoop.main)
+      .sink(receiveValue: onDistanceUpdate)
+      .store(in: &cancellables)
 
     $currentStation
       .sink { [weak self] station in
@@ -62,6 +54,15 @@ final class HuntManager: ObservableObject {
         self?.locationManager.start()
       }
       .store(in: &cancellables)
+  }
+
+  private func onDistanceUpdate(_ distance: CLLocationDistance) {
+    guard let currentStation else { return }
+
+    if distance <= currentStation.triggerDistance {
+      isNearCurrentStation = true
+      showQuestion()
+    }
   }
 
   private func showQuestion() {

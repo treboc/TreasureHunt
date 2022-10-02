@@ -14,7 +14,7 @@ enum LocationProviderError: Error {
 class LocationProvider: NSObject, ObservableObject {
   lazy var locationManager: CLLocationManager = {
     let locManager = CLLocationManager()
-    locManager.distanceFilter = 10
+    locManager.distanceFilter = 5
     locManager.headingFilter = 2
     locManager.requestWhenInUseAuthorization()
     locManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -32,10 +32,8 @@ class LocationProvider: NSObject, ObservableObject {
     }
   }
 
-  @Published var region: MKCoordinateRegion = .init()
   @Published var error: LocationProviderError?
   @Published var angle: Double = 0
-  @Published var heading: CLHeading? = nil
   @Published var distance: Double = 0
   @Published var reachedStation: Bool = false
 
@@ -44,7 +42,7 @@ class LocationProvider: NSObject, ObservableObject {
   
   override init() {
     super.init()
-    $heading.sink(receiveValue: update).store(in: &cancellables)
+    locationManager.requestLocation()
   }
   
   func start() {
@@ -55,15 +53,6 @@ class LocationProvider: NSObject, ObservableObject {
   func stop() {
     locationManager.stopUpdatingLocation()
     locationManager.stopUpdatingHeading()
-  }
-  
-  func set(headingOrientation: CLDeviceOrientation) {
-    locationManager.headingOrientation = headingOrientation
-  }
-  
-  func reset() {
-    nextLocation = nil
-    distance = 0
   }
 }
 
@@ -81,20 +70,16 @@ extension LocationProvider: CLLocationManagerDelegate {
   
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     if let location = locations.last {
-      updateLocation(location: location)
+      updateDistance(location: location, nextLocation: nextLocation)
     }
   }
-  
+
   func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-    heading = newHeading
+    updateAngle(heading: newHeading)
   }
-  
+
   func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
     print("error \(error)")
-  }
-  
-  private func updateLocation(location: CLLocation) {
-    updateDistance(location: location, nextLocation: nextLocation)
   }
 
   private func update(heading: CLHeading?) {
@@ -116,14 +101,6 @@ extension LocationProvider: CLLocationManagerDelegate {
        let nextLocation = nextLocation {
 
       distance = location.distance(from: nextLocation)
-
-      if distance < triggerDistance {
-        reachedStation = true
-        stop()
-      } else {
-        reachedStation = false
-        start()
-      }
     }
   }
 

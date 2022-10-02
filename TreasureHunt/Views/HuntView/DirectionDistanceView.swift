@@ -17,10 +17,9 @@ struct DirectionDistanceView: View {
   }
 
   @Namespace private var arrow
-  @Namespace private var title
 
   private var arrowColor: Color {
-    switch huntManager.distance {
+    switch huntManager.distanceToCurrentStation {
     case 0..<50:
       return .green
     case 50..<100:
@@ -39,12 +38,12 @@ struct DirectionDistanceView: View {
     formatter.unitStyle = MKDistanceFormatter.DistanceUnitStyle.default
     return formatter
   }()
-  
+
   var body: some View {
-    if huntManager.mapIsHidden {
+    if huntManager.isNearCurrentStation == false {
       VStack {
         VStack {
-          Text("Zweite Station")
+          Text(huntManager.currentStation?.name ?? "Keine Station")
             .font(.system(.largeTitle, design: .rounded))
             .fontWeight(.semibold)
             .padding(.top)
@@ -62,15 +61,15 @@ struct DirectionDistanceView: View {
           Image(systemName: arrowIcon.systemImage)
             .resizable()
             .aspectRatio(contentMode: .fit)
-            .rotationEffect(Angle(degrees: huntManager.angle))
+            .rotationEffect(Angle(degrees: huntManager.angleToCurrentStation))
             .frame(height: 150)
             .accessibilityHidden(true)
             .padding()
             .foregroundColor(arrowColor)
             .matchedGeometryEffect(id: "arrow", in: arrow)
 
-          if huntManager.distance > 0 {
-            Text(distanceFormatter.string(fromDistance: huntManager.distance))
+          if huntManager.distanceToCurrentStation > 0 {
+            Text(distanceFormatter.string(fromDistance: huntManager.distanceToCurrentStation))
               .font(.headline)
               .padding()
           } else {
@@ -99,17 +98,17 @@ struct DirectionDistanceView: View {
         Spacer()
 
         VStack {
-          Image(systemName: arrowIcon.systemImage)
+          Image(systemName: huntManager.locationManager.reachedStation ? "hand.point.down.fill" : arrowIcon.systemImage )
             .resizable()
             .aspectRatio(contentMode: .fit)
-            .rotationEffect(Angle(degrees: huntManager.angle))
+            .rotationEffect(huntManager.locationManager.reachedStation ? Angle(degrees: 0) : Angle(degrees: huntManager.angleToCurrentStation))
             .accessibilityHidden(true)
             .padding()
             .foregroundColor(arrowColor)
             .matchedGeometryEffect(id: "arrow", in: arrow)
 
-          if huntManager.distance > 0 {
-            Text("in **\(distanceFormatter.string(fromDistance: huntManager.distance))**")
+          if huntManager.distanceToCurrentStation > 0 {
+            Text("in **\(distanceFormatter.string(fromDistance: huntManager.distanceToCurrentStation))**")
               .font(.headline)
           } else {
             Text("Distance N/A")
@@ -125,6 +124,7 @@ struct DirectionDistanceView: View {
           .shadow(radius: 5)
       )
       .padding(.horizontal)
+      .transition(.opacity.combined(with: .scale))
     }
   }
 }
