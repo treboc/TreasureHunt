@@ -44,8 +44,10 @@ struct AddNewStationView: View {
         Section {
           TextField("Name der Station", text: $name)
             .focused($focusedField, equals: .name)
+
           TextField("Aufgabe an der Station", text: $question)
             .focused($focusedField, equals: .question)
+
           distanceSlider
         } footer: {
           Text("Distanz, die unterschritten werden muss, um diese Station zu aktivieren.")
@@ -82,14 +84,16 @@ extension AddNewStationView {
   }
 
   private func setSpanOfMap() {
-    region = MKCoordinateRegion(center: region.center, latitudinalMeters: mapSpanInMeters, longitudinalMeters: mapSpanInMeters)
+    region = MKCoordinateRegion(center: region.center,
+                                latitudinalMeters: mapSpanInMeters,
+                                longitudinalMeters: mapSpanInMeters)
   }
 
   private func setLocation() {
     if let lastStationCoordinate = stationsStore.allStations.last?.coordinate {
       region.center = .init(latitude: lastStationCoordinate.latitude, longitude: lastStationCoordinate.longitude)
-    } else if let location = locationProvider.location?.coordinate {
-      region.center = location
+    } else {
+      centerLocation()
     }
     setSpanOfMap()
   }
@@ -117,25 +121,23 @@ extension AddNewStationView {
   }
 
   private var mapView: some View {
-    GeometryReader { proxy in
-      Map(coordinateRegion: $region, interactionModes: [.pan])
-        .overlay(
-          Image(systemName: "plus")
-            .allowsHitTesting(false)
-        )
-        .overlay(
-          Circle()
-            .strokeBorder(Color.red, lineWidth: 1)
-            .background(Circle().foregroundColor(Color.black.opacity(0.1)))
-            .frame(width: proxy.size.width / 5, height: proxy.size.width / 5)
-            .allowsHitTesting(false)
-        )
-        .overlay(alignment: .bottom, content: locationCoordinates)
-        .animation(.none, value: focusedField)
-        .onAppear(perform: setLocation)
-        .onTapGesture(perform: dismissFocus)
-    }
-    .frame(minHeight: 100, idealHeight: 300, maxHeight: 300)
+    Map(coordinateRegion: $region, interactionModes: [.pan])
+      .overlay(
+        Image(systemName: "plus")
+          .allowsHitTesting(false)
+      )
+      .overlay(
+        Circle()
+          .strokeBorder(Color.red, lineWidth: 1)
+          .background(Circle().foregroundColor(Color.black.opacity(0.1)))
+          .frame(width: 60, height: 60)
+          .allowsHitTesting(false)
+      )
+      .overlay(alignment: .bottom, content: locationCoordinates)
+      .animation(.none, value: focusedField)
+      .onTapGesture(perform: dismissFocus)
+      .onAppear(perform: setLocation)
+      .frame(minHeight: 100, idealHeight: 300, maxHeight: 300)
   }
 
   func locationCoordinates() -> some View {
