@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		45A8CEE728EA228500F19E67 /* HuntViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A8CEE628EA228500F19E67 /* HuntViewModel.swift */; };
 		8A1CBD7428E350BE00E0AE4B /* SettingsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1CBD7328E350BE00E0AE4B /* SettingsKeys.swift */; };
 		8A1CBD7628E36EC300E0AE4B /* TrafficWarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1CBD7528E36EC300E0AE4B /* TrafficWarningView.swift */; };
 		8A1CBD7828E3795300E0AE4B /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1CBD7728E3795300E0AE4B /* Color+Extension.swift */; };
@@ -41,6 +42,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		45A8CEE628EA228500F19E67 /* HuntViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuntViewModel.swift; sourceTree = "<group>"; };
 		8A1CBD7328E350BE00E0AE4B /* SettingsKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsKeys.swift; sourceTree = "<group>"; };
 		8A1CBD7528E36EC300E0AE4B /* TrafficWarningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrafficWarningView.swift; sourceTree = "<group>"; };
 		8A1CBD7728E3795300E0AE4B /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				8A52024928E0A21900C49779 /* HuntView.swift */,
+				45A8CEE628EA228500F19E67 /* HuntViewModel.swift */,
 				8AD1768A28E0C58200A12948 /* HuntManager.swift */,
 				8A52024628E0A21900C49779 /* DirectionDistanceView.swift */,
 				8AE029C228E211FF009B5F4B /* StationAnnotationView.swift */,
@@ -327,6 +330,7 @@
 				8AFCFF3928E225ED000D1A0B /* MapView.swift in Sources */,
 				8A52024E28E0A21900C49779 /* HuntView.swift in Sources */,
 				8A52024B28E0A21900C49779 /* QuestionView.swift in Sources */,
+				45A8CEE728EA228500F19E67 /* HuntViewModel.swift in Sources */,
 				8A4C4F9628E1F9B300721C50 /* StationsListViewModel.swift in Sources */,
 				F2A056AD28DB8712007D7FFF /* StationsStore.swift in Sources */,
 				8A1CBD7628E36EC300E0AE4B /* TrafficWarningView.swift in Sources */,

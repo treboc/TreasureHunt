@@ -9,11 +9,17 @@ import MapKit
 struct HuntView: View {
   @Environment(\.dismiss) private var dismiss
   @StateObject private var huntManager: HuntManager
-  @State private var warningRead: Bool = false
-  @State private var endSessionAlertIsShown: Bool = false
+  @StateObject private var vm = HuntViewModel()
 
   init(stations: [Station]) {
     _huntManager = StateObject(wrappedValue: HuntManager(stations))
+  }
+
+  private var blurRadius: CGFloat {
+    if huntManager.isNearCurrentStation || vm.mapIsShown {
+      return 0
+    }
+    return 20
   }
 
   var body: some View {
@@ -31,7 +37,8 @@ struct HuntView: View {
         })
         .ignoresSafeArea()
         .allowsHitTesting(false)
-        .blur(radius: huntManager.isNearCurrentStation ? 0 : 20)
+        .blur(radius: blurRadius)
+        .animation(.default, value: blurRadius)
 
         arrowOverlay()
         showMapButton()
@@ -39,15 +46,15 @@ struct HuntView: View {
 
         nextStationButton()
 
-        if warningRead == false {
-          TrafficWarningView(warningRead: $warningRead)
+        if vm.warningRead == false {
+          TrafficWarningView(warningRead: $vm.warningRead)
             .transition(.opacity.combined(with: .scale))
             .zIndex(2)
         }
       }
       .animation(.default, value: huntManager.isNearCurrentStation)
       .navigationBarHidden(true)
-      .alert("Bist du sicher?", isPresented: $endSessionAlertIsShown) {
+      .alert("Bist du sicher?", isPresented: $vm.endSessionAlertIsShown) {
         Button("Abbrechen", role: .cancel) {}
         Button("Ja, beenden", role: .destructive) { dismiss.callAsFunction() }
       } message: {
@@ -64,8 +71,8 @@ struct HuntView: View {
         }
       }
     }
-    .onAppear(perform: applyIdleDimmingSetting)
-    .onDisappear(perform: disableIdleDimming)
+    .onAppear(perform: vm.applyIdleDimmingSetting)
+    .onDisappear(perform: vm.disableIdleDimming)
   }
 }
 
@@ -87,35 +94,45 @@ extension HuntView {
 
   @ViewBuilder
   private func endHuntButton() -> some View {
-    Image(systemName: "xmark")
-      .resizable()
-      .padding(10)
-      .background(.thinMaterial, in: Circle())
-      .frame(width: 44, height: 44, alignment: .center)
-      .foregroundColor(.primaryAccentColor)
-      .onTapGesture(perform: endHuntButtonTapped)
-      .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
-      .padding([.bottom, .leading], 20)
+    if huntManager.currentStationIsLastStation && huntManager.isNearCurrentStation {
+      Button("Suche Beenden") {
+        vm.endHuntButtonTapped()
+      }
+      .buttonStyle(.borderedProminent)
+      .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+      .padding(.bottom, 50)
+    } else {
+      Image(systemName: "xmark")
+        .resizable()
+        .padding(10)
+        .background(.thinMaterial, in: Circle())
+        .frame(width: 44, height: 44, alignment: .center)
+        .foregroundColor(.primaryAccentColor)
+        .onTapGesture(perform: vm.endHuntButtonTapped)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
+        .padding([.bottom, .leading], 20)
+    }
   }
 
   @ViewBuilder
   private func showMapButton() -> some View {
-    Image(systemName: "map")
-      .resizable()
-      .padding(10)
-      .background(.thinMaterial, in: Circle())
-      .frame(width: 44, height: 44, alignment: .center)
-      .foregroundColor(.primaryAccentColor)
-      .pressAction(onPress: showMap, onRelease: hideMap)
-      .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
-      .padding([.bottom, .trailing], 20)
+
+      Image(systemName: "map")
+        .resizable()
+        .padding(10)
+        .background(.thinMaterial, in: Circle())
+        .frame(width: 44, height: 44, alignment: .center)
+        .foregroundColor(.primaryAccentColor)
+        .pressAction(onPress: vm.showMap, onRelease: vm.hideMap)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
+        .padding([.bottom, .trailing], 20)
   }
 
   @ViewBuilder
   private func nextStationButton() -> some View {
-    if huntManager.distanceToCurrentStation < 50 {
+    if huntManager.isNearCurrentStation && huntManager.currentStationIsLastStation == false {
       Button("Nächste Station") {
-        huntManager.setNextStation()
+        huntManager.nextStationButtonTapped()
       }
       .buttonStyle(.borderedProminent)
       .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
@@ -123,23 +140,5 @@ extension HuntView {
     }
   }
 
-  private func showMap() {
-      huntManager.isNearCurrentStation = true
-  }
 
-  private func hideMap() {
-      huntManager.isNearCurrentStation = false
-  }
-
-  private func applyIdleDimmingSetting() {
-    UIApplication.shared.isIdleTimerDisabled = huntManager.idleDimmingDisabled
-  }
-
-  private func disableIdleDimming() {
-    UIApplication.shared.isIdleTimerDisabled = false
-  }
-
-  private func endHuntButtonTapped() {
-    endSessionAlertIsShown = true
-  }
 }
