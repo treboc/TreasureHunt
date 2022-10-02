@@ -82,7 +82,7 @@ struct DirectionDistanceView: View {
     } else {
       HStack {
         VStack(alignment: .leading) {
-          Text("Zweite Station")
+          Text(huntManager.currentStation?.name ?? "Keine Station")
             .font(.system(.title, design: .rounded))
             .fontWeight(.semibold)
             .lineLimit(1)
