@@ -99,7 +99,7 @@ extension AddNewStationView {
   }
 
   private func centerLocation() {
-    if let location = locationProvider.location?.coordinate {
+    if let location = locationProvider.currentLocation?.coordinate {
       region.center = location
       setSpanOfMap()
     }

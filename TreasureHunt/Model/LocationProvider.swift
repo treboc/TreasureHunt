@@ -22,11 +22,11 @@ class LocationProvider: NSObject, ObservableObject {
     return locManager
   }()
 
-  var location: CLLocation? {
+  var currentLocation: CLLocation? {
     locationManager.location
   }
 
-  var nextLocation: CLLocation? {
+  var currentStationLocation: CLLocation? {
     didSet {
       reachedStation = false
     }
@@ -70,7 +70,7 @@ extension LocationProvider: CLLocationManagerDelegate {
   
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     if let location = locations.last {
-      updateDistance(location: location, nextLocation: nextLocation)
+      updateDistance(location: location, nextLocation: currentStationLocation)
     }
   }
 
@@ -87,8 +87,8 @@ extension LocationProvider: CLLocationManagerDelegate {
   }
   
   func updateAngle(heading: CLHeading?) {
-    if let coordinate = nextLocation?.coordinate,
-       let myCoordinate = location?.coordinate,
+    if let coordinate = currentStationLocation?.coordinate,
+       let myCoordinate = currentLocation?.coordinate,
        let heading = heading {
 
       let bearing = myCoordinate.bearing(to: coordinate)
@@ -105,7 +105,7 @@ extension LocationProvider: CLLocationManagerDelegate {
   }
 
   func distanceTo(_ location: CLLocation) -> CLLocationDistance? {
-    self.location?.distance(from: location)
+    self.currentLocation?.distance(from: location)
   }
 
   static func angle(coordinate: Coordinate, heading: CLLocationDirection?, deviceCoordinate: CLLocation?) -> Double {
