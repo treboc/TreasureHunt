@@ -11,21 +11,13 @@ struct ArrowIconPicker: View {
   @AppStorage("arrowIcon") private var arrowIcon: ArrowIcon = .arrow
 
   var body: some View {
-    HStack {
-      Text("Pfeilsymbol")
-      Spacer()
-      Menu {
-        Picker("Pfeil", selection: $arrowIcon) {
-          ForEach(ArrowIcon.allCases, id: \.self) { icon in
-            Label(icon.name, systemImage: icon.systemImage)
-              .labelStyle(.titleAndIcon)
-          }
-        }
-      } label: {
-        Text(arrowIcon.name)
-          .animation(.none, value: arrowIcon)
+    Picker("Pfeil", selection: $arrowIcon) {
+      ForEach(ArrowIcon.allCases, id: \.self) { icon in
+        Label(icon.name, systemImage: icon.systemImage)
+          .labelStyle(.iconOnly)
       }
     }
+    .pickerStyle(.menu)
   }
 }
 
