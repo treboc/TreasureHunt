@@ -16,7 +16,6 @@ struct StationsListRowView: View {
     isChosen ? Color.primaryAccentColor : Color.primary
   }
 
-  @State private var fillCircle: CGFloat = 0
   var isChosen: Bool {
     position != nil
   }
@@ -63,18 +62,9 @@ extension StationsListRowView {
         .stroke(.primary, lineWidth: 3)
 
       Circle()
-        .trim(from: 0, to: fillCircle)
+        .trim(from: 0, to: isChosen ? 1 : 0)
         .stroke(Color.primaryAccentColor, lineWidth: 3)
         .rotationEffect(.degrees(-90))
-    }
-    .onChange(of: isChosen) { _ in
-      withAnimation {
-        if isChosen {
-          fillCircle = 0
-        } else {
-          fillCircle = 1
-        }
-      }
     }
   }
 }

@@ -69,7 +69,10 @@ extension AddNewStationView {
   // MARK: - Methods
   private func saveButtonTapped() {
     let location = region.center
-    stationsStore.newStation(with: name, triggerDistance: triggerDistance, question: question, and: location)
+    stationsStore.newStation(with: name,
+                             triggerDistance: triggerDistance,
+                             question: question,
+                             and: location)
     reset()
   }
 

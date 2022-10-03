@@ -6,7 +6,6 @@ import SwiftUI
 import MapKit
 
 struct StationsListView: View {
-  @Environment(\.editMode) private var editMode
   @EnvironmentObject private var stationStore: StationsStore
   @StateObject private var viewModel = StationsListViewModel()
 
@@ -21,7 +20,9 @@ struct StationsListView: View {
       }
       .navigationTitle("Stationen")
       .roundedNavigationTitle()
-      .sheet(isPresented: $viewModel.newStationSheetIsShown, onDismiss: nil, content: AddNewStationView.init)
+      .sheet(isPresented: $viewModel.newStationSheetIsShown, onDismiss: nil) {
+        AddNewStationView()
+      }
       .fullScreenCover(isPresented: $viewModel.huntIsStarted, onDismiss: viewModel.resetState) {
         HuntView(stations: viewModel.chosenStations)
       }
@@ -58,12 +59,6 @@ extension StationsListView {
     ToolbarItem(placement: .navigationBarTrailing) {
       Button(iconName: "plus", action: viewModel.showNewStationSheet)
     }
-
-    ToolbarItem(placement: .navigationBarLeading) {
-      if stationStore.allStations.isEmpty == false {
-        EditButton()
-      }
-    }
   }
 
   private var noStationsPlaceholder: some View {
@@ -83,14 +78,16 @@ extension StationsListView {
     List {
       ForEach(stationStore.allStations) { station in
         StationsListRowView(position: viewModel.positionOf(station), station: station)
-          .onTapGesture {
-            if editMode?.wrappedValue.isEditing == false {
-              viewModel.toggleStationChosenState(station)
+          .swipeActions(edge: .trailing, allowsFullSwipe: true, content: {
+            HStack {
+              swipeToDelete(station)
+              swipeToEdit(station)
             }
+          })
+          .onTapGesture {
+            viewModel.toggleStationChosenState(station)
           }
       }
-      .onDelete(perform: stationStore.deleteStation)
-      .onMove(perform: stationStore.moveStation)
     }
     .overlay(alignment: .bottom) {
       startHuntButton
@@ -98,4 +95,21 @@ extension StationsListView {
     .listStyle(.plain)
   }
 
+  private func swipeToDelete(_ station: Station) -> some View {
+    Button {
+      stationStore.delete(station)
+    } label: {
+      Label("Löschen", systemImage: "trash")
+    }
+    .tint(.red)
+  }
+
+  private func swipeToEdit(_ station: Station) -> some View {
+    Button {
+      viewModel.stationToEdit = station
+    } label: {
+      Label("Edit", systemImage: "square.and.pencil")
+    }
+    .tint(.orange)
+  }
 }

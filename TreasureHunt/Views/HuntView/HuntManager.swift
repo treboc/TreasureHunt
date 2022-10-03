@@ -67,7 +67,10 @@ final class HuntManager: ObservableObject {
   }
 
   private func onDistanceUpdate(_ distance: CLLocationDistance) {
-    guard let currentStation else { return }
+    guard
+      let currentStation,
+      distance > 0
+    else { return }
 
     if distance <= currentStation.triggerDistance {
       showQuestion()

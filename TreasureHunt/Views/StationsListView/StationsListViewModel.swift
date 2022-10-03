@@ -11,6 +11,7 @@ final class StationsListViewModel: ObservableObject {
   @Published var chosenStations: [Station] = []
   @Published var huntIsStarted: Bool = false
   @Published var newStationSheetIsShown: Bool = false
+  @Published var stationToEdit: Station? = nil
 
   func toggleStationChosenState(_ station: Station) {
     withAnimation {

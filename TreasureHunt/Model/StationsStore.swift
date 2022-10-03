@@ -46,8 +46,10 @@ class StationsStore: ObservableObject {
     allStations.append(station)
   }
 
-  func deleteStation(at offsets: IndexSet) {
-    allStations.remove(atOffsets: offsets)
+  func delete(_ station: Station) {
+    if let index = allStations.firstIndex(of: station) {
+      allStations.remove(at: index)
+    }
   }
 
   func moveStation(from source: IndexSet, to destination: Int) {
