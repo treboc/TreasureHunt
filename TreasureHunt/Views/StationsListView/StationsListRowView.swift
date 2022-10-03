@@ -31,7 +31,7 @@ struct StationsListRowView: View {
             .monospacedDigit()
         }
       }
-      .frame(width: 40, height: 40)
+      .frame(width: 30, height: 30)
 
       VStack(alignment: .leading, spacing: 5) {
         Text(station.name)
