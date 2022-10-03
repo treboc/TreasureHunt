@@ -8,7 +8,7 @@
 import SwiftUI
 
 final class HuntViewModel: ObservableObject {
-  @AppStorage(SettingsKeys.idleDimmingDisabled) var idleDimmingDisabled: Bool = false
+  @AppStorage(UserDefaultsKeys.idleDimmingDisabled) var idleDimmingDisabled: Bool = false
 
   @Published var warningRead: Bool = false
   @Published var endSessionAlertIsShown: Bool = false

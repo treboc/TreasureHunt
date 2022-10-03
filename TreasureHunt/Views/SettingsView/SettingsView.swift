@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct SettingsView: View {
-  @AppStorage(SettingsKeys.idleDimmingDisabled) private var idleDimmingDisabled: Bool = true
+  @AppStorage(UserDefaultsKeys.idleDimmingDisabled) private var idleDimmingDisabled: Bool = true
+  @AppStorage(UserDefaultsKeys.hapticsActivated) private var hapticsActivated: Bool = true
 
   var body: some View {
     NavigationView {
@@ -16,6 +17,7 @@ struct SettingsView: View {
         Section {
           AppearancePicker()
           ArrowIconPicker()
+          hapticsToggle
           idleDimmingToggle
         } footer: {
           Text("Ist diese Option aktiviert, so wird das Display während der Schatzsuche nicht automatisch deaktiviert.")
@@ -36,6 +38,10 @@ struct SettingsView_Previews: PreviewProvider {
 }
 
 extension SettingsView {
+  private var hapticsToggle: some View {
+    Toggle("Vibration", isOn: $hapticsActivated)
+  }
+
   private var idleDimmingToggle: some View {
     Toggle("Display aktiv lassen", isOn: $idleDimmingDisabled)
   }

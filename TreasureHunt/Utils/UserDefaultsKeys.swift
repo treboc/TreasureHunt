@@ -9,4 +9,6 @@ import Foundation
 
 struct UserDefaultsKeys {
   static let hapticsActivated: String = "hapticsActivated"
+  static let selectedAppearance = "selectedAppearance"
+  static let idleDimmingDisabled = "idleDimmingDisabled"
 }
