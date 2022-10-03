@@ -51,6 +51,9 @@ final class HuntManager: ObservableObject {
 
     locationManager
       .$distance
+      .map { $0.roundedToFive() }
+      .dropFirst()
+      .removeDuplicates()
       .sink(receiveValue: onDistanceUpdate)
       .store(in: &cancellables)
 
@@ -71,6 +74,8 @@ final class HuntManager: ObservableObject {
       let currentStation,
       distance > 0
     else { return }
+
+    HapticManager.shared.triggerFeedback(on: distance)
 
     if distance <= currentStation.triggerDistance {
       showQuestion()

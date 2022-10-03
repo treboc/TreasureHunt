@@ -21,4 +21,10 @@ struct TreasureHuntApp: App {
         .tint(.primaryAccentColor)
     }
   }
+
+  private func registerUserdefaults() {
+    UserDefaults.standard.register(defaults: [
+      UserDefaultsKeys.hapticsActivated: true
+    ])
+  }
 }

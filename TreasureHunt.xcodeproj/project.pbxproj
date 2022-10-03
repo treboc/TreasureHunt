@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		458F90E528EAACB300F9BE29 /* HapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458F90E428EAACB300F9BE29 /* HapticsManager.swift */; };
+		458F90E728EAAEB200F9BE29 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458F90E628EAAEB200F9BE29 /* UserDefaultsKeys.swift */; };
+		458F90E928EAB15500F9BE29 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458F90E828EAB15500F9BE29 /* Double+Extension.swift */; };
 		45A8CEE728EA228500F19E67 /* HuntViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A8CEE628EA228500F19E67 /* HuntViewModel.swift */; };
 		8A1CBD7428E350BE00E0AE4B /* SettingsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1CBD7328E350BE00E0AE4B /* SettingsKeys.swift */; };
 		8A1CBD7628E36EC300E0AE4B /* TrafficWarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1CBD7528E36EC300E0AE4B /* TrafficWarningView.swift */; };
@@ -42,6 +45,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		458F90E328EAAB0600F9BE29 /* MoselradwegAusWiki.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = MoselradwegAusWiki.gpx; path = ../MoselradwegAusWiki.gpx; sourceTree = "<group>"; };
+		458F90E428EAACB300F9BE29 /* HapticsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HapticsManager.swift; sourceTree = "<group>"; };
+		458F90E628EAAEB200F9BE29 /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
+		458F90E828EAB15500F9BE29 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		45A8CEE628EA228500F19E67 /* HuntViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuntViewModel.swift; sourceTree = "<group>"; };
 		8A1CBD7328E350BE00E0AE4B /* SettingsKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsKeys.swift; sourceTree = "<group>"; };
 		8A1CBD7528E36EC300E0AE4B /* TrafficWarningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrafficWarningView.swift; sourceTree = "<group>"; };
@@ -100,6 +107,8 @@
 		8A4C4F9928E207AA00721C50 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				458F90E628EAAEB200F9BE29 /* UserDefaultsKeys.swift */,
+				458F90E428EAACB300F9BE29 /* HapticsManager.swift */,
 				8A4C4F9F28E20CBA00721C50 /* ArrowIconManager */,
 				8A4C4F9E28E2086300721C50 /* AppearanceManager */,
 			);
@@ -157,6 +166,7 @@
 				8A52025228E0A23200C49779 /* FileManager+Extension.swift */,
 				8A1CBD7728E3795300E0AE4B /* Color+Extension.swift */,
 				8A52025028E0A23200C49779 /* ViewModifier */,
+				458F90E828EAB15500F9BE29 /* Double+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -192,6 +202,7 @@
 		F212392428CA539C006754E3 = {
 			isa = PBXGroup;
 			children = (
+				458F90E328EAAB0600F9BE29 /* MoselradwegAusWiki.gpx */,
 				F212392F28CA539C006754E3 /* TreasureHunt */,
 				F212392E28CA539C006754E3 /* Products */,
 			);
@@ -230,9 +241,9 @@
 		F2A056B228DB99B9007D7FFF /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F2A056AE28DB8740007D7FFF /* Station.swift */,
 				F2A056AA28DB7A63007D7FFF /* Coordinate.swift */,
 				F2A056AC28DB8712007D7FFF /* StationsStore.swift */,
-				F2A056AE28DB8740007D7FFF /* Station.swift */,
 				F2A056A428DB7957007D7FFF /* LocationProvider.swift */,
 				F2A056A628DB7983007D7FFF /* CLLocationCoordinate2DExtension.swift */,
 			);
@@ -313,6 +324,8 @@
 				F2A056AF28DB8741007D7FFF /* Station.swift in Sources */,
 				8A4C4F9828E1FBFE00721C50 /* RoundedNavigationTitle-ViewModifier.swift in Sources */,
 				8A52024A28E0A21900C49779 /* AddNewStationView.swift in Sources */,
+				458F90E728EAAEB200F9BE29 /* UserDefaultsKeys.swift in Sources */,
+				458F90E928EAB15500F9BE29 /* Double+Extension.swift in Sources */,
 				8A4C4F9128E1C0F100721C50 /* SettingsView.swift in Sources */,
 				F212393128CA539C006754E3 /* TreasureHuntApp.swift in Sources */,
 				8A52025328E0A23200C49779 /* Button+PressActionsModifier.swift in Sources */,
@@ -323,6 +336,7 @@
 				F2A056A728DB7983007D7FFF /* CLLocationCoordinate2DExtension.swift in Sources */,
 				8A52024C28E0A21900C49779 /* DirectionDistanceView.swift in Sources */,
 				8A4C4FA328E20FB100721C50 /* ArrowIconPicker.swift in Sources */,
+				458F90E528EAACB300F9BE29 /* HapticsManager.swift in Sources */,
 				8AD1768E28E0F14600A12948 /* StationsListRowView.swift in Sources */,
 				8A4C4F8F28E1C0E100721C50 /* MainTabView.swift in Sources */,
 				8A4C4F9428E1D9BB00721C50 /* Array+Extension.swift in Sources */,
