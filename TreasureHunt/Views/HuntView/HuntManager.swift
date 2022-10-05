@@ -14,29 +14,33 @@ final class HuntManager: ObservableObject {
   var locationManager = LocationProvider()
 
   @Published var region: MKCoordinateRegion = .init()
-  @Published var stations: [Station] = []
+  @Published var hunt: Hunt
   @Published var currentStation: Station?
   @Published var nextStation: Station?
   @Published var angleToCurrentStation: Double = 0
   @Published var distanceToCurrentStation: Double = 0
   @Published var questionSheetIsShown: Bool = false
 
+  var stations: [Station] {
+    return hunt.stations
+  }
+  
   var isNearCurrentStation: Bool {
     return distanceToCurrentStation <= currentStation?.triggerDistance ?? 0
   }
 
   var currentStationIsLastStation: Bool {
     if let index = currentStationsIndex() {
-      if stations[safe: index + 1] != nil {
+      if hunt.stations[safe: index + 1] != nil {
         return false
       }
     }
     return true
   }
 
-  init(_ stations: [Station]) {
-    self.stations = stations
-    if let firstStation = stations.first {
+  init(_ hunt: Hunt) {
+    self.hunt = hunt
+    if let firstStation = hunt.stations.first {
       currentStation = firstStation
       setNextStation()
     }
@@ -65,6 +69,7 @@ final class HuntManager: ObservableObject {
         self?.locationManager.currentStationLocation = location
         self?.locationManager.triggerDistance = station.triggerDistance
         self?.locationManager.start()
+        self?.distanceToCurrentStation = self?.locationManager.distance ?? 0
       }
       .store(in: &cancellables)
   }
@@ -89,7 +94,6 @@ final class HuntManager: ObservableObject {
   }
 
   func nextStationButtonTapped() {
-    currentStation?.reachedStation()
     setCurrentToNextStation()
   }
 

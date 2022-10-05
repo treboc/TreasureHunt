@@ -10,10 +10,12 @@ import SwiftUI
 
 struct MapView: UIViewRepresentable {
   @Binding var region: MKCoordinateRegion
+  @Binding var camera: MKMapCamera
 
   func makeUIView(context: Context) -> MKMapView {
     let mapView = MKMapView(frame: .zero)
-    mapView.showsUserLocation = false
+    mapView.showsUserLocation = true
+    mapView.setCamera(camera, animated: false)
     mapView.showsTraffic = false
     mapView.delegate = context.coordinator
     return mapView

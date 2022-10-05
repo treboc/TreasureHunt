@@ -23,8 +23,8 @@ struct StationsListView: View {
       .sheet(isPresented: $viewModel.newStationSheetIsShown, onDismiss: nil) {
         AddNewStationView()
       }
-      .fullScreenCover(isPresented: $viewModel.huntIsStarted, onDismiss: viewModel.resetState) {
-        HuntView(stations: viewModel.chosenStations)
+      .sheet(item: $viewModel.stationToEdit) { station in
+        AddNewStationView(stationToEdit: station)
       }
       .toolbar(content: toolbarContent)
     }
@@ -40,19 +40,6 @@ struct StationsListView_Previews: PreviewProvider {
 }
 
 extension StationsListView {
-  @ViewBuilder
-  private var startHuntButton: some View {
-    if !viewModel.chosenStations.isEmpty {
-      Button("Suche starten!") {
-        viewModel.huntIsStarted = true
-      }
-      .buttonStyle(.borderedProminent)
-      .controlSize(.large)
-      .padding(.bottom, 30)
-      .transition(.opacity.combined(with: .move(edge: .bottom)))
-    }
-  }
-
   // MARK: - ToolbarItems
   @ToolbarContentBuilder
   func toolbarContent() -> some ToolbarContent {
@@ -77,22 +64,15 @@ extension StationsListView {
   private var stationsList: some View {
     List {
       ForEach(stationStore.allStations) { station in
-        StationsListRowView(position: viewModel.positionOf(station), station: station)
+        StationsListRowView(station: station)
           .swipeActions(edge: .trailing, allowsFullSwipe: true, content: {
             HStack {
               swipeToDelete(station)
               swipeToEdit(station)
             }
           })
-          .onTapGesture {
-            viewModel.toggleStationChosenState(station)
-          }
       }
     }
-    .overlay(alignment: .bottom) {
-      startHuntButton
-    }
-    .listStyle(.plain)
   }
 
   private func swipeToDelete(_ station: Station) -> some View {

@@ -10,6 +10,8 @@ struct AddNewStationView: View {
     case name, question
   }
 
+  var stationToEdit: Station?
+
   @EnvironmentObject private var stationsStore: StationsStore
   private var locationProvider = LocationProvider()
 
@@ -27,6 +29,10 @@ struct AddNewStationView: View {
 
   private var mapSpanInMeters: CLLocationDistance {
     return triggerDistance * 10
+  }
+
+  init(stationToEdit: Station? = nil) {
+    self.stationToEdit = stationToEdit
   }
 
   var body: some View {
@@ -59,7 +65,8 @@ struct AddNewStationView: View {
       .onChange(of: triggerDistance) { newValue in
         setSpanOfMap()
       }
-      .onAppear(perform: setSpanOfMap)
+      .onAppear(perform: prepareEdit)
+      .interactiveDismissDisabled()
     }
   }
 }
@@ -68,11 +75,19 @@ struct AddNewStationView: View {
 extension AddNewStationView {
   // MARK: - Methods
   private func saveButtonTapped() {
-    let location = region.center
-    stationsStore.newStation(with: name,
-                             triggerDistance: triggerDistance,
-                             question: question,
-                             and: location)
+    if let stationToEdit {
+      stationsStore.updateStation(stationToEdit,
+                                  with: name,
+                                  triggerDistance: triggerDistance,
+                                  question: question,
+                                  and: region.center)
+      dismiss()
+    } else {
+      stationsStore.newStation(with: name,
+                               triggerDistance: triggerDistance,
+                               question: question,
+                               and: region.center)
+    }
     reset()
   }
 
@@ -84,6 +99,18 @@ extension AddNewStationView {
     self.name.removeAll()
     self.question.removeAll()
     self.focusedField = .name
+  }
+
+  private func prepareEdit() {
+    guard let stationToEdit else {
+      setLocation()
+      return
+    }
+    name = stationToEdit.name
+    question = stationToEdit.question
+    triggerDistance = stationToEdit.triggerDistance
+    region.center = stationToEdit.location.coordinate
+    setSpanOfMap()
   }
 
   private func setSpanOfMap() {
@@ -139,7 +166,6 @@ extension AddNewStationView {
       .overlay(alignment: .bottom, content: locationCoordinates)
       .animation(.none, value: focusedField)
       .onTapGesture(perform: dismissFocus)
-      .onAppear(perform: setLocation)
       .frame(minHeight: 100, idealHeight: 300, maxHeight: 300)
   }
 
