@@ -10,37 +10,27 @@ import SwiftUI
 struct MainTabView: View {
   var body: some View {
     TabView {
+      HuntListView()
+        .tabItem {
+          Label("Jagden", systemImage: "shippingbox")
+        }
+
       StationsListView()
         .tabItem {
-          makeTabItem(.stationsList)
+          Label("Stationen", systemImage: "dot.circle.and.hand.point.up.left.fill")
         }
 
       SettingsView()
         .tabItem {
-          makeTabItem(.settings)
+          Label("Einstellungen", systemImage: "gear")
         }
     }
+    .toolbarBackground(.visible, for: .tabBar)
   }
 }
 
 struct MainTabView_Previews: PreviewProvider {
   static var previews: some View {
     MainTabView()
-  }
-}
-
-extension MainTabView {
-  enum TabItem {
-    case settings
-    case stationsList
-  }
-
-  private func makeTabItem(_ tabItem: TabItem) -> Label<Text, Image> {
-    switch tabItem {
-    case .settings:
-      return Label("Einstellungen", systemImage: "gear")
-    case .stationsList:
-      return Label("Stationen", systemImage: "dot.circle.and.hand.point.up.left.fill")
-    }
   }
 }

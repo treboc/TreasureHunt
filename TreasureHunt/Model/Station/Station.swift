@@ -6,13 +6,14 @@ import Foundation
 import CoreLocation
 
 struct Station: Codable, Identifiable, Equatable {
-  var id: UUID = UUID()
+  let id: UUID
   let coordinate: Coordinate
   let triggerDistance: Double
   let name: String
   let question: String
 
-  init(clCoordinate: CLLocationCoordinate2D, triggerDistance: Double = 5, name: String, question: String = "") {
+  init(id: UUID = .init(), clCoordinate: CLLocationCoordinate2D, triggerDistance: Double = 5, name: String, question: String = "") {
+    self.id = id
     self.coordinate = Coordinate(clCoordinate: clCoordinate)
     self.triggerDistance = triggerDistance
     self.name = name

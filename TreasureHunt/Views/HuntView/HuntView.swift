@@ -11,8 +11,8 @@ struct HuntView: View {
   @StateObject private var huntManager: HuntManager
   @StateObject private var vm = HuntViewModel()
 
-  init(stations: [Station]) {
-    _huntManager = StateObject(wrappedValue: HuntManager(stations))
+  init(hunt: Hunt) {
+    _huntManager = StateObject(wrappedValue: HuntManager(hunt))
   }
 
   private var blurRadius: CGFloat {
@@ -27,14 +27,8 @@ struct HuntView: View {
       ZStack {
         Map(coordinateRegion: $huntManager.region,
             showsUserLocation: true,
-            userTrackingMode: .constant(.follow),
-            annotationItems: huntManager.stations,
-            annotationContent: { station in
-          MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: station.coordinate.latitude, longitude: station.coordinate.longitude)) {
-            StationAnnotationView(station: station)
-              .shadow(radius: 10)
-          }
-        })
+            userTrackingMode: .constant(.follow)
+        )
         .ignoresSafeArea()
         .allowsHitTesting(false)
         .blur(radius: blurRadius)
@@ -73,12 +67,6 @@ struct HuntView: View {
     }
     .onAppear(perform: vm.applyIdleDimmingSetting)
     .onDisappear(perform: vm.disableIdleDimming)
-  }
-}
-
-struct ContentView_Previews: PreviewProvider {
-  static var previews: some View {
-    HuntView(stations: [])
   }
 }
 

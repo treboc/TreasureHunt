@@ -9,63 +9,26 @@ import MapKit
 import SwiftUI
 
 struct StationsListRowView: View {
-  let position: Int?
   let station: Station
 
-  var circleColor: Color {
-    isChosen ? Color.primaryAccentColor : Color.primary
-  }
-
-  var isChosen: Bool {
-    position != nil
-  }
-
   var body: some View {
-    HStack(spacing: 10) {
-      ZStack {
-        animatedCircle
+    VStack(alignment: .leading, spacing: 5) {
+      Text(station.name)
+        .font(.headline)
+        .fontWeight(.semibold)
 
-        if let position = position {
-          Text("\(position)")
-            .font(.system(.headline, design: .rounded))
-            .monospacedDigit()
-        }
-      }
-      .frame(width: 30, height: 30)
-
-      VStack(alignment: .leading, spacing: 5) {
-        Text(station.name)
-          .font(.headline)
-          .fontWeight(.semibold)
-
-        if !station.question.isEmpty {
-          Text("**A:** *\(station.question)*")
-            .foregroundColor(.secondary)
-            .font(.caption)
-        } else {
-          Text("Keine Aufgabe für diese Station gestellt.")
-            .italic()
-            .foregroundColor(.secondary)
-            .font(.caption)
-        }
+      if !station.question.isEmpty {
+        Text("**A:** *\(station.question)*")
+          .foregroundColor(.secondary)
+          .font(.caption)
+      } else {
+        Text("Keine Aufgabe für diese Station gestellt.")
+          .italic()
+          .foregroundColor(.secondary)
+          .font(.caption)
       }
     }
-    .frame(maxWidth: .infinity, alignment: .leading)
-    .contentShape(.interaction, Rectangle())
-  }
-}
-
-extension StationsListRowView {
-  private var animatedCircle: some View {
-    ZStack {
-      Circle()
-        .stroke(.primary, lineWidth: 3)
-
-      Circle()
-        .trim(from: 0, to: isChosen ? 1 : 0)
-        .stroke(Color.primaryAccentColor, lineWidth: 3)
-        .rotationEffect(.degrees(-90))
-    }
+    .padding(.vertical, 4)
   }
 }
 
@@ -73,7 +36,7 @@ struct StationsListRowView_Previews: PreviewProvider {
   static let station = Station(clCoordinate: .init(latitude: 20, longitude: 20), triggerDistance: 30, name: "Random", question: "This could be a wonderful question!")
 
   static var previews: some View {
-    StationsListRowView(position: 2, station: station)
+    StationsListRowView(station: station)
       .environmentObject(StationsStore())
       .environmentObject(LocationProvider())
       .padding()

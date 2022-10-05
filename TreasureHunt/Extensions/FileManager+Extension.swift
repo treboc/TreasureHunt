@@ -17,4 +17,8 @@ extension FileManager {
   func stationsURL() -> URL {
     return documentsURL().appendingPathComponent("stations.json")
   }
+
+  var huntsStoreURL: URL {
+    return documentsURL().appendingPathComponent("hunts.json", conformingTo: .json)
+  }
 }

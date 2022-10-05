@@ -46,6 +46,13 @@ class StationsStore: ObservableObject {
     allStations.append(station)
   }
 
+  func updateStation(_ station: Station, with name: String, triggerDistance: Double, question: String, and location: CLLocationCoordinate2D) {
+    if let index = allStations.firstIndex(of: station) {
+      let station = Station(id: station.id, clCoordinate: location, triggerDistance: triggerDistance, name: name, question: question)
+      allStations[index] = station
+    }
+  }
+
   func delete(_ station: Station) {
     if let index = allStations.firstIndex(of: station) {
       allStations.remove(at: index)

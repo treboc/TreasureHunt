@@ -33,9 +33,3 @@ struct StationAnnotationView: View {
     }
   }
 }
-
-struct StationAnnotationView_Previews: PreviewProvider {
-    static var previews: some View {
-      StationAnnotationView(station: Station(clCoordinate: .init(), name: "Testing"))
-    }
-}
