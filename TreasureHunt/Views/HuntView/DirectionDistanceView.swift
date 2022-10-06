@@ -9,13 +9,7 @@ struct DirectionDistanceView: View {
   @AppStorage("arrowIcon") private var arrowIcon: ArrowIconPicker.ArrowIcon = .arrow
 
   @ObservedObject var huntManager: HuntManager
-  private var currentStationNumber: Int? {
-    guard let currentStation = huntManager.currentStation,
-          let currentStationIndex = huntManager.stations.firstIndex(of: currentStation)
-    else { return nil }
-    return currentStationIndex + 1
-  }
-
+  @State private var isAnimated: Bool = false
   @Namespace private var arrow
 
   private var arrowColor: Color {
@@ -33,26 +27,24 @@ struct DirectionDistanceView: View {
     }
   }
 
-  private let distanceFormatter: MKDistanceFormatter = {
-    let formatter = MKDistanceFormatter()
-    formatter.unitStyle = MKDistanceFormatter.DistanceUnitStyle.default
+  private let distanceFormatter: LengthFormatter = {
+    let formatter = LengthFormatter()
+    formatter.unitStyle = .short
     return formatter
   }()
+
+  private var distanceString: String {
+    distanceFormatter.string(fromMeters: huntManager.distanceToCurrentStation)
+  }
 
   var body: some View {
     if huntManager.isNearCurrentStation == false {
       VStack {
         VStack {
-          Text(huntManager.currentStation?.name ?? "Keine Station")
+          Text("Station \(huntManager.currentStationNumber ?? 0) von \(huntManager.stations.count)")
             .font(.system(.largeTitle, design: .rounded))
             .fontWeight(.semibold)
             .padding(.top)
-
-          if huntManager.currentStation != nil {
-            Text("Station \(currentStationNumber ?? 0) von \(huntManager.stations.count)")
-              .font(.system(.headline, design: .rounded))
-              .foregroundColor(.secondary)
-          }
         }
 
         Spacer()
@@ -69,7 +61,7 @@ struct DirectionDistanceView: View {
             .matchedGeometryEffect(id: "arrow", in: arrow)
 
           if huntManager.distanceToCurrentStation > 0 {
-            Text(distanceFormatter.string(fromDistance: huntManager.distanceToCurrentStation))
+            Text(distanceString)
               .font(.headline)
               .padding()
           } else {
@@ -88,7 +80,7 @@ struct DirectionDistanceView: View {
             .lineLimit(1)
 
           if huntManager.currentStation != nil {
-            Text("Station \(currentStationNumber ?? 0) von \(huntManager.stations.count)")
+            Text("Station \(huntManager.currentStationNumber ?? 0) von \(huntManager.stations.count)")
               .font(.system(.headline, design: .rounded))
               .italic()
               .foregroundColor(.secondary)
@@ -97,24 +89,16 @@ struct DirectionDistanceView: View {
 
         Spacer()
 
-        VStack {
-          Image(systemName: huntManager.locationManager.reachedStation ? "hand.point.down.fill" : arrowIcon.systemImage )
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-            .rotationEffect(huntManager.locationManager.reachedStation ? Angle(degrees: 0) : Angle(degrees: huntManager.angleToCurrentStation))
-            .accessibilityHidden(true)
-            .padding()
-            .foregroundColor(arrowColor)
-            .matchedGeometryEffect(id: "arrow", in: arrow)
-
-          if huntManager.distanceToCurrentStation > 0 {
-            Text("in **\(distanceFormatter.string(fromDistance: huntManager.distanceToCurrentStation))**")
-              .font(.headline)
-          } else {
-            Text("Distance N/A")
-          }
-        }
-        .frame(width: nil, height: 100)
+        Image(systemName: "hand.point.down.fill")
+          .resizable()
+          .aspectRatio(contentMode: .fit)
+          .accessibilityHidden(true)
+          .padding()
+          .foregroundColor(arrowColor)
+          .frame(height: 100)
+          .offset(y: isAnimated ? -10 : 10)
+          .animation(.easeInOut(duration: 0.5).repeatForever(), value: isAnimated)
+          .onAppear { isAnimated.toggle() }
       }
       .frame(maxWidth: .infinity, alignment: .top)
       .padding()

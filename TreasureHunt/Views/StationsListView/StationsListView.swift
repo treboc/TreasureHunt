@@ -6,13 +6,13 @@ import SwiftUI
 import MapKit
 
 struct StationsListView: View {
-  @EnvironmentObject private var stationStore: StationsStore
+  @StateObject private var stationsStore = StationsStore()
   @StateObject private var viewModel = StationsListViewModel()
 
   var body: some View {
     NavigationView {
       ZStack {
-        if stationStore.allStations.isEmpty {
+        if stationsStore.allStations.isEmpty {
           noStationsPlaceholder
         } else {
           stationsList
@@ -28,6 +28,7 @@ struct StationsListView: View {
       }
       .toolbar(content: toolbarContent)
     }
+    .environmentObject(stationsStore)
   }
 }
 
@@ -63,7 +64,7 @@ extension StationsListView {
 
   private var stationsList: some View {
     List {
-      ForEach(stationStore.allStations) { station in
+      ForEach(stationsStore.allStations) { station in
         StationsListRowView(station: station)
           .swipeActions(edge: .trailing, allowsFullSwipe: true, content: {
             HStack {
@@ -77,7 +78,7 @@ extension StationsListView {
 
   private func swipeToDelete(_ station: Station) -> some View {
     Button {
-      stationStore.delete(station)
+      stationsStore.delete(station)
     } label: {
       Label("Löschen", systemImage: "trash")
     }

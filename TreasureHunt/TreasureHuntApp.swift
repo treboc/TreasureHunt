@@ -2,29 +2,47 @@
 //  
 //
 
+import CoreLocation
 import SwiftUI
 
 @main
 struct TreasureHuntApp: App {
   @StateObject private var appearanceManager = AppearanceManager()
-  @StateObject private var stationsStore = StationsStore()
+  @StateObject private var locationProvider = LocationProvider()
+  @AppStorage(UserDefaultsKeys.locationAuthViewIsShown) private var locationOnboardingIsShown: Bool = false
+  @Environment(\.scenePhase) private var phase
 
   var body: some Scene {
     WindowGroup {
       MainTabView()
-        .environmentObject(stationsStore)
-        .environmentObject(appearanceManager)
-        .onAppear {
-          appearanceManager.setAppearance()
-          UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
-        }
         .tint(.primaryAccentColor)
+        .onAppear(perform: checkAuthorization)
+        .task {
+          appearanceManager.setAppearance()
+          registerUserDefaults()
+        }
+        .sheet(isPresented: $locationOnboardingIsShown, content: LocationAuthorizationOnboardingView.init)
+        .environmentObject(appearanceManager)
+        .environmentObject(locationProvider)
     }
   }
 
-  private func registerUserdefaults() {
+  private func registerUserDefaults() {
     UserDefaults.standard.register(defaults: [
-      UserDefaultsKeys.hapticsActivated: true
+      "_UIConstraintBasedLayoutLogUnsatisfiable": false,
+      UserDefaultsKeys.hapticsActivated: true,
+      UserDefaultsKeys.idleDimmingDisabled: true
     ])
+  }
+
+  private func checkAuthorization() {
+    switch locationProvider.locationManager.authorizationStatus {
+    case .restricted, .notDetermined, .denied:
+      locationOnboardingIsShown = true
+    case .authorizedAlways, .authorizedWhenInUse:
+      locationOnboardingIsShown = false
+    @unknown default:
+      return
+    }
   }
 }

@@ -16,7 +16,6 @@ class LocationProvider: NSObject, ObservableObject {
     let locManager = CLLocationManager()
     locManager.distanceFilter = 5
     locManager.headingFilter = 2
-    locManager.requestWhenInUseAuthorization()
     locManager.desiredAccuracy = kCLLocationAccuracyBest
     locManager.delegate = self
     return locManager
@@ -26,24 +25,14 @@ class LocationProvider: NSObject, ObservableObject {
     locationManager.location
   }
 
-  var currentStationLocation: CLLocation? {
-    didSet {
-      reachedStation = false
-    }
-  }
+  var currentStationLocation: CLLocation?
 
   @Published var error: LocationProviderError?
   @Published var angle: Double = 0
   @Published var distance: Double = 0
-  @Published var reachedStation: Bool = false
+  @Published var triggerDistance: Double = 0
 
-  var triggerDistance: Double = 5
   private var cancellables = Set<AnyCancellable>()
-  
-  override init() {
-    super.init()
-    locationManager.requestLocation()
-  }
   
   func start() {
     locationManager.startUpdatingLocation()
@@ -59,9 +48,12 @@ class LocationProvider: NSObject, ObservableObject {
 extension LocationProvider: CLLocationManagerDelegate {
   func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
     switch manager.authorizationStatus {
-    case .authorizedWhenInUse:
+    case .restricted, .notDetermined, .denied:
+      UserDefaults.standard.set(true, forKey: UserDefaultsKeys.locationAuthViewIsShown)
+      return
+    case .authorizedWhenInUse, .authorizedAlways:
       print("authorizedWhenInUse")
-      start()
+      UserDefaults.standard.set(false, forKey: UserDefaultsKeys.locationAuthViewIsShown)
     default:
       self.error = .wrongAuthorization(manager.authorizationStatus)
       print("No authorization")

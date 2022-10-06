@@ -32,6 +32,15 @@ class StationsStore: ObservableObject {
     }
   }
 
+  static func loadStationsFromDisk() -> [Station] {
+    do {
+      let data = try Data(contentsOf: FileManager.default.stationsURL())
+      return try JSONDecoder().decode([Station].self, from: data)
+    } catch {
+      return []
+    }
+  }
+
   private func writeStationsToDisk() {
     do {
       let data = try JSONEncoder().encode(allStations)
@@ -61,5 +70,14 @@ class StationsStore: ObservableObject {
 
   func moveStation(from source: IndexSet, to destination: Int) {
     allStations.move(fromOffsets: source, toOffset: destination)
+  }
+
+  static func loadHuntStations(hunt: Hunt) -> [Station] {
+    let allStations = Self.loadStationsFromDisk()
+
+    return allStations
+      .filter { station in
+        hunt.stations.contains(station.id)
+      }
   }
 }

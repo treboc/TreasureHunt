@@ -41,4 +41,9 @@ final class HuntsStore: ObservableObject {
     writeHuntsToDisk(allHunts)
     onCompletion()
   }
+
+  func deleteHunt(_ indexSet: IndexSet) {
+    allHunts.remove(atOffsets: indexSet)
+    writeHuntsToDisk(allHunts)
+  }
 }

@@ -8,17 +8,7 @@
 import Foundation
 
 final class HuntListViewModel: ObservableObject {
-  let huntsStore = HuntsStore()
-  @Published var allHunts: [Hunt] = []
   @Published var newHuntViewIsShown: Bool = false
-
-  init() {
-    allHunts = huntsStore.loadHuntsFromDisk()
-  }
-
-  func updateHunts() {
-    allHunts = huntsStore.loadHuntsFromDisk()
-  }
 
   func showNewHuntView() {
     newHuntViewIsShown = true

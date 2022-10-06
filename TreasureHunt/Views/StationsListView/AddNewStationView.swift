@@ -13,7 +13,7 @@ struct AddNewStationView: View {
   var stationToEdit: Station?
 
   @EnvironmentObject private var stationsStore: StationsStore
-  private var locationProvider = LocationProvider()
+  @EnvironmentObject private var locationProvider: LocationProvider
 
   @Environment(\.dismiss) private var dismiss
 

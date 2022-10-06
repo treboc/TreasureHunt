@@ -14,7 +14,7 @@ struct HuntListView: View {
   var body: some View {
     NavigationStack {
       ZStack {
-        if viewModel.allHunts.isEmpty {
+        if huntsStore.allHunts.isEmpty {
           noHuntsPlaceholder
         } else {
           List {
@@ -23,6 +23,7 @@ struct HuntListView: View {
                 HuntListRowView(hunt: hunt)
               }
             }
+            .onDelete(perform: huntsStore.deleteHunt)
           }
         }
       }

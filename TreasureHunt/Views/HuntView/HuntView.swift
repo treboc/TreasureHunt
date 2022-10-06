@@ -10,18 +10,18 @@ struct HuntView: View {
   @Environment(\.dismiss) private var dismiss
   @StateObject private var huntManager: HuntManager
   @StateObject private var vm = HuntViewModel()
-
+  
   init(hunt: Hunt) {
     _huntManager = StateObject(wrappedValue: HuntManager(hunt))
   }
-
+  
   private var blurRadius: CGFloat {
     if huntManager.isNearCurrentStation || vm.mapIsShown {
       return 0
     }
     return 20
   }
-
+  
   var body: some View {
     NavigationView {
       ZStack {
@@ -33,13 +33,10 @@ struct HuntView: View {
         .allowsHitTesting(false)
         .blur(radius: blurRadius)
         .animation(.default, value: blurRadius)
-
+        
         arrowOverlay()
-        showMapButton()
-        endHuntButton()
-
-        nextStationButton()
-
+        bottomButtonStack
+        
         if vm.warningRead == false {
           TrafficWarningView(warningRead: $vm.warningRead)
             .transition(.opacity.combined(with: .scale))
@@ -77,19 +74,14 @@ extension HuntView {
       DirectionDistanceView(huntManager: huntManager)
         .shadow(radius: 5)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+        .opacity(vm.mapIsShown ? 0.2 : 1)
+        .animation(.default, value: vm.mapIsShown)
     }
   }
-
+  
   @ViewBuilder
-  private func endHuntButton() -> some View {
-    if huntManager.currentStationIsLastStation && huntManager.isNearCurrentStation {
-      Button("Suche Beenden") {
-        vm.endHuntButtonTapped()
-      }
-      .buttonStyle(.borderedProminent)
-      .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-      .padding(.bottom, 50)
-    } else {
+  private func roundEndHuntButton() -> some View {
+    if huntManager.isNearCurrentStation == false {
       Image(systemName: "xmark")
         .resizable()
         .padding(10)
@@ -97,14 +89,13 @@ extension HuntView {
         .frame(width: 44, height: 44, alignment: .center)
         .foregroundColor(.primaryAccentColor)
         .onTapGesture(perform: vm.endHuntButtonTapped)
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
         .padding([.bottom, .leading], 20)
     }
   }
-
+  
   @ViewBuilder
-  private func showMapButton() -> some View {
-
+  private func roundShowMapButton() -> some View {
+    if huntManager.isNearCurrentStation == false {
       Image(systemName: "map")
         .resizable()
         .padding(10)
@@ -112,10 +103,10 @@ extension HuntView {
         .frame(width: 44, height: 44, alignment: .center)
         .foregroundColor(.primaryAccentColor)
         .pressAction(onPress: vm.showMap, onRelease: vm.hideMap)
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
         .padding([.bottom, .trailing], 20)
+    }
   }
-
+  
   @ViewBuilder
   private func nextStationButton() -> some View {
     if huntManager.isNearCurrentStation && huntManager.currentStationIsLastStation == false {
@@ -123,10 +114,30 @@ extension HuntView {
         huntManager.nextStationButtonTapped()
       }
       .buttonStyle(.borderedProminent)
+      .controlSize(.large)
+      .foregroundColor(Color(uiColor: .systemBackground))
       .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-      .padding(.bottom, 50)
+    } else if huntManager.isNearCurrentStation && huntManager.currentStationIsLastStation {
+      Button("Suche Beenden") {
+        vm.endHuntButtonTapped()
+      }
+      .buttonStyle(.borderedProminent)
+      .controlSize(.large)
+      .foregroundColor(Color(uiColor: .systemBackground))
+      .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
     }
   }
-
-
+  
+  private var bottomButtonStack: some View {
+    VStack {
+      Spacer()
+      HStack {
+        nextStationButton()
+      }
+      .frame(maxWidth: .infinity, alignment: .bottom)
+      .padding(.bottom, 50 )
+      .overlay(roundShowMapButton(), alignment: .bottomTrailing)
+      .overlay(roundEndHuntButton(), alignment: .bottomLeading)
+    }
+  }
 }

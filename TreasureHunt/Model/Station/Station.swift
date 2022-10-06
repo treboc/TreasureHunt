@@ -23,8 +23,4 @@ struct Station: Codable, Identifiable, Equatable {
   var location: CLLocation {
     return CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
   }
-
-  static func == (lhs: Station, rhs: Station) -> Bool {
-    lhs.id == rhs.id
-  }
 }

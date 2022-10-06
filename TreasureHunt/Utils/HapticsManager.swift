@@ -36,7 +36,6 @@ class HapticManager {
         }
 
         let generator = UIImpactFeedbackGenerator(style: impactStyle)
-        generator.prepare()
         generator.impactOccurred()
       }
     }

@@ -20,10 +20,7 @@ final class HuntManager: ObservableObject {
   @Published var angleToCurrentStation: Double = 0
   @Published var distanceToCurrentStation: Double = 0
   @Published var questionSheetIsShown: Bool = false
-
-  var stations: [Station] {
-    return hunt.stations
-  }
+  @Published var stations: [Station] = []
   
   var isNearCurrentStation: Bool {
     return distanceToCurrentStation <= currentStation?.triggerDistance ?? 0
@@ -31,23 +28,27 @@ final class HuntManager: ObservableObject {
 
   var currentStationIsLastStation: Bool {
     if let index = currentStationsIndex() {
-      if hunt.stations[safe: index + 1] != nil {
+      if stations[safe: index + 1] != nil {
         return false
       }
     }
     return true
   }
 
+  var currentStationNumber: Int? {
+      guard let currentStation = currentStation,
+            let currentStationIndex = stations.firstIndex(of: currentStation)
+      else { return nil }
+      return currentStationIndex + 1
+  }
+
   init(_ hunt: Hunt) {
-    self.hunt = hunt
-    if let firstStation = hunt.stations.first {
+    _hunt = Published(initialValue: hunt)
+    stations = StationsStore.loadHuntStations(hunt: hunt)
+    if let firstStation = stations.first {
       currentStation = firstStation
       setNextStation()
     }
-
-    locationManager
-      .$distance
-      .assign(to: &$distanceToCurrentStation)
 
     locationManager
       .$angle
@@ -56,7 +57,6 @@ final class HuntManager: ObservableObject {
     locationManager
       .$distance
       .map { $0.roundedToFive() }
-      .dropFirst()
       .removeDuplicates()
       .sink(receiveValue: onDistanceUpdate)
       .store(in: &cancellables)
@@ -64,12 +64,9 @@ final class HuntManager: ObservableObject {
     $currentStation
       .sink { [weak self] station in
         guard let station = station else { return }
-        let location: CLLocation = .init(latitude: station.coordinate.latitude,
-                                         longitude: station.coordinate.longitude)
-        self?.locationManager.currentStationLocation = location
+        self?.locationManager.currentStationLocation = station.location
         self?.locationManager.triggerDistance = station.triggerDistance
         self?.locationManager.start()
-        self?.distanceToCurrentStation = self?.locationManager.distance ?? 0
       }
       .store(in: &cancellables)
   }
@@ -79,6 +76,7 @@ final class HuntManager: ObservableObject {
       let currentStation,
       distance > 0
     else { return }
+    self.distanceToCurrentStation = distance
 
     HapticManager.shared.triggerFeedback(on: distance)
 
@@ -105,6 +103,7 @@ final class HuntManager: ObservableObject {
 
     if let nextStation = stations[safe: currentIndex + 1] {
       self.currentStation = nextStation
+      locationManager.distance = locationManager.distanceTo(nextStation.location) ?? 0
     }
   }
 

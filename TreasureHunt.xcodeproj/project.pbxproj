@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4530A10D28F14BCD00F05AE3 /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530A10C28F14BCD00F05AE3 /* QuestionView.swift */; };
 		45513FAA28EAF2D90064A32E /* HuntListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45513FA928EAF2D90064A32E /* HuntListView.swift */; };
 		45513FAC28EAF3940064A32E /* HuntListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45513FAB28EAF3940064A32E /* HuntListViewModel.swift */; };
 		45513FAE28EAF41A0064A32E /* Hunt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45513FAD28EAF41A0064A32E /* Hunt.swift */; };
@@ -17,6 +18,7 @@
 		45513FBC28ECD2070064A32E /* HuntListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45513FBB28ECD2070064A32E /* HuntListRowView.swift */; };
 		45513FBE28ECD22C0064A32E /* HuntListDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45513FBD28ECD22C0064A32E /* HuntListDetailView.swift */; };
 		45513FC128ED69130064A32E /* StationAnnotationView copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45513FC028ED69130064A32E /* StationAnnotationView copy.swift */; };
+		4587B6C928F32D2E00F10ED8 /* LocationAuthorizationOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4587B6C828F32D2E00F10ED8 /* LocationAuthorizationOnboardingView.swift */; };
 		458F90E528EAACB300F9BE29 /* HapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458F90E428EAACB300F9BE29 /* HapticsManager.swift */; };
 		458F90E728EAAEB200F9BE29 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458F90E628EAAEB200F9BE29 /* UserDefaultsKeys.swift */; };
 		458F90E928EAB15500F9BE29 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458F90E828EAB15500F9BE29 /* Double+Extension.swift */; };
@@ -32,7 +34,6 @@
 		8A4C4F9D28E2083500721C50 /* AppearancePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4C4F9C28E2083500721C50 /* AppearancePicker.swift */; };
 		8A4C4FA328E20FB100721C50 /* ArrowIconPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4C4FA228E20FB100721C50 /* ArrowIconPicker.swift */; };
 		8A52024A28E0A21900C49779 /* AddNewStationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A52024428E0A21900C49779 /* AddNewStationView.swift */; };
-		8A52024B28E0A21900C49779 /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A52024528E0A21900C49779 /* QuestionView.swift */; };
 		8A52024C28E0A21900C49779 /* DirectionDistanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A52024628E0A21900C49779 /* DirectionDistanceView.swift */; };
 		8A52024D28E0A21900C49779 /* StationsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A52024728E0A21900C49779 /* StationsListView.swift */; };
 		8A52024E28E0A21900C49779 /* HuntView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A52024928E0A21900C49779 /* HuntView.swift */; };
@@ -54,6 +55,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4530A10C28F14BCD00F05AE3 /* QuestionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
 		45513FA928EAF2D90064A32E /* HuntListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuntListView.swift; sourceTree = "<group>"; };
 		45513FAB28EAF3940064A32E /* HuntListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuntListViewModel.swift; sourceTree = "<group>"; };
 		45513FAD28EAF41A0064A32E /* Hunt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hunt.swift; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 		45513FBB28ECD2070064A32E /* HuntListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuntListRowView.swift; sourceTree = "<group>"; };
 		45513FBD28ECD22C0064A32E /* HuntListDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuntListDetailView.swift; sourceTree = "<group>"; };
 		45513FC028ED69130064A32E /* StationAnnotationView copy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StationAnnotationView copy.swift"; sourceTree = "<group>"; };
+		4587B6C828F32D2E00F10ED8 /* LocationAuthorizationOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAuthorizationOnboardingView.swift; sourceTree = SOURCE_ROOT; };
 		458F90E428EAACB300F9BE29 /* HapticsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HapticsManager.swift; sourceTree = "<group>"; };
 		458F90E628EAAEB200F9BE29 /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
 		458F90E828EAB15500F9BE29 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
@@ -79,7 +82,6 @@
 		8A4C4F9C28E2083500721C50 /* AppearancePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearancePicker.swift; sourceTree = "<group>"; };
 		8A4C4FA228E20FB100721C50 /* ArrowIconPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrowIconPicker.swift; sourceTree = "<group>"; };
 		8A52024428E0A21900C49779 /* AddNewStationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewStationView.swift; sourceTree = "<group>"; };
-		8A52024528E0A21900C49779 /* QuestionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
 		8A52024628E0A21900C49779 /* DirectionDistanceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectionDistanceView.swift; sourceTree = "<group>"; };
 		8A52024728E0A21900C49779 /* StationsListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationsListView.swift; sourceTree = "<group>"; };
 		8A52024928E0A21900C49779 /* HuntView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HuntView.swift; sourceTree = "<group>"; };
@@ -171,6 +173,21 @@
 			path = AddHuntView;
 			sourceTree = "<group>";
 		};
+		4587B6C628F329FA00F10ED8 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		4587B6C728F32AED00F10ED8 /* OnboardingView */ = {
+			isa = PBXGroup;
+			children = (
+				4587B6C828F32D2E00F10ED8 /* LocationAuthorizationOnboardingView.swift */,
+			);
+			path = OnboardingView;
+			sourceTree = "<group>";
+		};
 		8A4C4F9228E1C0F700721C50 /* SettingsView */ = {
 			isa = PBXGroup;
 			children = (
@@ -215,8 +232,8 @@
 				8AD1768C28E0F13300A12948 /* StationsListView */,
 				8A52024828E0A21900C49779 /* HuntView */,
 				8A4C4F9228E1C0F700721C50 /* SettingsView */,
-				8A52024528E0A21900C49779 /* QuestionView.swift */,
 				8AFCFF3828E225ED000D1A0B /* MapView.swift */,
+				4587B6C728F32AED00F10ED8 /* OnboardingView */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -230,6 +247,7 @@
 				8A52024628E0A21900C49779 /* DirectionDistanceView.swift */,
 				45513FC028ED69130064A32E /* StationAnnotationView copy.swift */,
 				8A1CBD7528E36EC300E0AE4B /* TrafficWarningView.swift */,
+				4530A10C28F14BCD00F05AE3 /* QuestionView.swift */,
 			);
 			path = HuntView;
 			sourceTree = "<group>";
@@ -300,6 +318,7 @@
 				8A52024F28E0A23200C49779 /* Extensions */,
 				8A4C4F9928E207AA00721C50 /* Utils */,
 				F212393428CA539E006754E3 /* Assets.xcassets */,
+				4587B6C628F329FA00F10ED8 /* Resources */,
 				F212393628CA539E006754E3 /* Preview Content */,
 			);
 			path = TreasureHunt;
@@ -403,6 +422,8 @@
 				8A4C4F9128E1C0F100721C50 /* SettingsView.swift in Sources */,
 				F212393128CA539C006754E3 /* TreasureHuntApp.swift in Sources */,
 				8A52025328E0A23200C49779 /* Button+PressActionsModifier.swift in Sources */,
+				4587B6C928F32D2E00F10ED8 /* LocationAuthorizationOnboardingView.swift in Sources */,
+				4530A10D28F14BCD00F05AE3 /* QuestionView.swift in Sources */,
 				8A1CBD7828E3795300E0AE4B /* Color+Extension.swift in Sources */,
 				45513FB028EAF5C70064A32E /* HuntsStore.swift in Sources */,
 				8A4C4F9D28E2083500721C50 /* AppearancePicker.swift in Sources */,
@@ -420,7 +441,6 @@
 				45513FB528EAFADD0064A32E /* AddHuntView.swift in Sources */,
 				8AFCFF3928E225ED000D1A0B /* MapView.swift in Sources */,
 				8A52024E28E0A21900C49779 /* HuntView.swift in Sources */,
-				8A52024B28E0A21900C49779 /* QuestionView.swift in Sources */,
 				45A8CEE728EA228500F19E67 /* HuntViewModel.swift in Sources */,
 				8A4C4F9628E1F9B300721C50 /* StationsListViewModel.swift in Sources */,
 				F2A056AD28DB8712007D7FFF /* StationsStore.swift in Sources */,
@@ -566,7 +586,8 @@
 				DEVELOPMENT_TEAM = X9DJ8STXP5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Show direction and distance to next station.";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "TreasureHunt benötigt deinen Standort um die Funktion der App zu gewährleisten.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "TreasureHunt benötigt deinen Standort um die Funktion der App zu gewährleisten.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -596,7 +617,8 @@
 				DEVELOPMENT_TEAM = X9DJ8STXP5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Show direction and distance to next station.";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "TreasureHunt benötigt deinen Standort um die Funktion der App zu gewährleisten.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "TreasureHunt benötigt deinen Standort um die Funktion der App zu gewährleisten.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

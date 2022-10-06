@@ -4,19 +4,17 @@
 
 import CoreLocation
 
-func deg2rad(_ number: Double) -> Double {
-  return number * .pi / 180
-}
-
-func rad2deg(_ number: Double) -> Double {
-  return number * 180 / .pi
-}
-
 extension CLLocationCoordinate2D {
-  
+  func deg2rad(_ number: Double) -> Double {
+    return number * .pi / 180
+  }
+
+  func rad2deg(_ number: Double) -> Double {
+    return number * 180 / .pi
+  }
+
   // https://stackoverflow.com/q/3925942/498796
   func bearing(to coordinate: CLLocationCoordinate2D) -> Double {
-    
     let lat1 = deg2rad(latitude)
     let long1 = deg2rad(longitude)
     

@@ -11,7 +11,10 @@ import MapKit
 struct HuntListDetailView: View {
   @State private var huntIsStarted: Bool = false
   @State private var region: MKCoordinateRegion
-  var hunt: Hunt
+  let hunt: Hunt
+  var stations: [Station] {
+    return StationsStore.loadHuntStations(hunt: hunt)
+  }
 
   init(hunt: Hunt) {
     self.hunt = hunt
@@ -22,7 +25,7 @@ struct HuntListDetailView: View {
 
   var body: some View {
     ZStack(alignment: .bottom) {
-      Map(coordinateRegion: $region, showsUserLocation: true, annotationItems: hunt.stations) {
+      Map(coordinateRegion: $region, showsUserLocation: true, annotationItems: stations) {
         MapMarker(coordinate: $0.location.coordinate)
       }
       .ignoresSafeArea(.container)
@@ -36,13 +39,6 @@ struct HuntListDetailView: View {
       .controlSize(.large)
       .padding(.bottom, 50)
 
-    }
-    .safeAreaInset(edge: .top) {
-      Rectangle()
-        .fill(.ultraThinMaterial)
-        .blur(radius: 10)
-        .frame(width: 1000, height: 170)
-        .ignoresSafeArea()
     }
     .toolbar(.hidden, for: .tabBar)
     .navigationTitle(hunt.name)
