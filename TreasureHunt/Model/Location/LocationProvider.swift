@@ -43,6 +43,13 @@ class LocationProvider: NSObject, ObservableObject {
     locationManager.stopUpdatingLocation()
     locationManager.stopUpdatingHeading()
   }
+
+  func didChange(_ station: Station) {
+    currentStationLocation = station.location
+    triggerDistance = station.triggerDistance
+    distance = distanceTo(station.location) ?? 0
+    start()
+  }
 }
 
 extension LocationProvider: CLLocationManagerDelegate {

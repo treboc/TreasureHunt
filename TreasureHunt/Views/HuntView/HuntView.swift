@@ -25,7 +25,7 @@ struct HuntView: View {
   var body: some View {
     NavigationView {
       ZStack {
-        Map(coordinateRegion: $huntManager.region,
+        Map(coordinateRegion: $vm.region,
             showsUserLocation: true,
             userTrackingMode: .constant(.follow)
         )
@@ -51,7 +51,7 @@ struct HuntView: View {
       } message: {
         Text("Damit wird die Suche beendet, dein Fortschritt ist nicht gespeichert.")
       }
-      .sheet(isPresented: $huntManager.questionSheetIsShown, onDismiss: huntManager.setNextStation) {
+      .sheet(isPresented: $huntManager.questionSheetIsShown) {
         if let station = huntManager.currentStation {
           QuestionView(station: station)
         }

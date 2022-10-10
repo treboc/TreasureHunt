@@ -5,32 +5,32 @@
 //  Created by Marvin Lee Kobert on 03.10.22.
 //
 
+import RealmSwift
 import SwiftUI
 
 struct HuntListView: View {
-  @StateObject private var huntsStore = HuntsStore()
+  @ObservedResults(Hunt.self) private var hunts
   @StateObject private var viewModel = HuntListViewModel()
 
   var body: some View {
     NavigationStack {
       ZStack {
-        if huntsStore.allHunts.isEmpty {
+        if hunts.isEmpty {
           noHuntsPlaceholder
         } else {
           List {
-            ForEach(huntsStore.allHunts) { hunt in
+            ForEach(hunts) { hunt in
               NavigationLink(destination: HuntListDetailView(hunt: hunt)) {
                 HuntListRowView(hunt: hunt)
               }
             }
-            .onDelete(perform: huntsStore.deleteHunt)
+            .onDelete(perform: HuntModelService.delete)
           }
         }
       }
       .sheet(isPresented: $viewModel.newHuntViewIsShown, content: AddHuntView.init)
       .toolbar(content: toolbarContent)
       .navigationTitle("Jagden")
-      .environmentObject(huntsStore)
     }
   }
 }

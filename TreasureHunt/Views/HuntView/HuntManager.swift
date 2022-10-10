@@ -5,56 +5,47 @@
 //  Created by Marvin Lee Kobert on 25.09.22.
 //
 
+import AVFoundation
 import Combine
-import SwiftUI
 import MapKit
+import RealmSwift
+import SwiftUI
 
 final class HuntManager: ObservableObject {
   private var cancellables = Set<AnyCancellable>()
-  var locationManager = LocationProvider()
+  var locationProvider = LocationProvider()
+  let audioPlayer = AudioPlayer()
 
-  @Published var region: MKCoordinateRegion = .init()
-  @Published var hunt: Hunt
+  @ObservedRealmObject var hunt: Hunt
   @Published var currentStation: Station?
-  @Published var nextStation: Station?
   @Published var angleToCurrentStation: Double = 0
   @Published var distanceToCurrentStation: Double = 0
   @Published var questionSheetIsShown: Bool = false
-  @Published var stations: [Station] = []
-  
-  var isNearCurrentStation: Bool {
-    return distanceToCurrentStation <= currentStation?.triggerDistance ?? 0
-  }
+  @Published var isNearCurrentStation: Bool = false
 
   var currentStationIsLastStation: Bool {
-    if let index = currentStationsIndex() {
-      if stations[safe: index + 1] != nil {
-        return false
-      }
-    }
-    return true
+    guard let currentStationIndex = getCurrentStationsIndex() else { return false}
+    return currentStationIndex + 1 == hunt.stations.count
   }
 
   var currentStationNumber: Int? {
-      guard let currentStation = currentStation,
-            let currentStationIndex = stations.firstIndex(of: currentStation)
-      else { return nil }
-      return currentStationIndex + 1
+    guard let currentStation = currentStation,
+          let currentStationIndex = hunt.stations.firstIndex(of: currentStation)
+    else { return nil }
+    return currentStationIndex + 1
   }
 
   init(_ hunt: Hunt) {
-    _hunt = Published(initialValue: hunt)
-    stations = StationsStore.loadHuntStations(hunt: hunt)
-    if let firstStation = stations.first {
+    _hunt = ObservedRealmObject(wrappedValue: hunt)
+    if let firstStation = hunt.stations.first {
       currentStation = firstStation
-      setNextStation()
     }
 
-    locationManager
+    locationProvider
       .$angle
       .assign(to: &$angleToCurrentStation)
 
-    locationManager
+    locationProvider
       .$distance
       .map { $0.roundedToFive() }
       .removeDuplicates()
@@ -62,75 +53,62 @@ final class HuntManager: ObservableObject {
       .store(in: &cancellables)
 
     $currentStation
-      .sink { [weak self] station in
-        guard let station = station else { return }
-        self?.locationManager.currentStationLocation = station.location
-        self?.locationManager.triggerDistance = station.triggerDistance
-        self?.locationManager.start()
+      .sink(receiveValue: onStationChanged)
+      .store(in: &cancellables)
+
+    $distanceToCurrentStation
+      .map { [weak self] in
+        guard let station = self?.currentStation else { return false }
+        return $0 <= station.triggerDistance
       }
+      .assign(to: \.isNearCurrentStation, on: self)
       .store(in: &cancellables)
   }
 
+  private func onStationChanged(_ station: Station?) {
+    guard let station else { return }
+    locationProvider.didChange(station)
+  }
+
   private func onDistanceUpdate(_ distance: CLLocationDistance) {
-    guard
-      let currentStation,
-      distance > 0
-    else { return }
+    guard distance > 0 else { return }
     self.distanceToCurrentStation = distance
 
     HapticManager.shared.triggerFeedback(on: distance)
 
-    if distance <= currentStation.triggerDistance {
+    if isNearCurrentStation {
+      audioPlayer.enteredStation()
       showQuestion()
     }
   }
 
   private func showQuestion() {
-    if currentStation?.question.isEmpty == false {
+    guard let currentStation else { return }
+    if currentStation.question.isEmpty == false && !currentStation.isCompleted {
       questionSheetIsShown = true
     }
   }
 
   func nextStationButtonTapped() {
+    currentStation?.isCompleted = true
+    audioPlayer.leftStation()
     setCurrentToNextStation()
   }
 
   private func setCurrentToNextStation() {
     guard
       let station = currentStation,
-      let currentIndex = stations.firstIndex(of: station)
+      let currentIndex = hunt.stations.firstIndex(of: station)
     else { return }
 
-    if let nextStation = stations[safe: currentIndex + 1] {
+    if currentIndex + 1 < hunt.stations.count {
+      let nextStation = hunt.stations[currentIndex + 1]
       self.currentStation = nextStation
-      locationManager.distance = locationManager.distanceTo(nextStation.location) ?? 0
     }
   }
 
-  func setNextStation() {
-    guard
-      let station = currentStation,
-      let currentIndex = stations.firstIndex(of: station)
-    else { return }
-
-    if let nextStation = stations[safe: currentIndex + 1] {
-      self.nextStation = nextStation
-    }
-  }
-
-  func setPreviousStation() {
-    guard
-      let station = currentStation,
-      let currentIndex = stations.firstIndex(of: station)
-    else { return }
-
-    if let prevStation = stations[safe: currentIndex - 1] {
-      currentStation = prevStation
-    }
-  }
-
-  private func currentStationsIndex() -> Int? {
+  private func getCurrentStationsIndex() -> Int? {
     guard let currentStation else { return nil }
-    return stations.firstIndex(of: currentStation)
+    return hunt.stations.firstIndex(of: currentStation)
   }
 }

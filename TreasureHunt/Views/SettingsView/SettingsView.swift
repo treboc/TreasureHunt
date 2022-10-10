@@ -10,6 +10,7 @@ import SwiftUI
 struct SettingsView: View {
   @AppStorage(UserDefaultsKeys.idleDimmingDisabled) private var idleDimmingDisabled: Bool = true
   @AppStorage(UserDefaultsKeys.hapticsActivated) private var hapticsActivated: Bool = true
+  @AppStorage(UserDefaultsKeys.soundsActivated) private var soundsActivated: Bool = true
 
   var body: some View {
     NavigationView {
@@ -17,6 +18,7 @@ struct SettingsView: View {
         Section {
           AppearancePicker()
           ArrowIconPicker()
+          soundsToggle
           hapticsToggle
           idleDimmingToggle
         } footer: {
@@ -40,6 +42,10 @@ struct SettingsView_Previews: PreviewProvider {
 extension SettingsView {
   private var hapticsToggle: some View {
     Toggle("Vibration", isOn: $hapticsActivated)
+  }
+
+  private var soundsToggle: some View {
+    Toggle("Sound", isOn: $soundsActivated)
   }
 
   private var idleDimmingToggle: some View {

@@ -5,10 +5,11 @@
 //  Created by Marvin Lee Kobert on 04.10.22.
 //
 
+import RealmSwift
 import SwiftUI
 
 struct StationsPicker: View {
-  @StateObject private var stationsStore = StationsStore()
+  @ObservedResults(Station.self) private var stations
   @Binding var chosenStations: [Station]
   @State private var addNewStationViewIsShown: Bool = false
 
@@ -16,10 +17,11 @@ struct StationsPicker: View {
     return "Gewählte Stationen (\(chosenStations.count) / 50)"
   }
 
-  private var filteredStations: [Station] {
-    return stationsStore.allStations.filter {
-      chosenStations.contains($0) == false
+  private var availableStations: [Station] {
+    let filtered = stations.filter {
+      !chosenStations.contains($0)
     }
+    return Array(filtered)
   }
 
   private func add(_ station: Station) {
@@ -40,7 +42,7 @@ struct StationsPicker: View {
         chosenStationsSection
         availableStationsSection
       }
-      .sheet(isPresented: $addNewStationViewIsShown) { AddNewStationView().environmentObject(stationsStore) }
+      .sheet(isPresented: $addNewStationViewIsShown) { AddNewStationView() }
       .navigationTitle("Stationsauswahl")
       .roundedNavigationTitle()
   }
@@ -86,7 +88,7 @@ extension StationsPicker {
 
   private var availableStationsSection: some View {
     Section("Verfügbare Stationen") {
-      ForEach(filteredStations) { station in
+      ForEach(availableStations) { station in
         StationPickerRowView(index: 0, station: station, rowType: .available)
           .onTapGesture {
             add(station)

@@ -2,17 +2,14 @@
 //  
 //
 
+import RealmSwift
 import SwiftUI
 import MapKit
 
 struct AddNewStationView: View {
-  enum Field: Hashable {
-    case name, question
-  }
-
-  var stationToEdit: Station?
-
-  @EnvironmentObject private var stationsStore: StationsStore
+  @State private var sheetType: SheetType = .new
+  private var stationToEdit: Station?
+  @ObservedResults(Station.self) private var realmStations
   @EnvironmentObject private var locationProvider: LocationProvider
 
   @Environment(\.dismiss) private var dismiss
@@ -31,8 +28,13 @@ struct AddNewStationView: View {
     return triggerDistance * 10
   }
 
-  init(stationToEdit: Station? = nil) {
-    self.stationToEdit = stationToEdit
+  init(sheetType: SheetType = .new) {
+    switch sheetType {
+    case .editing(let station):
+      stationToEdit = station
+    case .new:
+      return
+    }
   }
 
   var body: some View {
@@ -54,11 +56,12 @@ struct AddNewStationView: View {
           TextField("Aufgabe an der Station", text: $question)
             .focused($focusedField, equals: .question)
 
-          distanceSlider
+          TriggerDistanceSlider(triggerDistance: $triggerDistance)
         } footer: {
           Text("Distanz, die unterschritten werden muss, um diese Station zu aktivieren.")
         }
       }
+      .scrollDismissesKeyboard(.interactively)
       .toolbar(content: toolbarContent)
       .navigationBarTitleDisplayMode(.inline)
       .navigationTitle("Neue Station")
@@ -76,17 +79,14 @@ extension AddNewStationView {
   // MARK: - Methods
   private func saveButtonTapped() {
     if let stationToEdit {
-      stationsStore.updateStation(stationToEdit,
-                                  with: name,
-                                  triggerDistance: triggerDistance,
-                                  question: question,
-                                  and: region.center)
+      try? StationModelService.update(stationToEdit, with: region.center, name: name, triggerDistance: triggerDistance, question: question)
       dismiss()
     } else {
-      stationsStore.newStation(with: name,
-                               triggerDistance: triggerDistance,
-                               question: question,
-                               and: region.center)
+      let station = Station(coordinate: region.center,
+                            triggerDistance: triggerDistance,
+                            name: name,
+                            question: question)
+      try? StationModelService.add(station)
     }
     reset()
   }
@@ -109,7 +109,7 @@ extension AddNewStationView {
     name = stationToEdit.name
     question = stationToEdit.question
     triggerDistance = stationToEdit.triggerDistance
-    region.center = stationToEdit.location.coordinate
+    region.center = stationToEdit.coordinate
     setSpanOfMap()
   }
 
@@ -120,7 +120,7 @@ extension AddNewStationView {
   }
 
   private func setLocation() {
-    if let lastStationCoordinate = stationsStore.allStations.last?.coordinate {
+    if let lastStationCoordinate = realmStations.last?.coordinate {
       region.center = .init(latitude: lastStationCoordinate.latitude, longitude: lastStationCoordinate.longitude)
     } else {
       centerLocation()
@@ -158,8 +158,8 @@ extension AddNewStationView {
       )
       .overlay(
         Circle()
-          .strokeBorder(Color.red, lineWidth: 1)
-          .background(Circle().foregroundColor(Color.black.opacity(0.1)))
+          .strokeBorder(.tint, lineWidth: 1)
+          .background(Circle().foregroundColor(Color.black.opacity(0.2)))
           .frame(width: 60, height: 60)
           .allowsHitTesting(false)
       )
@@ -191,17 +191,43 @@ extension AddNewStationView {
     .padding()
     .contentShape(Circle())
   }
+}
 
-  private var distanceSlider: some View {
-    VStack {
-      Slider(value: $triggerDistance, in: 5...300, step: 5)
-      HStack {
-        Text("Min. Distanz:")
-        Spacer()
-        Text("\(triggerDistance.formatted(.number))")
-          .font(.headline)
-      }
+extension AddNewStationView {
+  enum Field: Hashable {
+    case name, question
+  }
+
+  enum SheetType {
+    case new, editing(Station)
+  }
+}
+
+extension AddNewStationView {
+  struct TriggerDistanceSlider: View {
+    @Binding var triggerDistance: Double
+
+    private let distanceFormatter: LengthFormatter = {
+      let formatter = LengthFormatter()
+      formatter.unitStyle = .short
+      return formatter
+    }()
+
+    private var distanceString: String {
+      distanceFormatter.string(fromMeters: triggerDistance)
     }
-    .padding(.vertical)
+
+    var body: some View {
+      VStack {
+        Slider(value: $triggerDistance, in: 5...300, step: 5)
+        HStack {
+          Text("Min. Distanz:")
+          Spacer()
+          Text(distanceString)
+            .font(.headline)
+        }
+      }
+      .padding(.vertical)
+    }
   }
 }

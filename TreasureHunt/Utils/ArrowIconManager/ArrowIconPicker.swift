@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ArrowIconPicker: View {
-  @AppStorage("arrowIcon") private var arrowIcon: ArrowIcon = .arrow
+  @AppStorage("arrowIcon") private var arrowIcon: ArrowIcon = .locationNorthFill
 
   var body: some View {
     Picker("Pfeil", selection: $arrowIcon) {
@@ -24,20 +24,26 @@ struct ArrowIconPicker: View {
 extension ArrowIconPicker {
   enum ArrowIcon: String, CaseIterable {
     case arrow
-    case triangleFilled
+    case triangleFill
     case triangleOutlined
     case arrowMerged
+    case locationNorth
+    case locationNorthFill
 
     var name: String {
       switch self {
       case .arrow:
         return "Pfeil"
-      case .triangleFilled:
+      case .triangleFill:
         return "Dreieck (gefüllt)"
       case .triangleOutlined:
         return "Dreieck"
       case .arrowMerged:
-        return "Pfeil, verbunden"
+        return "Pfeil (verbunden)"
+      case .locationNorth:
+        return "Position"
+      case .locationNorthFill:
+        return "Position (gefüllt)"
       }
     }
 
@@ -45,12 +51,16 @@ extension ArrowIconPicker {
       switch self {
       case .arrow:
         return "arrow.up"
-      case .triangleFilled:
+      case .triangleFill:
         return "arrowtriangle.up.fill"
       case .triangleOutlined:
         return "arrowtriangle.up"
       case .arrowMerged:
         return "arrow.triangle.merge"
+      case .locationNorth:
+        return "location.north"
+      case .locationNorthFill:
+        return "location.north.fill"
       }
     }
   }

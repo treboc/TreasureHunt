@@ -41,7 +41,7 @@ struct DirectionDistanceView: View {
     if huntManager.isNearCurrentStation == false {
       VStack {
         VStack {
-          Text("Station \(huntManager.currentStationNumber ?? 0) von \(huntManager.stations.count)")
+          Text("Station \(huntManager.currentStationNumber ?? 0) von \(huntManager.hunt.stations.count)")
             .font(.system(.largeTitle, design: .rounded))
             .fontWeight(.semibold)
             .padding(.top)
@@ -74,13 +74,17 @@ struct DirectionDistanceView: View {
     } else {
       HStack {
         VStack(alignment: .leading) {
+          Image(systemName: huntManager.currentStation?.isCompleted ?? false ? "checkmark.circle" : "circle")
+            .resizable()
+            .frame(width: 30, height: 30)
+
           Text(huntManager.currentStation?.name ?? "Keine Station")
             .font(.system(.title, design: .rounded))
             .fontWeight(.semibold)
             .lineLimit(1)
 
           if huntManager.currentStation != nil {
-            Text("Station \(huntManager.currentStationNumber ?? 0) von \(huntManager.stations.count)")
+            Text("Station \(huntManager.currentStationNumber ?? 0) von \(huntManager.hunt.stations.count)")
               .font(.system(.headline, design: .rounded))
               .italic()
               .foregroundColor(.secondary)

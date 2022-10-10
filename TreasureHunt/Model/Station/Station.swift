@@ -1,26 +1,40 @@
-//  Created by Dominik Hauser on 21.09.22.
-//  
+//
+//  RealmStation.swift
+//  TreasureHunt
+//
+//  Created by Marvin Lee Kobert on 10.10.22.
 //
 
-import Foundation
 import CoreLocation
+import RealmSwift
 
-struct Station: Codable, Identifiable, Equatable {
-  let id: UUID
-  let coordinate: Coordinate
-  let triggerDistance: Double
-  let name: String
-  let question: String
+final class Station: Object, ObjectKeyIdentifiable {
+  @Persisted(primaryKey: true) var _id: ObjectId
+  @Persisted var longitude: Double = 0
+  @Persisted var latitude: Double = 0
+  @Persisted var triggerDistance: Double = 5
+  @Persisted var name: String = ""
+  @Persisted var question: String = ""
+  var isCompleted: Bool = false
 
-  init(id: UUID = .init(), clCoordinate: CLLocationCoordinate2D, triggerDistance: Double = 5, name: String, question: String = "") {
-    self.id = id
-    self.coordinate = Coordinate(clCoordinate: clCoordinate)
+  convenience init(coordinate: CLLocationCoordinate2D, triggerDistance: Double, name: String, question: String) {
+    self.init()
+    self.longitude = coordinate.longitude
+    self.latitude = coordinate.latitude
     self.triggerDistance = triggerDistance
     self.name = name
     self.question = question
   }
 
-  var location: CLLocation {
-    return CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+  var coordinate: CLLocationCoordinate2D {
+    return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
   }
+
+  var location: CLLocation {
+    return CLLocation(latitude: latitude, longitude: longitude)
+  }
+}
+
+extension Station {
+  static let station = Station(coordinate: .init(latitude: 10, longitude: 50), triggerDistance: 50, name: "Dummy Station", question: "No questions at all!")
 }
