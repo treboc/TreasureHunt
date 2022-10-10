@@ -20,8 +20,8 @@ struct HuntListRowView: View {
         .italic()
         .font(.callout)
 
-      HStack {
-        Text("Erstellt:")
+      Group {
+        Text("Erstellt: ") +
         Text(hunt.createdAt, format: .dateTime)
       }
       .foregroundColor(.secondary)

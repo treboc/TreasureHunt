@@ -40,6 +40,6 @@ struct StationPickerRowView: View {
 
 struct StationPickerRowView_Previews: PreviewProvider {
     static var previews: some View {
-      StationPickerRowView(index: 1, station: Station(clCoordinate: .init(), name: "Testing"), rowType: .available)
+      StationPickerRowView(index: 1, station: Station.station, rowType: .available)
     }
 }

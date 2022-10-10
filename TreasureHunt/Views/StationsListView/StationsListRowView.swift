@@ -31,15 +31,3 @@ struct StationsListRowView: View {
     .padding(.vertical, 4)
   }
 }
-
-struct StationsListRowView_Previews: PreviewProvider {
-  static let station = Station(clCoordinate: .init(latitude: 20, longitude: 20), triggerDistance: 30, name: "Random", question: "This could be a wonderful question!")
-
-  static var previews: some View {
-    StationsListRowView(station: station)
-      .environmentObject(StationsStore())
-      .environmentObject(LocationProvider())
-      .padding()
-      .previewLayout(.sizeThatFits)
-  }
-}

@@ -15,7 +15,6 @@ struct TreasureHuntApp: App {
   var body: some Scene {
     WindowGroup {
       MainTabView()
-        .tint(.primaryAccentColor)
         .onAppear(perform: checkAuthorization)
         .task {
           appearanceManager.setAppearance()
@@ -24,6 +23,7 @@ struct TreasureHuntApp: App {
         .sheet(isPresented: $locationOnboardingIsShown, content: LocationAuthorizationOnboardingView.init)
         .environmentObject(appearanceManager)
         .environmentObject(locationProvider)
+        .tint(.primaryAccentColor)
     }
   }
 

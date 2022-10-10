@@ -7,14 +7,12 @@
 
 import SwiftUI
 import MapKit
+import RealmSwift
 
 struct HuntListDetailView: View {
   @State private var huntIsStarted: Bool = false
   @State private var region: MKCoordinateRegion
   let hunt: Hunt
-  var stations: [Station] {
-    return StationsStore.loadHuntStations(hunt: hunt)
-  }
 
   init(hunt: Hunt) {
     self.hunt = hunt
@@ -25,8 +23,8 @@ struct HuntListDetailView: View {
 
   var body: some View {
     ZStack(alignment: .bottom) {
-      Map(coordinateRegion: $region, showsUserLocation: true, annotationItems: stations) {
-        MapMarker(coordinate: $0.location.coordinate)
+      Map(coordinateRegion: $region, showsUserLocation: true, annotationItems: hunt.stations) {
+        MapMarker(coordinate: $0.coordinate)
       }
       .ignoresSafeArea(.container)
 
@@ -50,9 +48,7 @@ struct HuntListDetailView: View {
 }
 
 struct HuntListDetailView_Previews: PreviewProvider {
-  static let huntsStore = HuntsStore()
-
   static var previews: some View {
-    HuntListDetailView(hunt: huntsStore.allHunts.first!)
+    HuntListDetailView(hunt: Hunt.hunt)
   }
 }

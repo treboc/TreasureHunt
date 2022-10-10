@@ -2,11 +2,12 @@
 //  
 //
 
+import RealmSwift
 import SwiftUI
 
 struct QuestionView: View {
   @Environment(\.dismiss) private var dismiss
-  let station: Station
+  var station: Station
 
   var body: some View {
     VStack {
@@ -32,25 +33,25 @@ struct QuestionView: View {
       )
       Spacer()
 
-      Button("Frage beantwortet!", action: dismiss.callAsFunction)
+      Button("Frage beantwortet!", action: answeredQuestion)
         .foregroundColor(Color(uiColor: .systemBackground))
         .padding(50)
         .controlSize(.large)
         .buttonStyle(.borderedProminent)
         .shadow(radius: 5)
     }
-    .padding(.horizontal)
+    .padding()
+    .interactiveDismissDisabled()
+  }
+
+  private func answeredQuestion() {
+    station.isCompleted = true
+    dismiss()
   }
 }
 
 struct QuestionView_Previews: PreviewProvider {
-  static let station = Station(id: .init(),
-                               clCoordinate: .init(latitude: -20, longitude: -50),
-                               triggerDistance: 15,
-                               name: "Testing",
-                               question: "Wie ist das Wetter heute?")
-
   static var previews: some View {
-    QuestionView(station: station)
+    QuestionView(station: Station.station)
   }
 }

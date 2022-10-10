@@ -25,7 +25,7 @@ struct HuntView: View {
   var body: some View {
     NavigationView {
       ZStack {
-        Map(coordinateRegion: $huntManager.region,
+        Map(coordinateRegion: $vm.region,
             showsUserLocation: true,
             userTrackingMode: .constant(.follow)
         )

@@ -11,7 +11,6 @@ import MapKit
 struct AddHuntView: View {
   @Environment(\.dismiss) private var dismiss
   @EnvironmentObject private var locationProvider: LocationProvider
-  @EnvironmentObject private var huntsStore: HuntsStore
 
   @State private var name: String = ""
   @State private var chosenStations: [Station] = []
@@ -69,11 +68,9 @@ struct AddHuntView_Previews: PreviewProvider {
 
 extension AddHuntView {
   func saveButtonTapped(onCompletion: @escaping (() -> Void)) {
-    let huntStations = chosenStations.map(\.id)
-    let hunt = Hunt(name: name, stations: huntStations)
-    huntsStore.persist(hunt) {
-      onCompletion()
-    }
+    let hunt = Hunt(name: name)
+    HuntModelService.add(hunt, with: chosenStations)
+    dismiss()
   }
 
   private func centerLocation() {
@@ -104,7 +101,7 @@ extension AddHuntView {
       Section {
         ZStack(alignment: .topTrailing) {
           Map(coordinateRegion: $region, showsUserLocation: true, annotationItems: chosenStations, annotationContent: { station in
-            MapAnnotation(coordinate: station.location.coordinate) {
+            MapAnnotation(coordinate: station.coordinate) {
               let index = chosenStations.firstIndex(of: station) ?? 0
               AddHuntStationAnnotationView(position: index + 1)
             }

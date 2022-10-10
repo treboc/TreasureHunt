@@ -2,25 +2,31 @@
 //  Hunt.swift
 //  TreasureHunt
 //
-//  Created by Marvin Lee Kobert on 03.10.22.
+//  Created by Marvin Lee Kobert on 10.10.22.
 //
 
-import Foundation
 import CoreLocation
+import Foundation
+import RealmSwift
 
-struct Hunt: Codable, Identifiable {
-  var id: UUID = .init()
-  let name: String
-  var stations: [Station.ID]
-  var createdAt: Date = .now
+final class Hunt: Object, ObjectKeyIdentifiable {
+  @Persisted(primaryKey: true) var _id: ObjectId
+  @Persisted var name: String = ""
+  @Persisted var createdAt: Date = .now
+  @Persisted var stations: List<Station>
+
+  convenience init(name: String) {
+    self.init()
+    self.name = name
+  }
 
   var centerLocation: CLLocationCoordinate2D {
-    let stationsStore = StationsStore()
-    let huntStations = stationsStore.allStations.filter { station in
-      stations.contains(station.id)
-    }
-    let lat = huntStations.map(\.location.coordinate.latitude).reduce(0.0, +) / Double(huntStations.count)
-    let lon = huntStations.map(\.location.coordinate.longitude).reduce(0.0, +) / Double(huntStations.count)
-    return CLLocationCoordinate2D(latitude: lat, longitude: lon)
+    let centerLat = stations.map(\.latitude).reduce(0.0, +) / Double(stations.count)
+    let centerLong = stations.map(\.longitude).reduce(0.0, +) / Double(stations.count)
+    return CLLocationCoordinate2D(latitude: centerLat, longitude: centerLong)
   }
+}
+
+extension Hunt {
+  static let hunt = Hunt(name: "Dummy Station")
 }

@@ -6,46 +6,40 @@
 //
 
 import Combine
-import SwiftUI
 import MapKit
+import RealmSwift
+import SwiftUI
 
 final class HuntManager: ObservableObject {
   private var cancellables = Set<AnyCancellable>()
   var locationManager = LocationProvider()
 
-  @Published var region: MKCoordinateRegion = .init()
-  @Published var hunt: Hunt
+  @ObservedRealmObject var hunt: Hunt
   @Published var currentStation: Station?
   @Published var nextStation: Station?
   @Published var angleToCurrentStation: Double = 0
   @Published var distanceToCurrentStation: Double = 0
   @Published var questionSheetIsShown: Bool = false
-  @Published var stations: [Station] = []
-  
+
   var isNearCurrentStation: Bool {
     return distanceToCurrentStation <= currentStation?.triggerDistance ?? 0
   }
 
   var currentStationIsLastStation: Bool {
-    if let index = currentStationsIndex() {
-      if stations[safe: index + 1] != nil {
-        return false
-      }
-    }
-    return true
+    guard let currentStationIndex = currentStationsIndex() else { return false}
+    return currentStationIndex + 1 == hunt.stations.count
   }
 
   var currentStationNumber: Int? {
       guard let currentStation = currentStation,
-            let currentStationIndex = stations.firstIndex(of: currentStation)
+            let currentStationIndex = hunt.stations.firstIndex(of: currentStation)
       else { return nil }
       return currentStationIndex + 1
   }
 
   init(_ hunt: Hunt) {
-    _hunt = Published(initialValue: hunt)
-    stations = StationsStore.loadHuntStations(hunt: hunt)
-    if let firstStation = stations.first {
+    _hunt = ObservedRealmObject(wrappedValue: hunt)
+    if let firstStation = hunt.stations.first {
       currentStation = firstStation
       setNextStation()
     }
@@ -77,31 +71,32 @@ final class HuntManager: ObservableObject {
       distance > 0
     else { return }
     self.distanceToCurrentStation = distance
-
     HapticManager.shared.triggerFeedback(on: distance)
-
-    if distance <= currentStation.triggerDistance {
+    if isNearCurrentStation {
       showQuestion()
     }
   }
 
   private func showQuestion() {
-    if currentStation?.question.isEmpty == false {
+    guard let currentStation else { return }
+    if currentStation.question.isEmpty == false && !currentStation.isCompleted {
       questionSheetIsShown = true
     }
   }
 
   func nextStationButtonTapped() {
+    currentStation?.isCompleted = true
     setCurrentToNextStation()
   }
 
   private func setCurrentToNextStation() {
     guard
       let station = currentStation,
-      let currentIndex = stations.firstIndex(of: station)
+      let currentIndex = hunt.stations.firstIndex(of: station)
     else { return }
 
-    if let nextStation = stations[safe: currentIndex + 1] {
+    if currentIndex + 1 < hunt.stations.count {
+      let nextStation = hunt.stations[currentIndex + 1]
       self.currentStation = nextStation
       locationManager.distance = locationManager.distanceTo(nextStation.location) ?? 0
     }
@@ -110,10 +105,11 @@ final class HuntManager: ObservableObject {
   func setNextStation() {
     guard
       let station = currentStation,
-      let currentIndex = stations.firstIndex(of: station)
+      let currentIndex = hunt.stations.firstIndex(of: station)
     else { return }
 
-    if let nextStation = stations[safe: currentIndex + 1] {
+    if currentIndex + 1 < hunt.stations.count {
+      let nextStation = hunt.stations[currentIndex + 1]
       self.nextStation = nextStation
     }
   }
@@ -121,16 +117,17 @@ final class HuntManager: ObservableObject {
   func setPreviousStation() {
     guard
       let station = currentStation,
-      let currentIndex = stations.firstIndex(of: station)
+      let currentIndex = hunt.stations.firstIndex(of: station)
     else { return }
 
-    if let prevStation = stations[safe: currentIndex - 1] {
+    if currentIndex - 1 > 0 {
+      let prevStation = hunt.stations[currentIndex - 1]
       currentStation = prevStation
     }
   }
 
   private func currentStationsIndex() -> Int? {
     guard let currentStation else { return nil }
-    return stations.firstIndex(of: currentStation)
+    return hunt.stations.firstIndex(of: currentStation)
   }
 }
