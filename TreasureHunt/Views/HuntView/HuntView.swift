@@ -36,7 +36,9 @@ struct HuntView: View {
         
         arrowOverlay()
         bottomButtonStack
-        
+      }
+      .disabled(vm.warningRead == false)
+      .overlay {
         if vm.warningRead == false {
           TrafficWarningView(warningRead: $vm.warningRead)
             .transition(.opacity.combined(with: .scale))
