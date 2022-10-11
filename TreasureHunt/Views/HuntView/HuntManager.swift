@@ -73,7 +73,6 @@ final class HuntManager: ObservableObject {
   private func onDistanceUpdate(_ distance: CLLocationDistance) {
     guard distance > 0 else { return }
     self.distanceToCurrentStation = distance
-
     HapticManager.shared.triggerFeedback(on: distance)
 
     if isNearCurrentStation {
