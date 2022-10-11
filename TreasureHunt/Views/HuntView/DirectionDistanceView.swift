@@ -6,8 +6,7 @@ import SwiftUI
 import MapKit
 
 struct DirectionDistanceView: View {
-  @AppStorage("arrowIcon") private var arrowIcon: ArrowIconPicker.ArrowIcon = .arrow
-
+  @AppStorage("arrowIcon") private var arrowIcon: ArrowIconPicker.ArrowIcon = .locationNorthFill
   @ObservedObject var huntManager: HuntManager
   @State private var isAnimated: Bool = false
   @Namespace private var arrow
@@ -38,81 +37,91 @@ struct DirectionDistanceView: View {
   }
 
   var body: some View {
-    if huntManager.isNearCurrentStation == false {
-      VStack {
-        VStack {
-          Text("Station \(huntManager.currentStationNumber ?? 0) von \(huntManager.hunt.stations.count)")
-            .font(.system(.largeTitle, design: .rounded))
-            .fontWeight(.semibold)
-            .padding(.top)
-        }
-
-        Spacer()
-
-        VStack {
-          Image(systemName: arrowIcon.systemImage)
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-            .rotationEffect(Angle(degrees: huntManager.angleToCurrentStation))
-            .frame(height: 150)
-            .accessibilityHidden(true)
-            .padding()
-            .foregroundColor(arrowColor)
-            .matchedGeometryEffect(id: "arrow", in: arrow)
-
-          if huntManager.distanceToCurrentStation > 0 {
-            Text(distanceString)
-              .font(.headline)
-              .padding()
-          } else {
-            Text("Distance N/A")
-          }
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-      }
-      .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+    if huntManager.isNearCurrentStation {
+      nearStationView
     } else {
-      HStack {
-        VStack(alignment: .leading) {
-          Image(systemName: huntManager.currentStation?.isCompleted ?? false ? "checkmark.circle" : "circle")
-            .resizable()
-            .frame(width: 30, height: 30)
+      notNearStationView
+    }
+  }
+}
 
-          Text(huntManager.currentStation?.name ?? "Keine Station")
-            .font(.system(.title, design: .rounded))
-            .fontWeight(.semibold)
-            .lineLimit(1)
+extension DirectionDistanceView {
+  private var notNearStationView: some View {
+    VStack {
+      VStack {
+        Text("Station \(huntManager.currentStationNumber ?? 0) von \(huntManager.hunt.stations.count)")
+          .font(.system(.largeTitle, design: .rounded))
+          .fontWeight(.semibold)
+          .padding(.top)
+      }
 
-          if huntManager.currentStation != nil {
-            Text("Station \(huntManager.currentStationNumber ?? 0) von \(huntManager.hunt.stations.count)")
-              .font(.system(.headline, design: .rounded))
-              .italic()
-              .foregroundColor(.secondary)
-          }
-        }
+      Spacer()
 
-        Spacer()
-
-        Image(systemName: "hand.point.down.fill")
+      VStack {
+        Image(systemName: arrowIcon.systemImage)
           .resizable()
           .aspectRatio(contentMode: .fit)
+          .rotationEffect(Angle(degrees: huntManager.angleToCurrentStation))
+          .frame(height: 150)
           .accessibilityHidden(true)
           .padding()
           .foregroundColor(arrowColor)
-          .frame(height: 100)
-          .offset(y: isAnimated ? -10 : 10)
-          .animation(.easeInOut(duration: 0.5).repeatForever(), value: isAnimated)
-          .onAppear { isAnimated.toggle() }
+          .matchedGeometryEffect(id: "arrow", in: arrow)
+
+        if huntManager.distanceToCurrentStation > 0 {
+          Text(distanceString)
+            .font(.headline)
+            .padding()
+        } else {
+          Text("Distance N/A")
+        }
       }
-      .frame(maxWidth: .infinity, alignment: .top)
-      .padding()
-      .background(
-        RoundedRectangle(cornerRadius: 16)
-          .fill(.thinMaterial)
-          .shadow(radius: 5)
-      )
-      .padding(.horizontal)
-      .transition(.opacity.combined(with: .scale))
+      .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
     }
+    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+  }
+
+  private var nearStationView: some View {
+    HStack {
+      VStack(alignment: .leading) {
+        Image(systemName: huntManager.currentStation?.isCompleted ?? false ? "checkmark.circle" : "circle")
+          .resizable()
+          .frame(width: 30, height: 30)
+
+        Text(huntManager.currentStation?.name ?? "Keine Station")
+          .font(.system(.title, design: .rounded))
+          .fontWeight(.semibold)
+          .lineLimit(1)
+
+        if huntManager.currentStation != nil {
+          Text("Station \(huntManager.currentStationNumber ?? 0) von \(huntManager.hunt.stations.count)")
+            .font(.system(.headline, design: .rounded))
+            .italic()
+            .foregroundColor(.secondary)
+        }
+      }
+
+      Spacer()
+
+      Image(systemName: "hand.point.down.fill")
+        .resizable()
+        .aspectRatio(contentMode: .fit)
+        .accessibilityHidden(true)
+        .padding()
+        .foregroundColor(arrowColor)
+        .frame(height: 100)
+        .offset(y: isAnimated ? -10 : 10)
+        .animation(.easeInOut(duration: 0.5).repeatForever(), value: isAnimated)
+        .onAppear { isAnimated.toggle() }
+    }
+    .frame(maxWidth: .infinity, alignment: .top)
+    .padding()
+    .background(
+      RoundedRectangle(cornerRadius: 16)
+        .fill(.thinMaterial)
+        .shadow(radius: 5)
+    )
+    .padding(.horizontal)
+    .transition(.opacity.combined(with: .scale))
   }
 }
