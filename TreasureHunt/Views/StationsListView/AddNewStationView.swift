@@ -10,14 +10,14 @@ struct AddNewStationView: View {
   @State private var sheetType: SheetType = .new
   private var stationToEdit: Station?
   @ObservedResults(Station.self) private var realmStations
-  @EnvironmentObject private var locationProvider: LocationProvider
+  let locationProvider = LocationProvider()
 
   @Environment(\.dismiss) private var dismiss
 
   @State private var region: MKCoordinateRegion = .init()
   @State private var name: String = ""
   @State private var question: String = ""
-  @State private var triggerDistance: Double = 50
+  @State private var triggerDistance: Double = 25
   @FocusState private var focusedField: Field?
 
   private var saveButtonIsDisabled: Bool {
@@ -30,10 +30,10 @@ struct AddNewStationView: View {
 
   init(sheetType: SheetType = .new) {
     switch sheetType {
-    case .editing(let station):
-      stationToEdit = station
     case .new:
       return
+    case .editing(let station):
+      stationToEdit = station
     }
   }
 
@@ -65,7 +65,7 @@ struct AddNewStationView: View {
       .toolbar(content: toolbarContent)
       .navigationBarTitleDisplayMode(.inline)
       .navigationTitle("Neue Station")
-      .onChange(of: triggerDistance) { newValue in
+      .onChange(of: triggerDistance) { _ in
         setSpanOfMap()
       }
       .onAppear(perform: prepareEdit)
@@ -102,15 +102,17 @@ extension AddNewStationView {
   }
 
   private func prepareEdit() {
-    guard let stationToEdit else {
+    if let stationToEdit {
+      name = stationToEdit.name
+      question = stationToEdit.question
+      triggerDistance = stationToEdit.triggerDistance
+      region.center = stationToEdit.coordinate
+    } else {
       setLocation()
-      return
     }
-    name = stationToEdit.name
-    question = stationToEdit.question
-    triggerDistance = stationToEdit.triggerDistance
-    region.center = stationToEdit.coordinate
-    setSpanOfMap()
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+      self.setSpanOfMap()
+    }
   }
 
   private func setSpanOfMap() {
@@ -125,13 +127,11 @@ extension AddNewStationView {
     } else {
       centerLocation()
     }
-    setSpanOfMap()
   }
 
   private func centerLocation() {
     if let location = locationProvider.currentLocation?.coordinate {
       region.center = location
-      setSpanOfMap()
     }
   }
 }
