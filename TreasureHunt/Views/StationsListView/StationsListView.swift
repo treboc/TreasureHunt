@@ -8,6 +8,7 @@ import MapKit
 
 struct StationsListView: View {
   @ObservedResults(Station.self) private var stations
+  @EnvironmentObject private var locationProvider: LocationProvider
   @StateObject private var viewModel = StationsListViewModel()
 
   var body: some View {
@@ -22,12 +23,13 @@ struct StationsListView: View {
       .navigationTitle("Stationen")
       .roundedNavigationTitle()
       .sheet(isPresented: $viewModel.newStationSheetIsShown, onDismiss: nil) {
-        AddNewStationView()
+        AddNewStationView(location: locationProvider.locationManager.location)
       }
       .sheet(item: $viewModel.stationToEdit) { station in
-        AddNewStationView(sheetType: .editing(station))
+        AddNewStationView(stationToEdit: station)
       }
       .toolbar(content: toolbarContent)
+      .onAppear(perform: locationProvider.locationManager.requestLocation)
     }
   }
 }

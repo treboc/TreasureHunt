@@ -7,7 +7,6 @@ import SwiftUI
 import MapKit
 
 struct AddNewStationView: View {
-  @State private var sheetType: SheetType = .new
   private var stationToEdit: Station?
   @ObservedResults(Station.self) private var realmStations
   let locationProvider = LocationProvider()
@@ -28,12 +27,25 @@ struct AddNewStationView: View {
     return triggerDistance * 10
   }
 
-  init(sheetType: SheetType = .new) {
-    switch sheetType {
-    case .new:
-      return
-    case .editing(let station):
-      stationToEdit = station
+  init(stationToEdit: Station? = nil, location: CLLocation? = nil) {
+    if let stationToEdit {
+      self.stationToEdit = stationToEdit
+      _name = State(initialValue: stationToEdit.name)
+      _question = State(initialValue: stationToEdit.question)
+      _triggerDistance = State(initialValue: stationToEdit.triggerDistance)
+
+      let region = MKCoordinateRegion(center: stationToEdit.coordinate,
+                                      latitudinalMeters: mapSpanInMeters,
+                                      longitudinalMeters: mapSpanInMeters)
+      _region = State(initialValue: region)
+    } else {
+      if let location {
+        let region = MKCoordinateRegion(center: location.coordinate,
+                                        latitudinalMeters: mapSpanInMeters,
+                                        longitudinalMeters: mapSpanInMeters)
+        _region = State(initialValue: region)
+        setMapSpan()
+      }
     }
   }
 
@@ -66,9 +78,8 @@ struct AddNewStationView: View {
       .navigationBarTitleDisplayMode(.inline)
       .navigationTitle("Neue Station")
       .onChange(of: triggerDistance) { _ in
-        setSpanOfMap()
+        setMapSpan()
       }
-      .onAppear(perform: prepareEdit)
       .interactiveDismissDisabled()
     }
   }
@@ -101,21 +112,7 @@ extension AddNewStationView {
     self.focusedField = .name
   }
 
-  private func prepareEdit() {
-    if let stationToEdit {
-      name = stationToEdit.name
-      question = stationToEdit.question
-      triggerDistance = stationToEdit.triggerDistance
-      region.center = stationToEdit.coordinate
-    } else {
-      setLocation()
-    }
-    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-      self.setSpanOfMap()
-    }
-  }
-
-  private func setSpanOfMap() {
+  private func setMapSpan() {
     region = MKCoordinateRegion(center: region.center,
                                 latitudinalMeters: mapSpanInMeters,
                                 longitudinalMeters: mapSpanInMeters)
@@ -196,10 +193,6 @@ extension AddNewStationView {
 extension AddNewStationView {
   enum Field: Hashable {
     case name, question
-  }
-
-  enum SheetType {
-    case new, editing(Station)
   }
 }
 
