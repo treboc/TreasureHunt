@@ -9,7 +9,8 @@ import MapKit
 struct StationsListView: View {
   @ObservedResults(Station.self) private var stations
   @EnvironmentObject private var locationProvider: LocationProvider
-  @StateObject private var viewModel = StationsListViewModel()
+  @State private var newStationSheetIsShown: Bool = false
+  @State private var stationToEdit: Station? = nil
 
   var body: some View {
     NavigationView {
@@ -22,14 +23,13 @@ struct StationsListView: View {
       }
       .navigationTitle("Stationen")
       .roundedNavigationTitle()
-      .sheet(isPresented: $viewModel.newStationSheetIsShown, onDismiss: nil) {
+      .sheet(isPresented: $newStationSheetIsShown, onDismiss: nil) {
         AddNewStationView(location: locationProvider.locationManager.location)
       }
-      .sheet(item: $viewModel.stationToEdit) { station in
+      .sheet(item: $stationToEdit) { station in
         AddNewStationView(stationToEdit: station)
       }
       .toolbar(content: toolbarContent)
-      .onAppear(perform: locationProvider.locationManager.requestLocation)
     }
   }
 }
@@ -46,7 +46,10 @@ extension StationsListView {
   @ToolbarContentBuilder
   func toolbarContent() -> some ToolbarContent {
     ToolbarItem(placement: .navigationBarTrailing) {
-      Button(iconName: "plus", action: viewModel.showNewStationSheet)
+//      Button(iconName: "plus", action: viewModel.showNewStationSheet)
+      Button(iconName: "plus") {
+        newStationSheetIsShown.toggle()
+      }
     }
   }
 
@@ -55,7 +58,7 @@ extension StationsListView {
       Text("Du hast noch keine Stationen erstellt, aber fang' doch gleich damit an, in dem du hier, oder oben rechts auf das \"+\" tippst.")
         .multilineTextAlignment(.center)
         .font(.system(.headline, design: .rounded))
-      Button("Erstelle eine Station", action: viewModel.showNewStationSheet)
+      Button("Erstelle eine Station") { newStationSheetIsShown.toggle() }
         .foregroundColor(Color(uiColor: .systemBackground))
         .buttonStyle(.borderedProminent)
         .controlSize(.regular)
@@ -88,7 +91,7 @@ extension StationsListView {
 
   private func swipeToEdit(_ station: Station) -> some View {
     Button {
-      viewModel.stationToEdit = station
+      stationToEdit = station
     } label: {
       Label("Edit", systemImage: "square.and.pencil")
     }

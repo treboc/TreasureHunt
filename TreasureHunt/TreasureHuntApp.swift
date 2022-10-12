@@ -9,7 +9,10 @@ import SwiftUI
 struct TreasureHuntApp: App {
   @StateObject private var appearanceManager = AppearanceManager()
   @StateObject private var locationProvider = LocationProvider()
-  @AppStorage(UserDefaultsKeys.locationAuthViewIsShown) private var locationOnboardingIsShown: Bool = false
+
+  @AppStorage(UserDefaultsKeys.locationAuthViewIsShown)
+  private var locationOnboardingIsShown: Bool = false
+
   @Environment(\.scenePhase) private var phase
 
   var body: some Scene {
@@ -37,13 +40,19 @@ struct TreasureHuntApp: App {
   }
 
   private func checkAuthorization() {
-    switch locationProvider.locationManager.authorizationStatus {
+    let authStatus = locationProvider.locationManager.authorizationStatus
+
+    switch authStatus {
     case .restricted, .notDetermined, .denied:
       locationOnboardingIsShown = true
     case .authorizedAlways, .authorizedWhenInUse:
       locationOnboardingIsShown = false
     @unknown default:
       return
+    }
+
+    if authStatus == .authorizedAlways || authStatus == .authorizedWhenInUse {
+      locationProvider.locationManager.requestLocation()
     }
   }
 }

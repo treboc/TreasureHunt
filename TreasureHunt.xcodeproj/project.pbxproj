@@ -10,7 +10,6 @@
 		452AA85328F69DA300F11BA5 /* LocationAuthorizationOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452AA85228F69DA300F11BA5 /* LocationAuthorizationOnboardingView.swift */; };
 		4530A10D28F14BCD00F05AE3 /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530A10C28F14BCD00F05AE3 /* QuestionView.swift */; };
 		45513FAA28EAF2D90064A32E /* HuntListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45513FA928EAF2D90064A32E /* HuntListView.swift */; };
-		45513FAC28EAF3940064A32E /* HuntListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45513FAB28EAF3940064A32E /* HuntListViewModel.swift */; };
 		45513FB528EAFADD0064A32E /* AddHuntView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45513FB428EAFADD0064A32E /* AddHuntView.swift */; };
 		45513FB728EBD9A60064A32E /* StationsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45513FB628EBD9A60064A32E /* StationsPicker.swift */; };
 		45513FB928ECBDC10064A32E /* StationPickerRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45513FB828ECBDC10064A32E /* StationPickerRowView.swift */; };
@@ -36,7 +35,6 @@
 		8A4C4F8F28E1C0E100721C50 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4C4F8E28E1C0E100721C50 /* MainTabView.swift */; };
 		8A4C4F9128E1C0F100721C50 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4C4F9028E1C0F100721C50 /* SettingsView.swift */; };
 		8A4C4F9428E1D9BB00721C50 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4C4F9328E1D9BB00721C50 /* Array+Extension.swift */; };
-		8A4C4F9628E1F9B300721C50 /* StationsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4C4F9528E1F9B300721C50 /* StationsListViewModel.swift */; };
 		8A4C4F9828E1FBFE00721C50 /* RoundedNavigationTitle-ViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4C4F9728E1FBFE00721C50 /* RoundedNavigationTitle-ViewModifier.swift */; };
 		8A4C4F9B28E207C200721C50 /* AppearanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4C4F9A28E207C200721C50 /* AppearanceManager.swift */; };
 		8A4C4F9D28E2083500721C50 /* AppearancePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4C4F9C28E2083500721C50 /* AppearancePicker.swift */; };
@@ -64,7 +62,6 @@
 		452AA85228F69DA300F11BA5 /* LocationAuthorizationOnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationAuthorizationOnboardingView.swift; sourceTree = "<group>"; };
 		4530A10C28F14BCD00F05AE3 /* QuestionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
 		45513FA928EAF2D90064A32E /* HuntListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuntListView.swift; sourceTree = "<group>"; };
-		45513FAB28EAF3940064A32E /* HuntListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuntListViewModel.swift; sourceTree = "<group>"; };
 		45513FB428EAFADD0064A32E /* AddHuntView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHuntView.swift; sourceTree = "<group>"; };
 		45513FB628EBD9A60064A32E /* StationsPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsPicker.swift; sourceTree = "<group>"; };
 		45513FB828ECBDC10064A32E /* StationPickerRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationPickerRowView.swift; sourceTree = "<group>"; };
@@ -88,7 +85,6 @@
 		8A4C4F8E28E1C0E100721C50 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		8A4C4F9028E1C0F100721C50 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		8A4C4F9328E1D9BB00721C50 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
-		8A4C4F9528E1F9B300721C50 /* StationsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StationsListViewModel.swift; path = TreasureHunt/Views/StationsListView/StationsListViewModel.swift; sourceTree = SOURCE_ROOT; };
 		8A4C4F9728E1FBFE00721C50 /* RoundedNavigationTitle-ViewModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RoundedNavigationTitle-ViewModifier.swift"; sourceTree = "<group>"; };
 		8A4C4F9A28E207C200721C50 /* AppearanceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearanceManager.swift; sourceTree = "<group>"; };
 		8A4C4F9C28E2083500721C50 /* AppearancePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearancePicker.swift; sourceTree = "<group>"; };
@@ -132,7 +128,6 @@
 				45513FA928EAF2D90064A32E /* HuntListView.swift */,
 				45513FBB28ECD2070064A32E /* HuntListRowView.swift */,
 				45513FBD28ECD22C0064A32E /* HuntListDetailView.swift */,
-				45513FAB28EAF3940064A32E /* HuntListViewModel.swift */,
 				45513FBF28ED68F20064A32E /* AddHuntView */,
 			);
 			path = HuntListView;
@@ -310,7 +305,6 @@
 			isa = PBXGroup;
 			children = (
 				8A52024728E0A21900C49779 /* StationsListView.swift */,
-				8A4C4F9528E1F9B300721C50 /* StationsListViewModel.swift */,
 				8AD1768D28E0F14600A12948 /* StationsListRowView.swift */,
 				8A52024428E0A21900C49779 /* AddNewStationView.swift */,
 			);
@@ -486,8 +480,6 @@
 				8AFCFF3928E225ED000D1A0B /* MapView.swift in Sources */,
 				8A52024E28E0A21900C49779 /* HuntView.swift in Sources */,
 				45A8CEE728EA228500F19E67 /* HuntViewModel.swift in Sources */,
-				8A4C4F9628E1F9B300721C50 /* StationsListViewModel.swift in Sources */,
-				45513FAC28EAF3940064A32E /* HuntListViewModel.swift in Sources */,
 				45513FB728EBD9A60064A32E /* StationsPicker.swift in Sources */,
 				8A1CBD7628E36EC300E0AE4B /* TrafficWarningView.swift in Sources */,
 				45513FC128ED69130064A32E /* StationAnnotationView copy.swift in Sources */,

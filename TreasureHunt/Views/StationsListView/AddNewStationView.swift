@@ -9,8 +9,7 @@ import MapKit
 struct AddNewStationView: View {
   private var stationToEdit: Station?
   @ObservedResults(Station.self) private var realmStations
-  let locationProvider = LocationProvider()
-
+  @EnvironmentObject private var locationProvider: LocationProvider
   @Environment(\.dismiss) private var dismiss
 
   @State private var region: MKCoordinateRegion = .init()

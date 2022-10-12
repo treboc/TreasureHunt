@@ -10,7 +10,7 @@ import SwiftUI
 
 struct HuntListView: View {
   @ObservedResults(Hunt.self) private var hunts
-  @StateObject private var viewModel = HuntListViewModel()
+  @State private var newHuntViewIsShown: Bool = false
 
   var body: some View {
     NavigationStack {
@@ -28,7 +28,7 @@ struct HuntListView: View {
           }
         }
       }
-      .sheet(isPresented: $viewModel.newHuntViewIsShown, content: AddHuntView.init)
+      .sheet(isPresented: $newHuntViewIsShown, content: AddHuntView.init)
       .toolbar(content: toolbarContent)
       .navigationTitle("Jagden")
     }
@@ -46,7 +46,7 @@ extension HuntListView {
   @ToolbarContentBuilder
   private func toolbarContent() -> some ToolbarContent {
     ToolbarItem(placement: .navigationBarTrailing) {
-      Button(iconName: "plus", action: viewModel.showNewHuntView)
+      Button(iconName: "plus") { newHuntViewIsShown.toggle() }
     }
   }
 
@@ -55,7 +55,7 @@ extension HuntListView {
       Text("Du hast noch keine Jagd erstellt. Deine erste Jagd kann du erstellen in dem du hier tippst, oder oben rechts auf das \"+\".")
         .multilineTextAlignment(.center)
         .font(.system(.headline, design: .rounded))
-      Button("Erstelle eine Jagd", action: viewModel.showNewHuntView)
+      Button("Erstelle eine Jagd")  { newHuntViewIsShown.toggle() }
         .foregroundColor(Color(uiColor: .systemBackground))
         .buttonStyle(.borderedProminent)
         .controlSize(.regular)
