@@ -106,7 +106,7 @@ extension AddHuntView {
               AddHuntStationAnnotationView(position: index + 1)
             }
           })
-          centerMapButton
+          .overlay(alignment: .topTrailing) { centerMapButton }
         }
         .frame(height: 300)
       } header: {
