@@ -13,10 +13,12 @@ struct QuestionView: View {
     VStack {
       Text("\(station.name) erreicht!")
         .font(.system(.largeTitle, design: .rounded, weight: .semibold))
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.horizontal)
 
       Spacer()
       VStack(alignment: .leading) {
-        Text("Frage")
+        Text("Aufgabe")
           .font(.system(.headline, design: .rounded, weight: .bold))
           .foregroundColor(.secondary)
 
@@ -33,7 +35,7 @@ struct QuestionView: View {
       )
       Spacer()
 
-      Button("Frage beantwortet!", action: answeredQuestion)
+      Button("Erledigt!", action: answeredQuestion)
         .foregroundColor(Color(uiColor: .systemBackground))
         .padding(50)
         .controlSize(.large)
