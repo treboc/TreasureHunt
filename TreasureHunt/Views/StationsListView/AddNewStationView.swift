@@ -80,6 +80,10 @@ struct AddNewStationView: View {
         setMapSpan()
       }
       .interactiveDismissDisabled()
+      .task {
+        centerLocation()
+        setMapSpan()
+      }
     }
   }
 }
@@ -150,6 +154,7 @@ extension AddNewStationView {
     Map(coordinateRegion: $region, interactionModes: [.pan])
       .overlay(
         Image(systemName: "plus")
+          .accessibilityHidden(true)
           .allowsHitTesting(false)
       )
       .overlay(
@@ -157,6 +162,7 @@ extension AddNewStationView {
           .strokeBorder(.tint, lineWidth: 1)
           .background(Circle().foregroundColor(Color.black.opacity(0.2)))
           .frame(width: 60, height: 60)
+          .accessibilityHidden(true)
           .allowsHitTesting(false)
       )
       .overlay(alignment: .bottom, content: locationCoordinates)
@@ -218,8 +224,12 @@ extension AddNewStationView {
           Text(distanceString)
             .font(.headline)
         }
+        .accessibilityHidden(true)
       }
       .padding(.vertical)
+      .accessibilityLabel("Distanzslider")
+      .accessibilityValue(Text("Minimale Distanz: \(distanceString)"))
+      .accessibilityHint("Legt fest, ab welcher Entfernung eine Station ausgelöst wird.")
     }
   }
 }

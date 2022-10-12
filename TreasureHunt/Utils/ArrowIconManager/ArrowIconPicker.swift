@@ -18,6 +18,8 @@ struct ArrowIconPicker: View {
       }
     }
     .pickerStyle(.menu)
+    .accessibilityElement()
+    .accessibilityLabel(Text("Pfeil, \(arrowIcon.name)"))
   }
 }
 

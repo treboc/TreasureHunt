@@ -47,6 +47,7 @@ extension HuntListView {
   private func toolbarContent() -> some ToolbarContent {
     ToolbarItem(placement: .navigationBarTrailing) {
       Button(iconName: "plus") { newHuntViewIsShown.toggle() }
+        .accessibilityLabel("Jagd erstellen")
     }
   }
 
