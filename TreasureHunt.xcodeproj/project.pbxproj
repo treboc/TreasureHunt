@@ -10,6 +10,9 @@
 		452AA85328F69DA300F11BA5 /* LocationAuthorizationOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452AA85228F69DA300F11BA5 /* LocationAuthorizationOnboardingView.swift */; };
 		4530A10D28F14BCD00F05AE3 /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530A10C28F14BCD00F05AE3 /* QuestionView.swift */; };
 		4532DB0728FA981500C32418 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4532DB0928FA981500C32418 /* Localizable.strings */; };
+		4533508D28FC822300BC0AA0 /* AddNewStationView+TextfieldWithTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4533508C28FC822300BC0AA0 /* AddNewStationView+TextfieldWithTitle.swift */; };
+		4533508F28FC824400BC0AA0 /* AddNewStationView+TriggerDistanceSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4533508E28FC824400BC0AA0 /* AddNewStationView+TriggerDistanceSlider.swift */; };
+		4533509128FC82BA00BC0AA0 /* AddNewStationView+PagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4533509028FC82BA00BC0AA0 /* AddNewStationView+PagePicker.swift */; };
 		45513FAA28EAF2D90064A32E /* HuntListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45513FA928EAF2D90064A32E /* HuntListView.swift */; };
 		45513FB528EAFADD0064A32E /* AddHuntView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45513FB428EAFADD0064A32E /* AddHuntView.swift */; };
 		45513FB728EBD9A60064A32E /* StationsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45513FB628EBD9A60064A32E /* StationsPicker.swift */; };
@@ -63,6 +66,9 @@
 		452AA85228F69DA300F11BA5 /* LocationAuthorizationOnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationAuthorizationOnboardingView.swift; sourceTree = "<group>"; };
 		4530A10C28F14BCD00F05AE3 /* QuestionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
 		4532DB0828FA981500C32418 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4533508C28FC822300BC0AA0 /* AddNewStationView+TextfieldWithTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddNewStationView+TextfieldWithTitle.swift"; sourceTree = "<group>"; };
+		4533508E28FC824400BC0AA0 /* AddNewStationView+TriggerDistanceSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddNewStationView+TriggerDistanceSlider.swift"; sourceTree = "<group>"; };
+		4533509028FC82BA00BC0AA0 /* AddNewStationView+PagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddNewStationView+PagePicker.swift"; sourceTree = "<group>"; };
 		45513FA928EAF2D90064A32E /* HuntListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuntListView.swift; sourceTree = "<group>"; };
 		45513FB428EAFADD0064A32E /* AddHuntView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHuntView.swift; sourceTree = "<group>"; };
 		45513FB628EBD9A60064A32E /* StationsPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsPicker.swift; sourceTree = "<group>"; };
@@ -124,6 +130,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4532DB0A28FC81E600C32418 /* AddNewStationView */ = {
+			isa = PBXGroup;
+			children = (
+				8A52024428E0A21900C49779 /* AddNewStationView.swift */,
+				4533509028FC82BA00BC0AA0 /* AddNewStationView+PagePicker.swift */,
+				4533508E28FC824400BC0AA0 /* AddNewStationView+TriggerDistanceSlider.swift */,
+				4533508C28FC822300BC0AA0 /* AddNewStationView+TextfieldWithTitle.swift */,
+			);
+			path = AddNewStationView;
+			sourceTree = "<group>";
+		};
 		45513FA828EAF2CD0064A32E /* HuntListView */ = {
 			isa = PBXGroup;
 			children = (
@@ -309,7 +326,7 @@
 			children = (
 				8A52024728E0A21900C49779 /* StationsListView.swift */,
 				8AD1768D28E0F14600A12948 /* StationsListRowView.swift */,
-				8A52024428E0A21900C49779 /* AddNewStationView.swift */,
+				4532DB0A28FC81E600C32418 /* AddNewStationView */,
 			);
 			path = StationsListView;
 			sourceTree = "<group>";
@@ -455,12 +472,15 @@
 				452AA85328F69DA300F11BA5 /* LocationAuthorizationOnboardingView.swift in Sources */,
 				F2A056A528DB7957007D7FFF /* LocationProvider.swift in Sources */,
 				45E188C728F5451700A055BD /* AudioPlayer.swift in Sources */,
+				4533508F28FC824400BC0AA0 /* AddNewStationView+TriggerDistanceSlider.swift in Sources */,
 				45513FBE28ECD22C0064A32E /* HuntListDetailView.swift in Sources */,
 				4587B6D328F383C900F10ED8 /* StationModelService.swift in Sources */,
 				8A4C4F9828E1FBFE00721C50 /* RoundedNavigationTitle-ViewModifier.swift in Sources */,
 				8A52024A28E0A21900C49779 /* AddNewStationView.swift in Sources */,
 				45D56EEC28F3F06A0008BC3A /* HuntModelService.swift in Sources */,
+				4533509128FC82BA00BC0AA0 /* AddNewStationView+PagePicker.swift in Sources */,
 				458F90E728EAAEB200F9BE29 /* UserDefaultsKeys.swift in Sources */,
+				4533508D28FC822300BC0AA0 /* AddNewStationView+TextfieldWithTitle.swift in Sources */,
 				458F90E928EAB15500F9BE29 /* Double+Extension.swift in Sources */,
 				8A4C4F9128E1C0F100721C50 /* SettingsView.swift in Sources */,
 				F212393128CA539C006754E3 /* TreasureHuntApp.swift in Sources */,

@@ -7,16 +7,21 @@ import SwiftUI
 import MapKit
 
 struct AddNewStationView: View {
-  private var stationToEdit: Station?
-  @ObservedResults(Station.self) private var realmStations
   @EnvironmentObject private var locationProvider: LocationProvider
   @Environment(\.dismiss) private var dismiss
+
+  private var stationToEdit: Station?
 
   @State private var region: MKCoordinateRegion = .init()
   @State private var name: String = ""
   @State private var question: String = ""
   @State private var triggerDistance: Double = 25
   @FocusState private var focusedField: Field?
+
+  @State private var selectedPage: Int = 1
+  private var isLastPageSelected: Bool {
+    return selectedPage == 2
+  }
 
   private var saveButtonIsDisabled: Bool {
     return name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
@@ -32,7 +37,6 @@ struct AddNewStationView: View {
       _name = State(initialValue: stationToEdit.name)
       _question = State(initialValue: stationToEdit.question)
       _triggerDistance = State(initialValue: stationToEdit.triggerDistance)
-
       let region = MKCoordinateRegion(center: stationToEdit.coordinate,
                                       latitudinalMeters: mapSpanInMeters,
                                       longitudinalMeters: mapSpanInMeters)
@@ -50,41 +54,38 @@ struct AddNewStationView: View {
 
   var body: some View {
     NavigationView {
-      Form {
-        Section {
-          ZStack(alignment: .topTrailing) {
-            mapView
-            centerMapButton
-          }
+      VStack {
+        switch selectedPage {
+        case 1:
+          positionPage
+            .transition(.move(edge: .leading))
+        case 2:
+          detailsPage
+            .transition(.move(edge: .trailing))
+        default:
+          EmptyView()
         }
-        .listRowBackground(Color.clear)
-        .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
 
-        Section {
-          TextField("Name der Station", text: $name)
-            .focused($focusedField, equals: .name)
-
-          TextField("Aufgabe an der Station", text: $question)
-            .focused($focusedField, equals: .question)
-
-          TriggerDistanceSlider(triggerDistance: $triggerDistance)
-        } footer: {
-          Text("Distanz, die unterschritten werden muss, um diese Station zu aktivieren.")
-        }
+        PagePicker(selectedPage: $selectedPage)
       }
-      .scrollDismissesKeyboard(.interactively)
+      .animation(.default, value: selectedPage)
       .toolbar(content: toolbarContent)
       .navigationBarTitleDisplayMode(.inline)
       .navigationTitle("Neue Station")
-      .onChange(of: triggerDistance) { _ in
-        setMapSpan()
-      }
       .interactiveDismissDisabled()
       .task {
         centerLocation()
         setMapSpan()
       }
     }
+  }
+}
+
+struct AddNewStationView_Previews: PreviewProvider {
+  static let location = CLLocation(latitude: 50, longitude: 50)
+
+  static var previews: some View {
+    AddNewStationView(location: location)
   }
 }
 
@@ -112,7 +113,7 @@ extension AddNewStationView {
   private func reset() {
     self.name.removeAll()
     self.question.removeAll()
-    self.focusedField = .name
+    self.selectedPage = 1
   }
 
   private func setMapSpan() {
@@ -122,11 +123,7 @@ extension AddNewStationView {
   }
 
   private func setLocation() {
-    if let lastStationCoordinate = realmStations.last?.coordinate {
-      region.center = .init(latitude: lastStationCoordinate.latitude, longitude: lastStationCoordinate.longitude)
-    } else {
-      centerLocation()
-    }
+    centerLocation()
   }
 
   private func centerLocation() {
@@ -137,7 +134,7 @@ extension AddNewStationView {
 }
 
 extension AddNewStationView {
-  // MARK: - Views
+  // MARK: - Toolbar
   @ToolbarContentBuilder
   func toolbarContent() -> some ToolbarContent {
     ToolbarItem(placement: .navigationBarLeading) {
@@ -150,28 +147,94 @@ extension AddNewStationView {
     }
   }
 
+  // MARK: - positionPage
+  private var positionPage: some View {
+    VStack(alignment: .leading, spacing: 12) {
+      Text("1. Position")
+        .font(.system(.title, design: .rounded, weight: .semibold))
+      Text("Schiebe die Mitte der Karte an die Stelle, an der diese Station sein soll.")
+        .font(.system(.body, design: .rounded))
+        .foregroundColor(.secondary)
+
+      mapView
+        .overlay(alignment: .topTrailing) {
+          centerMapButton
+        }
+        .onAppear {
+          DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            withAnimation {
+              self.setMapSpan()
+            }
+          }
+        }
+
+      VStack {
+        TriggerDistanceSlider(triggerDistance: $triggerDistance)
+      }
+    }
+    .padding(.horizontal)
+  }
+
+  // MARK: - detailsPage
+  private var detailsPage: some View {
+    VStack(alignment: .leading, spacing: 12) {
+      Text("2. Details")
+        .font(.system(.title, design: .rounded, weight: .semibold))
+      Text("Füge noch einen Namen und eine Aufgabe hinzu.")
+        .lineLimit(2)
+        .font(.system(.body, design: .rounded))
+        .foregroundColor(.secondary)
+
+      VStack(spacing: 16) {
+        TextfieldWithTitle(title: "Name der Station",
+                           placeholder: "z.B. An der alten Mühle",
+                           text: $name,
+                           focusField: _focusedField,
+                           field: .name)
+
+        TextfieldWithTitle(title: "Aufgabe an der Station",
+                           placeholder: "z.B. Finde den größten Stein!",
+                           text: $question,
+                           focusField: _focusedField,
+                           field: .question)
+      }
+      .padding(.vertical, 24)
+
+      Spacer()
+    }
+    .padding(.horizontal)
+    .onAppear {
+      focusedField = .name
+    }
+  }
+}
+
+extension AddNewStationView {
+  // MARK: - MapView
   private var mapView: some View {
     Map(coordinateRegion: $region, interactionModes: [.pan])
       .overlay(
-        Image(systemName: "plus")
-          .accessibilityHidden(true)
-          .allowsHitTesting(false)
-      )
-      .overlay(
-        Circle()
-          .strokeBorder(.tint, lineWidth: 1)
-          .background(Circle().foregroundColor(Color.black.opacity(0.2)))
+        ZStack {
+          Circle()
+            .strokeBorder(.tint, lineWidth: 1)
+            .background(Circle().foregroundColor(Color.black.opacity(0.2)))
+
+          Image(systemName: "plus")
+        }
           .frame(width: 60, height: 60)
           .accessibilityHidden(true)
           .allowsHitTesting(false)
       )
-      .overlay(alignment: .bottom, content: locationCoordinates)
-      .animation(.none, value: focusedField)
-      .onTapGesture(perform: dismissFocus)
-      .frame(minHeight: 100, idealHeight: 300, maxHeight: 300)
+      .overlay(alignment: .bottom) { coordinatesOverlay }
+      .frame(maxHeight: .infinity)
+      .clipShape(RoundedRectangle(cornerRadius: 16))
+      .animation(.none, value: selectedPage)
+      .onChange(of: triggerDistance) { _ in
+        setMapSpan()
+      }
   }
 
-  func locationCoordinates() -> some View {
+  private var coordinatesOverlay: some View {
     Text("\(region.center.latitude), \(region.center.longitude)")
       .font(.footnote)
       .monospacedDigit()
@@ -198,38 +261,5 @@ extension AddNewStationView {
 extension AddNewStationView {
   enum Field: Hashable {
     case name, question
-  }
-}
-
-extension AddNewStationView {
-  struct TriggerDistanceSlider: View {
-    @Binding var triggerDistance: Double
-
-    private let distanceFormatter: LengthFormatter = {
-      let formatter = LengthFormatter()
-      formatter.unitStyle = .short
-      return formatter
-    }()
-
-    private var distanceString: String {
-      distanceFormatter.string(fromMeters: triggerDistance)
-    }
-
-    var body: some View {
-      VStack {
-        Slider(value: $triggerDistance, in: 5...300, step: 5)
-        HStack {
-          Text("Min. Distanz:")
-          Spacer()
-          Text(distanceString)
-            .font(.headline)
-        }
-        .accessibilityHidden(true)
-      }
-      .padding(.vertical)
-      .accessibilityLabel("Distanzslider")
-      .accessibilityValue(Text("Minimale Distanz: \(distanceString)"))
-      .accessibilityHint("Legt fest, ab welcher Entfernung eine Station ausgelöst wird.")
-    }
   }
 }
