@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		452AA85328F69DA300F11BA5 /* LocationAuthorizationOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452AA85228F69DA300F11BA5 /* LocationAuthorizationOnboardingView.swift */; };
 		4530A10D28F14BCD00F05AE3 /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530A10C28F14BCD00F05AE3 /* QuestionView.swift */; };
+		4532DB0728FA981500C32418 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4532DB0928FA981500C32418 /* Localizable.strings */; };
 		45513FAA28EAF2D90064A32E /* HuntListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45513FA928EAF2D90064A32E /* HuntListView.swift */; };
 		45513FB528EAFADD0064A32E /* AddHuntView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45513FB428EAFADD0064A32E /* AddHuntView.swift */; };
 		45513FB728EBD9A60064A32E /* StationsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45513FB628EBD9A60064A32E /* StationsPicker.swift */; };
@@ -61,6 +62,7 @@
 /* Begin PBXFileReference section */
 		452AA85228F69DA300F11BA5 /* LocationAuthorizationOnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationAuthorizationOnboardingView.swift; sourceTree = "<group>"; };
 		4530A10C28F14BCD00F05AE3 /* QuestionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
+		4532DB0828FA981500C32418 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		45513FA928EAF2D90064A32E /* HuntListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuntListView.swift; sourceTree = "<group>"; };
 		45513FB428EAFADD0064A32E /* AddHuntView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHuntView.swift; sourceTree = "<group>"; };
 		45513FB628EBD9A60064A32E /* StationsPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsPicker.swift; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 		4587B6C628F329FA00F10ED8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4532DB0928FA981500C32418 /* Localizable.strings */,
 				45B7EFE828F4BDE1006AE0FB /* Sounds */,
 			);
 			path = Resources;
@@ -433,6 +436,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4532DB0728FA981500C32418 /* Localizable.strings in Resources */,
 				45B7EFEC28F4BDE1006AE0FB /* success.wav in Resources */,
 				F212393828CA539E006754E3 /* Preview Assets.xcassets in Resources */,
 				F212393528CA539E006754E3 /* Assets.xcassets in Resources */,
@@ -494,6 +498,17 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		4532DB0928FA981500C32418 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4532DB0828FA981500C32418 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		F212393928CA539E006754E3 /* Debug */ = {
