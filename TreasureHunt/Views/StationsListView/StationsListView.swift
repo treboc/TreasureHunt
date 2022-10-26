@@ -46,7 +46,6 @@ extension StationsListView {
   @ToolbarContentBuilder
   func toolbarContent() -> some ToolbarContent {
     ToolbarItem(placement: .navigationBarTrailing) {
-//      Button(iconName: "plus", action: viewModel.showNewStationSheet)
       Button(iconName: "plus") {
         newStationSheetIsShown.toggle()
       }
@@ -70,6 +69,9 @@ extension StationsListView {
     List {
       ForEach(stations, id: \._id) { station in
         StationsListRowView(station: station)
+          .onTapGesture {
+            stationToEdit = station
+          }
           .swipeActions(edge: .trailing, allowsFullSwipe: true, content: {
             HStack {
               swipeToDelete(station)
@@ -77,6 +79,13 @@ extension StationsListView {
             }
           })
       }
+    }
+    .safeAreaInset(edge: .bottom) {
+      Text("Tipp: Tippe eine Station in der Liste an, um sie zu bearbeiten.")
+        .foregroundColor(.secondary)
+        .font(.footnote)
+        .italic()
+        .padding()
     }
   }
 

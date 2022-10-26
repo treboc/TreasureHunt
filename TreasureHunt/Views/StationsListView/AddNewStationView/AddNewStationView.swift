@@ -73,8 +73,10 @@ struct AddNewStationView: View {
       .navigationBarTitleDisplayMode(.inline)
       .navigationTitle("Neue Station")
       .interactiveDismissDisabled()
+      .onAppear {
+        locationProvider.locationManager.requestWhenInUseAuthorization()
+      }
       .task {
-        centerLocation()
         setMapSpan()
       }
     }
@@ -213,18 +215,18 @@ extension AddNewStationView {
   // MARK: - MapView
   private var mapView: some View {
     Map(coordinateRegion: $region, interactionModes: [.pan])
-      .overlay(
+      .overlay {
         ZStack {
           Circle()
             .strokeBorder(.tint, lineWidth: 1)
             .background(Circle().foregroundColor(Color.black.opacity(0.2)))
-
+          
           Image(systemName: "plus")
         }
-          .frame(width: 60, height: 60)
-          .accessibilityHidden(true)
-          .allowsHitTesting(false)
-      )
+        .frame(width: 60, height: 60)
+        .accessibilityHidden(true)
+        .allowsHitTesting(false)
+      }
       .overlay(alignment: .bottom) { coordinatesOverlay }
       .frame(maxHeight: .infinity)
       .clipShape(RoundedRectangle(cornerRadius: 16))

@@ -38,6 +38,9 @@ extension AddNewStationView {
           .font(.caption)
           .padding(.top, 5)
       }
+      .onChange(of: triggerDistance) { _ in
+        HapticManager.shared.impact(style: .soft)
+      }
       .padding(.vertical)
       .accessibilityLabel("Distanzslider")
       .accessibilityValue(Text("Minimale Distanz: \(distanceString)"))
