@@ -15,7 +15,7 @@ struct AddHuntView: View {
   @State private var name: String = ""
   @State private var chosenStations: [Station] = []
   @State private var region: MKCoordinateRegion = .init()
-  @State private var mapIsShown: Bool = true
+  @State private var mapIsShown: Bool = false
 
   private var saveButtonIsDisabled: Bool {
     return name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || chosenStations.isEmpty
@@ -127,7 +127,7 @@ extension AddHuntView {
       .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
     } else {
       HStack {
-        Text("Übersicht")
+        Text("Übersicht der Stationen")
         Spacer()
         Image(systemName: "chevron.down")
           .rotationEffect(Angle(degrees: mapIsShown ? 0 : -90))
