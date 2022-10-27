@@ -7,10 +7,13 @@
 
 import SwiftUI
 import MapKit
+import RealmSwift
 
 struct AddHuntView: View {
-  @Environment(\.dismiss) private var dismiss
   @EnvironmentObject private var locationProvider: LocationProvider
+  @Environment(\.dismiss) private var dismiss
+
+  private var huntToEdit: Hunt?
 
   @State private var name: String = ""
   @State private var chosenStations: [Station] = []
@@ -21,6 +24,15 @@ struct AddHuntView: View {
     return name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || chosenStations.isEmpty
   }
 
+  init(huntToEdit: Hunt? = nil) {
+    if let huntToEdit {
+      self.huntToEdit = huntToEdit
+      _name = State(initialValue: huntToEdit.name)
+      let stations: [Station] = Array(huntToEdit.stations)
+      _chosenStations = State(initialValue: stations)
+    }
+  }
+
   var body: some View {
     NavigationView {
       Form {
@@ -29,7 +41,7 @@ struct AddHuntView: View {
         }
 
         Section {
-          NavigationLink("Station hinzufügen") {
+          NavigationLink("Stationen bearbeiten") {
             StationsPicker(chosenStations: $chosenStations)
           }
         }
@@ -68,8 +80,12 @@ struct AddHuntView_Previews: PreviewProvider {
 
 extension AddHuntView {
   func saveButtonTapped(onCompletion: @escaping (() -> Void)) {
-    let hunt = Hunt(name: name)
-    HuntModelService.add(hunt, with: chosenStations)
+    if let huntToEdit {
+      try? HuntModelService.update(huntToEdit, with: name, and: chosenStations)
+    } else {
+      let hunt = Hunt(name: name)
+      HuntModelService.add(hunt, with: chosenStations)
+    }
     dismiss()
   }
 

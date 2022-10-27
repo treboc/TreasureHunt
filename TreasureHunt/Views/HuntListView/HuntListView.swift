@@ -28,7 +28,9 @@ struct HuntListView: View {
           }
         }
       }
-      .sheet(isPresented: $newHuntViewIsShown, content: AddHuntView.init)
+      .sheet(isPresented: $newHuntViewIsShown) {
+        AddHuntView()
+      }
       .toolbar(content: toolbarContent)
       .navigationTitle("Jagden")
     }

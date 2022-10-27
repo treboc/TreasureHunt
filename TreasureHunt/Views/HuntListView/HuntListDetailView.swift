@@ -49,7 +49,7 @@ struct HuntListDetailView: View {
       AddNewStationView(stationToEdit: station)
     }
     .sheet(item: $huntToEdit) { hunt in
-      AddHuntView()
+      AddHuntView(huntToEdit: hunt)
     }
   }
 }
