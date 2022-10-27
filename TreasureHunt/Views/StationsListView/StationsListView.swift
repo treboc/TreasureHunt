@@ -9,6 +9,7 @@ import MapKit
 struct StationsListView: View {
   @ObservedResults(Station.self) private var stations
   @EnvironmentObject private var locationProvider: LocationProvider
+  @AppStorage(UserDefaultsKeys.Tooltips.editStations) private var editStationTooltipIsShown = true
   @State private var newStationSheetIsShown: Bool = false
   @State private var stationToEdit: Station? = nil
 
@@ -81,11 +82,28 @@ extension StationsListView {
       }
     }
     .safeAreaInset(edge: .bottom) {
-      Text("Tipp: Tippe eine Station in der Liste an, um sie zu bearbeiten.")
-        .foregroundColor(.secondary)
-        .font(.footnote)
-        .italic()
-        .padding()
+      if editStationTooltipIsShown {
+        Text("Tipp: Tippe eine Station in der Liste an, um sie zu bearbeiten.")
+          .foregroundColor(.secondary)
+          .font(.footnote)
+          .italic()
+          .padding()
+          .background(
+            RoundedRectangle(cornerRadius: 16)
+              .fill(.ultraThinMaterial)
+              .shadow(radius: 8)
+              .overlay(alignment: .topTrailing) {
+                Image(systemName: "x.circle.fill")
+                  .font(.title2)
+                  .foregroundColor(.gray)
+                  .offset(x: 10, y: -10)
+                  .onTapGesture {
+                    editStationTooltipIsShown = false
+                  }
+              }
+          )
+          .padding()
+      }
     }
   }
 
