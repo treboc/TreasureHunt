@@ -12,6 +12,8 @@ struct StationsListView: View {
   @AppStorage(UserDefaultsKeys.Tooltips.editStations) private var editStationTooltipIsShown = true
   @State private var newStationSheetIsShown: Bool = false
   @State private var stationToEdit: Station? = nil
+  @State private var stationDeletionAlertIsShown: Bool = false
+  @State private var stationToDelete: Station? = nil
 
   var body: some View {
     NavigationView {
@@ -83,35 +85,55 @@ extension StationsListView {
     }
     .safeAreaInset(edge: .bottom) {
       if editStationTooltipIsShown {
-        Text("Tipp: Tippe eine Station in der Liste an, um sie zu bearbeiten.")
-          .foregroundColor(.secondary)
-          .font(.footnote)
-          .italic()
-          .padding()
-          .background(
-            RoundedRectangle(cornerRadius: 16)
-              .fill(.ultraThinMaterial)
-              .shadow(radius: 8)
-              .overlay(alignment: .topTrailing) {
-                Image(systemName: "x.circle.fill")
-                  .font(.title2)
-                  .foregroundColor(.gray)
-                  .offset(x: 10, y: -10)
-                  .onTapGesture {
-                    editStationTooltipIsShown = false
-                  }
-              }
-          )
-          .padding()
+        editStationTooltipView
       }
     }
+    .alert("Station löschen", isPresented: $stationDeletionAlertIsShown, actions: {
+      Button("Abbrechen", role: .cancel) {}
+        .tint(Color.accentColor)
+      Button("Ja, ich bin mir sicher.", role: .destructive) {
+        if let stationToDelete {
+          withAnimation {
+            $stations.remove(stationToDelete)
+          }
+        }
+      }
+    }, message: {
+      Text("Die Station wird gelöscht und aus allen Jagden entfernt, in der diese Station geplant ist. Dies kann nicht rückgängig gemacht werden.\nBist du dir sicher?")
+    })
+    .animation(.default, value: stationDeletionAlertIsShown)
+  }
+
+  private var editStationTooltipView: some View {
+    Text("Tipp: Tippe eine Station in der Liste an, um sie zu bearbeiten.")
+      .foregroundColor(.secondary)
+      .font(.footnote)
+      .italic()
+      .padding()
+      .background(
+        RoundedRectangle(cornerRadius: 16)
+          .fill(.ultraThinMaterial)
+          .shadow(radius: 8)
+          .overlay(alignment: .topTrailing) {
+            Image(systemName: "x.circle.fill")
+              .font(.title2)
+              .foregroundColor(.gray)
+              .offset(x: 10, y: -10)
+              .onTapGesture {
+                editStationTooltipIsShown = false
+              }
+          }
+      )
+      .padding()
   }
 
   private func swipeToDelete(_ station: Station) -> some View {
     Button {
-      $stations.remove(station)
+      stationToDelete = station
+      stationDeletionAlertIsShown = true
     } label: {
       Label("Löschen", systemImage: "trash")
+        .labelStyle(.iconOnly)
     }
     .tint(.red)
   }
@@ -121,6 +143,7 @@ extension StationsListView {
       stationToEdit = station
     } label: {
       Label("Edit", systemImage: "square.and.pencil")
+        .labelStyle(.iconOnly)
     }
     .tint(.orange)
   }

@@ -38,13 +38,12 @@ struct HuntModelService {
     }
   }
 
-  static func delete(_ atOffset: IndexSet) {
-    guard let firstIndex = atOffset.first else { return }
+  static func delete(at index: Int) {
     do {
       let realm = try Realm()
       let allHunts = realm.objects(Hunt.self)
       try realm.write {
-        realm.delete(allHunts[firstIndex])
+        realm.delete(allHunts[index])
       }
     } catch {
       print(error)

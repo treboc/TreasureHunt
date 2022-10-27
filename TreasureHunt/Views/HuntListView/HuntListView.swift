@@ -11,6 +11,8 @@ import SwiftUI
 struct HuntListView: View {
   @ObservedResults(Hunt.self) private var hunts
   @State private var newHuntViewIsShown: Bool = false
+  @State private var huntDeletionAlertIsShown: Bool = false
+  @State private var huntToDelete: Hunt? = nil
 
   var body: some View {
     NavigationStack {
@@ -23,11 +25,26 @@ struct HuntListView: View {
               NavigationLink(destination: HuntListDetailView(hunt: hunt)) {
                 HuntListRowView(hunt: hunt)
               }
+              .swipeActions {
+                swipeToDelete(hunt)
+              }
             }
-            .onDelete(perform: HuntModelService.delete)
           }
         }
       }
+      .alert("Jagd löschen", isPresented: $huntDeletionAlertIsShown, actions: {
+        Button("Abbrechen", role: .cancel) {}
+        Button("Ja, ich bin mir sicher.", role: .destructive) {
+          if let huntToDelete {
+            withAnimation {
+              $hunts.remove(huntToDelete)
+            }
+          }
+        }
+      }, message: {
+        Text("Die Jagd wird gelöscht. Dies kann nicht rückgängig gemacht werden. Bist du dir sicher?")
+      })
+      .animation(.default, value: huntDeletionAlertIsShown)
       .sheet(isPresented: $newHuntViewIsShown) {
         AddHuntView()
       }
@@ -40,6 +57,19 @@ struct HuntListView: View {
 struct HuntListView_Previews: PreviewProvider {
   static var previews: some View {
     HuntListView()
+  }
+}
+
+extension HuntListView {
+  private func swipeToDelete(_ hunt: Hunt) -> some View {
+    Button {
+      huntToDelete = hunt
+      huntDeletionAlertIsShown = true
+    } label: {
+      Label("Löschen", systemImage: "trash")
+        .labelStyle(.iconOnly)
+    }
+    .tint(.red)
   }
 }
 
