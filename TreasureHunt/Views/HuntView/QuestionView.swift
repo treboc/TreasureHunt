@@ -13,7 +13,7 @@ struct QuestionView: View {
     VStack {
       Text("\(station.name) erreicht!")
         .font(.system(.largeTitle, design: .rounded, weight: .semibold))
-        .frame(maxWidth: .infinity, alignment: .leading)
+        .frame(maxWidth: .infinity, alignment: .center)
         .padding(.horizontal)
 
       Spacer()
