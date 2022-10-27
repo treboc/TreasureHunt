@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-extension AddNewStationView {
+extension AddStationView {
   struct PagePicker: View {
     @Binding var selectedPage: Int
 
@@ -17,7 +17,7 @@ extension AddNewStationView {
           Image(systemName: selectedPage == 1 ? "mappin" : "chevron.backward")
             .frame(width: 16, height: 16)
           if selectedPage == 1 {
-            Text("Position")
+            Text(L10n.AddStationView.PagePicker.position)
           }
         }
         .padding(10)
@@ -31,7 +31,7 @@ extension AddNewStationView {
           Image(systemName: selectedPage == 2 ? "magnifyingglass" : "chevron.forward")
             .frame(width: 16, height: 16)
           if selectedPage == 2 {
-            Text("Details")
+            Text(L10n.AddStationView.PagePicker.details)
           }
         }
         .padding(10)

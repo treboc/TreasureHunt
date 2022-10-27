@@ -46,7 +46,7 @@ struct HuntListDetailView: View {
     }
     .toolbar(.hidden, for: .tabBar)
     .sheet(item: $stationToEdit) { station in
-      AddNewStationView(stationToEdit: station)
+      AddStationView(stationToEdit: station)
     }
     .sheet(item: $huntToEdit) { hunt in
       AddHuntView(huntToEdit: hunt)
@@ -58,7 +58,7 @@ extension HuntListDetailView {
   private var title: some View {
     HStack(alignment: .top) {
       VStack(alignment: .leading, spacing: 0) {
-        Text("Name der Jagd".uppercased())
+        Text(L10n.HuntListDetailView.huntName.uppercased())
           .font(.system(.caption, design: .rounded, weight: .regular))
           .foregroundColor(.secondary)
       }
@@ -66,7 +66,7 @@ extension HuntListDetailView {
       .frame(maxWidth: .infinity, alignment: .leading)
 
       VStack(alignment: .trailing, spacing: 0) {
-        Text("Erstellt am".uppercased())
+        Text(L10n.HuntListDetailView.createdAt.uppercased())
           .font(.system(.caption, design: .rounded, weight: .regular))
           .foregroundColor(.secondary)
 
@@ -79,7 +79,7 @@ extension HuntListDetailView {
   }
 
   private var startHuntButton: some View {
-    Button("Jagd starten") {
+    Button(L10n.HuntListDetailView.startHuntButtonTitle) {
       withAnimation {
         huntIsStarted = true
       }
@@ -97,8 +97,8 @@ extension HuntListDetailView {
       Text("Diese Jagd hat keine Stationen, bitte füge zuerst mindestens eine hinzu.")
         .font(.system(.body, design: .rounded))
         .foregroundColor(.red)
-      Button("Jagd bearbeiten") {
-        //
+      Button(L10n.HuntListDetailView.noStationsEditHuntButtonTitle) {
+        huntToEdit = hunt
       }
       .buttonStyle(.bordered)
       .controlSize(.regular)
@@ -142,7 +142,7 @@ extension HuntListDetailView {
       if let distance = locationProvider.distanceTo(station.location) {
         return distance.asDistance()
       } else {
-        return "Distanz N/A"
+        return "N/A"
       }
     }
 
@@ -150,7 +150,7 @@ extension HuntListDetailView {
       VStack(alignment: .leading, spacing: 10) {
         // title
         VStack(alignment: .leading, spacing: 2) {
-          Text("Name der Station".localizedUppercase)
+          Text(L10n.HuntListDetailRowView.stationName.localizedUppercase)
             .font(.system(.caption2, design: .rounded))
             .foregroundColor(.secondary)
 
@@ -162,7 +162,7 @@ extension HuntListDetailView {
 
         // distance to station
         VStack(alignment: .leading, spacing: 2) {
-          Text("Distanz von hier:".localizedUppercase)
+          Text(L10n.HuntListDetailRowView.distanceFromHere.localizedUppercase)
             .font(.system(.caption2, design: .rounded))
             .foregroundColor(.secondary)
 
@@ -173,7 +173,7 @@ extension HuntListDetailView {
         // question & answer
         if station.question.isEmpty == false {
           VStack(alignment: .leading, spacing: 2) {
-            Text("Aufgabe".localizedUppercase)
+            Text(L10n.HuntListDetailRowView.question.localizedUppercase)
               .font(.system(.caption2, design: .rounded))
               .foregroundColor(.secondary)
 

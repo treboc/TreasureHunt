@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct AppearancePicker: View {
-  @EnvironmentObject var appearanceManager: AppearanceManager
+ @EnvironmentObject var appearanceManager: AppearanceManager
 
-  var body: some View {
-    Picker("Farbschema", selection: $appearanceManager.appearance) {
-      ForEach(AppearanceManager.Appearance.allCases, id: \.self) {
-        Text($0.title)
-      }
-    }
-    .pickerStyle(.menu)
-    .accessibilityElement()
-    .accessibilityLabel(Text("Farbschema, \(appearanceManager.appearance.title)"))
+ var body: some View {
+  Picker(L10n.SettingsView.AppearancePicker.title, selection: $appearanceManager.appearance) {
+   ForEach(AppearanceManager.Appearance.allCases, id: \.self) {
+    Text($0.title)
+   }
   }
+  .pickerStyle(.menu)
+  .accessibilityElement()
+  .accessibilityLabel(Text("Farbschema, \(appearanceManager.appearance.title)"))
+ }
 }

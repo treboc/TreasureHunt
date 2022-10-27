@@ -1,0 +1,141 @@
+/* 
+  Localizable.strings
+  TreasureHunt
+
+  Created by Marvin Lee Kobert on 15.10.22.
+  
+*/
+// SimpleConstants
+"simpleConstants.hunt" = "Jagden";
+"simpleConstants.hunts" = "Jagd";
+"simpleConstants.station" = "Station";
+"simpleConstants.stations" = "Stationen";
+
+// ButtonTitles
+"btnTitle.delete" = "Löschen";
+"btnTitle.edit" = "Bearbeiten";
+"btnTitle.save" = "Speichern";
+"btnTitle.cancel" = "Abbrechen";
+"btnTitle.iAmSure" = "Ja, ich bin sicher.";
+
+// Alerts
+"alert.deleteHunt.title" = "Jagd Löschen";
+"alert.deleteHunt.message" = "Die Jagd wird gelöscht. Dies kann nicht rückgängig gemacht werden. Bist du dir sicher?";
+"alert.deleteStation.title" = "Station Löschen";
+"alert.deleteStation.message" = "Die ausgewählte Station wird gelöscht und aus jeder Jagd entfernt, in der sie genutzt wird. Das kann nicht rückgängig gemacht werden. Bist du sicher?"; //
+
+// A11yLabels
+"a11yLabel.createHunt" = "Jagd Erstellen";
+
+// MainTabView
+"mainTabView.tabItem.huntList" = "Jagden";
+"mainTabView.tabItem.stationList" = "Stationen";
+"mainTabView.tabItem.settings" = "Einstellungen";
+
+// HuntListView
+"huntListView.listPlaceholderText" = "Du hast noch keine Jagd erstellt. Deine erste Jagd kann du erstellen in dem du hier tippst, oder oben rechts auf das \"+\".";
+"huntListView.listPlaceholderButtonTitle" = "Erstelle eine Jagd";
+
+// HuntListRowView
+"huntListRowView.created" = "Erstellt am: ";
+
+// HuntListDetailView
+"huntListDetailView.huntName" = "Name";
+"huntListDetailView.createdAt" = "Erstellt am";
+"huntListDetailView.startHuntButtonTitle" = "Jagd starten";
+"huntListDetailView.noStationsPlaceholderText" = "Diese Jagd hat keine Stationen, bitte füge zuerst mindestens eine hinzu.";
+"huntListDetailView.noStationsEditHuntButtonTitle" = "Jagd Bearbeiten";
+
+"huntListDetailRowView.stationName" = "Name der Station";
+"huntListDetailRowView.distanceFromHere" = "Distanz:";
+"huntListDetailRowView.question" = "Aufgabe";
+
+// AddHuntView
+"addHuntView.name" = "Name der Jagd";
+"addHuntView.namePlaceholder" = "Kindergeburtstag 🎁";
+"addHuntView.editStations" = "Stationen bearbeiten";
+"addHuntView.chosenStations %@" = "Ausgewählte Stationen (%@ / 50)";
+"addHuntView.noChosenStations" = "Noch keine Station ausgewählt";
+"addHuntView.navTitle" = "Neue Jagd";
+"addHuntView.overview" = "Übersicht";
+"addHuntView.stationsOverview" = "Übersicht über alle Stationen";
+
+// StationsPicker
+"stationsPicker.navTitle" = "Wähle Stationen";
+"stationsPicker.addStationButtonTitle" = "Station erstellen";
+"stationsPicker.noChosenStations" = "Noch keine Station gewählt";
+"stationsPicker.availableStations" = "Verfügbare Stationen";
+
+// StationsListView
+"stationsListView.navTitle" = "Stationen";
+"stationsListView.listPlaceholderText" = "Du hast noch keine Station erstellt. Deine erste Station kann du erstellen in dem du hier tippst, oder oben rechts auf das \"+\".";
+"stationsListView.listPlaceholderButtonTitle" = "Erstelle eine Station";
+"stationsListView.editStationTooltip" = "Tipp: Tippe eine Station in der Liste an, um sie zu bearbeiten.";
+
+// StationsListRowView
+"stationsListRowView.noQuestion" = "Zu dieser Station gibt es keine Aufgabe.";
+
+// AddStationView
+"addStationView.navTitle" = "Neue Station";
+"addStationView.positionPage.title" = "1. Position";
+"addStationView.positionPage.description" = "Schiebe die Mitte der Karte an die Stelle, an der diese Station sein soll.";
+"addStationView.detailPage.title" = "2. Details";
+"addStationView.detailPage.description" = "Füge noch einen Namen und eine Aufgabe hinzu.";
+"addStationView.detailPage.nameTextFieldTitle" = "Name der Station";
+"addStationView.detailPage.nameTextFieldPlaceholder" = "z.B. an der alten Mühle";
+"addStationView.detailPage.questionTextFieldTitle" = "Aufgabe";
+"addStationView.detailPage.questionTextFieldPlaceholder" = "z.B. wie heißt die Hauptstadt der BRD?";
+
+// AddStationView+PagePicker
+"addStationView.pagePicker.position" = "Position";
+"addStationView.pagePicker.details" = "Details";
+
+// AddStationView+TriggerDistanceSlider
+"addStationView.triggerDistanceSlider.minDistance" = "Min. Distanz";
+"addStationView.triggerDistanceSlider.description" = "Distanz, die unterschritten werden muss, um diese Station zu aktivieren.";
+"addStationView.triggerDistanceSlider.a11yLabel" = "Distanzregler";
+"addStationView.triggerDistanceSlider.a11yValue %@" = "Minimale Distanz: %@";
+"addStationView.triggerDistanceSlider.a11yHint" = "Legt fest, ab welcher Entfernung eine Station ausgelöst wird.";
+
+// HuntView
+"huntView.endHuntAlert.title" = "Bist du sicher?";
+"huntView.endHuntAlert.message" = "Das wird die Jagd beenden. Dein Fortschritt ist nicht gespeichert.";
+"huntView.nextStationButtonTitle" = "Nächste Station";
+"huntView.endHuntButtonTitle" = "Jagd Beenden";
+
+// HuntView => TrafficWarningView
+"huntView.trafficWarningView.title" = "Warnung!";
+"huntView.trafficWarningView.message" = "Achte bei der Suche immer auf deine Umgebung und den Verkehr.";
+"huntView.trafficWarningView.buttonTitle" = "Verstanden";
+
+// HuntView => DirectionDistanceView
+"huntView.directionDistanceView.stationOf %@ %@" = "Station %@ von %@.";
+"huntView.directionDistanceView.distanceNA" = "Distanz N/A";
+"huntView.directionDistanceView.stationNameFallback" = "Keine Station";
+
+// HuntView => QuestionView
+"huntView.questionView.reachedStation %@" = "%@ erreicht!";
+"huntView.questionView.question" = "Aufgabe";
+"huntView.questionView.doneButtonTitle" = "Erledigt!";
+
+// SettingsView
+"settingsView.navTitle" = "Einstellungen";
+"settingsView.hapticsToggleTitle" = "Vibration";
+"settingsView.soundToggleTitle" = "Ton";
+"settingsView.idleDimmingToggleTitle" = "Autom. abdunkeln ausschalten";
+"settingsView.idleDimmingToggleDescription" = "Ist diese Option aktiviert, so wird das Display während der Schatzsuche nicht automatisch deaktiviert.";
+
+// SettingsView => AppearancePicker
+"settingsView.appearancePicker.title" = "Farbschema";
+"settingsView.appearancePicker.dark" = "Dunkel";
+"settingsView.appearancePicker.light" = "Hell";
+"settingsView.appearancePicker.system" = "Automatisch";
+
+// SettingsView => ArrowPicker
+"settingsView.arrowPicker.title" = "Pfeilsymbol";
+"settingsView.arrowPicker.arrow" = "Pfeil";
+"settingsView.arrowPicker.triangleFill" = "Dreieck (gefüllt)";
+"settingsView.arrowPicker.triangleOutlined" = "Dreieck";
+"settingsView.arrowPicker.arrowMerged" = "Pfeil (verbunden)";
+"settingsView.arrowPicker.locationNorth" = "Position";
+"settingsView.arrowPicker.locationNorthFill" = "Position (gefüllt)";

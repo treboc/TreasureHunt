@@ -28,10 +28,10 @@ final class HuntManager: ObservableObject {
     return currentStationIndex + 1 == hunt.stations.count
   }
 
-  var currentStationNumber: Int? {
+  var currentStationNumber: Int {
     guard let currentStation = currentStation,
           let currentStationIndex = hunt.stations.firstIndex(of: currentStation)
-    else { return nil }
+    else { return 0 }
     return currentStationIndex + 1
   }
 

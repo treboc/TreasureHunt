@@ -22,12 +22,12 @@ struct SettingsView: View {
           hapticsToggle
           idleDimmingToggle
         } footer: {
-          Text("Ist diese Option aktiviert, so wird das Display während der Schatzsuche nicht automatisch deaktiviert.")
+          Text(L10n.SettingsView.idleDimmingToggleDescription)
             .font(.caption)
             .italic()
         }
       }
-      .navigationTitle("Einstellungen")
+      .navigationTitle(L10n.SettingsView.navTitle)
       .roundedNavigationTitle()
     }
   }
@@ -41,14 +41,14 @@ struct SettingsView_Previews: PreviewProvider {
 
 extension SettingsView {
   private var hapticsToggle: some View {
-    Toggle("Vibration", isOn: $hapticsActivated)
+    Toggle(L10n.SettingsView.hapticsToggleTitle, isOn: $hapticsActivated)
   }
 
   private var soundsToggle: some View {
-    Toggle("Sound", isOn: $soundsActivated)
+    Toggle(L10n.SettingsView.soundToggleTitle, isOn: $soundsActivated)
   }
 
   private var idleDimmingToggle: some View {
-    Toggle("Display aktiv lassen", isOn: $idleDimmingDisabled)
+    Toggle(L10n.SettingsView.idleDimmingToggleTitle, isOn: $idleDimmingDisabled)
   }
 }

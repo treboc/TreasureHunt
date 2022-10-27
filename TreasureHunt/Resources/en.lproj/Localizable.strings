@@ -5,3 +5,137 @@
   Created by Marvin Lee Kobert on 15.10.22.
   
 */
+// SimpleConstants
+"simpleConstants.hunt" = "Hunts";
+"simpleConstants.hunts" = "Hunt";
+"simpleConstants.station" = "Station";
+"simpleConstants.stations" = "Stations";
+
+// ButtonTitles
+"btnTitle.delete" = "Delete";
+"btnTitle.edit" = "Edit";
+"btnTitle.save" = "Save";
+"btnTitle.cancel" = "Cancel";
+"btnTitle.iAmSure" = "Yes, I'm sure.";
+
+// Alerts
+"alert.deleteHunt.title" = "Delete Hunt";
+"alert.deleteHunt.message" = "The selected hunt will be deleted. This cannot be undone. Are you sure?";
+"alert.deleteStation.title" = "Delete Station";
+"alert.deleteStation.message" = "The selected station will be deleted and removed from any hunt that used this station. This cannot be undone. Are you sure?"; //
+
+// A11yLabels
+"a11yLabel.createHunt" = "Create Hunt";
+
+// MainTabView
+"mainTabView.tabItem.huntList" = "Hunts";
+"mainTabView.tabItem.stationList" = "Stations";
+"mainTabView.tabItem.settings" = "Settings";
+
+// HuntListView
+"huntListView.listPlaceholderText" = "You've not added any hunt yet. To create your first hunt, tap here or the \"+\" in the top right corner.";
+"huntListView.listPlaceholderButtonTitle" = "Create a Hunt";
+
+// HuntListRowView
+"huntListRowView.created" = "Created: ";
+
+// HuntListDetailView
+"huntListDetailView.huntName" = "Name";
+"huntListDetailView.createdAt" = "Created On";
+"huntListDetailView.startHuntButtonTitle" = "Start Hunt";
+"huntListDetailView.noStationsPlaceholderText" = "This hunt has no stations yet, please at atleast one.";
+"huntListDetailView.noStationsEditHuntButtonTitle" = "Edit Hunt";
+
+"huntListDetailRowView.stationName" = "Stations Name";
+"huntListDetailRowView.distanceFromHere" = "Distance:";
+"huntListDetailRowView.question" = "Question";
+
+// AddHuntView
+"addHuntView.name" = "Name of the Hunt";
+"addHuntView.namePlaceholder" = "Kids Birthday Party 🎁";
+"addHuntView.editStations" = "Edit Stations";
+"addHuntView.chosenStations %@" = "Chosen Stations (%@ / 50)";
+"addHuntView.noChosenStations" = "No Stations Chosen";
+"addHuntView.navTitle" = "New Hunt";
+"addHuntView.overview" = "Overview";
+"addHuntView.stationsOverview" = "Overview of all Stations";
+
+// StationsPicker
+"stationsPicker.navTitle" = "Stations Picker";
+"stationsPicker.addStationButtonTitle" = "Create Station";
+"stationsPicker.noChosenStations" = "No Station Chosen Yet";
+"stationsPicker.availableStations" = "Available Stations";
+
+// StationsListView
+"stationsListView.navTitle" = "Stations";
+"stationsListView.listPlaceholderText" = "You've not added any station yet. To create your first station, tap here or the \"+\" in the top right corner.";
+"stationsListView.listPlaceholderButtonTitle" = "Create a Station";
+"stationsListView.editStationTooltip" = "Tip: Tap on a station to show an edit sheet for this station.";
+
+// StationsListRowView
+"stationsListRowView.noQuestion" = "No question on this station.";
+
+// AddStationView
+"addStationView.navTitle" = "New Station";
+"addStationView.positionPage.title" = "1. Position";
+"addStationView.positionPage.description" = "Move the map, so that the center is at this point where the station sould be.";
+"addStationView.detailPage.title" = "2. Details";
+"addStationView.detailPage.description" = "Add a name and a question.";
+"addStationView.detailPage.nameTextFieldTitle" = "Name of the Station";
+"addStationView.detailPage.nameTextFieldPlaceholder" = "z.B. At the old mill";
+"addStationView.detailPage.questionTextFieldTitle" = "Question";
+"addStationView.detailPage.questionTextFieldPlaceholder" = "z.B. what's the capitol of the US?";
+
+// AddStationView+PagePicker
+"addStationView.pagePicker.position" = "Position";
+"addStationView.pagePicker.details" = "Details";
+
+// AddStationView+TriggerDistanceSlider
+"addStationView.triggerDistanceSlider.minDistance" = "Min. Distance";
+"addStationView.triggerDistanceSlider.description" = "Distance to the station, that must be fallen short to trigger the station.";
+"addStationView.triggerDistanceSlider.a11yLabel" = "Distance Slider";
+"addStationView.triggerDistanceSlider.a11yValue %@" = "Minimum Distance: %@";
+"addStationView.triggerDistanceSlider.a11yHint" = "Defines from which distance a station is triggered.";
+
+// HuntView
+"huntView.endHuntAlert.title" = "Are you sure?";
+"huntView.endHuntAlert.message" = "That will end the hunt. Your progress won't be saved.";
+"huntView.nextStationButtonTitle" = "Next Station";
+"huntView.endHuntButtonTitle" = "End Hunt";
+
+// HuntView => TrafficWarningView
+"huntView.trafficWarningView.title" = "Caution!";
+"huntView.trafficWarningView.message" = "Always be aware of your surroundings and traffic when on a hunt.";
+"huntView.trafficWarningView.buttonTitle" = "Agree";
+
+// HuntView => DirectionDistanceView
+"huntView.directionDistanceView.stationOf %@ %@" = "Station %@ of %@.";
+"huntView.directionDistanceView.distanceNA" = "Distance N/A";
+"huntView.directionDistanceView.stationNameFallback" = "No Station";
+
+// HuntView => QuestionView
+"huntView.questionView.reachedStation %@" = "%@ reached!";
+"huntView.questionView.question" = "Question";
+"huntView.questionView.doneButtonTitle" = "Done!";
+
+// SettingsView
+"settingsView.navTitle" = "Settings";
+"settingsView.hapticsToggleTitle" = "Haptic Feedback";
+"settingsView.soundToggleTitle" = "Sound";
+"settingsView.idleDimmingToggleTitle" = "Disable Display Dimming";
+"settingsView.idleDimmingToggleDescription" = "The display will not shut down while hunting, if this option is activated.";
+
+// SettingsView => AppearancePicker
+"settingsView.appearancePicker.title" = "Color Scheme";
+"settingsView.appearancePicker.dark" = "Dark";
+"settingsView.appearancePicker.light" = "Light";
+"settingsView.appearancePicker.system" = "System";
+
+// SettingsView => ArrowPicker
+"settingsView.arrowPicker.title" = "Arrow Icon";
+"settingsView.arrowPicker.arrow" = "Arrow";
+"settingsView.arrowPicker.triangleFill" = "Triangle (filled)";
+"settingsView.arrowPicker.triangleOutlined" = "Triangle (outlined)";
+"settingsView.arrowPicker.arrowMerged" = "Arrow (merged)";
+"settingsView.arrowPicker.locationNorth" = "Location";
+"settingsView.arrowPicker.locationNorthFill" = "Location (filled)";

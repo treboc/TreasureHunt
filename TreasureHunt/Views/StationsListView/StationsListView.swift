@@ -24,13 +24,13 @@ struct StationsListView: View {
           stationsList
         }
       }
-      .navigationTitle("Stationen")
+      .navigationTitle(L10n.StationsListView.navTitle)
       .roundedNavigationTitle()
       .sheet(isPresented: $newStationSheetIsShown, onDismiss: nil) {
-        AddNewStationView(location: locationProvider.locationManager.location)
+        AddStationView(location: locationProvider.locationManager.location)
       }
       .sheet(item: $stationToEdit) { station in
-        AddNewStationView(stationToEdit: station)
+        AddStationView(stationToEdit: station)
       }
       .toolbar(content: toolbarContent)
     }
@@ -57,10 +57,10 @@ extension StationsListView {
 
   private var noStationsPlaceholder: some View {
     VStack(spacing: 30) {
-      Text("Du hast noch keine Stationen erstellt, aber fang' doch gleich damit an, in dem du hier, oder oben rechts auf das \"+\" tippst.")
+      Text(L10n.StationsListView.listPlaceholderText)
         .multilineTextAlignment(.center)
         .font(.system(.headline, design: .rounded))
-      Button("Erstelle eine Station") { newStationSheetIsShown.toggle() }
+      Button(L10n.StationsListView.listPlaceholderButtonTitle) { newStationSheetIsShown.toggle() }
         .foregroundColor(Color(uiColor: .systemBackground))
         .buttonStyle(.borderedProminent)
         .controlSize(.regular)
@@ -88,10 +88,10 @@ extension StationsListView {
         editStationTooltipView
       }
     }
-    .alert("Station löschen", isPresented: $stationDeletionAlertIsShown, actions: {
-      Button("Abbrechen", role: .cancel) {}
+    .alert(L10n.Alert.DeleteStation.title, isPresented: $stationDeletionAlertIsShown, actions: {
+      Button(L10n.BtnTitle.cancel, role: .cancel) {}
         .tint(Color.accentColor)
-      Button("Ja, ich bin mir sicher.", role: .destructive) {
+      Button(L10n.BtnTitle.iAmSure, role: .destructive) {
         if let stationToDelete {
           withAnimation {
             $stations.remove(stationToDelete)
@@ -99,13 +99,13 @@ extension StationsListView {
         }
       }
     }, message: {
-      Text("Die Station wird gelöscht und aus allen Jagden entfernt, in der diese Station geplant ist. Dies kann nicht rückgängig gemacht werden.\nBist du dir sicher?")
+      Text(L10n.Alert.DeleteStation.message)
     })
     .animation(.default, value: stationDeletionAlertIsShown)
   }
 
   private var editStationTooltipView: some View {
-    Text("Tipp: Tippe eine Station in der Liste an, um sie zu bearbeiten.")
+    Text(L10n.StationsListView.editStationTooltip)
       .foregroundColor(.secondary)
       .font(.footnote)
       .italic()
@@ -132,7 +132,7 @@ extension StationsListView {
       stationToDelete = station
       stationDeletionAlertIsShown = true
     } label: {
-      Label("Löschen", systemImage: "trash")
+      Label(L10n.BtnTitle.delete, systemImage: "trash")
         .labelStyle(.iconOnly)
     }
     .tint(.red)
@@ -142,7 +142,7 @@ extension StationsListView {
     Button {
       stationToEdit = station
     } label: {
-      Label("Edit", systemImage: "square.and.pencil")
+      Label(L10n.BtnTitle.edit, systemImage: "square.and.pencil")
         .labelStyle(.iconOnly)
     }
     .tint(.orange)

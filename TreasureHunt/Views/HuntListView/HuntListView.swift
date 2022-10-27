@@ -32,9 +32,9 @@ struct HuntListView: View {
           }
         }
       }
-      .alert("Jagd löschen", isPresented: $huntDeletionAlertIsShown, actions: {
-        Button("Abbrechen", role: .cancel) {}
-        Button("Ja, ich bin mir sicher.", role: .destructive) {
+      .alert(L10n.Alert.DeleteHunt.message, isPresented: $huntDeletionAlertIsShown, actions: {
+        Button(L10n.BtnTitle.cancel, role: .cancel) {}
+        Button(L10n.BtnTitle.iAmSure, role: .destructive) {
           if let huntToDelete {
             withAnimation {
               $hunts.remove(huntToDelete)
@@ -42,14 +42,14 @@ struct HuntListView: View {
           }
         }
       }, message: {
-        Text("Die Jagd wird gelöscht. Dies kann nicht rückgängig gemacht werden. Bist du dir sicher?")
+        Text(L10n.Alert.DeleteHunt.message)
       })
       .animation(.default, value: huntDeletionAlertIsShown)
       .sheet(isPresented: $newHuntViewIsShown) {
         AddHuntView()
       }
       .toolbar(content: toolbarContent)
-      .navigationTitle("Jagden")
+      .navigationTitle(L10n.SimpleConstants.hunts)
     }
   }
 }
@@ -66,7 +66,7 @@ extension HuntListView {
       huntToDelete = hunt
       huntDeletionAlertIsShown = true
     } label: {
-      Label("Löschen", systemImage: "trash")
+      Label(L10n.BtnTitle.delete, systemImage: "trash")
         .labelStyle(.iconOnly)
     }
     .tint(.red)
@@ -79,19 +79,21 @@ extension HuntListView {
   private func toolbarContent() -> some ToolbarContent {
     ToolbarItem(placement: .navigationBarTrailing) {
       Button(iconName: "plus") { newHuntViewIsShown.toggle() }
-        .accessibilityLabel("Jagd erstellen")
+        .accessibilityLabel(L10n.A11yLabel.createHunt)
     }
   }
 
   private var noHuntsPlaceholder: some View {
     VStack(spacing: 30) {
-      Text("Du hast noch keine Jagd erstellt. Deine erste Jagd kann du erstellen in dem du hier tippst, oder oben rechts auf das \"+\".")
+      Text(L10n.HuntListView.listPlaceholderText)
         .multilineTextAlignment(.center)
         .font(.system(.headline, design: .rounded))
-      Button("Erstelle eine Jagd")  { newHuntViewIsShown.toggle() }
-        .foregroundColor(Color(uiColor: .systemBackground))
-        .buttonStyle(.borderedProminent)
-        .controlSize(.regular)
+      Button(L10n.HuntListView.listPlaceholderButtonTitle) {
+        newHuntViewIsShown.toggle()
+      }
+      .foregroundColor(Color(uiColor: .systemBackground))
+      .buttonStyle(.borderedProminent)
+      .controlSize(.regular)
     }
     .padding(.horizontal, 50)
   }

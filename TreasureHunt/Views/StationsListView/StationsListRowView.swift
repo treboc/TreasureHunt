@@ -18,11 +18,11 @@ struct StationsListRowView: View {
         .fontWeight(.semibold)
 
       if !station.question.isEmpty {
-        Text("**A:** *\(station.question)*")
+        Text("**Q:** *\(station.question)*")
           .foregroundColor(.secondary)
           .font(.caption)
       } else {
-        Text("Keine Aufgabe für diese Station gestellt.")
+        Text(L10n.StationsListRowView.noQuestion)
           .italic()
           .foregroundColor(.secondary)
           .font(.caption)

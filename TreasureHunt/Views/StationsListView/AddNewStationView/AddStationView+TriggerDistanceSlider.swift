@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-extension AddNewStationView {
+extension AddStationView {
   struct TriggerDistanceSlider: View {
     @Binding var triggerDistance: Double
 
@@ -26,14 +26,14 @@ extension AddNewStationView {
         Slider(value: $triggerDistance, in: 5...300, step: 5)
 
         HStack {
-          Text("Min. Distanz:")
+          Text(L10n.AddStationView.TriggerDistanceSlider.minDistance)
           Spacer()
           Text(distanceString)
         }
         .font(.footnote)
         .accessibilityHidden(true)
 
-        Text("Distanz, die unterschritten werden muss, um diese Station zu aktivieren.")
+        Text(L10n.AddStationView.TriggerDistanceSlider.description)
           .foregroundColor(.secondary)
           .font(.caption)
           .padding(.top, 5)
@@ -42,9 +42,9 @@ extension AddNewStationView {
         HapticManager.shared.impact(style: .soft)
       }
       .padding(.vertical)
-      .accessibilityLabel("Distanzslider")
-      .accessibilityValue(Text("Minimale Distanz: \(distanceString)"))
-      .accessibilityHint("Legt fest, ab welcher Entfernung eine Station ausgelöst wird.")
+      .accessibilityLabel(L10n.AddStationView.TriggerDistanceSlider.a11yLabel)
+      .accessibilityValue(Text(L10n.AddStationView.TriggerDistanceSlider.a11yValue(distanceString)))
+      .accessibilityHint(L10n.AddStationView.TriggerDistanceSlider.a11yHint)
     }
   }
 }

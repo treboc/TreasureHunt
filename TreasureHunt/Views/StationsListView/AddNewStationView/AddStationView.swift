@@ -6,7 +6,7 @@ import RealmSwift
 import SwiftUI
 import MapKit
 
-struct AddNewStationView: View {
+struct AddStationView: View {
   @EnvironmentObject private var locationProvider: LocationProvider
   @Environment(\.dismiss) private var dismiss
 
@@ -71,7 +71,7 @@ struct AddNewStationView: View {
       .animation(.default, value: selectedPage)
       .toolbar(content: toolbarContent)
       .navigationBarTitleDisplayMode(.inline)
-      .navigationTitle("Neue Station")
+      .navigationTitle(L10n.AddStationView.navTitle)
       .interactiveDismissDisabled()
       .onAppear {
         locationProvider.locationManager.requestWhenInUseAuthorization()
@@ -87,12 +87,12 @@ struct AddNewStationView_Previews: PreviewProvider {
   static let location = CLLocation(latitude: 50, longitude: 50)
 
   static var previews: some View {
-    AddNewStationView(location: location)
+    AddStationView(location: location)
   }
 }
 
 
-extension AddNewStationView {
+extension AddStationView {
   // MARK: - Methods
   private func saveButtonTapped() {
     if let stationToEdit {
@@ -135,16 +135,16 @@ extension AddNewStationView {
   }
 }
 
-extension AddNewStationView {
+extension AddStationView {
   // MARK: - Toolbar
   @ToolbarContentBuilder
   func toolbarContent() -> some ToolbarContent {
     ToolbarItem(placement: .navigationBarLeading) {
-      Button("Abbrechen", action: dismiss.callAsFunction)
+      Button(L10n.BtnTitle.cancel, action: dismiss.callAsFunction)
     }
 
     ToolbarItem(placement: .navigationBarTrailing) {
-      Button("Speichern", action: saveButtonTapped)
+      Button(L10n.BtnTitle.save, action: saveButtonTapped)
         .disabled(saveButtonIsDisabled)
     }
   }
@@ -152,9 +152,9 @@ extension AddNewStationView {
   // MARK: - positionPage
   private var positionPage: some View {
     VStack(alignment: .leading, spacing: 12) {
-      Text("1. Position")
+      Text(L10n.AddStationView.PositionPage.title)
         .font(.system(.title, design: .rounded, weight: .semibold))
-      Text("Schiebe die Mitte der Karte an die Stelle, an der diese Station sein soll.")
+      Text(L10n.AddStationView.PositionPage.description)
         .font(.system(.body, design: .rounded))
         .foregroundColor(.secondary)
 
@@ -180,22 +180,22 @@ extension AddNewStationView {
   // MARK: - detailsPage
   private var detailsPage: some View {
     VStack(alignment: .leading, spacing: 12) {
-      Text("2. Details")
+      Text(L10n.AddStationView.DetailPage.title)
         .font(.system(.title, design: .rounded, weight: .semibold))
-      Text("Füge noch einen Namen und eine Aufgabe hinzu.")
+      Text(L10n.AddStationView.DetailPage.description)
         .lineLimit(2)
         .font(.system(.body, design: .rounded))
         .foregroundColor(.secondary)
 
       VStack(spacing: 16) {
-        TextfieldWithTitle(title: "Name der Station",
-                           placeholder: "z.B. An der alten Mühle",
+        TextfieldWithTitle(title: L10n.AddStationView.DetailPage.nameTextFieldTitle,
+                           placeholder: L10n.AddStationView.DetailPage.nameTextFieldPlaceholder,
                            text: $name,
                            focusField: _focusedField,
                            field: .name)
 
-        TextfieldWithTitle(title: "Aufgabe an der Station",
-                           placeholder: "z.B. Finde den größten Stein!",
+        TextfieldWithTitle(title: L10n.AddStationView.DetailPage.questionTextFieldTitle,
+                           placeholder: L10n.AddStationView.DetailPage.questionTextFieldPlaceholder,
                            text: $question,
                            focusField: _focusedField,
                            field: .question)
@@ -211,7 +211,7 @@ extension AddNewStationView {
   }
 }
 
-extension AddNewStationView {
+extension AddStationView {
   // MARK: - MapView
   private var mapView: some View {
     Map(coordinateRegion: $region, interactionModes: [.pan])
@@ -260,7 +260,7 @@ extension AddNewStationView {
   }
 }
 
-extension AddNewStationView {
+extension AddStationView {
   enum Field: Hashable {
     case name, question
   }

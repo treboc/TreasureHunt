@@ -36,21 +36,21 @@ struct AddHuntView: View {
   var body: some View {
     NavigationView {
       Form {
-        Section("Name der Jagd") {
-          TextField("Kindergeburtstag 🎁", text: $name)
+        Section(L10n.AddHuntView.name) {
+          TextField(L10n.AddHuntView.namePlaceholder, text: $name)
         }
 
         Section {
-          NavigationLink("Stationen bearbeiten") {
+          NavigationLink(L10n.AddHuntView.editStations) {
             StationsPicker(chosenStations: $chosenStations)
           }
         }
 
         stationOverview
 
-        Section("Gewählte Stationen (\(chosenStations.count) / 50)") {
+        Section(L10n.AddHuntView.chosenStations(chosenStations.count)) {
           if chosenStations.isEmpty {
-            Text("Noch keine Station gewählt.")
+            Text(L10n.AddHuntView.noChosenStations)
               .italic()
               .foregroundColor(.secondary)
           } else {
@@ -63,7 +63,7 @@ struct AddHuntView: View {
         }
       }
       .toolbar(content: toolbarContent)
-      .navigationTitle(name.isEmpty ? "Neue Jagd" : name)
+      .navigationTitle(name.isEmpty ? L10n.AddHuntView.navTitle : name)
       .roundedNavigationTitle()
       .task {
         centerLocation()
@@ -100,11 +100,11 @@ extension AddHuntView {
   @ToolbarContentBuilder
   func toolbarContent() -> some ToolbarContent {
     ToolbarItem(placement: .navigationBarLeading) {
-      Button("Abbrechen", action: dismiss.callAsFunction)
+      Button(L10n.BtnTitle.cancel, action: dismiss.callAsFunction)
     }
 
     ToolbarItem(placement: .navigationBarTrailing) {
-      Button("Speichern") {
+      Button(L10n.BtnTitle.save) {
         saveButtonTapped(onCompletion: dismiss.callAsFunction)
       }
       .disabled(saveButtonIsDisabled)
@@ -127,7 +127,7 @@ extension AddHuntView {
         .frame(height: 300)
       } header: {
         HStack {
-          Text("Übersicht")
+          Text(L10n.AddHuntView.overview)
           Spacer()
           Image(systemName: "chevron.down")
             .rotationEffect(Angle(degrees: mapIsShown ? 0 : -90))
@@ -143,7 +143,7 @@ extension AddHuntView {
       .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
     } else {
       HStack {
-        Text("Übersicht der Stationen")
+        Text(L10n.AddHuntView.stationsOverview)
         Spacer()
         Image(systemName: "chevron.down")
           .rotationEffect(Angle(degrees: mapIsShown ? 0 : -90))

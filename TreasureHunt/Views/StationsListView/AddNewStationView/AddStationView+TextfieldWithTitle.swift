@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-extension AddNewStationView {
+extension AddStationView {
   struct TextfieldWithTitle: View {
     let title: String
     let placeholder: String

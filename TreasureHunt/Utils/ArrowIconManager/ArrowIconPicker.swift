@@ -11,7 +11,7 @@ struct ArrowIconPicker: View {
   @AppStorage("arrowIcon") private var arrowIcon: ArrowIcon = .locationNorthFill
 
   var body: some View {
-    Picker("Pfeil", selection: $arrowIcon) {
+    Picker(L10n.SettingsView.ArrowPicker.title, selection: $arrowIcon) {
       ForEach(ArrowIcon.allCases, id: \.self) { icon in
         Label(icon.name, systemImage: icon.systemImage)
           .labelStyle(.iconOnly)
@@ -35,17 +35,17 @@ extension ArrowIconPicker {
     var name: String {
       switch self {
       case .arrow:
-        return "Pfeil"
+        return L10n.SettingsView.ArrowPicker.arrow
       case .triangleFill:
-        return "Dreieck (gefüllt)"
+        return L10n.SettingsView.ArrowPicker.triangleFill
       case .triangleOutlined:
-        return "Dreieck"
+        return L10n.SettingsView.ArrowPicker.triangleOutlined
       case .arrowMerged:
-        return "Pfeil (verbunden)"
+        return L10n.SettingsView.ArrowPicker.arrowMerged
       case .locationNorth:
-        return "Position"
+        return L10n.SettingsView.ArrowPicker.locationNorth
       case .locationNorthFill:
-        return "Position (gefüllt)"
+        return L10n.SettingsView.ArrowPicker.locationNorthFill
       }
     }
 
