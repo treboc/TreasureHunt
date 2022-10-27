@@ -41,7 +41,7 @@ extension AddNewStationView {
           selectedPage = 2
         }
       }
-      .padding(.vertical)
+      .padding(.bottom)
     }
   }
 }

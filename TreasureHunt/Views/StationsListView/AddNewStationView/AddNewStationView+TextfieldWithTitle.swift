@@ -22,11 +22,13 @@ extension AddNewStationView {
           .font(.caption)
           .padding(.leading)
 
-        TextField(placeholder, text: $text)
+        TextField(placeholder, text: $text, axis: .vertical)
           .focused($focusField, equals: field)
           .padding(.vertical, 10)
           .padding(.horizontal)
           .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 8))
+          .lineLimit(1...10)
+          .scrollDismissesKeyboard(.interactively)
       }
     }
   }
