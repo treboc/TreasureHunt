@@ -5,9 +5,12 @@
 //  Created by Marvin Lee Kobert on 26.09.22.
 //
 
+import RealmSwift
 import SwiftUI
 
 struct MainTabView: View {
+  let realmConfiguration = Realm.Configuration(schemaVersion: 1)
+
   var body: some View {
     TabView {
       HuntListView()
@@ -29,6 +32,7 @@ struct MainTabView: View {
         }
     }
     .toolbarBackground(.visible, for: .tabBar)
+    .environment(\.realmConfiguration, realmConfiguration)
   }
 }
 
