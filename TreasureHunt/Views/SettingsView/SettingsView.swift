@@ -26,6 +26,16 @@ struct SettingsView: View {
             .font(.caption)
             .italic()
         }
+
+        Section("About") {
+          reviewLink
+          NavigationLink("About") {
+            AboutView()
+          }
+          NavigationLink(L10n.SettingsView.LegalNoticeView.navTitle) {
+            LegalNoticeView()
+          }
+        }
       }
       .navigationTitle(L10n.SettingsView.navTitle)
       .roundedNavigationTitle()
@@ -50,5 +60,17 @@ extension SettingsView {
 
   private var idleDimmingToggle: some View {
     Toggle(L10n.SettingsView.idleDimmingToggleTitle, isOn: $idleDimmingDisabled)
+  }
+}
+
+extension SettingsView {
+  private var reviewLink: some View {
+    Link(destination: Constants.Links.reviewURL) {
+      HStack {
+        Text("Rate This App \(Image(systemName: "heart.fill"))")
+        Spacer()
+        Image(systemName: "arrow.up.right")
+      }
+    }
   }
 }
