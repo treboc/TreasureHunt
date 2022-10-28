@@ -32,7 +32,7 @@ struct HuntListView: View {
           }
         }
       }
-      .alert(L10n.Alert.DeleteHunt.message, isPresented: $huntDeletionAlertIsShown, actions: {
+      .alert(L10n.Alert.DeleteHunt.title, isPresented: $huntDeletionAlertIsShown, actions: {
         Button(L10n.BtnTitle.cancel, role: .cancel) {}
         Button(L10n.BtnTitle.iAmSure, role: .destructive) {
           if let huntToDelete {
@@ -98,4 +98,3 @@ extension HuntListView {
     .padding(.horizontal, 50)
   }
 }
-

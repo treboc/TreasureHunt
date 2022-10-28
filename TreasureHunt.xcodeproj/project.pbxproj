@@ -40,6 +40,7 @@
 		45F99CDF290BD36C0050AC6F /* LegalNoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F99CDE290BD36C0050AC6F /* LegalNoticeView.swift */; };
 		45F99CE1290BD3B30050AC6F /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F99CE0290BD3B30050AC6F /* AboutView.swift */; };
 		45F99CE3290BD3CE0050AC6F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F99CE2290BD3CE0050AC6F /* Constants.swift */; };
+		45F99CE5290BFFBF0050AC6F /* HuntListDetailRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F99CE4290BFFBF0050AC6F /* HuntListDetailRowView.swift */; };
 		8A1CBD7628E36EC300E0AE4B /* TrafficWarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1CBD7528E36EC300E0AE4B /* TrafficWarningView.swift */; };
 		8A1CBD7828E3795300E0AE4B /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1CBD7728E3795300E0AE4B /* Color+Extension.swift */; };
 		8A4C4F8F28E1C0E100721C50 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4C4F8E28E1C0E100721C50 /* MainTabView.swift */; };
@@ -102,6 +103,7 @@
 		45F99CDE290BD36C0050AC6F /* LegalNoticeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LegalNoticeView.swift; sourceTree = "<group>"; };
 		45F99CE0290BD3B30050AC6F /* AboutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		45F99CE2290BD3CE0050AC6F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		45F99CE4290BFFBF0050AC6F /* HuntListDetailRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuntListDetailRowView.swift; sourceTree = "<group>"; };
 		8A1CBD7528E36EC300E0AE4B /* TrafficWarningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrafficWarningView.swift; sourceTree = "<group>"; };
 		8A1CBD7728E3795300E0AE4B /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		8A4C4F8E28E1C0E100721C50 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
@@ -160,7 +162,7 @@
 			children = (
 				45513FA928EAF2D90064A32E /* HuntListView.swift */,
 				45513FBB28ECD2070064A32E /* HuntListRowView.swift */,
-				45513FBD28ECD22C0064A32E /* HuntListDetailView.swift */,
+				45F99CE6290BFFD00050AC6F /* HuntListDetailView */,
 				45513FBF28ED68F20064A32E /* AddHuntView */,
 			);
 			path = HuntListView;
@@ -198,6 +200,7 @@
 		4587B6C628F329FA00F10ED8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F212393428CA539E006754E3 /* Assets.xcassets */,
 				45ABD0B8290AA9CF0010E1EF /* L10n.swift */,
 				45ABD0BE290AAD230010E1EF /* Localizable.stringsdict */,
 				4532DB0928FA981500C32418 /* Localizable.strings */,
@@ -248,6 +251,15 @@
 				45B7EFE428F4BCC6006AE0FB /* SoundType.swift */,
 			);
 			path = AudioPlayer;
+			sourceTree = "<group>";
+		};
+		45F99CE6290BFFD00050AC6F /* HuntListDetailView */ = {
+			isa = PBXGroup;
+			children = (
+				45513FBD28ECD22C0064A32E /* HuntListDetailView.swift */,
+				45F99CE4290BFFBF0050AC6F /* HuntListDetailRowView.swift */,
+			);
+			path = HuntListDetailView;
 			sourceTree = "<group>";
 		};
 		8A4C4F9228E1C0F700721C50 /* SettingsView */ = {
@@ -383,7 +395,6 @@
 				F2A056B228DB99B9007D7FFF /* Model */,
 				8A52024F28E0A23200C49779 /* Extensions */,
 				8A4C4F9928E207AA00721C50 /* Utils */,
-				F212393428CA539E006754E3 /* Assets.xcassets */,
 				4587B6C628F329FA00F10ED8 /* Resources */,
 				F212393628CA539E006754E3 /* Preview Content */,
 			);
@@ -520,6 +531,7 @@
 				8AD1768E28E0F14600A12948 /* StationsListRowView.swift in Sources */,
 				8A4C4F8F28E1C0E100721C50 /* MainTabView.swift in Sources */,
 				45B7EFE528F4BCC6006AE0FB /* SoundType.swift in Sources */,
+				45F99CE5290BFFBF0050AC6F /* HuntListDetailRowView.swift in Sources */,
 				8A4C4F9428E1D9BB00721C50 /* Array+Extension.swift in Sources */,
 				8AD1768928E0AE0C00A12948 /* Button+Extension.swift in Sources */,
 				45ABD0B9290AA9CF0010E1EF /* L10n.swift in Sources */,

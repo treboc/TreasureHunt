@@ -19,10 +19,10 @@
 "btnTitle.iAmSure" = "Yes, I'm sure.";
 
 // Alerts
-"alert.deleteHunt.title" = "Delete Hunt";
-"alert.deleteHunt.message" = "The selected hunt will be deleted. This cannot be undone. Are you sure?";
-"alert.deleteStation.title" = "Delete Station";
-"alert.deleteStation.message" = "The selected station will be deleted and removed from any hunt that used this station. This cannot be undone. Are you sure?"; //
+"alert.deleteHunt.title" = "Are you sure?";
+"alert.deleteHunt.message" = "The selected hunt will be deleted. This cannot be undone.";
+"alert.deleteStation.title" = "Are you sure?";
+"alert.deleteStation.message" = "The selected station will be deleted and removed from any hunt that used this station. This cannot be undone."; //
 
 // A11yLabels
 "a11yLabel.createHunt" = "Create Hunt";
