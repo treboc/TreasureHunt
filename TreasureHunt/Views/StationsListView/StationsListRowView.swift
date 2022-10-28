@@ -6,10 +6,11 @@
 //
 
 import MapKit
+import RealmSwift
 import SwiftUI
 
 struct StationsListRowView: View {
-  let station: Station
+  @ObservedRealmObject var station: Station
 
   var body: some View {
     VStack(alignment: .leading, spacing: 5) {
@@ -18,16 +19,24 @@ struct StationsListRowView: View {
         .fontWeight(.semibold)
 
       if !station.question.isEmpty {
-        Text("**A:** *\(station.question)*")
+        Text("**Q:** *\(station.question)*")
           .foregroundColor(.secondary)
           .font(.caption)
       } else {
-        Text("Keine Aufgabe für diese Station gestellt.")
+        Text(L10n.StationsListRowView.noQuestion)
           .italic()
           .foregroundColor(.secondary)
           .font(.caption)
       }
     }
     .padding(.vertical, 4)
+    .frame(maxWidth: .infinity, alignment: .leading)
+    .contentShape(Rectangle())
+    .overlay(alignment: .topTrailing) {
+      if station.isFavorite {
+        Image(systemName: "star.fill")
+          .foregroundColor(.yellow)
+      }
+    }
   }
 }

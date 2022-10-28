@@ -47,20 +47,15 @@ struct HuntView: View {
       }
       .animation(.default, value: huntManager.isNearCurrentStation)
       .navigationBarHidden(true)
-      .alert("Bist du sicher?", isPresented: $vm.endSessionAlertIsShown) {
-        Button("Abbrechen", role: .cancel) {}
-        Button("Ja, beenden", role: .destructive) { dismiss.callAsFunction() }
+      .alert(L10n.HuntView.EndHuntAlert.title, isPresented: $vm.endSessionAlertIsShown) {
+        Button(L10n.BtnTitle.cancel, role: .cancel) {}
+        Button(L10n.BtnTitle.iAmSure, role: .destructive) { dismiss.callAsFunction() }
       } message: {
-        Text("Damit wird die Suche beendet, dein Fortschritt ist nicht gespeichert.")
+        Text(L10n.HuntView.EndHuntAlert.message)
       }
       .sheet(isPresented: $huntManager.questionSheetIsShown) {
         if let station = huntManager.currentStation {
           QuestionView(station: station)
-        }
-      }
-      .toolbar {
-        ToolbarItem(placement: .navigationBarLeading) {
-          Button("Beenden", action: dismiss.callAsFunction)
         }
       }
     }
@@ -112,7 +107,7 @@ extension HuntView {
   @ViewBuilder
   private func nextStationButton() -> some View {
     if huntManager.isNearCurrentStation && huntManager.currentStationIsLastStation == false {
-      Button("Nächste Station") {
+      Button(L10n.HuntView.nextStationButtonTitle) {
         huntManager.nextStationButtonTapped()
       }
       .buttonStyle(.borderedProminent)
@@ -120,7 +115,7 @@ extension HuntView {
       .foregroundColor(Color(uiColor: .systemBackground))
       .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
     } else if huntManager.isNearCurrentStation && huntManager.currentStationIsLastStation {
-      Button("Suche Beenden") {
+      Button(L10n.HuntView.endHuntButtonTitle) {
         vm.endHuntButtonTapped()
       }
       .buttonStyle(.borderedProminent)

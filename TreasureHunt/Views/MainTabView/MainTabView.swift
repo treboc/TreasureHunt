@@ -5,27 +5,34 @@
 //  Created by Marvin Lee Kobert on 26.09.22.
 //
 
+import RealmSwift
 import SwiftUI
 
 struct MainTabView: View {
+  let realmConfiguration = Realm.Configuration(schemaVersion: 1)
+
   var body: some View {
     TabView {
       HuntListView()
         .tabItem {
-          Label("Jagden", systemImage: "shippingbox")
+          Label(L10n.MainTabView.TabItem.huntList,
+                systemImage: "shippingbox")
         }
 
       StationsListView()
         .tabItem {
-          Label("Stationen", systemImage: "dot.circle.and.hand.point.up.left.fill")
+          Label(L10n.MainTabView.TabItem.stationList,
+                systemImage: "dot.circle.and.hand.point.up.left.fill")
         }
 
       SettingsView()
         .tabItem {
-          Label("Einstellungen", systemImage: "gear")
+          Label(L10n.MainTabView.TabItem.settings,
+                systemImage: "gear")
         }
     }
     .toolbarBackground(.visible, for: .tabBar)
+    .environment(\.realmConfiguration, realmConfiguration)
   }
 }
 

@@ -14,7 +14,7 @@ struct StationsPicker: View {
   @State private var addNewStationViewIsShown: Bool = false
 
   private var chosenStationsSectionHeader: String {
-    return "Gewählte Stationen (\(chosenStations.count) / 50)"
+    return L10n.AddHuntView.chosenStations(chosenStations.count)
   }
 
   private var availableStations: [Station] {
@@ -42,8 +42,8 @@ struct StationsPicker: View {
         chosenStationsSection
         availableStationsSection
       }
-      .sheet(isPresented: $addNewStationViewIsShown) { AddNewStationView() }
-      .navigationTitle("Stationsauswahl")
+      .sheet(isPresented: $addNewStationViewIsShown) { AddStationView() }
+      .navigationTitle(L10n.StationsPicker.navTitle)
       .roundedNavigationTitle()
   }
 }
@@ -58,7 +58,7 @@ extension StationsPicker {
   private var createStationButton: some View {
     Button(action: showAddNewStationView) {
       HStack {
-        Text("Station erstellen")
+        Text(L10n.StationsPicker.addStationButtonTitle)
         Spacer()
         Image(systemName: "plus")
       }
@@ -79,7 +79,7 @@ extension StationsPicker {
         .onMove(perform: moveStation)
         .transition(.slide)
       } else {
-        Text("Noch keine Station ausgewählt")
+        Text(L10n.StationsPicker.noChosenStations)
           .italic()
           .foregroundColor(.secondary)
       }
@@ -87,7 +87,7 @@ extension StationsPicker {
   }
 
   private var availableStationsSection: some View {
-    Section("Verfügbare Stationen") {
+    Section(L10n.StationsPicker.availableStations) {
       ForEach(availableStations) { station in
         StationPickerRowView(index: 0, station: station, rowType: .available)
           .onTapGesture {

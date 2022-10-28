@@ -16,12 +16,12 @@ struct HuntListRowView: View {
         .font(.headline)
         .fontWeight(.semibold)
 
-      Text("\(hunt.stations.count) Stationen")
+      Text(L10n.huntListRowViewStationsCount(hunt.stations.count))
         .italic()
         .font(.callout)
 
       Group {
-        Text("Erstellt: ") +
+        Text(L10n.HuntListRowView.created) +
         Text(hunt.createdAt, format: .dateTime)
       }
       .foregroundColor(.secondary)

@@ -49,7 +49,7 @@ extension DirectionDistanceView {
   private var notNearStationView: some View {
     VStack {
       VStack {
-        Text("Station \(huntManager.currentStationNumber ?? 0) von \(huntManager.hunt.stations.count)")
+        Text(L10n.HuntView.DirectionDistanceView.stationOf(huntManager.currentStationNumber, huntManager.hunt.stations.count))
           .font(.system(.largeTitle, design: .rounded))
           .fontWeight(.semibold)
           .padding(.top)
@@ -73,7 +73,7 @@ extension DirectionDistanceView {
             .font(.headline)
             .padding()
         } else {
-          Text("Distance N/A")
+          Text(L10n.HuntView.DirectionDistanceView.distanceNA)
         }
       }
       .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
@@ -88,13 +88,13 @@ extension DirectionDistanceView {
           .resizable()
           .frame(width: 30, height: 30)
 
-        Text(huntManager.currentStation?.name ?? "Keine Station")
+        Text(huntManager.currentStation?.name ?? L10n.HuntView.DirectionDistanceView.stationNameFallback)
           .font(.system(.title, design: .rounded))
           .fontWeight(.semibold)
           .lineLimit(1)
 
         if huntManager.currentStation != nil {
-          Text("Station \(huntManager.currentStationNumber ?? 0) von \(huntManager.hunt.stations.count)")
+          Text(L10n.HuntView.DirectionDistanceView.stationOf(huntManager.currentStationNumber, huntManager.hunt.stations.count))
             .font(.system(.headline, design: .rounded))
             .italic()
             .foregroundColor(.secondary)

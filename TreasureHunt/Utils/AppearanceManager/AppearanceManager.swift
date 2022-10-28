@@ -22,11 +22,11 @@ class AppearanceManager: ObservableObject {
     var title: String {
       switch self {
       case .dark:
-        return "Dunkel"
+        return L10n.SettingsView.AppearancePicker.dark
       case .light:
-        return "Hell"
+        return L10n.SettingsView.AppearancePicker.light
       case .system:
-        return "System"
+        return L10n.SettingsView.AppearancePicker.system
       }
     }
   }

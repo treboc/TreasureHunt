@@ -13,7 +13,7 @@ struct TrafficWarningView: View {
   var body: some View {
     VStack(spacing: 30) {
       HStack {
-        Text("Achtung")
+        Text(L10n.HuntView.TrafficWarningView.title)
           .font(.system(.largeTitle, design: .rounded))
           .fontWeight(.black)
         Spacer()
@@ -21,10 +21,10 @@ struct TrafficWarningView: View {
           .font(.largeTitle)
       }
       
-      Text("Achte bei der Suche immer auf deine Umgebung und den Verkehr.")
+      Text(L10n.HuntView.TrafficWarningView.message)
         .frame(maxWidth: .infinity, alignment: .leading)
       
-      Button("Verstanden") {
+      Button(L10n.HuntView.TrafficWarningView.buttonTitle) {
         withAnimation {
           warningRead = true
         }

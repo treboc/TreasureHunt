@@ -7,38 +7,50 @@
 
 import SwiftUI
 import MapKit
+import RealmSwift
 
 struct AddHuntView: View {
-  @Environment(\.dismiss) private var dismiss
   @EnvironmentObject private var locationProvider: LocationProvider
+  @Environment(\.dismiss) private var dismiss
+
+  private var huntToEdit: Hunt?
 
   @State private var name: String = ""
   @State private var chosenStations: [Station] = []
   @State private var region: MKCoordinateRegion = .init()
-  @State private var mapIsShown: Bool = true
+  @State private var mapIsShown: Bool = false
 
   private var saveButtonIsDisabled: Bool {
     return name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || chosenStations.isEmpty
   }
 
+  init(huntToEdit: Hunt? = nil) {
+    if let huntToEdit {
+      self.huntToEdit = huntToEdit
+      _name = State(initialValue: huntToEdit.name)
+      let stations: [Station] = Array(huntToEdit.stations)
+      _chosenStations = State(initialValue: stations)
+    }
+  }
+
   var body: some View {
     NavigationView {
       Form {
-        Section("Name der Jagd") {
-          TextField("Kindergeburtstag 🎁", text: $name)
+        Section(L10n.AddHuntView.name) {
+          TextField(L10n.AddHuntView.namePlaceholder, text: $name)
         }
 
         Section {
-          NavigationLink("Station hinzufügen") {
+          NavigationLink(L10n.AddHuntView.editStations) {
             StationsPicker(chosenStations: $chosenStations)
           }
         }
 
         stationOverview
 
-        Section("Gewählte Stationen (\(chosenStations.count) / 50)") {
+        Section(L10n.AddHuntView.chosenStations(chosenStations.count)) {
           if chosenStations.isEmpty {
-            Text("Noch keine Station gewählt.")
+            Text(L10n.AddHuntView.noChosenStations)
               .italic()
               .foregroundColor(.secondary)
           } else {
@@ -51,7 +63,7 @@ struct AddHuntView: View {
         }
       }
       .toolbar(content: toolbarContent)
-      .navigationTitle(name.isEmpty ? "Neue Jagd" : name)
+      .navigationTitle(name.isEmpty ? L10n.AddHuntView.navTitle : name)
       .roundedNavigationTitle()
       .task {
         centerLocation()
@@ -68,8 +80,12 @@ struct AddHuntView_Previews: PreviewProvider {
 
 extension AddHuntView {
   func saveButtonTapped(onCompletion: @escaping (() -> Void)) {
-    let hunt = Hunt(name: name)
-    HuntModelService.add(hunt, with: chosenStations)
+    if let huntToEdit {
+      try? HuntModelService.update(huntToEdit, with: name, and: chosenStations)
+    } else {
+      let hunt = Hunt(name: name)
+      HuntModelService.add(hunt, with: chosenStations)
+    }
     dismiss()
   }
 
@@ -84,11 +100,11 @@ extension AddHuntView {
   @ToolbarContentBuilder
   func toolbarContent() -> some ToolbarContent {
     ToolbarItem(placement: .navigationBarLeading) {
-      Button("Abbrechen", action: dismiss.callAsFunction)
+      Button(L10n.BtnTitle.cancel, action: dismiss.callAsFunction)
     }
 
     ToolbarItem(placement: .navigationBarTrailing) {
-      Button("Speichern") {
+      Button(L10n.BtnTitle.save) {
         saveButtonTapped(onCompletion: dismiss.callAsFunction)
       }
       .disabled(saveButtonIsDisabled)
@@ -111,7 +127,7 @@ extension AddHuntView {
         .frame(height: 300)
       } header: {
         HStack {
-          Text("Übersicht")
+          Text(L10n.AddHuntView.overview)
           Spacer()
           Image(systemName: "chevron.down")
             .rotationEffect(Angle(degrees: mapIsShown ? 0 : -90))
@@ -127,7 +143,7 @@ extension AddHuntView {
       .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
     } else {
       HStack {
-        Text("Übersicht")
+        Text(L10n.AddHuntView.stationsOverview)
         Spacer()
         Image(systemName: "chevron.down")
           .rotationEffect(Angle(degrees: mapIsShown ? 0 : -90))

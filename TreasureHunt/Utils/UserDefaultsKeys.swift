@@ -13,4 +13,8 @@ struct UserDefaultsKeys {
   static let selectedAppearance = "selectedAppearance"
   static let idleDimmingDisabled = "idleDimmingDisabled"
   static let locationAuthViewIsShown = "locationAuthViewIsShown"
+
+  enum Tooltips {
+    static let editStations = "editStations"
+  }
 }
