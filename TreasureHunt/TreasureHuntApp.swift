@@ -18,7 +18,7 @@ struct TreasureHuntApp: App {
   var body: some Scene {
     WindowGroup {
       MainTabView()
-        .onAppear(perform: checkAuthorization)
+        .onAppear(perform: checkLocationAuthorization)
         .task {
           appearanceManager.setAppearance()
           registerUserDefaults()
@@ -39,7 +39,7 @@ struct TreasureHuntApp: App {
     ])
   }
 
-  private func checkAuthorization() {
+  private func checkLocationAuthorization() {
     let authStatus = locationProvider.locationManager.authorizationStatus
 
     switch authStatus {
