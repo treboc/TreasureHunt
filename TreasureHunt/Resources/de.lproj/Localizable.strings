@@ -19,10 +19,10 @@
 "btnTitle.iAmSure" = "Ja, ich bin sicher.";
 
 // Alerts
-"alert.deleteHunt.title" = "Jagd Löschen";
-"alert.deleteHunt.message" = "Die Jagd wird gelöscht. Dies kann nicht rückgängig gemacht werden. Bist du dir sicher?";
-"alert.deleteStation.title" = "Station Löschen";
-"alert.deleteStation.message" = "Die ausgewählte Station wird gelöscht und aus jeder Jagd entfernt, in der sie genutzt wird. Das kann nicht rückgängig gemacht werden. Bist du sicher?"; //
+"alert.deleteHunt.title" = "Bist du sicher?";
+"alert.deleteHunt.message" = "Die Jagd wird gelöscht. Dies kann nicht rückgängig gemacht werden.";
+"alert.deleteStation.title" = "Bist du sicher?";
+"alert.deleteStation.message" = "Die ausgewählte Station wird gelöscht und aus jeder Jagd entfernt, in der sie genutzt wird. Das kann nicht rückgängig gemacht werden."; //
 
 // A11yLabels
 "a11yLabel.createHunt" = "Jagd Erstellen";

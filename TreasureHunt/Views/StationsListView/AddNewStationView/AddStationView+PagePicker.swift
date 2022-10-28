@@ -8,40 +8,50 @@
 import SwiftUI
 
 extension AddStationView {
+  enum PageSelection: Int, CaseIterable, Identifiable {
+    var id: Int {
+      self.rawValue
+    }
+
+    case position, details
+  }
+
   struct PagePicker: View {
-    @Binding var selectedPage: Int
+    @Binding var selectedPage: PageSelection
 
     var body: some View {
       HStack {
-        HStack {
-          Image(systemName: selectedPage == 1 ? "mappin" : "chevron.backward")
-            .frame(width: 16, height: 16)
-          if selectedPage == 1 {
-            Text(L10n.AddStationView.PagePicker.position)
-          }
+        Button("Back") {
+          selectedPage = .position
         }
-        .padding(10)
-        .background(selectedPage == 1 ? Color.accentColor : Color.accentColor.opacity(0.4), in: Capsule())
-        .foregroundColor(selectedPage == 1 ? Color(uiColor: .systemBackground) : Color(uiColor: .label))
-        .onTapGesture {
-          selectedPage = 1
-        }
+        .controlSize(.regular)
+        .buttonStyle(.borderedProminent)
+        .foregroundColor(Color(uiColor: .systemBackground))
+        .opacity(selectedPage == .details ? 1 : 0)
+
+        Spacer()
 
         HStack {
-          Image(systemName: selectedPage == 2 ? "magnifyingglass" : "chevron.forward")
-            .frame(width: 16, height: 16)
-          if selectedPage == 2 {
-            Text(L10n.AddStationView.PagePicker.details)
+          ForEach(PageSelection.allCases) { selectableCase in
+            Circle()
+              .fill(Color.white)
+              .frame(width: 5, height: 5)
+              .scaleEffect(selectableCase == selectedPage ? 1.5 : 1)
+              .opacity(selectableCase == selectedPage ? 1 : 0.7)
           }
         }
-        .padding(10)
-        .background(selectedPage == 2 ? Color.accentColor : Color.accentColor.opacity(0.4), in: Capsule())
-        .foregroundColor(selectedPage == 2 ? Color(uiColor: .systemBackground) : Color(uiColor: .label))
-        .onTapGesture {
-          selectedPage = 2
+
+        Spacer()
+
+        Button("Next") {
+          selectedPage = .details
         }
+        .controlSize(.regular)
+        .buttonStyle(.borderedProminent)
+        .foregroundColor(Color(uiColor: .systemBackground))
+        .opacity(selectedPage == .position ? 1 : 0)
       }
-      .padding(.bottom)
+      .padding()
     }
   }
 }
