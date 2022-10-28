@@ -19,9 +19,9 @@ struct AddStationView: View {
   @State private var triggerDistance: Double = 25
   @FocusState private var focusedField: Field?
 
-  @State private var selectedPage: Int = 1
+  @State private var selectedPage: PageSelection = .position
   private var isLastPageSelected: Bool {
-    return selectedPage == 2
+    return selectedPage == .details
   }
 
   private var saveButtonIsDisabled: Bool {
@@ -58,14 +58,12 @@ struct AddStationView: View {
     NavigationView {
       VStack {
         switch selectedPage {
-        case 1:
+        case .position:
           positionPage
             .transition(.move(edge: .leading))
-        case 2:
+        case .details:
           detailsPage
             .transition(.move(edge: .trailing))
-        default:
-          EmptyView()
         }
 
         PagePicker(selectedPage: $selectedPage)
@@ -73,7 +71,7 @@ struct AddStationView: View {
       .animation(.default, value: selectedPage)
       .toolbar(content: toolbarContent)
       .navigationBarTitleDisplayMode(.inline)
-      .navigationTitle(L10n.AddStationView.navTitle)
+      .navigationTitle(name.isEmpty ? L10n.AddStationView.navTitle : name)
       .interactiveDismissDisabled()
       .onAppear {
         locationProvider.locationManager.requestWhenInUseAuthorization()
@@ -117,7 +115,7 @@ extension AddStationView {
   private func reset() {
     self.name.removeAll()
     self.question.removeAll()
-    self.selectedPage = 1
+    self.selectedPage = .position
   }
 
   private func setMapSpan() {
@@ -153,7 +151,7 @@ extension AddStationView {
 
   // MARK: - positionPage
   private var positionPage: some View {
-    VStack(alignment: .leading, spacing: 12) {
+    VStack(alignment: .leading) {
       Text(L10n.AddStationView.PositionPage.title)
         .font(.system(.title, design: .rounded, weight: .semibold))
       Text(L10n.AddStationView.PositionPage.description)
