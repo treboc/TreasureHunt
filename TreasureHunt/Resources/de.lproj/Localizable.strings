@@ -140,3 +140,6 @@
 "settingsView.arrowPicker.arrowMerged" = "Pfeil (verbunden)";
 "settingsView.arrowPicker.locationNorth" = "Position";
 "settingsView.arrowPicker.locationNorthFill" = "Position (gefüllt)";
+
+// SettingsView => LegalNoticeView
+"settingsView.legalNoticeView.navTitle" = "Impressum";

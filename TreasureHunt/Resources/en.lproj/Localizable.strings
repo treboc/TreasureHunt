@@ -140,3 +140,6 @@
 "settingsView.arrowPicker.arrowMerged" = "Arrow (merged)";
 "settingsView.arrowPicker.locationNorth" = "Location";
 "settingsView.arrowPicker.locationNorthFill" = "Location (filled)";
+
+// SettingsView => LegalNoticeView
+"settingsView.legalNoticeView.navTitle" = "Legal Notice";

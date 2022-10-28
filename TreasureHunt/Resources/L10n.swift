@@ -225,6 +225,10 @@ internal enum L10n {
       /// Triangle (outlined)
       internal static let triangleOutlined = L10n.tr("Localizable", "settingsView.arrowPicker.triangleOutlined", fallback: "Triangle (outlined)")
     }
+    internal enum LegalNoticeView {
+      /// Legal Notice
+      internal static let navTitle = L10n.tr("Localizable", "settingsView.legalNoticeView.navTitle", fallback: "Legal Notice")
+    }
   }
   internal enum SimpleConstants {
     /// Localizable.strings

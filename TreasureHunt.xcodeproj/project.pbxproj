@@ -37,6 +37,9 @@
 		45D56EEA28F3ED930008BC3A /* Hunt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D56EE928F3ED930008BC3A /* Hunt.swift */; };
 		45D56EEC28F3F06A0008BC3A /* HuntModelService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D56EEB28F3F06A0008BC3A /* HuntModelService.swift */; };
 		45E188C728F5451700A055BD /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E188C628F5451700A055BD /* AudioPlayer.swift */; };
+		45F99CDF290BD36C0050AC6F /* LegalNoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F99CDE290BD36C0050AC6F /* LegalNoticeView.swift */; };
+		45F99CE1290BD3B30050AC6F /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F99CE0290BD3B30050AC6F /* AboutView.swift */; };
+		45F99CE3290BD3CE0050AC6F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F99CE2290BD3CE0050AC6F /* Constants.swift */; };
 		8A1CBD7628E36EC300E0AE4B /* TrafficWarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1CBD7528E36EC300E0AE4B /* TrafficWarningView.swift */; };
 		8A1CBD7828E3795300E0AE4B /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1CBD7728E3795300E0AE4B /* Color+Extension.swift */; };
 		8A4C4F8F28E1C0E100721C50 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4C4F8E28E1C0E100721C50 /* MainTabView.swift */; };
@@ -96,6 +99,9 @@
 		45D56EE928F3ED930008BC3A /* Hunt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hunt.swift; sourceTree = "<group>"; };
 		45D56EEB28F3F06A0008BC3A /* HuntModelService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuntModelService.swift; sourceTree = "<group>"; };
 		45E188C628F5451700A055BD /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
+		45F99CDE290BD36C0050AC6F /* LegalNoticeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LegalNoticeView.swift; sourceTree = "<group>"; };
+		45F99CE0290BD3B30050AC6F /* AboutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		45F99CE2290BD3CE0050AC6F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8A1CBD7528E36EC300E0AE4B /* TrafficWarningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrafficWarningView.swift; sourceTree = "<group>"; };
 		8A1CBD7728E3795300E0AE4B /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		8A4C4F8E28E1C0E100721C50 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
@@ -248,6 +254,9 @@
 			isa = PBXGroup;
 			children = (
 				8A4C4F9028E1C0F100721C50 /* SettingsView.swift */,
+				45F99CE0290BD3B30050AC6F /* AboutView.swift */,
+				45F99CE2290BD3CE0050AC6F /* Constants.swift */,
+				45F99CDE290BD36C0050AC6F /* LegalNoticeView.swift */,
 			);
 			path = SettingsView;
 			sourceTree = "<group>";
@@ -497,6 +506,7 @@
 				8A4C4F9128E1C0F100721C50 /* SettingsView.swift in Sources */,
 				F212393128CA539C006754E3 /* TreasureHuntApp.swift in Sources */,
 				8A52025328E0A23200C49779 /* Button+PressActionsModifier.swift in Sources */,
+				45F99CDF290BD36C0050AC6F /* LegalNoticeView.swift in Sources */,
 				4530A10D28F14BCD00F05AE3 /* QuestionView.swift in Sources */,
 				8A1CBD7828E3795300E0AE4B /* Color+Extension.swift in Sources */,
 				8A4C4F9D28E2083500721C50 /* AppearancePicker.swift in Sources */,
@@ -514,6 +524,7 @@
 				8AD1768928E0AE0C00A12948 /* Button+Extension.swift in Sources */,
 				45ABD0B9290AA9CF0010E1EF /* L10n.swift in Sources */,
 				45513FB528EAFADD0064A32E /* AddHuntView.swift in Sources */,
+				45F99CE3290BD3CE0050AC6F /* Constants.swift in Sources */,
 				8AFCFF3928E225ED000D1A0B /* MapView.swift in Sources */,
 				8A52024E28E0A21900C49779 /* HuntView.swift in Sources */,
 				45A8CEE728EA228500F19E67 /* HuntViewModel.swift in Sources */,
@@ -523,6 +534,7 @@
 				4533509328FC953400BC0AA0 /* String+Extension.swift in Sources */,
 				8A52025428E0A23200C49779 /* FileManager+Extension.swift in Sources */,
 				8A4C4F9B28E207C200721C50 /* AppearanceManager.swift in Sources */,
+				45F99CE1290BD3B30050AC6F /* AboutView.swift in Sources */,
 				8A52024D28E0A21900C49779 /* StationsListView.swift in Sources */,
 				45513FAA28EAF2D90064A32E /* HuntListView.swift in Sources */,
 				45D56EEA28F3ED930008BC3A /* Hunt.swift in Sources */,
