@@ -10,7 +10,7 @@ If you come across this repository and want to try or help developing, it would 
 - create stations to look for with a position on the map and, optional, a question that has to be answered at reaching the station
 - with this stations you create a hunt that you can play
 - the arrow points you to the next station, maybe there are multiple ways to get there
-- but: look for the traffic and your environment fist, when you hunt!
+- but: look for the traffic and your environment first, when you hunt!
 
 
 ## Plans for the future
