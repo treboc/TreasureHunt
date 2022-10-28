@@ -71,6 +71,7 @@
 "stationsListView.listPlaceholderText" = "You've not added any station yet. To create your first station, tap here or the \"+\" in the top right corner.";
 "stationsListView.listPlaceholderButtonTitle" = "Create a Station";
 "stationsListView.editStationTooltip" = "Tip: Tap on a station to show an edit sheet for this station.";
+"stationsListView.swipeAction.markFavorite" = "Toggle Station as Favorite";
 
 // StationsListRowView
 "stationsListRowView.noQuestion" = "No question on this station.";

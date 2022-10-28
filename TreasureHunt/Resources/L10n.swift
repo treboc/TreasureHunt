@@ -210,8 +210,8 @@ internal enum L10n {
       internal static let title = L10n.tr("Localizable", "settingsView.appearancePicker.title", fallback: "Color Scheme")
     }
     internal enum ArrowPicker {
-      /// Arrow Icon
-      internal static let arrow = L10n.tr("Localizable", "settingsView.arrowPicker.arrow", fallback: "Arrow Icon")
+      /// Arrow
+      internal static let arrow = L10n.tr("Localizable", "settingsView.arrowPicker.arrow", fallback: "Arrow")
       /// Arrow (merged)
       internal static let arrowMerged = L10n.tr("Localizable", "settingsView.arrowPicker.arrowMerged", fallback: "Arrow (merged)")
       /// Location
@@ -252,6 +252,10 @@ internal enum L10n {
     internal static let listPlaceholderText = L10n.tr("Localizable", "stationsListView.listPlaceholderText", fallback: "You've not added any station yet. To create your first station, tap here or the \"+\" in the top right corner.")
     /// Stations
     internal static let navTitle = L10n.tr("Localizable", "stationsListView.navTitle", fallback: "Stations")
+    internal enum SwipeAction {
+      /// Toggle Station as Favorite
+      internal static let markFavorite = L10n.tr("Localizable", "stationsListView.swipeAction.markFavorite", fallback: "Toggle Station as Favorite")
+    }
   }
   internal enum StationsPicker {
     /// Create Station

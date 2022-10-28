@@ -67,20 +67,26 @@ extension StationsListView {
     }
     .padding(.horizontal, 50)
   }
+  private func favoriteSort(_ lhs: Station, _ rhs: Station) -> Bool {
+    return lhs.isFavorite
+  }
 
   private var stationsList: some View {
     List {
-      ForEach(stations, id: \._id) { station in
+      ForEach(stations.sorted(by: favoriteSort), id: \._id) { station in
         StationsListRowView(station: station)
           .onTapGesture {
             stationToEdit = station
           }
-          .swipeActions(edge: .trailing, allowsFullSwipe: true, content: {
+          .swipeActions(edge: .trailing, allowsFullSwipe: true) {
             HStack {
               swipeToDelete(station)
               swipeToEdit(station)
             }
-          })
+          }
+          .swipeActions(edge: .leading, allowsFullSwipe: true) {
+            swipeToFavorite(station)
+          }
       }
     }
     .safeAreaInset(edge: .bottom) {
@@ -146,5 +152,17 @@ extension StationsListView {
         .labelStyle(.iconOnly)
     }
     .tint(.orange)
+  }
+
+  private func swipeToFavorite(_ station: Station) -> some View {
+    Button {
+      withAnimation {
+        StationModelService.toggleFavorite(station)
+      }
+    } label: {
+      Image(systemName: "star.fill")
+    }
+    .tint(.yellow)
+    .accessibilityLabel(Text(L10n.StationsListView.SwipeAction.markFavorite))
   }
 }

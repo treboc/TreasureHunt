@@ -15,6 +15,7 @@ final class Station: Object, ObjectKeyIdentifiable {
   @Persisted var triggerDistance: Double = 5
   @Persisted var name: String = ""
   @Persisted var question: String = ""
+  @Persisted var isFavorite: Bool = false
   var isCompleted: Bool = false
 
   convenience init(coordinate: CLLocationCoordinate2D, triggerDistance: Double, name: String, question: String) {

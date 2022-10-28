@@ -6,10 +6,11 @@
 //
 
 import MapKit
+import RealmSwift
 import SwiftUI
 
 struct StationsListRowView: View {
-  let station: Station
+  @ObservedRealmObject var station: Station
 
   var body: some View {
     VStack(alignment: .leading, spacing: 5) {
@@ -31,5 +32,11 @@ struct StationsListRowView: View {
     .padding(.vertical, 4)
     .frame(maxWidth: .infinity, alignment: .leading)
     .contentShape(Rectangle())
+    .overlay(alignment: .topTrailing) {
+      if station.isFavorite {
+        Image(systemName: "star.fill")
+          .foregroundColor(.yellow)
+      }
+    }
   }
 }

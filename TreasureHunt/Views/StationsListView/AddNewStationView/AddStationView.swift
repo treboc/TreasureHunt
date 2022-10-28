@@ -15,6 +15,7 @@ struct AddStationView: View {
   @State private var region: MKCoordinateRegion = .init()
   @State private var name: String = ""
   @State private var question: String = ""
+  @State private var isFavorite: Bool = false
   @State private var triggerDistance: Double = 25
   @FocusState private var focusedField: Field?
 
@@ -36,6 +37,7 @@ struct AddStationView: View {
       self.stationToEdit = stationToEdit
       _name = State(initialValue: stationToEdit.name)
       _question = State(initialValue: stationToEdit.question)
+      _isFavorite = State(initialValue: stationToEdit.isFavorite)
       _triggerDistance = State(initialValue: stationToEdit.triggerDistance)
       let region = MKCoordinateRegion(center: stationToEdit.coordinate,
                                       latitudinalMeters: mapSpanInMeters,
@@ -96,7 +98,7 @@ extension AddStationView {
   // MARK: - Methods
   private func saveButtonTapped() {
     if let stationToEdit {
-      try? StationModelService.update(stationToEdit, with: region.center, name: name, triggerDistance: triggerDistance, question: question)
+      try? StationModelService.update(stationToEdit, with: region.center, name: name, triggerDistance: triggerDistance, question: question, isFavorite: isFavorite)
       dismiss()
     } else {
       let station = Station(coordinate: region.center,
@@ -199,6 +201,8 @@ extension AddStationView {
                            text: $question,
                            focusField: _focusedField,
                            field: .question)
+
+        Toggle("Is Favorite", isOn: $isFavorite)
       }
       .padding(.vertical, 24)
 

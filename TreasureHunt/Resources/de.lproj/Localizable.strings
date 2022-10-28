@@ -71,6 +71,7 @@
 "stationsListView.listPlaceholderText" = "Du hast noch keine Station erstellt. Deine erste Station kann du erstellen in dem du hier tippst, oder oben rechts auf das \"+\".";
 "stationsListView.listPlaceholderButtonTitle" = "Erstelle eine Station";
 "stationsListView.editStationTooltip" = "Tipp: Tippe eine Station in der Liste an, um sie zu bearbeiten.";
+"stationsListview.swipeAction.markFavorite" = "Station als Favoriten umschalten";
 
 // StationsListRowView
 "stationsListRowView.noQuestion" = "Zu dieser Station gibt es keine Aufgabe.";
