@@ -4,6 +4,7 @@ Start the treasure hunt now! Whether at a children's birthday party or a nice af
 
 Create a few stations and let the kids search for them with the help of the arrow and the map!
 
+If you come across this repository and want to try or help developing, it would be awesome if you test it: [TreasureHunt on TestFlight](https://testflight.apple.com/join/OD9uUu26)
 
 ## Features
 - create stations to look for with a position on the map and, optional, a question that has to be answered at reaching the station
