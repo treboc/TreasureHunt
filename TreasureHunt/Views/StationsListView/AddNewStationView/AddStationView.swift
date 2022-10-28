@@ -179,9 +179,23 @@ extension AddStationView {
 
   // MARK: - detailsPage
   private var detailsPage: some View {
-    VStack(alignment: .leading, spacing: 12) {
-      Text(L10n.AddStationView.DetailPage.title)
-        .font(.system(.title, design: .rounded, weight: .semibold))
+    VStack(alignment: .leading) {
+      HStack(alignment: .center) {
+        Text(L10n.AddStationView.DetailPage.title)
+          .font(.system(.title, design: .rounded, weight: .semibold))
+
+        Spacer()
+  
+        Image(systemName: isFavorite ? "star.fill" : "star")
+          .font(.title2)
+          .foregroundColor(.accentColor)
+          .onTapGesture {
+            withAnimation {
+              isFavorite.toggle()
+              HapticManager.shared.impact(style: .medium)
+            }
+          }
+      }
       Text(L10n.AddStationView.DetailPage.description)
         .lineLimit(2)
         .font(.system(.body, design: .rounded))
@@ -199,11 +213,8 @@ extension AddStationView {
                            text: $question,
                            focusField: _focusedField,
                            field: .question)
-
-        Toggle("Is Favorite", isOn: $isFavorite)
       }
-      .padding(.vertical, 24)
-
+      .padding(.top, 16)
       Spacer()
     }
     .padding(.horizontal)
