@@ -41,6 +41,7 @@
 		45F99CE1290BD3B30050AC6F /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F99CE0290BD3B30050AC6F /* AboutView.swift */; };
 		45F99CE3290BD3CE0050AC6F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F99CE2290BD3CE0050AC6F /* Constants.swift */; };
 		45F99CE5290BFFBF0050AC6F /* HuntListDetailRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F99CE4290BFFBF0050AC6F /* HuntListDetailRowView.swift */; };
+		45F99CEA290C6F5F0050AC6F /* ReadSize+ViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F99CE9290C6F5F0050AC6F /* ReadSize+ViewModifier.swift */; };
 		8A1CBD7628E36EC300E0AE4B /* TrafficWarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1CBD7528E36EC300E0AE4B /* TrafficWarningView.swift */; };
 		8A1CBD7828E3795300E0AE4B /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1CBD7728E3795300E0AE4B /* Color+Extension.swift */; };
 		8A4C4F8F28E1C0E100721C50 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4C4F8E28E1C0E100721C50 /* MainTabView.swift */; };
@@ -104,6 +105,7 @@
 		45F99CE0290BD3B30050AC6F /* AboutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		45F99CE2290BD3CE0050AC6F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		45F99CE4290BFFBF0050AC6F /* HuntListDetailRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuntListDetailRowView.swift; sourceTree = "<group>"; };
+		45F99CE9290C6F5F0050AC6F /* ReadSize+ViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReadSize+ViewModifier.swift"; sourceTree = "<group>"; };
 		8A1CBD7528E36EC300E0AE4B /* TrafficWarningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrafficWarningView.swift; sourceTree = "<group>"; };
 		8A1CBD7728E3795300E0AE4B /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		8A4C4F8E28E1C0E100721C50 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
@@ -349,6 +351,7 @@
 			children = (
 				8A4C4F9728E1FBFE00721C50 /* RoundedNavigationTitle-ViewModifier.swift */,
 				8A52025128E0A23200C49779 /* Button+PressActionsModifier.swift */,
+				45F99CE9290C6F5F0050AC6F /* ReadSize+ViewModifier.swift */,
 			);
 			path = ViewModifier;
 			sourceTree = "<group>";
@@ -542,6 +545,7 @@
 				45A8CEE728EA228500F19E67 /* HuntViewModel.swift in Sources */,
 				45513FB728EBD9A60064A32E /* StationsPicker.swift in Sources */,
 				8A1CBD7628E36EC300E0AE4B /* TrafficWarningView.swift in Sources */,
+				45F99CEA290C6F5F0050AC6F /* ReadSize+ViewModifier.swift in Sources */,
 				45513FC128ED69130064A32E /* StationAnnotationView.swift in Sources */,
 				4533509328FC953400BC0AA0 /* String+Extension.swift in Sources */,
 				8A52025428E0A23200C49779 /* FileManager+Extension.swift in Sources */,
