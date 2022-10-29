@@ -10,33 +10,65 @@ import RealmSwift
 import SwiftUI
 
 struct StationsListRowView: View {
-  @ObservedRealmObject var station: Station
+  @EnvironmentObject private var locationProvider: LocationProvider
+  @StateRealmObject var station: Station
+  @State private var yOffset: CGFloat = 0
+
+  func distanceToStation() -> String {
+    if let distance = locationProvider.distanceTo(station.location) {
+      return distance.asDistance()
+    } else {
+      return "N/A"
+    }
+  }
 
   var body: some View {
-    VStack(alignment: .leading, spacing: 5) {
-      Text(station.name)
-        .font(.headline)
-        .fontWeight(.semibold)
+    HStack {
+      VStack(alignment: .leading, spacing: 5) {
+        Text(station.name)
+          .font(.system(.title3, design: .rounded, weight: .semibold))
+          .fontWeight(.semibold)
 
-      if !station.question.isEmpty {
-        Text("**Q:** *\(station.question)*")
-          .foregroundColor(.secondary)
-          .font(.caption)
-      } else {
-        Text(L10n.StationsListRowView.noQuestion)
-          .italic()
-          .foregroundColor(.secondary)
-          .font(.caption)
+        if !station.question.isEmpty {
+          Text("**Q:** *\(station.question)*")
+            .foregroundColor(.secondary)
+            .font(.caption)
+        } else {
+          Text(L10n.StationsListRowView.noQuestion)
+            .italic()
+            .foregroundColor(.secondary)
+            .font(.caption)
+        }
+      }
+
+      Spacer()
+
+      VStack(alignment: .trailing) {
+        Text(L10n.HuntListDetailRowView.distanceFromHere)
+          .font(.system(.caption, design: .rounded, weight: .thin))
+
+        Text(distanceToStation())
       }
     }
     .padding(.vertical, 4)
     .frame(maxWidth: .infinity, alignment: .leading)
-    .contentShape(Rectangle())
-    .overlay(alignment: .topTrailing) {
+    .overlay(alignment: .trailing) {
       if station.isFavorite {
         Image(systemName: "star.fill")
           .foregroundColor(.yellow)
+          .offset(y: yOffset)
       }
+    }
+    .padding()
+    .background(
+      RoundedRectangle(cornerRadius: 8)
+        .fill(.regularMaterial)
+    )
+    .listRowInsets(.init(top: 10, leading: 10, bottom: 10, trailing: 10))
+    .listRowSeparator(.hidden)
+    .contentShape(Rectangle())
+    .readSize { size in
+      yOffset = -(size.height / 2)
     }
   }
 }

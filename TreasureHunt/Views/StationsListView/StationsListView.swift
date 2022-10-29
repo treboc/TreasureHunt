@@ -73,7 +73,7 @@ extension StationsListView {
 
   private var stationsList: some View {
     List {
-      ForEach(stations.sorted(by: favoriteSort), id: \._id) { station in
+      ForEach(stations, id: \._id) { station in
         StationsListRowView(station: station)
           .onTapGesture {
             stationToEdit = station
@@ -87,8 +87,25 @@ extension StationsListView {
           .swipeActions(edge: .leading, allowsFullSwipe: true) {
             swipeToFavorite(station)
           }
+          .contextMenu {
+            Button {
+              StationModelService.toggleFavorite(station)
+            } label: {
+              if station.isFavorite {
+                Label("Remove from Favorites", systemImage: "star.fill")
+              } else {
+                Label("Add to Favorites", systemImage: "star")
+              }
+            }
+            Button {
+              stationToEdit = station
+            } label: {
+              Label("Edit Station", systemImage: "pencil")
+            }
+          }
       }
     }
+    .listStyle(.plain)
     .safeAreaInset(edge: .bottom) {
       if editStationTooltipIsShown {
         editStationTooltipView
@@ -151,7 +168,7 @@ extension StationsListView {
       Label(L10n.BtnTitle.edit, systemImage: "square.and.pencil")
         .labelStyle(.iconOnly)
     }
-    .tint(.orange)
+    .tint(.teal)
   }
 
   private func swipeToFavorite(_ station: Station) -> some View {
@@ -160,7 +177,13 @@ extension StationsListView {
         StationModelService.toggleFavorite(station)
       }
     } label: {
-      Image(systemName: "star.fill")
+      if station.isFavorite {
+        Label("Unmark as Favorite", systemImage: "star.slash.fill")
+          .labelStyle(.iconOnly)
+      } else {
+        Label("Mark as Favorite", systemImage: "star")
+          .labelStyle(.iconOnly)
+      }
     }
     .tint(.yellow)
     .accessibilityLabel(Text(L10n.StationsListView.SwipeAction.markFavorite))
