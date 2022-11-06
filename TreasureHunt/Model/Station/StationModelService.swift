@@ -35,7 +35,6 @@ struct StationModelService {
                      with coordinate: CLLocationCoordinate2D,
                      name: String,
                      triggerDistance: Double,
-                     question: String,
                      isFavorite: Bool) throws {
     guard let station = station.thaw() else { return }
 
@@ -46,7 +45,6 @@ struct StationModelService {
         station.latitude = coordinate.latitude
         station.name = name
         station.triggerDistance = triggerDistance
-        station.question = question
         station.isFavorite = isFavorite
       }
     } catch {

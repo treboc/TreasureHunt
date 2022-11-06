@@ -23,8 +23,8 @@ internal enum L10n {
     internal static func chosenStations(_ p1: Any) -> String {
       return L10n.tr("Localizable", "addHuntView.chosenStations %@", String(describing: p1), fallback: "Chosen Stations (%@ / 50)")
     }
-    /// Edit Stations
-    internal static let editStations = L10n.tr("Localizable", "addHuntView.editStations", fallback: "Edit Stations")
+    /// Chose Stations
+    internal static let editStations = L10n.tr("Localizable", "addHuntView.editStations", fallback: "Chose Stations")
     /// Name of the Hunt
     internal static let name = L10n.tr("Localizable", "addHuntView.name", fallback: "Name of the Hunt")
     /// Kids Birthday Party 🎁
@@ -42,16 +42,12 @@ internal enum L10n {
     /// New Station
     internal static let navTitle = L10n.tr("Localizable", "addStationView.navTitle", fallback: "New Station")
     internal enum DetailPage {
-      /// Add a name and a question.
-      internal static let description = L10n.tr("Localizable", "addStationView.detailPage.description", fallback: "Add a name and a question.")
+      /// Add a name.
+      internal static let description = L10n.tr("Localizable", "addStationView.detailPage.description", fallback: "Add a name.")
       /// z.B. At the old mill
       internal static let nameTextFieldPlaceholder = L10n.tr("Localizable", "addStationView.detailPage.nameTextFieldPlaceholder", fallback: "z.B. At the old mill")
       /// Name of the Station
       internal static let nameTextFieldTitle = L10n.tr("Localizable", "addStationView.detailPage.nameTextFieldTitle", fallback: "Name of the Station")
-      /// z.B. what's the capitol of the US?
-      internal static let questionTextFieldPlaceholder = L10n.tr("Localizable", "addStationView.detailPage.questionTextFieldPlaceholder", fallback: "z.B. what's the capitol of the US?")
-      /// Question
-      internal static let questionTextFieldTitle = L10n.tr("Localizable", "addStationView.detailPage.questionTextFieldTitle", fallback: "Question")
       /// 2. Details
       internal static let title = L10n.tr("Localizable", "addStationView.detailPage.title", fallback: "2. Details")
     }
@@ -84,16 +80,16 @@ internal enum L10n {
   }
   internal enum Alert {
     internal enum DeleteHunt {
-      /// The selected hunt will be deleted. This cannot be undone. Are you sure?
-      internal static let message = L10n.tr("Localizable", "alert.deleteHunt.message", fallback: "The selected hunt will be deleted. This cannot be undone. Are you sure?")
-      /// Delete Hunt
-      internal static let title = L10n.tr("Localizable", "alert.deleteHunt.title", fallback: "Delete Hunt")
+      /// The selected hunt will be deleted. This cannot be undone.
+      internal static let message = L10n.tr("Localizable", "alert.deleteHunt.message", fallback: "The selected hunt will be deleted. This cannot be undone.")
+      /// Are you sure?
+      internal static let title = L10n.tr("Localizable", "alert.deleteHunt.title", fallback: "Are you sure?")
     }
     internal enum DeleteStation {
-      /// The selected station will be deleted and removed from any hunt that used this station. This cannot be undone. Are you sure?
-      internal static let message = L10n.tr("Localizable", "alert.deleteStation.message", fallback: "The selected station will be deleted and removed from any hunt that used this station. This cannot be undone. Are you sure?")
-      /// Delete Station
-      internal static let title = L10n.tr("Localizable", "alert.deleteStation.title", fallback: "Delete Station")
+      /// The selected station will be deleted and removed from any hunt that used this station. This cannot be undone.
+      internal static let message = L10n.tr("Localizable", "alert.deleteStation.message", fallback: "The selected station will be deleted and removed from any hunt that used this station. This cannot be undone.")
+      /// Are you sure?
+      internal static let title = L10n.tr("Localizable", "alert.deleteStation.title", fallback: "Are you sure?")
     }
   }
   internal enum BtnTitle {
@@ -109,8 +105,8 @@ internal enum L10n {
     internal static let save = L10n.tr("Localizable", "btnTitle.save", fallback: "Save")
   }
   internal enum HuntListDetailRowView {
-    /// Distance:
-    internal static let distanceFromHere = L10n.tr("Localizable", "huntListDetailRowView.distanceFromHere", fallback: "Distance:")
+    /// Distance
+    internal static let distanceFromHere = L10n.tr("Localizable", "huntListDetailRowView.distanceFromHere", fallback: "Distance")
     /// Question
     internal static let question = L10n.tr("Localizable", "huntListDetailRowView.question", fallback: "Question")
     /// Stations Name

@@ -40,7 +40,9 @@ struct StationsPicker: View {
       Form {
         createStationButton
         chosenStationsSection
-        availableStationsSection
+        if !availableStations.isEmpty {
+          availableStationsSection
+        }
       }
       .sheet(isPresented: $addNewStationViewIsShown) { AddStationView() }
       .navigationTitle(L10n.StationsPicker.navTitle)
@@ -77,7 +79,6 @@ extension StationsPicker {
             }
         }
         .onMove(perform: moveStation)
-        .transition(.slide)
       } else {
         Text(L10n.StationsPicker.noChosenStations)
           .italic()

@@ -16,10 +16,6 @@ struct HuntListRowView: View {
         .font(.headline)
         .fontWeight(.semibold)
 
-      Text(L10n.huntListRowViewStationsCount(hunt.stations.count))
-        .italic()
-        .font(.callout)
-
       Group {
         Text(L10n.HuntListRowView.created) +
         Text(hunt.createdAt, format: .dateTime)
@@ -28,5 +24,19 @@ struct HuntListRowView: View {
       .font(.caption)
     }
     .padding(.vertical, 4)
+    .frame(maxWidth: .infinity, alignment: .leading)
+    .overlay(alignment: .trailing, content: {
+      Image(systemName: "chevron.right")
+        .foregroundColor(.secondary)
+    })
+    .padding()
+    .background(
+      RoundedRectangle(cornerRadius: 8)
+        .fill(.regularMaterial)
+    )
+    .listRowInsets(.init(top: 10, leading: 10, bottom: 10, trailing: 10))
+    .listRowSeparator(.hidden)
+    .contentShape(Rectangle())
+    .buttonStyle(.plain)
   }
 }

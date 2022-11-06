@@ -21,9 +21,6 @@ struct QuestionView: View {
         Text(L10n.HuntView.QuestionView.question)
           .font(.system(.headline, design: .rounded, weight: .bold))
           .foregroundColor(.secondary)
-
-        Text(station.question)
-          .font(.system(.title, design: .rounded, weight: .semibold))
       }
       .multilineTextAlignment(.leading)
       .frame(maxWidth: .infinity, alignment: .leading)

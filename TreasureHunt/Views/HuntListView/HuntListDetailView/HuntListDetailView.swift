@@ -55,53 +55,17 @@ struct HuntListDetailView: View {
 }
 
 extension HuntListDetailView {
-  private var title: some View {
-    HStack(alignment: .top) {
-      VStack(alignment: .leading, spacing: 0) {
-        Text(L10n.HuntListDetailView.huntName.uppercased())
-          .font(.system(.caption, design: .rounded, weight: .regular))
-          .foregroundColor(.secondary)
-      }
-      .padding(.horizontal)
-      .frame(maxWidth: .infinity, alignment: .leading)
-
-      VStack(alignment: .trailing, spacing: 0) {
-        Text(L10n.HuntListDetailView.createdAt.uppercased())
-          .font(.system(.caption, design: .rounded, weight: .regular))
-          .foregroundColor(.secondary)
-
-        Text("\(hunt.createdAt.formatted(date: .abbreviated, time: .shortened))")
-          .font(.system(.subheadline, design: .rounded, weight: .heavy))
-      }
-      .padding(.horizontal)
-      .frame(maxWidth: .infinity, alignment: .trailing)
-    }
-  }
-
-  private var startHuntButton: some View {
-    Button(L10n.HuntListDetailView.startHuntButtonTitle) {
-      withAnimation {
-        huntIsStarted = true
-      }
-    }
-    .shadow(radius: 5)
-    .foregroundColor(Color(uiColor: .systemBackground))
-    .buttonStyle(.borderedProminent)
-    .controlSize(.large)
-    .padding(.bottom, 50)
-    .disabled(huntHasStations == false)
-  }
-
   private var emptyListPlaceholder: some View {
     VStack(alignment: .center, spacing: 20) {
-      Text("Diese Jagd hat keine Stationen, bitte füge zuerst mindestens eine hinzu.")
+      Text(L10n.HuntListDetailView.noStationsPlaceholderText)
         .font(.system(.body, design: .rounded))
-        .foregroundColor(.red)
+        .foregroundColor(.secondary)
       Button(L10n.HuntListDetailView.noStationsEditHuntButtonTitle) {
         huntToEdit = hunt
       }
-      .buttonStyle(.bordered)
+      .buttonStyle(.borderedProminent)
       .controlSize(.regular)
+      .foregroundStyle(.primary)
     }
     .padding()
     .background(
@@ -129,6 +93,33 @@ extension HuntListDetailView {
       startHuntButton
     }
     .transition(.opacity)
+  }
+
+  private var title: some View {
+    VStack(alignment: .leading, spacing: 0) {
+      Text(L10n.HuntListDetailView.createdAt.uppercased())
+        .font(.system(.caption, design: .rounded, weight: .regular))
+        .foregroundColor(.secondary)
+
+      Text("\(hunt.createdAt.formatted(date: .abbreviated, time: .shortened))")
+        .font(.system(.subheadline, design: .rounded, weight: .heavy))
+    }
+    .padding(.horizontal)
+    .frame(maxWidth: .infinity, alignment: .leading)
+  }
+
+  private var startHuntButton: some View {
+    Button(L10n.HuntListDetailView.startHuntButtonTitle) {
+      withAnimation {
+        huntIsStarted = true
+      }
+    }
+    .shadow(radius: 5)
+    .foregroundColor(Color(uiColor: .systemBackground))
+    .buttonStyle(.borderedProminent)
+    .controlSize(.large)
+    .padding(.bottom, 50)
+    .disabled(huntHasStations == false)
   }
 }
 

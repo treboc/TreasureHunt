@@ -21,9 +21,8 @@ class LocationProvider: NSObject, ObservableObject {
     return locManager
   }()
 
-  var currentLocation: CLLocation? {
-    locationManager.location
-  }
+
+  var currentLocation: CLLocation? = .init()
 
   var currentStationLocation: CLLocation?
 
@@ -69,6 +68,7 @@ extension LocationProvider: CLLocationManagerDelegate {
   
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     if let location = locations.last {
+      currentLocation = location
       updateDistance(location: location, nextLocation: currentStationLocation)
     }
   }
@@ -98,7 +98,6 @@ extension LocationProvider: CLLocationManagerDelegate {
   func updateDistance(location: CLLocation?, nextLocation: CLLocation?) {
     if let location = location,
        let nextLocation = nextLocation {
-
       distance = location.distance(from: nextLocation)
     }
   }

@@ -47,13 +47,13 @@
 "huntListDetailView.noStationsEditHuntButtonTitle" = "Edit Hunt";
 
 "huntListDetailRowView.stationName" = "Stations Name";
-"huntListDetailRowView.distanceFromHere" = "Distance:";
+"huntListDetailRowView.distanceFromHere" = "Distance";
 "huntListDetailRowView.question" = "Question";
 
 // AddHuntView
 "addHuntView.name" = "Name of the Hunt";
 "addHuntView.namePlaceholder" = "Kids Birthday Party 🎁";
-"addHuntView.editStations" = "Edit Stations";
+"addHuntView.editStations" = "Chose Stations";
 "addHuntView.chosenStations %@" = "Chosen Stations (%@ / 50)";
 "addHuntView.noChosenStations" = "No Stations Chosen";
 "addHuntView.navTitle" = "New Hunt";
@@ -81,11 +81,9 @@
 "addStationView.positionPage.title" = "1. Position";
 "addStationView.positionPage.description" = "Move the map, so that the center is at this point where the station sould be.";
 "addStationView.detailPage.title" = "2. Details";
-"addStationView.detailPage.description" = "Add a name and a question.";
+"addStationView.detailPage.description" = "Add a name.";
 "addStationView.detailPage.nameTextFieldTitle" = "Name of the Station";
 "addStationView.detailPage.nameTextFieldPlaceholder" = "z.B. At the old mill";
-"addStationView.detailPage.questionTextFieldTitle" = "Question";
-"addStationView.detailPage.questionTextFieldPlaceholder" = "z.B. what's the capitol of the US?";
 
 // AddStationView+PagePicker
 "addStationView.pagePicker.position" = "Position";

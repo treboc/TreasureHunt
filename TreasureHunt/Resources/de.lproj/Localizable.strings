@@ -53,7 +53,7 @@
 // AddHuntView
 "addHuntView.name" = "Name der Jagd";
 "addHuntView.namePlaceholder" = "Kindergeburtstag 🎁";
-"addHuntView.editStations" = "Stationen bearbeiten";
+"addHuntView.editStations" = "Stationen wählen";
 "addHuntView.chosenStations %@" = "Ausgewählte Stationen (%@ / 50)";
 "addHuntView.noChosenStations" = "Noch keine Station ausgewählt";
 "addHuntView.navTitle" = "Neue Jagd";
@@ -81,11 +81,9 @@
 "addStationView.positionPage.title" = "1. Position";
 "addStationView.positionPage.description" = "Schiebe die Mitte der Karte an die Stelle, an der diese Station sein soll.";
 "addStationView.detailPage.title" = "2. Details";
-"addStationView.detailPage.description" = "Füge noch einen Namen und eine Aufgabe hinzu.";
+"addStationView.detailPage.description" = "Füge noch einen Namen hinzu.";
 "addStationView.detailPage.nameTextFieldTitle" = "Name der Station";
 "addStationView.detailPage.nameTextFieldPlaceholder" = "z.B. an der alten Mühle";
-"addStationView.detailPage.questionTextFieldTitle" = "Aufgabe";
-"addStationView.detailPage.questionTextFieldPlaceholder" = "z.B. wie heißt die Hauptstadt der BRD?";
 
 // AddStationView+PagePicker
 "addStationView.pagePicker.position" = "Position";

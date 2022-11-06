@@ -12,6 +12,8 @@ struct HuntListDetailRowView: View {
   let station: Station
   let position: Int
 
+  @State private var rowSize: CGSize = .zero
+
   func distanceToStation() -> String {
     if let distance = locationProvider.distanceTo(station.location) {
       return distance.asDistance()
@@ -23,10 +25,6 @@ struct HuntListDetailRowView: View {
   var body: some View {
     VStack(alignment: .leading, spacing: 10) {
       HStack(alignment: .center) {
-        Image(systemName: "\(position).circle.fill")
-          .font(.title3)
-          .foregroundStyle(Color.accentColor)
-
         HStack(alignment: .top) {
           // title
           VStack(alignment: .leading, spacing: 2) {
@@ -36,6 +34,7 @@ struct HuntListDetailRowView: View {
 
             Text(station.name)
               .font(.system(.title2, design: .rounded, weight: .semibold))
+              .lineLimit(2)
           }
 
           Spacer()
@@ -51,26 +50,19 @@ struct HuntListDetailRowView: View {
           }
         }
       }
-
-      // question & answer
-      if station.question.isEmpty == false {
-        Divider()
-
-        VStack(alignment: .leading, spacing: 2) {
-          Text(L10n.HuntListDetailRowView.question.localizedUppercase)
-            .font(.system(.caption2, design: .rounded))
-            .foregroundColor(.secondary)
-
-          Text(station.question)
-            .font(.system(.headline, design: .rounded))
-            .lineLimit(0)
-            .multilineTextAlignment(.leading)
-        }
-      }
     }
     .frame(maxWidth: .infinity, alignment: .leading)
     .padding()
     .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 16, style: .circular))
+    .readSize { size in
+      rowSize = size
+    }
+    .overlay {
+      Image(systemName: "\(position).circle.fill")
+        .font(.title3)
+        .foregroundStyle(Color.accentColor)
+        .offset(x: -(rowSize.width / 2))
+    }
     .padding(.horizontal)
   }
 }

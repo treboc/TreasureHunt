@@ -27,7 +27,7 @@ struct StationPickerRowView: View {
   }
 
   var body: some View {
-    HStack(spacing: 16) {
+    HStack {
       if rowType == .chosen {
         positionImage
       }

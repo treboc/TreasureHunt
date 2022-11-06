@@ -11,7 +11,7 @@ import SwiftUI
 
 struct StationsListRowView: View {
   @EnvironmentObject private var locationProvider: LocationProvider
-  @StateRealmObject var station: Station
+  let station: Station
   @State private var yOffset: CGFloat = 0
 
   func distanceToStation() -> String {
@@ -28,26 +28,15 @@ struct StationsListRowView: View {
         Text(station.name)
           .font(.system(.title3, design: .rounded, weight: .semibold))
           .fontWeight(.semibold)
-
-        if !station.question.isEmpty {
-          Text("**Q:** *\(station.question)*")
-            .foregroundColor(.secondary)
-            .font(.caption)
-        } else {
-          Text(L10n.StationsListRowView.noQuestion)
-            .italic()
-            .foregroundColor(.secondary)
-            .font(.caption)
-        }
       }
 
       Spacer()
 
       VStack(alignment: .trailing) {
-        Text(L10n.HuntListDetailRowView.distanceFromHere)
-          .font(.system(.caption, design: .rounded, weight: .thin))
-
         Text(distanceToStation())
+
+        Text(L10n.HuntListDetailRowView.distanceFromHere)
+          .font(.system(.caption, design: .rounded, weight: .light))
       }
     }
     .padding(.vertical, 4)

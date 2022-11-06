@@ -14,17 +14,15 @@ final class Station: Object, ObjectKeyIdentifiable {
   @Persisted var latitude: Double = 0
   @Persisted var triggerDistance: Double = 5
   @Persisted var name: String = ""
-  @Persisted var question: String = ""
   @Persisted var isFavorite: Bool = false
   var isCompleted: Bool = false
 
-  convenience init(coordinate: CLLocationCoordinate2D, triggerDistance: Double, name: String, question: String) {
+  convenience init(coordinate: CLLocationCoordinate2D, triggerDistance: Double, name: String) {
     self.init()
     self.longitude = coordinate.longitude
     self.latitude = coordinate.latitude
     self.triggerDistance = triggerDistance
     self.name = name
-    self.question = question
   }
 
   var coordinate: CLLocationCoordinate2D {
@@ -37,5 +35,5 @@ final class Station: Object, ObjectKeyIdentifiable {
 }
 
 extension Station {
-  static let station = Station(coordinate: .init(latitude: 10, longitude: 50), triggerDistance: 50, name: "Dummy Station", question: "No questions at all!")
+  static let station = Station(coordinate: .init(latitude: 10, longitude: 50), triggerDistance: 50, name: "Dummy Station")
 }

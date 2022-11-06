@@ -40,15 +40,10 @@ struct AddHuntView: View {
           TextField(L10n.AddHuntView.namePlaceholder, text: $name)
         }
 
-        Section {
+        Section(L10n.AddHuntView.chosenStations(chosenStations.count)) {
           NavigationLink(L10n.AddHuntView.editStations) {
             StationsPicker(chosenStations: $chosenStations)
           }
-        }
-
-        stationOverview
-
-        Section(L10n.AddHuntView.chosenStations(chosenStations.count)) {
           if chosenStations.isEmpty {
             Text(L10n.AddHuntView.noChosenStations)
               .italic()
@@ -57,6 +52,9 @@ struct AddHuntView: View {
             List {
               ForEach(0..<chosenStations.count, id: \.self) { index in
                 StationPickerRowView(index: index, station: chosenStations[index], rowType: .chosen)
+              }
+              .onDelete { indexSet in
+                chosenStations.remove(atOffsets: indexSet)
               }
             }
           }

@@ -22,14 +22,19 @@ struct HuntListView: View {
         } else {
           List {
             ForEach(hunts) { hunt in
-              NavigationLink(destination: HuntListDetailView(hunt: hunt)) {
-                HuntListRowView(hunt: hunt)
-              }
+              HuntListRowView(hunt: hunt)
+                .overlay(
+                  NavigationLink(
+                    destination: { HuntListDetailView(hunt: hunt) },
+                    label: { EmptyView() }
+                  ).opacity(0)
+                )
               .swipeActions {
                 swipeToDelete(hunt)
               }
             }
           }
+          .listStyle(.plain)
         }
       }
       .alert(L10n.Alert.DeleteHunt.title, isPresented: $huntDeletionAlertIsShown, actions: {

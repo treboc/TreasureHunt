@@ -2,9 +2,9 @@
 //  
 //
 
+import MapKit
 import RealmSwift
 import SwiftUI
-import MapKit
 
 struct AddStationView: View {
   @EnvironmentObject private var locationProvider: LocationProvider
@@ -14,7 +14,6 @@ struct AddStationView: View {
 
   @State private var region: MKCoordinateRegion = .init()
   @State private var name: String = ""
-  @State private var question: String = ""
   @State private var isFavorite: Bool = false
   @State private var triggerDistance: Double = 25
   @FocusState private var focusedField: Field?
@@ -36,7 +35,6 @@ struct AddStationView: View {
     if let stationToEdit {
       self.stationToEdit = stationToEdit
       _name = State(initialValue: stationToEdit.name)
-      _question = State(initialValue: stationToEdit.question)
       _isFavorite = State(initialValue: stationToEdit.isFavorite)
       _triggerDistance = State(initialValue: stationToEdit.triggerDistance)
       let region = MKCoordinateRegion(center: stationToEdit.coordinate,
@@ -73,9 +71,6 @@ struct AddStationView: View {
       .navigationBarTitleDisplayMode(.inline)
       .navigationTitle(name.isEmpty ? L10n.AddStationView.navTitle : name)
       .interactiveDismissDisabled()
-      .onAppear {
-        locationProvider.locationManager.requestWhenInUseAuthorization()
-      }
       .task {
         setMapSpan()
       }
@@ -83,26 +78,16 @@ struct AddStationView: View {
   }
 }
 
-struct AddNewStationView_Previews: PreviewProvider {
-  static let location = CLLocation(latitude: 50, longitude: 50)
-
-  static var previews: some View {
-    AddStationView(location: location)
-  }
-}
-
-
 extension AddStationView {
   // MARK: - Methods
   private func saveButtonTapped() {
     if let stationToEdit {
-      try? StationModelService.update(stationToEdit, with: region.center, name: name, triggerDistance: triggerDistance, question: question, isFavorite: isFavorite)
+      try? StationModelService.update(stationToEdit, with: region.center, name: name, triggerDistance: triggerDistance, isFavorite: isFavorite)
       dismiss()
     } else {
       let station = Station(coordinate: region.center,
                             triggerDistance: triggerDistance,
-                            name: name,
-                            question: question)
+                            name: name)
       try? StationModelService.add(station)
     }
     reset()
@@ -114,7 +99,6 @@ extension AddStationView {
 
   private func reset() {
     self.name.removeAll()
-    self.question.removeAll()
     self.selectedPage = .position
   }
 
@@ -202,18 +186,22 @@ extension AddStationView {
         .foregroundColor(.secondary)
 
       VStack(spacing: 16) {
-        TextfieldWithTitle(title: L10n.AddStationView.DetailPage.nameTextFieldTitle,
-                           placeholder: L10n.AddStationView.DetailPage.nameTextFieldPlaceholder,
-                           text: $name,
-                           focusField: _focusedField,
-                           field: .name)
+        VStack(alignment: .leading, spacing: 2) {
+          Text(L10n.AddStationView.DetailPage.nameTextFieldTitle.uppercased())
+            .foregroundColor(.secondary)
+            .font(.caption)
+            .padding(.leading)
 
-        TextfieldWithTitle(title: L10n.AddStationView.DetailPage.questionTextFieldTitle,
-                           placeholder: L10n.AddStationView.DetailPage.questionTextFieldPlaceholder,
-                           text: $question,
-                           focusField: _focusedField,
-                           field: .question)
+          TextField(L10n.AddStationView.DetailPage.nameTextFieldPlaceholder, text: $name, axis: .vertical)
+            .focused($focusedField, equals: .name)
+            .padding(.vertical, 10)
+            .padding(.horizontal)
+            .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 8))
+            .lineLimit(1...10)
+            .scrollDismissesKeyboard(.interactively)
+        }
       }
+      .animation(.none, value: focusedField)
       .padding(.top, 16)
       Spacer()
     }
@@ -275,6 +263,6 @@ extension AddStationView {
 
 extension AddStationView {
   enum Field: Hashable {
-    case name, question
+    case name
   }
 }

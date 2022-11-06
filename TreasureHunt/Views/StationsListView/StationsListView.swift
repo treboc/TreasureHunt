@@ -12,11 +12,10 @@ struct StationsListView: View {
   @AppStorage(UserDefaultsKeys.Tooltips.editStations) private var editStationTooltipIsShown = true
   @State private var newStationSheetIsShown: Bool = false
   @State private var stationToEdit: Station? = nil
-  @State private var stationDeletionAlertIsShown: Bool = false
   @State private var stationToDelete: Station? = nil
 
   var body: some View {
-    NavigationView {
+    NavigationStack {
       ZStack {
         if stations.isEmpty {
           noStationsPlaceholder
@@ -27,7 +26,7 @@ struct StationsListView: View {
       .navigationTitle(L10n.StationsListView.navTitle)
       .roundedNavigationTitle()
       .sheet(isPresented: $newStationSheetIsShown, onDismiss: nil) {
-        AddStationView(location: locationProvider.locationManager.location)
+        AddStationView(location: locationProvider.currentLocation)
       }
       .sheet(item: $stationToEdit) { station in
         AddStationView(stationToEdit: station)
@@ -73,7 +72,7 @@ extension StationsListView {
 
   private var stationsList: some View {
     List {
-      ForEach(stations, id: \._id) { station in
+      ForEach(stations) { station in
         StationsListRowView(station: station)
           .onTapGesture {
             stationToEdit = station
@@ -88,20 +87,7 @@ extension StationsListView {
             swipeToFavorite(station)
           }
           .contextMenu {
-            Button {
-              StationModelService.toggleFavorite(station)
-            } label: {
-              if station.isFavorite {
-                Label("Remove from Favorites", systemImage: "star.fill")
-              } else {
-                Label("Add to Favorites", systemImage: "star")
-              }
-            }
-            Button {
-              stationToEdit = station
-            } label: {
-              Label("Edit Station", systemImage: "pencil")
-            }
+            contextMenuContent(station)
           }
       }
     }
@@ -111,20 +97,24 @@ extension StationsListView {
         editStationTooltipView
       }
     }
-    .alert(L10n.Alert.DeleteStation.title, isPresented: $stationDeletionAlertIsShown, actions: {
-      Button(L10n.BtnTitle.cancel, role: .cancel) {}
-        .tint(Color.accentColor)
+    .alert(L10n.Alert.DeleteStation.title, isPresented: .constant(stationToDelete != nil), actions: {
+      Button(L10n.BtnTitle.cancel, role: .cancel) {
+        stationToDelete = nil
+      }
+      .tint(Color.accentColor)
+
       Button(L10n.BtnTitle.iAmSure, role: .destructive) {
         if let stationToDelete {
           withAnimation {
             $stations.remove(stationToDelete)
+            self.stationToDelete = nil
           }
         }
       }
     }, message: {
       Text(L10n.Alert.DeleteStation.message)
     })
-    .animation(.default, value: stationDeletionAlertIsShown)
+    .animation(.default, value: stationToDelete)
   }
 
   private var editStationTooltipView: some View {
@@ -150,10 +140,33 @@ extension StationsListView {
       .padding()
   }
 
-  private func swipeToDelete(_ station: Station) -> some View {
+  @ViewBuilder
+  private func contextMenuContent(_ station: Station) -> some View {
     Button {
+      StationModelService.toggleFavorite(station)
+    } label: {
+      if station.isFavorite {
+        Label("Remove from Favorites", systemImage: "star.fill")
+      } else {
+        Label("Add to Favorites", systemImage: "star")
+      }
+    }
+    Button {
+      stationToEdit = station
+    } label: {
+      Label("Edit Station", systemImage: "pencil")
+    }
+
+    Button(role: .destructive) {
       stationToDelete = station
-      stationDeletionAlertIsShown = true
+    } label: {
+      Label("Delete", systemImage: "trash")
+    }
+  }
+
+  private func swipeToDelete(_ station: Station) -> some View {
+    Button(role: .destructive) {
+      stationToDelete = station
     } label: {
       Label(L10n.BtnTitle.delete, systemImage: "trash")
         .labelStyle(.iconOnly)
@@ -168,7 +181,7 @@ extension StationsListView {
       Label(L10n.BtnTitle.edit, systemImage: "square.and.pencil")
         .labelStyle(.iconOnly)
     }
-    .tint(.teal)
+    .tint(.purple)
   }
 
   private func swipeToFavorite(_ station: Station) -> some View {
