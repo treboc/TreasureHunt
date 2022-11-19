@@ -1,5 +1,5 @@
 //
-//  StationsListRowView.swift
+//  LocationsListRowView.swift
 //  TreasureHunt
 //
 //  Created by Marvin Lee Kobert on 25.09.22.
@@ -9,13 +9,13 @@ import MapKit
 import RealmSwift
 import SwiftUI
 
-struct StationsListRowView: View {
+struct LocationsListRowView: View {
   @EnvironmentObject private var locationProvider: LocationProvider
-  let station: Station
   @State private var yOffset: CGFloat = 0
+  let location: THLocation
 
   func distanceToStation() -> String {
-    if let distance = locationProvider.distanceTo(station.location) {
+    if let distance = locationProvider.distanceTo(location.location) {
       return distance.asDistance()
     } else {
       return "N/A"
@@ -25,7 +25,7 @@ struct StationsListRowView: View {
   var body: some View {
     HStack {
       VStack(alignment: .leading, spacing: 5) {
-        Text(station.name)
+        Text(location.name)
           .font(.system(.title3, design: .rounded, weight: .semibold))
           .fontWeight(.semibold)
       }
@@ -42,7 +42,7 @@ struct StationsListRowView: View {
     .padding(.vertical, 4)
     .frame(maxWidth: .infinity, alignment: .leading)
     .overlay(alignment: .trailing) {
-      if station.isFavorite {
+      if location.isFavorite {
         Image(systemName: "star.fill")
           .foregroundColor(.yellow)
           .offset(y: yOffset)

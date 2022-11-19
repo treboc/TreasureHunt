@@ -1,6 +1,6 @@
 //
 //  Button+Extension.swift
-//  TriomiCount
+//  TreasureHunt
 //
 //  Created by Marvin Lee Kobert on 12.05.22.
 //

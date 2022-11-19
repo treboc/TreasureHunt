@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct StationAnnotationView: View {
-  let station: Station
+  let station: THLocation
 
   var body: some View {
     VStack(spacing: 0) {

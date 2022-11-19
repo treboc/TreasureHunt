@@ -29,7 +29,7 @@
 
 // MainTabView
 "mainTabView.tabItem.huntList" = "Hunts";
-"mainTabView.tabItem.stationList" = "Stations";
+"mainTabView.tabItem.stationList" = "Locations";
 "mainTabView.tabItem.settings" = "Settings";
 
 // HuntListView
@@ -66,15 +66,15 @@
 "stationsPicker.noChosenStations" = "No Station Chosen Yet";
 "stationsPicker.availableStations" = "Available Stations";
 
-// StationsListView
-"stationsListView.navTitle" = "Stations";
-"stationsListView.listPlaceholderText" = "You've not added any station yet. To create your first station, tap here or the \"+\" in the top right corner.";
-"stationsListView.listPlaceholderButtonTitle" = "Create a Station";
-"stationsListView.editStationTooltip" = "Tip: Tap on a station to show an edit sheet for this station.";
-"stationsListView.swipeAction.markFavorite" = "Toggle Station as Favorite";
+// LocationsListView
+"locationsListView.navTitle" = "Locations";
+"locationsListView.listPlaceholderText" = "You've not added any location yet. To create your first location, tap here or the \"+\" in the top right corner.";
+"locationsListView.listPlaceholderButtonTitle" = "Create a Location";
+"locationsListView.editStationTooltip" = "Tip: Tap on a location to show an edit sheet for this location.";
+"locationsListView.swipeAction.markFavorite" = "Toggle Location as Favorite";
 
-// StationsListRowView
-"stationsListRowView.noQuestion" = "No question on this station.";
+// LocationsListRowView
+"locationsListRowView.noQuestion" = "No question on this station.";
 
 // AddStationView
 "addStationView.navTitle" = "New Station";
@@ -141,3 +141,4 @@
 
 // SettingsView => LegalNoticeView
 "settingsView.legalNoticeView.navTitle" = "Legal Notice";
+

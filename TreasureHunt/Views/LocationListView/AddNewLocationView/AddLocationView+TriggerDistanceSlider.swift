@@ -1,5 +1,5 @@
 //
-//  TriggerDistanceSlider.swift
+//  AddLocationView+TriggerDistanceSlider.swift
 //  TreasureHunt
 //
 //  Created by Marvin Lee Kobert on 16.10.22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-extension AddStationView {
+extension AddLocationView {
   struct TriggerDistanceSlider: View {
     @Binding var triggerDistance: Double
 

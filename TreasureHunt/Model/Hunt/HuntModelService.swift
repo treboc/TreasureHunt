@@ -9,7 +9,7 @@ import Foundation
 import RealmSwift
 
 struct HuntModelService {
-  static func add(_ hunt: Hunt, with stations: [Station]) {
+  static func add(_ hunt: Hunt, with stations: [THStation]) {
     do {
       let realm = try Realm()
       try realm.write {
@@ -22,7 +22,7 @@ struct HuntModelService {
     }
   }
 
-  static func update(_ hunt: Hunt, with name: String, and stations: [Station]) throws {
+  static func update(_ hunt: Hunt, with name: String, and stations: [THStation]) throws {
     let realm = try Realm()
     guard let huntToEdit = realm.object(ofType: Hunt.self, forPrimaryKey: hunt._id) else { return }
 

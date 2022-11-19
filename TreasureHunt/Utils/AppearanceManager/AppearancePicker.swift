@@ -18,6 +18,6 @@ struct AppearancePicker: View {
   }
   .pickerStyle(.menu)
   .accessibilityElement()
-  .accessibilityLabel(Text("Farbschema, \(appearanceManager.appearance.title)"))
+  .accessibilityLabel(Text("\(L10n.SettingsView.AppearancePicker.title), \(appearanceManager.appearance.title)"))
  }
 }

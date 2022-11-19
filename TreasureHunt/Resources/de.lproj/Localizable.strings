@@ -29,7 +29,7 @@
 
 // MainTabView
 "mainTabView.tabItem.huntList" = "Jagden";
-"mainTabView.tabItem.stationList" = "Stationen";
+"mainTabView.tabItem.stationList" = "Standorte";
 "mainTabView.tabItem.settings" = "Einstellungen";
 
 // HuntListView
@@ -66,15 +66,15 @@
 "stationsPicker.noChosenStations" = "Noch keine Station gewählt";
 "stationsPicker.availableStations" = "Verfügbare Stationen";
 
-// StationsListView
-"stationsListView.navTitle" = "Stationen";
-"stationsListView.listPlaceholderText" = "Du hast noch keine Station erstellt. Deine erste Station kann du erstellen in dem du hier tippst, oder oben rechts auf das \"+\".";
-"stationsListView.listPlaceholderButtonTitle" = "Erstelle eine Station";
-"stationsListView.editStationTooltip" = "Tipp: Tippe eine Station in der Liste an, um sie zu bearbeiten.";
-"stationsListview.swipeAction.markFavorite" = "Station als Favoriten umschalten";
+// LocationsListView
+"locationsListView.navTitle" = "Standorte";
+"locationsListView.listPlaceholderText" = "Du hast noch keinen Standort erstellt. Deinen ersten Standort kannst du erstellen in dem du hier, oder oben rechts auf das \"+\", tippst.";
+"locationsListView.listPlaceholderButtonTitle" = "Erstelle einen Standort";
+"locationsListView.editStationTooltip" = "Tipp: Tippe einen Standort in der Liste an, um ihn zu bearbeiten.";
+"locationsListview.swipeAction.markFavorite" = "Standort als Favoriten umschalten";
 
-// StationsListRowView
-"stationsListRowView.noQuestion" = "Zu dieser Station gibt es keine Aufgabe.";
+// LocationsListRowView
+"locationsListRowView.noQuestion" = "Zu dieser Station gibt es keine Aufgabe.";
 
 // AddStationView
 "addStationView.navTitle" = "Neue Station";

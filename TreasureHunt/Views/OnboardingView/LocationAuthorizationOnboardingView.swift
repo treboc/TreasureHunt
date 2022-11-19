@@ -43,7 +43,6 @@ extension LocationAuthorizationOnboardingView {
       Text("Achtung! ⚠️")
         .font(.system(.largeTitle, design: .rounded, weight: .semibold))
 
-
       Text("Du hast die Standorterkennung für TreasureHunt deaktiviert. Diese ist aber unverzichtbar für die Nutzung der App, da die Schatzsuche standortbasiert ist.")
         .foregroundColor(.secondary)
 
@@ -59,9 +58,7 @@ extension LocationAuthorizationOnboardingView {
       VStack(alignment: .leading, spacing: 5) {
         Button {
           if let url = URL(string: UIApplication.openSettingsURLString) {
-            UIApplication.shared.open(url, options: [:]) { bool in
-              print(true)
-            }
+            UIApplication.shared.open(url, options: [:]) { _ in }
           }
         } label: {
           Label("Zu den Einstellungen", systemImage: "gear")

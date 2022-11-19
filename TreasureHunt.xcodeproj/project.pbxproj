@@ -10,22 +10,23 @@
 		452AA85328F69DA300F11BA5 /* LocationAuthorizationOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452AA85228F69DA300F11BA5 /* LocationAuthorizationOnboardingView.swift */; };
 		4530A10D28F14BCD00F05AE3 /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530A10C28F14BCD00F05AE3 /* QuestionView.swift */; };
 		4532DB0728FA981500C32418 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4532DB0928FA981500C32418 /* Localizable.strings */; };
-		4533508F28FC824400BC0AA0 /* AddStationView+TriggerDistanceSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4533508E28FC824400BC0AA0 /* AddStationView+TriggerDistanceSlider.swift */; };
-		4533509128FC82BA00BC0AA0 /* AddStationView+PagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4533509028FC82BA00BC0AA0 /* AddStationView+PagePicker.swift */; };
-		4533509328FC953400BC0AA0 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4533509228FC953400BC0AA0 /* String+Extension.swift */; };
+		4533508F28FC824400BC0AA0 /* AddLocationView+TriggerDistanceSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4533508E28FC824400BC0AA0 /* AddLocationView+TriggerDistanceSlider.swift */; };
+		45435A702918332C00FCDB42 /* THStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45435A6F2918332C00FCDB42 /* THStation.swift */; };
 		45513FAA28EAF2D90064A32E /* HuntListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45513FA928EAF2D90064A32E /* HuntListView.swift */; };
 		45513FB528EAFADD0064A32E /* AddHuntView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45513FB428EAFADD0064A32E /* AddHuntView.swift */; };
-		45513FB728EBD9A60064A32E /* StationsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45513FB628EBD9A60064A32E /* StationsPicker.swift */; };
+		45513FB728EBD9A60064A32E /* LocationsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45513FB628EBD9A60064A32E /* LocationsPicker.swift */; };
 		45513FB928ECBDC10064A32E /* StationPickerRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45513FB828ECBDC10064A32E /* StationPickerRowView.swift */; };
 		45513FBC28ECD2070064A32E /* HuntListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45513FBB28ECD2070064A32E /* HuntListRowView.swift */; };
 		45513FBE28ECD22C0064A32E /* HuntListDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45513FBD28ECD22C0064A32E /* HuntListDetailView.swift */; };
 		45513FC128ED69130064A32E /* StationAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45513FC028ED69130064A32E /* StationAnnotationView.swift */; };
+		457C2D532928176A0051FDD6 /* SuccessPopover+ViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C2D522928176A0051FDD6 /* SuccessPopover+ViewModifier.swift */; };
+		457C2D55292818310051FDD6 /* AnimatedCheckmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C2D54292818310051FDD6 /* AnimatedCheckmark.swift */; };
 		4587B6CC28F37AFB00F10ED8 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 4587B6CB28F37AFB00F10ED8 /* Realm */; };
 		4587B6CE28F37AFB00F10ED8 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4587B6CD28F37AFB00F10ED8 /* RealmSwift */; };
-		4587B6D128F37C2000F10ED8 /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4587B6D028F37C2000F10ED8 /* Station.swift */; };
+		4587B6D128F37C2000F10ED8 /* THLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4587B6D028F37C2000F10ED8 /* THLocation.swift */; };
 		4587B6D328F383C900F10ED8 /* StationModelService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4587B6D228F383C900F10ED8 /* StationModelService.swift */; };
 		458F90E528EAACB300F9BE29 /* HapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458F90E428EAACB300F9BE29 /* HapticsManager.swift */; };
-		458F90E728EAAEB200F9BE29 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458F90E628EAAEB200F9BE29 /* UserDefaultsKeys.swift */; };
+		458F90E728EAAEB200F9BE29 /* UserDefaults.Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458F90E628EAAEB200F9BE29 /* UserDefaults.Keys.swift */; };
 		458F90E928EAB15500F9BE29 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458F90E828EAB15500F9BE29 /* Double+Extension.swift */; };
 		45A8CEE728EA228500F19E67 /* HuntViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A8CEE628EA228500F19E67 /* HuntViewModel.swift */; };
 		45ABD0B9290AA9CF0010E1EF /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ABD0B8290AA9CF0010E1EF /* L10n.swift */; };
@@ -50,15 +51,14 @@
 		8A4C4F9B28E207C200721C50 /* AppearanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4C4F9A28E207C200721C50 /* AppearanceManager.swift */; };
 		8A4C4F9D28E2083500721C50 /* AppearancePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4C4F9C28E2083500721C50 /* AppearancePicker.swift */; };
 		8A4C4FA328E20FB100721C50 /* ArrowIconPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4C4FA228E20FB100721C50 /* ArrowIconPicker.swift */; };
-		8A52024A28E0A21900C49779 /* AddStationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A52024428E0A21900C49779 /* AddStationView.swift */; };
+		8A52024A28E0A21900C49779 /* AddLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A52024428E0A21900C49779 /* AddLocationView.swift */; };
 		8A52024C28E0A21900C49779 /* DirectionDistanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A52024628E0A21900C49779 /* DirectionDistanceView.swift */; };
-		8A52024D28E0A21900C49779 /* StationsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A52024728E0A21900C49779 /* StationsListView.swift */; };
+		8A52024D28E0A21900C49779 /* LocationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A52024728E0A21900C49779 /* LocationListView.swift */; };
 		8A52024E28E0A21900C49779 /* HuntView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A52024928E0A21900C49779 /* HuntView.swift */; };
 		8A52025328E0A23200C49779 /* Button+PressActionsModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A52025128E0A23200C49779 /* Button+PressActionsModifier.swift */; };
-		8A52025428E0A23200C49779 /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A52025228E0A23200C49779 /* FileManager+Extension.swift */; };
 		8AD1768928E0AE0C00A12948 /* Button+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD1768828E0AE0C00A12948 /* Button+Extension.swift */; };
 		8AD1768B28E0C58200A12948 /* HuntManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD1768A28E0C58200A12948 /* HuntManager.swift */; };
-		8AD1768E28E0F14600A12948 /* StationsListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD1768D28E0F14600A12948 /* StationsListRowView.swift */; };
+		8AD1768E28E0F14600A12948 /* LocationsListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD1768D28E0F14600A12948 /* LocationsListRowView.swift */; };
 		8AE029C328E211FF009B5F4B /* AddHuntStationAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE029C228E211FF009B5F4B /* AddHuntStationAnnotationView.swift */; };
 		8AFCFF3928E225ED000D1A0B /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFCFF3828E225ED000D1A0B /* MapView.swift */; };
 		F212393128CA539C006754E3 /* TreasureHuntApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F212393028CA539C006754E3 /* TreasureHuntApp.swift */; };
@@ -73,20 +73,21 @@
 		452AA85228F69DA300F11BA5 /* LocationAuthorizationOnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationAuthorizationOnboardingView.swift; sourceTree = "<group>"; };
 		4530A10C28F14BCD00F05AE3 /* QuestionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
 		4532DB0828FA981500C32418 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		4533508E28FC824400BC0AA0 /* AddStationView+TriggerDistanceSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddStationView+TriggerDistanceSlider.swift"; sourceTree = "<group>"; };
-		4533509028FC82BA00BC0AA0 /* AddStationView+PagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddStationView+PagePicker.swift"; sourceTree = "<group>"; };
-		4533509228FC953400BC0AA0 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		4533508E28FC824400BC0AA0 /* AddLocationView+TriggerDistanceSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddLocationView+TriggerDistanceSlider.swift"; sourceTree = "<group>"; };
+		45435A6F2918332C00FCDB42 /* THStation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = THStation.swift; sourceTree = "<group>"; };
 		45513FA928EAF2D90064A32E /* HuntListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuntListView.swift; sourceTree = "<group>"; };
 		45513FB428EAFADD0064A32E /* AddHuntView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHuntView.swift; sourceTree = "<group>"; };
-		45513FB628EBD9A60064A32E /* StationsPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsPicker.swift; sourceTree = "<group>"; };
+		45513FB628EBD9A60064A32E /* LocationsPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsPicker.swift; sourceTree = "<group>"; };
 		45513FB828ECBDC10064A32E /* StationPickerRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationPickerRowView.swift; sourceTree = "<group>"; };
 		45513FBB28ECD2070064A32E /* HuntListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuntListRowView.swift; sourceTree = "<group>"; };
 		45513FBD28ECD22C0064A32E /* HuntListDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuntListDetailView.swift; sourceTree = "<group>"; };
 		45513FC028ED69130064A32E /* StationAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationAnnotationView.swift; sourceTree = "<group>"; };
-		4587B6D028F37C2000F10ED8 /* Station.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
+		457C2D522928176A0051FDD6 /* SuccessPopover+ViewModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SuccessPopover+ViewModifier.swift"; sourceTree = "<group>"; };
+		457C2D54292818310051FDD6 /* AnimatedCheckmark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatedCheckmark.swift; sourceTree = "<group>"; };
+		4587B6D028F37C2000F10ED8 /* THLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = THLocation.swift; sourceTree = "<group>"; };
 		4587B6D228F383C900F10ED8 /* StationModelService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationModelService.swift; sourceTree = "<group>"; };
 		458F90E428EAACB300F9BE29 /* HapticsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HapticsManager.swift; sourceTree = "<group>"; };
-		458F90E628EAAEB200F9BE29 /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
+		458F90E628EAAEB200F9BE29 /* UserDefaults.Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.Keys.swift; sourceTree = "<group>"; };
 		458F90E828EAB15500F9BE29 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		45A8CEE628EA228500F19E67 /* HuntViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuntViewModel.swift; sourceTree = "<group>"; };
 		45ABD0B5290AA6630010E1EF /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -113,15 +114,14 @@
 		8A4C4F9A28E207C200721C50 /* AppearanceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearanceManager.swift; sourceTree = "<group>"; };
 		8A4C4F9C28E2083500721C50 /* AppearancePicker.swift */ = {isa = PBXFileReference; indentWidth = 1; lastKnownFileType = sourcecode.swift; path = AppearancePicker.swift; sourceTree = "<group>"; };
 		8A4C4FA228E20FB100721C50 /* ArrowIconPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrowIconPicker.swift; sourceTree = "<group>"; };
-		8A52024428E0A21900C49779 /* AddStationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddStationView.swift; sourceTree = "<group>"; };
+		8A52024428E0A21900C49779 /* AddLocationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddLocationView.swift; sourceTree = "<group>"; };
 		8A52024628E0A21900C49779 /* DirectionDistanceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectionDistanceView.swift; sourceTree = "<group>"; };
-		8A52024728E0A21900C49779 /* StationsListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationsListView.swift; sourceTree = "<group>"; };
+		8A52024728E0A21900C49779 /* LocationListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationListView.swift; sourceTree = "<group>"; };
 		8A52024928E0A21900C49779 /* HuntView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HuntView.swift; sourceTree = "<group>"; };
 		8A52025128E0A23200C49779 /* Button+PressActionsModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Button+PressActionsModifier.swift"; sourceTree = "<group>"; };
-		8A52025228E0A23200C49779 /* FileManager+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
 		8AD1768828E0AE0C00A12948 /* Button+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Button+Extension.swift"; sourceTree = "<group>"; };
 		8AD1768A28E0C58200A12948 /* HuntManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuntManager.swift; sourceTree = "<group>"; };
-		8AD1768D28E0F14600A12948 /* StationsListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsListRowView.swift; sourceTree = "<group>"; };
+		8AD1768D28E0F14600A12948 /* LocationsListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsListRowView.swift; sourceTree = "<group>"; };
 		8AE029C228E211FF009B5F4B /* AddHuntStationAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHuntStationAnnotationView.swift; sourceTree = "<group>"; };
 		8AFCFF3828E225ED000D1A0B /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		F212392D28CA539C006754E3 /* TreasureHunt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TreasureHunt.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -146,14 +146,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4532DB0A28FC81E600C32418 /* AddNewStationView */ = {
+		4532DB0A28FC81E600C32418 /* AddNewLocationView */ = {
 			isa = PBXGroup;
 			children = (
-				8A52024428E0A21900C49779 /* AddStationView.swift */,
-				4533509028FC82BA00BC0AA0 /* AddStationView+PagePicker.swift */,
-				4533508E28FC824400BC0AA0 /* AddStationView+TriggerDistanceSlider.swift */,
+				8A52024428E0A21900C49779 /* AddLocationView.swift */,
+				4533508E28FC824400BC0AA0 /* AddLocationView+TriggerDistanceSlider.swift */,
 			);
-			path = AddNewStationView;
+			path = AddNewLocationView;
 			sourceTree = "<group>";
 		};
 		45513FA828EAF2CD0064A32E /* HuntListView */ = {
@@ -180,7 +179,7 @@
 		45513FBA28ECBDC80064A32E /* StationPicker */ = {
 			isa = PBXGroup;
 			children = (
-				45513FB628EBD9A60064A32E /* StationsPicker.swift */,
+				45513FB628EBD9A60064A32E /* LocationsPicker.swift */,
 				45513FB828ECBDC10064A32E /* StationPickerRowView.swift */,
 			);
 			path = StationPicker;
@@ -194,6 +193,15 @@
 				45513FBA28ECBDC80064A32E /* StationPicker */,
 			);
 			path = AddHuntView;
+			sourceTree = "<group>";
+		};
+		457C2D56292818350051FDD6 /* SuccessPopover */ = {
+			isa = PBXGroup;
+			children = (
+				457C2D522928176A0051FDD6 /* SuccessPopover+ViewModifier.swift */,
+				457C2D54292818310051FDD6 /* AnimatedCheckmark.swift */,
+			);
+			path = SuccessPopover;
 			sourceTree = "<group>";
 		};
 		4587B6C628F329FA00F10ED8 /* Resources */ = {
@@ -219,7 +227,8 @@
 		4587B6CF28F37BF800F10ED8 /* Station */ = {
 			isa = PBXGroup;
 			children = (
-				4587B6D028F37C2000F10ED8 /* Station.swift */,
+				4587B6D028F37C2000F10ED8 /* THLocation.swift */,
+				45435A6F2918332C00FCDB42 /* THStation.swift */,
 				4587B6D228F383C900F10ED8 /* StationModelService.swift */,
 			);
 			path = Station;
@@ -275,7 +284,7 @@
 		8A4C4F9928E207AA00721C50 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				458F90E628EAAEB200F9BE29 /* UserDefaultsKeys.swift */,
+				458F90E628EAAEB200F9BE29 /* UserDefaults.Keys.swift */,
 				458F90E428EAACB300F9BE29 /* HapticsManager.swift */,
 				45E188C828F545C300A055BD /* AudioPlayer */,
 				8A4C4F9F28E20CBA00721C50 /* ArrowIconManager */,
@@ -306,7 +315,7 @@
 			children = (
 				8AD1768F28E1C08000A12948 /* MainTabView */,
 				45513FA828EAF2CD0064A32E /* HuntListView */,
-				8AD1768C28E0F13300A12948 /* StationsListView */,
+				8AD1768C28E0F13300A12948 /* LocationListView */,
 				8A52024828E0A21900C49779 /* HuntView */,
 				8A4C4F9228E1C0F700721C50 /* SettingsView */,
 				8AFCFF3828E225ED000D1A0B /* MapView.swift */,
@@ -334,9 +343,7 @@
 			children = (
 				458F90E828EAB15500F9BE29 /* Double+Extension.swift */,
 				8AD1768828E0AE0C00A12948 /* Button+Extension.swift */,
-				4533509228FC953400BC0AA0 /* String+Extension.swift */,
 				8A4C4F9328E1D9BB00721C50 /* Array+Extension.swift */,
-				8A52025228E0A23200C49779 /* FileManager+Extension.swift */,
 				8A1CBD7728E3795300E0AE4B /* Color+Extension.swift */,
 				8A52025028E0A23200C49779 /* ViewModifier */,
 			);
@@ -349,18 +356,19 @@
 				8A4C4F9728E1FBFE00721C50 /* RoundedNavigationTitle-ViewModifier.swift */,
 				8A52025128E0A23200C49779 /* Button+PressActionsModifier.swift */,
 				45F99CE9290C6F5F0050AC6F /* ReadSize+ViewModifier.swift */,
+				457C2D56292818350051FDD6 /* SuccessPopover */,
 			);
 			path = ViewModifier;
 			sourceTree = "<group>";
 		};
-		8AD1768C28E0F13300A12948 /* StationsListView */ = {
+		8AD1768C28E0F13300A12948 /* LocationListView */ = {
 			isa = PBXGroup;
 			children = (
-				8A52024728E0A21900C49779 /* StationsListView.swift */,
-				8AD1768D28E0F14600A12948 /* StationsListRowView.swift */,
-				4532DB0A28FC81E600C32418 /* AddNewStationView */,
+				8A52024728E0A21900C49779 /* LocationListView.swift */,
+				8AD1768D28E0F14600A12948 /* LocationsListRowView.swift */,
+				4532DB0A28FC81E600C32418 /* AddNewLocationView */,
 			);
-			path = StationsListView;
+			path = LocationListView;
 			sourceTree = "<group>";
 		};
 		8AD1768F28E1C08000A12948 /* MainTabView */ = {
@@ -500,18 +508,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4587B6D128F37C2000F10ED8 /* Station.swift in Sources */,
+				4587B6D128F37C2000F10ED8 /* THLocation.swift in Sources */,
 				452AA85328F69DA300F11BA5 /* LocationAuthorizationOnboardingView.swift in Sources */,
 				F2A056A528DB7957007D7FFF /* LocationProvider.swift in Sources */,
 				45E188C728F5451700A055BD /* AudioPlayer.swift in Sources */,
-				4533508F28FC824400BC0AA0 /* AddStationView+TriggerDistanceSlider.swift in Sources */,
+				45435A702918332C00FCDB42 /* THStation.swift in Sources */,
+				4533508F28FC824400BC0AA0 /* AddLocationView+TriggerDistanceSlider.swift in Sources */,
 				45513FBE28ECD22C0064A32E /* HuntListDetailView.swift in Sources */,
 				4587B6D328F383C900F10ED8 /* StationModelService.swift in Sources */,
 				8A4C4F9828E1FBFE00721C50 /* RoundedNavigationTitle-ViewModifier.swift in Sources */,
-				8A52024A28E0A21900C49779 /* AddStationView.swift in Sources */,
+				8A52024A28E0A21900C49779 /* AddLocationView.swift in Sources */,
 				45D56EEC28F3F06A0008BC3A /* HuntModelService.swift in Sources */,
-				4533509128FC82BA00BC0AA0 /* AddStationView+PagePicker.swift in Sources */,
-				458F90E728EAAEB200F9BE29 /* UserDefaultsKeys.swift in Sources */,
+				458F90E728EAAEB200F9BE29 /* UserDefaults.Keys.swift in Sources */,
 				458F90E928EAB15500F9BE29 /* Double+Extension.swift in Sources */,
 				8A4C4F9128E1C0F100721C50 /* SettingsView.swift in Sources */,
 				F212393128CA539C006754E3 /* TreasureHuntApp.swift in Sources */,
@@ -522,12 +530,13 @@
 				8A4C4F9D28E2083500721C50 /* AppearancePicker.swift in Sources */,
 				8AD1768B28E0C58200A12948 /* HuntManager.swift in Sources */,
 				8AE029C328E211FF009B5F4B /* AddHuntStationAnnotationView.swift in Sources */,
+				457C2D532928176A0051FDD6 /* SuccessPopover+ViewModifier.swift in Sources */,
 				F2A056A728DB7983007D7FFF /* CLLocationCoordinate2DExtension.swift in Sources */,
 				8A52024C28E0A21900C49779 /* DirectionDistanceView.swift in Sources */,
 				45513FB928ECBDC10064A32E /* StationPickerRowView.swift in Sources */,
 				8A4C4FA328E20FB100721C50 /* ArrowIconPicker.swift in Sources */,
 				458F90E528EAACB300F9BE29 /* HapticsManager.swift in Sources */,
-				8AD1768E28E0F14600A12948 /* StationsListRowView.swift in Sources */,
+				8AD1768E28E0F14600A12948 /* LocationsListRowView.swift in Sources */,
 				8A4C4F8F28E1C0E100721C50 /* MainTabView.swift in Sources */,
 				45B7EFE528F4BCC6006AE0FB /* SoundType.swift in Sources */,
 				45F99CE5290BFFBF0050AC6F /* HuntListDetailRowView.swift in Sources */,
@@ -536,18 +545,17 @@
 				45ABD0B9290AA9CF0010E1EF /* L10n.swift in Sources */,
 				45513FB528EAFADD0064A32E /* AddHuntView.swift in Sources */,
 				45F99CE3290BD3CE0050AC6F /* Constants.swift in Sources */,
+				457C2D55292818310051FDD6 /* AnimatedCheckmark.swift in Sources */,
 				8AFCFF3928E225ED000D1A0B /* MapView.swift in Sources */,
 				8A52024E28E0A21900C49779 /* HuntView.swift in Sources */,
 				45A8CEE728EA228500F19E67 /* HuntViewModel.swift in Sources */,
-				45513FB728EBD9A60064A32E /* StationsPicker.swift in Sources */,
+				45513FB728EBD9A60064A32E /* LocationsPicker.swift in Sources */,
 				8A1CBD7628E36EC300E0AE4B /* TrafficWarningView.swift in Sources */,
 				45F99CEA290C6F5F0050AC6F /* ReadSize+ViewModifier.swift in Sources */,
 				45513FC128ED69130064A32E /* StationAnnotationView.swift in Sources */,
-				4533509328FC953400BC0AA0 /* String+Extension.swift in Sources */,
-				8A52025428E0A23200C49779 /* FileManager+Extension.swift in Sources */,
 				8A4C4F9B28E207C200721C50 /* AppearanceManager.swift in Sources */,
 				45F99CE1290BD3B30050AC6F /* AboutView.swift in Sources */,
-				8A52024D28E0A21900C49779 /* StationsListView.swift in Sources */,
+				8A52024D28E0A21900C49779 /* LocationListView.swift in Sources */,
 				45513FAA28EAF2D90064A32E /* HuntListView.swift in Sources */,
 				45D56EEA28F3ED930008BC3A /* Hunt.swift in Sources */,
 				45513FBC28ECD2070064A32E /* HuntListRowView.swift in Sources */,

@@ -10,16 +10,14 @@ struct TreasureHuntApp: App {
   @StateObject private var appearanceManager = AppearanceManager()
   @StateObject private var locationProvider = LocationProvider()
 
-  @AppStorage(UserDefaultsKeys.locationAuthViewIsShown)
+  @AppStorage(UserDefaults.SettingsKeys.locationAuthViewIsShown)
   private var locationOnboardingIsShown: Bool = false
-
-  @Environment(\.scenePhase) private var phase
 
   var body: some Scene {
     WindowGroup {
       MainTabView()
-        .onAppear(perform: checkLocationAuthorization)
-        .task {
+        .onAppear {
+          locationProvider.checkLocationAuthorization(locationOnboardingIsShown: &locationOnboardingIsShown)
           appearanceManager.setAppearance()
           registerUserDefaults()
         }
@@ -33,26 +31,11 @@ struct TreasureHuntApp: App {
   private func registerUserDefaults() {
     UserDefaults.standard.register(defaults: [
       "_UIConstraintBasedLayoutLogUnsatisfiable": false,
-      UserDefaultsKeys.hapticsActivated: true,
-      UserDefaultsKeys.soundsActivated: true,
-      UserDefaultsKeys.idleDimmingDisabled: true
+      UserDefaults.SettingsKeys.hapticsActivated: true,
+      UserDefaults.SettingsKeys.soundsActivated: true,
+      UserDefaults.SettingsKeys.idleDimmingDisabled: true
     ])
   }
 
-  private func checkLocationAuthorization() {
-    let authStatus = locationProvider.locationManager.authorizationStatus
 
-    switch authStatus {
-    case .restricted, .notDetermined, .denied:
-      locationOnboardingIsShown = true
-    case .authorizedAlways, .authorizedWhenInUse:
-      locationOnboardingIsShown = false
-    @unknown default:
-      return
-    }
-
-    if authStatus == .authorizedAlways || authStatus == .authorizedWhenInUse {
-      locationProvider.locationManager.requestLocation()
-    }
-  }
 }

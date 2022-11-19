@@ -1,5 +1,5 @@
 //
-//  StationsPicker.swift
+//  LocationsPicker.swift
 //  TreasureHunt
 //
 //  Created by Marvin Lee Kobert on 04.10.22.
@@ -8,30 +8,31 @@
 import RealmSwift
 import SwiftUI
 
-struct StationsPicker: View {
-  @ObservedResults(Station.self) private var stations
-  @Binding var chosenStations: [Station]
-  @State private var addNewStationViewIsShown: Bool = false
+struct LocationsPicker: View {
+  @ObservedResults(THLocation.self) private var locations
+  @EnvironmentObject var locationProvider: LocationProvider
+  @Binding var chosenStations: [THLocation]
+  @State private var addNewLocationViewIsShown: Bool = false
 
   private var chosenStationsSectionHeader: String {
     return L10n.AddHuntView.chosenStations(chosenStations.count)
   }
 
-  private var availableStations: [Station] {
-    let filtered = stations.filter {
+  private var availableStations: [THLocation] {
+    let filtered = locations.filter {
       !chosenStations.contains($0)
     }
     return Array(filtered)
   }
 
-  private func add(_ station: Station) {
+  private func add(_ location: THLocation) {
     if chosenStations.count < 50 {
-      chosenStations.append(station)
+      chosenStations.append(location)
     }
   }
 
-  private func remove(_ station: Station) {
-    if let index = chosenStations.firstIndex(of: station) {
+  private func remove(_ location: THLocation) {
+    if let index = chosenStations.firstIndex(of: location) {
       chosenStations.remove(at: index)
     }
   }
@@ -44,7 +45,9 @@ struct StationsPicker: View {
           availableStationsSection
         }
       }
-      .sheet(isPresented: $addNewStationViewIsShown) { AddStationView() }
+      .sheet(isPresented: $addNewLocationViewIsShown) {
+        AddLocationView(location: locationProvider.currentLocation)
+      }
       .navigationTitle(L10n.StationsPicker.navTitle)
       .roundedNavigationTitle()
   }
@@ -52,11 +55,11 @@ struct StationsPicker: View {
 
 struct StationsPicker_Previews: PreviewProvider {
   static var previews: some View {
-    StationsPicker(chosenStations: .constant([]))
+    LocationsPicker(chosenStations: .constant([]))
   }
 }
 
-extension StationsPicker {
+extension LocationsPicker {
   private var createStationButton: some View {
     Button(action: showAddNewStationView) {
       HStack {
@@ -73,7 +76,7 @@ extension StationsPicker {
     Section(chosenStationsSectionHeader) {
       if !chosenStations.isEmpty {
         ForEach(0..<chosenStations.count, id: \.self) { index in
-          StationPickerRowView(index: index, station: chosenStations[index], rowType: .chosen)
+          StationPickerRowView(index: index, location: locations[index], rowType: .chosen)
             .onTapGesture {
               remove(chosenStations[index])
             }
@@ -89,19 +92,19 @@ extension StationsPicker {
 
   private var availableStationsSection: some View {
     Section(L10n.StationsPicker.availableStations) {
-      ForEach(availableStations) { station in
-        StationPickerRowView(index: 0, station: station, rowType: .available)
+      ForEach(availableStations) { location in
+        StationPickerRowView(index: 0, location: location, rowType: .available)
           .onTapGesture {
-            add(station)
+            add(location)
           }
       }
     }
   }
 }
 
-extension StationsPicker {
+extension LocationsPicker {
   private func showAddNewStationView() {
-    addNewStationViewIsShown.toggle()
+    addNewLocationViewIsShown.toggle()
   }
 
   private func moveStation(from source: IndexSet, to destination: Int) {

@@ -174,6 +174,24 @@ internal enum L10n {
       internal static let title = L10n.tr("Localizable", "huntView.trafficWarningView.title", fallback: "Caution!")
     }
   }
+  internal enum LocationsListRowView {
+    /// No question on this station.
+    internal static let noQuestion = L10n.tr("Localizable", "locationsListRowView.noQuestion", fallback: "No question on this station.")
+  }
+  internal enum LocationsListView {
+    /// Tip: Tap on a location to show an edit sheet for this location.
+    internal static let editStationTooltip = L10n.tr("Localizable", "locationsListView.editStationTooltip", fallback: "Tip: Tap on a location to show an edit sheet for this location.")
+    /// Create a Location
+    internal static let listPlaceholderButtonTitle = L10n.tr("Localizable", "locationsListView.listPlaceholderButtonTitle", fallback: "Create a Location")
+    /// You've not added any location yet. To create your first location, tap here or the "+" in the top right corner.
+    internal static let listPlaceholderText = L10n.tr("Localizable", "locationsListView.listPlaceholderText", fallback: "You've not added any location yet. To create your first location, tap here or the \"+\" in the top right corner.")
+    /// Locations
+    internal static let navTitle = L10n.tr("Localizable", "locationsListView.navTitle", fallback: "Locations")
+    internal enum SwipeAction {
+      /// Toggle Location as Favorite
+      internal static let markFavorite = L10n.tr("Localizable", "locationsListView.swipeAction.markFavorite", fallback: "Toggle Location as Favorite")
+    }
+  }
   internal enum MainTabView {
     internal enum TabItem {
       /// Hunts
@@ -238,24 +256,6 @@ internal enum L10n {
     internal static let station = L10n.tr("Localizable", "simpleConstants.station", fallback: "Station")
     /// Stations
     internal static let stations = L10n.tr("Localizable", "simpleConstants.stations", fallback: "Stations")
-  }
-  internal enum StationsListRowView {
-    /// No question on this station.
-    internal static let noQuestion = L10n.tr("Localizable", "stationsListRowView.noQuestion", fallback: "No question on this station.")
-  }
-  internal enum StationsListView {
-    /// Tip: Tap on a station to show an edit sheet for this station.
-    internal static let editStationTooltip = L10n.tr("Localizable", "stationsListView.editStationTooltip", fallback: "Tip: Tap on a station to show an edit sheet for this station.")
-    /// Create a Station
-    internal static let listPlaceholderButtonTitle = L10n.tr("Localizable", "stationsListView.listPlaceholderButtonTitle", fallback: "Create a Station")
-    /// You've not added any station yet. To create your first station, tap here or the "+" in the top right corner.
-    internal static let listPlaceholderText = L10n.tr("Localizable", "stationsListView.listPlaceholderText", fallback: "You've not added any station yet. To create your first station, tap here or the \"+\" in the top right corner.")
-    /// Stations
-    internal static let navTitle = L10n.tr("Localizable", "stationsListView.navTitle", fallback: "Stations")
-    internal enum SwipeAction {
-      /// Toggle Station as Favorite
-      internal static let markFavorite = L10n.tr("Localizable", "stationsListView.swipeAction.markFavorite", fallback: "Toggle Station as Favorite")
-    }
   }
   internal enum StationsPicker {
     /// Create Station

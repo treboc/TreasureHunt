@@ -9,7 +9,7 @@ import RealmSwift
 import CoreLocation
 
 struct StationModelService {
-  static func add(_ station: Station) throws {
+  static func add(_ station: THLocation) throws {
     do {
       let realm = try Realm()
       try realm.write {
@@ -18,7 +18,7 @@ struct StationModelService {
     }
   }
 
-  static func toggleFavorite(_ station: Station) {
+  static func toggleFavorite(_ station: THLocation) {
     guard let station = station.thaw() else { return }
 
     do {
@@ -31,7 +31,7 @@ struct StationModelService {
     }
   }
 
-  static func update(_ station: Station,
+  static func update(_ station: THLocation,
                      with coordinate: CLLocationCoordinate2D,
                      name: String,
                      triggerDistance: Double,

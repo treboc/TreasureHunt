@@ -19,7 +19,7 @@ struct MainTabView: View {
                 systemImage: "shippingbox")
         }
 
-      StationsListView()
+      LocationListView()
         .tabItem {
           Label(L10n.MainTabView.TabItem.stationList,
                 systemImage: "dot.circle.and.hand.point.up.left.fill")

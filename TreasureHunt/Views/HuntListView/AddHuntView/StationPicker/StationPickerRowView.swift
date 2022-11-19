@@ -14,7 +14,7 @@ struct StationPickerRowView: View {
   }
 
   let index: Int?
-  let station: Station
+  let location: THLocation
   let rowType: StationPickerRowType
 
   @ViewBuilder
@@ -31,7 +31,7 @@ struct StationPickerRowView: View {
       if rowType == .chosen {
         positionImage
       }
-      Text(station.name)
+      Text(location.name)
     }
     .frame(maxWidth: .infinity, alignment: .leading)
     .contentShape(Rectangle())
@@ -40,6 +40,6 @@ struct StationPickerRowView: View {
 
 struct StationPickerRowView_Previews: PreviewProvider {
     static var previews: some View {
-      StationPickerRowView(index: 1, station: Station.station, rowType: .available)
+      StationPickerRowView(index: 1, location: THLocation.station, rowType: .available)
     }
 }

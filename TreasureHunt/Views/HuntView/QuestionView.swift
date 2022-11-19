@@ -7,7 +7,7 @@ import SwiftUI
 
 struct QuestionView: View {
   @Environment(\.dismiss) private var dismiss
-  var station: Station
+  var station: THStation
 
   var body: some View {
     VStack {
@@ -51,6 +51,6 @@ struct QuestionView: View {
 
 struct QuestionView_Previews: PreviewProvider {
   static var previews: some View {
-    QuestionView(station: Station.station)
+    QuestionView(station: THStation.station)
   }
 }

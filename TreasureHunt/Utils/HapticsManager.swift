@@ -21,7 +21,7 @@ class HapticManager {
   }
 
   func triggerFeedback(on distance: Double) {
-    if UserDefaults.standard.bool(forKey: UserDefaultsKeys.hapticsActivated) {
+    if UserDefaults.standard.bool(forKey: UserDefaults.SettingsKeys.hapticsActivated) {
       if distance < 300 && Int(distance) % 10 == 0 {
         var impactStyle: UIImpactFeedbackGenerator.FeedbackStyle
         switch distance {

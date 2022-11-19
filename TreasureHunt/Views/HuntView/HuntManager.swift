@@ -17,7 +17,7 @@ final class HuntManager: ObservableObject {
   let audioPlayer = AudioPlayer()
 
   @ObservedRealmObject var hunt: Hunt
-  @Published var currentStation: Station?
+  @Published var currentStation: THStation?
   @Published var angleToCurrentStation: Double = 0
   @Published var distanceToCurrentStation: Double = 0
   @Published var questionSheetIsShown: Bool = false
@@ -58,14 +58,14 @@ final class HuntManager: ObservableObject {
 
     $distanceToCurrentStation
       .map { [weak self] in
-        guard let station = self?.currentStation else { return false }
-        return $0 <= station.triggerDistance
+        guard let location = self?.currentStation?.location else { return false }
+        return $0 <= location.triggerDistance
       }
       .assign(to: \.isNearCurrentStation, on: self)
       .store(in: &cancellables)
   }
 
-  private func onStationChanged(_ station: Station?) {
+  private func onStationChanged(_ station: THStation?) {
     guard let station else { return }
     locationProvider.didChange(station)
   }

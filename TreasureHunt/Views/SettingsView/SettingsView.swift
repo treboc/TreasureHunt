@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct SettingsView: View {
-  @AppStorage(UserDefaultsKeys.idleDimmingDisabled) private var idleDimmingDisabled: Bool = true
-  @AppStorage(UserDefaultsKeys.hapticsActivated) private var hapticsActivated: Bool = true
-  @AppStorage(UserDefaultsKeys.soundsActivated) private var soundsActivated: Bool = true
+  @AppStorage(UserDefaults.SettingsKeys.idleDimmingDisabled) private var idleDimmingDisabled: Bool = true
+  @AppStorage(UserDefaults.SettingsKeys.hapticsActivated) private var hapticsActivated: Bool = true
+  @AppStorage(UserDefaults.SettingsKeys.soundsActivated) private var soundsActivated: Bool = true
 
   var body: some View {
     NavigationView {
