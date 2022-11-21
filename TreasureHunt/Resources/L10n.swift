@@ -198,8 +198,8 @@ internal enum L10n {
       internal static let huntList = L10n.tr("Localizable", "mainTabView.tabItem.huntList", fallback: "Hunts")
       /// Settings
       internal static let settings = L10n.tr("Localizable", "mainTabView.tabItem.settings", fallback: "Settings")
-      /// Stations
-      internal static let stationList = L10n.tr("Localizable", "mainTabView.tabItem.stationList", fallback: "Stations")
+      /// Locations
+      internal static let stationList = L10n.tr("Localizable", "mainTabView.tabItem.stationList", fallback: "Locations")
     }
   }
   internal enum SettingsView {

@@ -88,6 +88,7 @@ extension LocationAuthorizationOnboardingView {
       VStack(alignment: .leading, spacing: 5) {
         Button {
           locationProvider.locationManager.requestWhenInUseAuthorization()
+          locationProvider.locationManager.requestLocation()
         } label: {
           Label("Standort freigeben", systemImage: "location")
         }

@@ -38,18 +38,18 @@ struct LocationsPicker: View {
   }
 
   var body: some View {
-      Form {
-        createStationButton
-        chosenStationsSection
-        if !availableStations.isEmpty {
-          availableStationsSection
-        }
+    Form {
+      createStationButton
+      chosenStationsSection
+      if !availableStations.isEmpty {
+        availableStationsSection
       }
-      .sheet(isPresented: $addNewLocationViewIsShown) {
-        AddLocationView(location: locationProvider.currentLocation)
-      }
-      .navigationTitle(L10n.StationsPicker.navTitle)
-      .roundedNavigationTitle()
+    }
+    .sheet(isPresented: $addNewLocationViewIsShown) {
+      AddLocationView(location: locationProvider.currentLocation)
+    }
+    .navigationTitle(L10n.StationsPicker.navTitle)
+    .roundedNavigationTitle()
   }
 }
 

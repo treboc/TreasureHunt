@@ -6,7 +6,7 @@ import RealmSwift
 import SwiftUI
 import MapKit
 
-struct LocationListView: View {
+struct LocationsListView: View {
   @ObservedResults(THLocation.self) private var locations
   @EnvironmentObject private var locationProvider: LocationProvider
   @AppStorage(UserDefaults.TooltipKeys.editLocations) private var editStationTooltipIsShown = true
@@ -44,12 +44,12 @@ struct LocationListView: View {
 
 struct StationsListView_Previews: PreviewProvider {
   static var previews: some View {
-    LocationListView()
+    LocationsListView()
       .environmentObject(LocationProvider())
   }
 }
 
-extension LocationListView {
+extension LocationsListView {
   // MARK: - ToolbarItems
   @ToolbarContentBuilder
   func toolbarContent() -> some ToolbarContent {
@@ -163,7 +163,7 @@ extension LocationListView {
   @ViewBuilder
   private func contextMenuContent(_ station: THLocation) -> some View {
     Button {
-      StationModelService.toggleFavorite(station)
+      THLocationService.toggleFavorite(station)
     } label: {
       if station.isFavorite {
         Label("Remove from Favorites", systemImage: "star.fill")
@@ -207,7 +207,7 @@ extension LocationListView {
   private func swipeToFavorite(_ station: THLocation) -> some View {
     Button {
       withAnimation {
-        StationModelService.toggleFavorite(station)
+        THLocationService.toggleFavorite(station)
       }
     } label: {
       if station.isFavorite {

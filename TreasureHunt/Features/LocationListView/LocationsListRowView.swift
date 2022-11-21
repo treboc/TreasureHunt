@@ -14,27 +14,19 @@ struct LocationsListRowView: View {
   @State private var yOffset: CGFloat = 0
   let location: THLocation
 
-  func distanceToStation() -> String {
-    if let distance = locationProvider.distanceTo(location.location) {
-      return distance.asDistance()
-    } else {
-      return "N/A"
-    }
-  }
-
   var body: some View {
     HStack {
       VStack(alignment: .leading, spacing: 5) {
         Text(location.name)
-          .font(.system(.title3, design: .rounded, weight: .semibold))
+          .font(.system(.body, design: .rounded, weight: .semibold))
           .fontWeight(.semibold)
       }
 
       Spacer()
 
       VStack(alignment: .trailing) {
-        Text(distanceToStation())
-
+        Text(locationProvider.distanceToAsString(location.location))
+          .font(.system(.footnote, design: .rounded))
         Text(L10n.HuntListDetailRowView.distanceFromHere)
           .font(.system(.caption, design: .rounded, weight: .light))
       }

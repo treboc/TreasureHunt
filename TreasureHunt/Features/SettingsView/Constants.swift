@@ -17,4 +17,5 @@ enum Constants {
   }
 
   static let cornerRadius: CGFloat = 8
+  static let rowSpacing: CGFloat = 8
 }

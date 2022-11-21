@@ -129,6 +129,14 @@ extension LocationProvider: CLLocationManagerDelegate {
     return nil
   }
 
+  func distanceToAsString(_ location: CLLocation) -> String {
+    if let distance = distanceTo(location) {
+      return distance.asDistance()
+    } else {
+      return "N/A"
+    }
+  }
+
   static func angle(coordinate: Coordinate, heading: CLLocationDirection?, deviceCoordinate: CLLocation?) -> Double {
     guard let deviceCoordinate = deviceCoordinate,
           let heading = heading else {
@@ -186,4 +194,6 @@ extension LocationProvider {
     let longitude: Double
     let lastUpdated: Date
   }
+
+
 }

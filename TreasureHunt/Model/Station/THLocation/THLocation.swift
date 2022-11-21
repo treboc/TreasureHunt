@@ -34,5 +34,5 @@ final class THLocation: Object, ObjectKeyIdentifiable {
 }
 
 extension THLocation {
-  static let station = THLocation(coordinate: .init(latitude: 10, longitude: 50), triggerDistance: 50, name: "Dummy Station")
+  static let location = THLocation(coordinate: .init(latitude: 10, longitude: 50), triggerDistance: 50, name: "Dummy Station")
 }

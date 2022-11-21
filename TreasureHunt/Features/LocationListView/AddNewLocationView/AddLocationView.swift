@@ -18,6 +18,8 @@ struct AddLocationView: View {
   @State private var triggerDistance: Double = 25
   @State private var showLocationCreatedOverlay: Bool = false
 
+  @FocusState private var textFieldIsFocused
+
   private var saveButtonIsDisabled: Bool {
     return name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
   }
@@ -48,24 +50,35 @@ struct AddLocationView: View {
     NavigationView {
       VStack(spacing: 16) {
         VStack(alignment: .leading) {
-          Text("1 – Name")
-            .font(.headline)
+          HStack {
+            THNumberedCircle(number: 1)
+            Text("Name")
+              .font(.headline)
+          }
           TextField("Name", text: $name)
             .padding()
             .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: Constants.cornerRadius))
+            .focused($textFieldIsFocused)
         }
         .padding(.horizontal)
 
         VStack(alignment: .leading) {
-          Text("2 – Position")
-            .font(.headline)
+          HStack {
+            THNumberedCircle(number: 2)
+            Text("Position")
+              .font(.headline)
+          }
 
           mapView
             .overlay(alignment: .topTrailing) {
               centerMapButton
             }
+            .padding(.bottom, textFieldIsFocused ? 20 : 0)
 
-          TriggerDistanceSlider(triggerDistance: $triggerDistance )
+          if !textFieldIsFocused {
+            TriggerDistanceSlider(triggerDistance: $triggerDistance)
+          }
+
         }
         .padding(.horizontal)
       }
@@ -82,12 +95,12 @@ extension AddLocationView {
   // MARK: - Methods
   private func saveButtonTapped() {
     if let locationToEdit {
-      try? StationModelService.update(locationToEdit, with: region.center, name: name, triggerDistance: triggerDistance, isFavorite: isFavorite)
+      try? THLocationService.update(locationToEdit, with: region.center, name: name, triggerDistance: triggerDistance, isFavorite: isFavorite)
     } else {
       let station = THLocation(coordinate: region.center,
                             triggerDistance: triggerDistance,
                             name: name)
-      try? StationModelService.add(station)
+      try? THLocationService.add(station)
     }
     self.showLocationCreatedOverlay = true
   }

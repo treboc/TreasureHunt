@@ -9,29 +9,47 @@ import Foundation
 import RealmSwift
 
 struct HuntModelService {
-  static func add(_ hunt: Hunt, with stations: [THStation]) {
+  static func createHunt(name: String, introduction: String? = nil, stations: [THStation], outline: String? = nil) {
+    let hunt = Hunt(value: ["name": name,
+                            "introduction": introduction,
+                            "outline": outline])
+    hunt.stations.append(objectsIn: stations)
     do {
       let realm = try Realm()
       try realm.write {
-        let thawedStations = stations.compactMap { $0.thaw() }
-        hunt.stations.append(objectsIn: thawedStations)
-        realm.add(hunt)
+        realm.create(Hunt.self, value: hunt, update: .modified)
       }
     } catch {
       print(error.localizedDescription)
     }
   }
 
-  static func update(_ hunt: Hunt, with name: String, and stations: [THStation]) throws {
+  static func updateHunt(name: String, introduction: String? = nil, stations: [THStation], outline: String? = nil) {
+    let hunt = Hunt(value: ["name": name,
+                            "introduction": introduction,
+                            "outline": outline])
+    hunt.stations.append(objectsIn: stations)
+    do {
+      let realm = try Realm()
+      try realm.write {
+        realm.create(Hunt.self, value: hunt, update: .all)
+      }
+    } catch {
+      print(error.localizedDescription)
+    }
+  }
+
+  static func update(_ hunt: Hunt, name: String, introduction: String? = nil, stations: [THStation], outline: String? = nil) throws {
     let realm = try Realm()
-    guard let huntToEdit = realm.object(ofType: Hunt.self, forPrimaryKey: hunt._id) else { return }
+    guard var huntToEdit = realm.object(ofType: Hunt.self, forPrimaryKey: hunt._id) else { return }
 
     do {
       try realm.write {
-        huntToEdit.name = name
-        let thawedStations = stations.compactMap { $0.thaw() }
-        huntToEdit.stations.removeAll()
-        huntToEdit.stations.append(objectsIn: thawedStations)
+        huntToEdit = Hunt(value: ["name": name,
+                                  "introduction": introduction,
+                                  "outline": outline])
+        huntToEdit.stations.append(objectsIn: stations)
+        realm.create(Hunt.self, value: huntToEdit, update: .all)
       }
     } catch {
       print(error.localizedDescription)

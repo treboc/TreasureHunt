@@ -33,7 +33,7 @@
 "mainTabView.tabItem.settings" = "Settings";
 
 // HuntListView
-"huntListView.listPlaceholderText" = "You've not added any hunt yet. To create your first hunt, tap here or the \"+\" in the top right corner.";
+"huntListView.listPlaceholderText" = "You've not added any hunt yet. To create a hunt, tap here or the \"+\" in the top right corner.";
 "huntListView.listPlaceholderButtonTitle" = "Create a Hunt";
 
 // HuntListRowView

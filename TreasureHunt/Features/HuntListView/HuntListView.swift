@@ -10,7 +10,6 @@ import SwiftUI
 
 struct HuntListView: View {
   @ObservedResults(Hunt.self) private var hunts
-  @State private var newHuntViewIsShown: Bool = false
   @State private var huntDeletionAlertIsShown: Bool = false
   @State private var huntToDelete: Hunt? = nil
 
@@ -22,16 +21,10 @@ struct HuntListView: View {
         } else {
           List {
             ForEach(hunts) { hunt in
-              HuntListRowView(hunt: hunt)
-                .overlay(
-                  NavigationLink(
-                    destination: { HuntListDetailView(hunt: hunt) },
-                    label: { EmptyView() }
-                  ).opacity(0)
-                )
-              .swipeActions {
-                swipeToDelete(hunt)
-              }
+              HuntListRowNavLink(hunt: hunt)
+                .swipeActions {
+                  swipeToDelete(hunt)
+                }
             }
           }
           .listStyle(.plain)
@@ -50,10 +43,6 @@ struct HuntListView: View {
         Text(L10n.Alert.DeleteHunt.message)
       })
       .animation(.default, value: huntDeletionAlertIsShown)
-      .sheet(isPresented: $newHuntViewIsShown) {
-        AddHuntView()
-      }
-      .toolbar(content: toolbarContent)
       .navigationTitle(L10n.SimpleConstants.hunts)
     }
   }
@@ -79,27 +68,41 @@ extension HuntListView {
 }
 
 extension HuntListView {
-  // MARK: - ToolbarItems
-  @ToolbarContentBuilder
-  private func toolbarContent() -> some ToolbarContent {
-    ToolbarItem(placement: .navigationBarTrailing) {
-      Button(iconName: "plus") { newHuntViewIsShown.toggle() }
-        .accessibilityLabel(L10n.A11yLabel.createHunt)
+  private var noHuntsPlaceholder: some View {
+    VStack {
+      NavigationLink(destination: AddHuntView.init) {
+        Text(L10n.HuntListView.listPlaceholderButtonTitle)
+          .fontWeight(.semibold)
+          .frame(maxWidth: .infinity)
+          .foregroundColor(Color(uiColor: .systemBackground))
+      }
+      .buttonStyle(.borderedProminent)
+      .controlSize(.large)
+      .padding([.top, .horizontal])
+
+      Text(L10n.HuntListView.listPlaceholderText)
+        .multilineTextAlignment(.center)
+        .font(.system(.footnote, design: .rounded))
+        .italic()
+        .foregroundColor(.secondary)
+        .padding(.horizontal, 50)
+
+      Spacer()
     }
   }
 
-  private var noHuntsPlaceholder: some View {
-    VStack(spacing: 30) {
-      Text(L10n.HuntListView.listPlaceholderText)
-        .multilineTextAlignment(.center)
-        .font(.system(.headline, design: .rounded))
-      Button(L10n.HuntListView.listPlaceholderButtonTitle) {
-        newHuntViewIsShown.toggle()
-      }
-      .foregroundColor(Color(uiColor: .systemBackground))
-      .buttonStyle(.borderedProminent)
-      .controlSize(.regular)
+  struct HuntListRowNavLink: View {
+    let hunt: Hunt
+
+    var body: some View {
+      HuntListRowView(hunt: hunt)
+        .overlay(
+          NavigationLink(
+            destination: { HuntListDetailView(hunt: hunt) },
+            label: { EmptyView() }
+          ).opacity(0)
+        )
+
     }
-    .padding(.horizontal, 50)
   }
 }

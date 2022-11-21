@@ -40,6 +40,6 @@ struct StationPickerRowView: View {
 
 struct StationPickerRowView_Previews: PreviewProvider {
     static var previews: some View {
-      StationPickerRowView(index: 1, location: THLocation.station, rowType: .available)
+      StationPickerRowView(index: 1, location: THLocation.location, rowType: .available)
     }
 }

@@ -11,16 +11,10 @@ import RealmSwift
 
 struct HuntListDetailView: View {
   @EnvironmentObject private var locationProvider: LocationProvider
-
-  @State private var locationToEdit: THLocation? = nil
   @State private var huntToEdit: Hunt?
   @State private var huntIsStarted: Bool = false
 
   let hunt: Hunt
-
-  private var huntHasStations: Bool {
-    !hunt.stations.isEmpty
-  }
 
   var body: some View {
     Group {
@@ -29,28 +23,18 @@ struct HuntListDetailView: View {
           .toolbar(.hidden, for: .tabBar, .navigationBar)
           .transition(.move(edge: .trailing))
       } else {
-        if huntHasStations {
-          huntDetails
-        } else {
-          emptyListPlaceholder
-        }
+        huntDetails
       }
     }
     .navigationTitle(hunt.name)
     .toolbar {
       ToolbarItemGroup(placement: .navigationBarTrailing) {
-        Button(iconName: "square.and.pencil") {
-          huntToEdit = hunt
+        NavigationLink("Edit") {
+          AddHuntView(huntToEdit: hunt)
         }
       }
     }
     .toolbar(.hidden, for: .tabBar)
-    .sheet(item: $locationToEdit) {
-      AddLocationView(location: $0)
-    }
-    .sheet(item: $huntToEdit) { hunt in
-      AddHuntView(huntToEdit: hunt)
-    }
   }
 }
 
@@ -83,9 +67,6 @@ extension HuntListDetailView {
         HuntListDetailRowView(station: hunt.stations[index], position: index + 1)
           .listRowSeparator(.hidden)
           .listRowInsets(.init(top: 5, leading: 0, bottom: 5, trailing: 0))
-          .onTapGesture {
-//            stationToEdit = hunt.stations[index].location
-          }
       }
       .listStyle(.plain)
     }
@@ -119,7 +100,6 @@ extension HuntListDetailView {
     .buttonStyle(.borderedProminent)
     .controlSize(.large)
     .padding(.bottom, 50)
-    .disabled(huntHasStations == false)
   }
 }
 

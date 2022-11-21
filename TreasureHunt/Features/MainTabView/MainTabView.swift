@@ -9,7 +9,7 @@ import RealmSwift
 import SwiftUI
 
 struct MainTabView: View {
-  let realmConfiguration = Realm.Configuration(schemaVersion: 1)
+  let realmConfiguration = Realm.Configuration(schemaVersion: 2)
 
   var body: some View {
     TabView {
@@ -19,7 +19,7 @@ struct MainTabView: View {
                 systemImage: "shippingbox")
         }
 
-      LocationListView()
+      LocationsListView()
         .tabItem {
           Label(L10n.MainTabView.TabItem.stationList,
                 systemImage: "dot.circle.and.hand.point.up.left.fill")
