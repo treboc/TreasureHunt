@@ -13,11 +13,12 @@ import SwiftUI
 
 final class HuntManager: ObservableObject {
   private var cancellables = Set<AnyCancellable>()
-  var locationProvider = LocationProvider()
   let audioPlayer = AudioPlayer()
 
+  @ObservedObject var locationProvider: LocationProvider
   @ObservedRealmObject var hunt: Hunt
-  @Published var currentStation: THStation?
+
+  @Published var currentStation: THStation? = nil
   @Published var angleToCurrentStation: Double = 0
   @Published var distanceToCurrentStation: Double = 0
   @Published var questionSheetIsShown: Bool = false
@@ -29,18 +30,24 @@ final class HuntManager: ObservableObject {
   }
 
   var currentStationNumber: Int {
-    guard let currentStation = currentStation,
-          let currentStationIndex = hunt.stations.firstIndex(of: currentStation)
+    guard
+      let currentStation,
+      let currentStationIndex = hunt.stations.firstIndex(of: currentStation)
     else { return 0 }
     return currentStationIndex + 1
   }
 
-  init(_ hunt: Hunt) {
-    _hunt = ObservedRealmObject(wrappedValue: hunt)
+  init(locationProvider: LocationProvider = LocationProvider(),
+       _ hunt: Hunt) {
+    self.locationProvider = locationProvider
+    self.hunt = hunt
     if let firstStation = hunt.stations.first {
-      currentStation = firstStation
+      _currentStation = Published(initialValue: firstStation)
+      setupPublishers()
     }
+  }
 
+  private func setupPublishers() {
     locationProvider
       .$angle
       .assign(to: &$angleToCurrentStation)
@@ -82,8 +89,7 @@ final class HuntManager: ObservableObject {
   }
 
   private func showQuestion() {
-    guard let currentStation else { return }
-    if !currentStation.isCompleted {
+    if !(currentStation?.isCompleted ?? false) {
       questionSheetIsShown = true
     }
   }
@@ -96,8 +102,8 @@ final class HuntManager: ObservableObject {
 
   private func setCurrentToNextStation() {
     guard
-      let station = currentStation,
-      let currentIndex = hunt.stations.firstIndex(of: station)
+      let currentStation,
+      let currentIndex = hunt.stations.firstIndex(of: currentStation)
     else { return }
 
     if currentIndex + 1 < hunt.stations.count {

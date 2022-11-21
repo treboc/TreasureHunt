@@ -348,8 +348,8 @@
 				8AD1768C28E0F13300A12948 /* LocationListView */,
 				8A52024828E0A21900C49779 /* HuntView */,
 				8A4C4F9228E1C0F700721C50 /* SettingsView */,
-				8AFCFF3828E225ED000D1A0B /* MapView.swift */,
 				4587B6C728F32AED00F10ED8 /* OnboardingView */,
+				8AFCFF3828E225ED000D1A0B /* MapView.swift */,
 			);
 			path = Features;
 			sourceTree = "<group>";

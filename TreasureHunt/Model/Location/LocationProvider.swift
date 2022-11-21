@@ -4,7 +4,6 @@
 
 import Combine
 import MapKit
-import UIKit
 
 enum LocationProviderError: Error {
   case wrongAuthorization(CLAuthorizationStatus)
@@ -35,6 +34,10 @@ class LocationProvider: NSObject, ObservableObject {
   override init() {
     super.init()
     loadLastLocation()
+  }
+
+  deinit {
+    print("deinit")
   }
   
   func start() {
@@ -129,7 +132,7 @@ extension LocationProvider: CLLocationManagerDelegate {
     return nil
   }
 
-  func distanceToAsString(_ location: CLLocation) -> String {
+  func distanceToAsString(_ location: CLLocation?) -> String {
     if let distance = distanceTo(location) {
       return distance.asDistance()
     } else {

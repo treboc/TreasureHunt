@@ -10,6 +10,7 @@ import SwiftUI
 
 extension AddHuntView {
   struct OutlinePage: View {
+    @EnvironmentObject private var locationProvider: LocationProvider
     let pageIndex: PageSelection
     @Binding var hasOutline: Bool
     @Binding var outline: String
@@ -51,7 +52,7 @@ extension AddHuntView {
           }
         }
         .sheet(isPresented: $outlineLocationSelectionSheetIsShown) {
-          OutlineLocationPicker(outlineLocation: $outlineLocation)
+          LocationPicker(location: $outlineLocation)
         }
       }
       .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
@@ -74,7 +75,7 @@ extension AddHuntView {
           Spacer()
 
           VStack(alignment: .trailing) {
-            Text(LocationProvider().distanceToAsString(outlineLocation.location))
+            Text(locationProvider.distanceToAsString(outlineLocation.location))
             Text(L10n.HuntListDetailRowView.distanceFromHere)
               .font(.system(.caption, design: .rounded, weight: .light))
           }
@@ -102,12 +103,12 @@ extension AddHuntView {
     }
   }
 
-  //MARK: - OutlineLocationPicker
-  struct OutlineLocationPicker: View {
+  //MARK: - LocationPicker
+  struct LocationPicker: View {
     @EnvironmentObject private var locationProvider: LocationProvider
     @Environment(\.dismiss) private var dismiss
     @ObservedResults(THLocation.self) private var locations
-    @Binding var outlineLocation: THLocation?
+    @Binding var location: THLocation?
     @State private var addNewLocationSheetIsShown: Bool = false
 
     var body: some View {
@@ -116,7 +117,7 @@ extension AddHuntView {
           ForEach(locations) { location in
             makeRowFor(location)
               .onTapGesture {
-                outlineLocation = location
+                self.location = location
                 dismiss()
               }
           }
@@ -134,14 +135,13 @@ extension AddHuntView {
           Spacer()
         }
         .padding([.horizontal])
-
         .sheet(isPresented: $addNewLocationSheetIsShown) {
           AddLocationView(location: locationProvider.currentLocation ?? .init())
         }
         .toolbar {
           Button(iconName: "xmark.circle.fill", action: dismiss.callAsFunction)
         }
-        .navigationTitle("Outline Location")
+        .navigationTitle("Location")
       }
     }
 
@@ -154,7 +154,7 @@ extension AddHuntView {
         Spacer()
 
         VStack(alignment: .trailing) {
-          Text(LocationProvider().distanceToAsString(location.location))
+          Text(locationProvider.distanceToAsString(location.location))
           Text(L10n.HuntListDetailRowView.distanceFromHere)
             .font(.system(.caption, design: .rounded, weight: .light))
         }

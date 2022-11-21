@@ -11,52 +11,54 @@ struct HuntView: View {
   @StateObject private var huntManager: HuntManager
   @StateObject private var vm = HuntViewModel()
   
-  init(hunt: Hunt) {
-    _huntManager = StateObject(wrappedValue: HuntManager(hunt))
+  init(locationProvider: LocationProvider = LocationProvider(), hunt: Hunt) {
+    let huntManger = HuntManager(locationProvider: locationProvider, hunt)
+    _huntManager = StateObject(wrappedValue: huntManger)
   }
   
   private var blurRadius: CGFloat {
-    if huntManager.isNearCurrentStation || vm.mapIsShown {
-      return 0
-    }
-    return 20
+    (huntManager.isNearCurrentStation || vm.mapIsShown) ? 0 : 20
   }
   
   var body: some View {
-    NavigationView {
-      ZStack {
-        Map(coordinateRegion: $vm.region,
-            showsUserLocation: true,
-            userTrackingMode: .constant(.follow)
-        )
-        .ignoresSafeArea()
-        .allowsHitTesting(false)
-        .blur(radius: blurRadius)
-        .animation(.default, value: blurRadius)
-        
-        arrowOverlay()
-        bottomButtonStack
+    ZStack {
+      Map(coordinateRegion: $vm.region,
+          showsUserLocation: true,
+          userTrackingMode: .constant(.follow)
+      )
+      .ignoresSafeArea()
+      .allowsHitTesting(false)
+      .blur(radius: blurRadius)
+      .animation(.default, value: blurRadius)
+
+      arrowOverlay()
+      bottomButtonStack
+    }
+    .disabled(vm.warningRead == false)
+    .overlay {
+      if vm.warningRead == false {
+        TrafficWarningView(warningRead: $vm.warningRead)
+          .transition(.opacity.combined(with: .scale))
+          .zIndex(2)
       }
-      .disabled(vm.warningRead == false)
-      .overlay {
-        if vm.warningRead == false {
-          TrafficWarningView(warningRead: $vm.warningRead)
-            .transition(.opacity.combined(with: .scale))
-            .zIndex(2)
-        }
-      }
-      .animation(.default, value: huntManager.isNearCurrentStation)
-      .navigationBarHidden(true)
-      .alert(L10n.HuntView.EndHuntAlert.title, isPresented: $vm.endSessionAlertIsShown) {
-        Button(L10n.BtnTitle.cancel, role: .cancel) {}
-        Button(L10n.BtnTitle.iAmSure, role: .destructive) { dismiss.callAsFunction() }
-      } message: {
-        Text(L10n.HuntView.EndHuntAlert.message)
-      }
-      .sheet(isPresented: $huntManager.questionSheetIsShown) {
-        if let station = huntManager.currentStation {
-          QuestionView(station: station)
-        }
+    }
+    .animation(.default, value: huntManager.isNearCurrentStation)
+    .alert(L10n.HuntView.EndHuntAlert.title, isPresented: $vm.endSessionAlertIsShown) {
+      Button(L10n.BtnTitle.cancel, role: .cancel) {}
+      Button(L10n.BtnTitle.iAmSure, role: .destructive) { dismiss.callAsFunction() }
+    } message: {
+      Text(L10n.HuntView.EndHuntAlert.message)
+    }
+    .animation(.default, value: huntManager.isNearCurrentStation)
+    .alert(L10n.HuntView.EndHuntAlert.title, isPresented: $vm.endSessionAlertIsShown) {
+      Button(L10n.BtnTitle.cancel, role: .cancel) {}
+      Button(L10n.BtnTitle.iAmSure, role: .destructive, action: dismiss.callAsFunction)
+    } message: {
+      Text(L10n.HuntView.EndHuntAlert.message)
+    }
+    .sheet(isPresented: $huntManager.questionSheetIsShown) {
+      if let station = huntManager.currentStation {
+        QuestionView(station: station)
       }
     }
     .onAppear(perform: vm.applyIdleDimmingSetting)
@@ -67,13 +69,11 @@ struct HuntView: View {
 extension HuntView {
   @ViewBuilder
   private func arrowOverlay() -> some View {
-    if let _ = huntManager.currentStation {
-      DirectionDistanceView(huntManager: huntManager)
-        .shadow(radius: 5)
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-        .opacity(vm.mapIsShown ? 0.2 : 1)
-        .animation(.default, value: vm.mapIsShown)
-    }
+    DirectionDistanceView(huntManager: huntManager)
+      .shadow(radius: 5)
+      .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+      .opacity(vm.mapIsShown ? 0.2 : 1)
+      .animation(.default, value: vm.mapIsShown)
   }
   
   @ViewBuilder

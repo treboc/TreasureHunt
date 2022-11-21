@@ -6,7 +6,6 @@
 //
 
 import CoreLocation
-import Foundation
 import RealmSwift
 
 final class Hunt: Object, ObjectKeyIdentifiable {
@@ -15,6 +14,7 @@ final class Hunt: Object, ObjectKeyIdentifiable {
   @Persisted var createdAt: Date = .now
   @Persisted var introduction: String?
   @Persisted var outline: String?
+  @Persisted var outlineLocation: THLocation?
   @Persisted var stations: List<THStation>
 
   convenience init(name: String) {

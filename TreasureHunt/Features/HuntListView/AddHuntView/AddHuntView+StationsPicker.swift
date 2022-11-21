@@ -10,7 +10,7 @@ import SwiftUI
 
 extension AddHuntView {
   struct StationsPicker: View {
-    @Binding var stations: [THStation]
+    @EnvironmentObject private var viewModel: AddHuntViewModel
     @State private var addNewStationSheetIsShown: Bool = false
     @State private var stationToEdit: THStation?
 
@@ -30,20 +30,23 @@ extension AddHuntView {
 
           List {
             Group {
-              ForEach(0..<stations.count, id: \.self) { index in
-                StationsPickerRowView(station: stations[index], index: index)
+              ForEach(0..<viewModel.stations.count, id: \.self) { index in
+                StationsPickerRowView(station: viewModel.stations[index], index: index)
                   .onTapGesture {
-                    stationToEdit = stations[index]
+                    stationToEdit = viewModel.stations[index]
                   }
                   .sheet(item: $stationToEdit) { station in
-                    AddNewStationView(stations: $stations, station: station)
+                    AddNewStationView(station: station)
                   }
+              }
+              .onDelete { indexSet in
+                viewModel.stations.remove(atOffsets: indexSet)
               }
 
               Button {
                 addNewStationSheetIsShown = true
               } label: {
-                Text(stations.isEmpty ? "Create your first station" : "Add another station")
+                Text(viewModel.stations.isEmpty ? "Create your first station" : "Add another station")
                   .frame(maxWidth: .infinity)
                   .foregroundColor(Color(uiColor: .systemBackground))
               }
@@ -59,7 +62,7 @@ extension AddHuntView {
       .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
       .padding()
       .sheet(isPresented: $addNewStationSheetIsShown) {
-        AddNewStationView(stations: $stations)
+        AddNewStationView()
       }
     }
 
@@ -94,8 +97,9 @@ extension AddHuntView {
     //MARK: - AddNewStationView
     struct AddNewStationView: View {
       @Environment(\.dismiss) private var dismiss
-      @Binding var stations: [THStation]
-      @State private var stationToEdit: THStation?
+      @EnvironmentObject private var viewModel: AddHuntViewModel
+      @EnvironmentObject private var locationProvider: LocationProvider
+      private var stationToEdit: THStation?
 
       @State private var name: String = ""
       @State private var task: String = ""
@@ -107,13 +111,10 @@ extension AddHuntView {
         return !name.trimmingCharacters(in: .whitespaces).isEmpty && !(location == nil)
       }
 
-      init(stations: Binding<[THStation]>) {
-        self._stations = stations
-      }
+      init() {}
 
-      init(stations: Binding<[THStation]>, station: THStation) {
-        _stationToEdit = State(wrappedValue: station)
-        self._stations = stations
+      init(station: THStation) {
+        self.stationToEdit = station
         _name = State(initialValue: station.name)
         if let task = station.task {
           _task = State(initialValue: task)
@@ -163,7 +164,7 @@ extension AddHuntView {
               }
             }
             .sheet(isPresented: $locationSelectionSheetIsShown) {
-              OutlineLocationPicker(outlineLocation: $location)
+              LocationPicker(location: $location)
             }
 
             HStack {
@@ -186,27 +187,33 @@ extension AddHuntView {
       }
 
       private func saveButtonPressed() {
-        if let stationToEdit {
-          updateStation(stationToEdit)
+        if stationToEdit != nil {
+          updateStation()
         } else{
           saveNewStation()
         }
-
         dismiss()
       }
 
-      private func updateStation(_ station: THStation) {
-        if let realm = station.realm?.thaw(),
-           let station = station.thaw() {
-          do {
-            try realm.write {
-              station.name = name
-              station.location = location?.thaw()
-              station.task = task
-            }
-          } catch {
-            print(error)
+      private func updateStation() {
+        guard var station = viewModel.stations.first(where: { $0._id == stationToEdit?._id }),
+              let realm = station.realm?.thaw(),
+        let index = viewModel.stations.firstIndex(where: { $0._id == stationToEdit?._id }) else { return }
+        if station.isFrozen {
+          if let thawedStation = station.thaw() {
+            station = thawedStation
           }
+        }
+
+        do {
+          try realm.write {
+            station.name = name
+            station.task = task
+            viewModel.objectWillChange.send()
+            viewModel.stations[index] = station
+          }
+        } catch {
+          print(error)
         }
       }
 
@@ -215,11 +222,11 @@ extension AddHuntView {
 
         if task.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
           let station = THStation(name: name, task: nil, location: location)
-          self.stations.append(station)
+          viewModel.stations.append(station)
         } else {
           task = task.trimmingCharacters(in: .whitespacesAndNewlines)
           let station = THStation(name: name, task: task, location: location)
-          self.stations.append(station)
+          viewModel.stations.append(station)
         }
       }
 
@@ -233,7 +240,7 @@ extension AddHuntView {
             Spacer()
 
             VStack(alignment: .trailing) {
-              Text(LocationProvider().distanceToAsString(location.location))
+              Text(locationProvider.distanceToAsString(location.location))
               Text(L10n.HuntListDetailRowView.distanceFromHere)
                 .font(.system(.caption, design: .rounded, weight: .light))
             }

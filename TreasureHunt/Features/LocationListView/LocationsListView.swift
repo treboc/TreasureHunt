@@ -23,9 +23,6 @@ struct LocationsListView: View {
           locationsList
         }
       }
-      .refreshable {
-        locationProvider.locationManager.requestLocation()
-      }
       .safeAreaInset(edge: .bottom) {
         locationUpdateInfoText
       }

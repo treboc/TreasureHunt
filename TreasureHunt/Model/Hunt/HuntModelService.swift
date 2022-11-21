@@ -40,28 +40,37 @@ struct HuntModelService {
   }
 
   static func update(_ hunt: Hunt, name: String, introduction: String? = nil, stations: [THStation], outline: String? = nil) throws {
-    let realm = try Realm()
-    guard var huntToEdit = realm.object(ofType: Hunt.self, forPrimaryKey: hunt._id) else { return }
-
     do {
-      try realm.write {
-        huntToEdit = Hunt(value: ["name": name,
-                                  "introduction": introduction,
-                                  "outline": outline])
-        huntToEdit.stations.append(objectsIn: stations)
-        realm.create(Hunt.self, value: huntToEdit, update: .all)
+      let realm = try Realm()
+      if let hunt = realm.object(ofType: Hunt.self, forPrimaryKey: hunt._id) {
+        try realm.write {
+          hunt.stations.removeAll()
+          for station in stations {
+            if let station = realm.object(ofType: THStation.self, forPrimaryKey: station._id) {
+              hunt.stations.append(station)
+            } else {
+              let newStation = realm.create(THStation.self, value: station, update: .modified)
+              hunt.stations.append(newStation)
+            }
+          }
+          hunt.name = name
+          hunt.introduction = introduction
+          hunt.outline = outline
+        }
       }
     } catch {
       print(error.localizedDescription)
     }
   }
 
-  static func delete(at index: Int) {
+  static func delete(with id: ObjectId) {
     do {
       let realm = try Realm()
-      let allHunts = realm.objects(Hunt.self)
-      try realm.write {
-        realm.delete(allHunts[index])
+      if let huntToDelete = realm.objects(Hunt.self).first(where: { $0._id == id }) {
+        try realm.write {
+          realm.delete(huntToDelete.stations)
+          realm.delete(huntToDelete)
+        }
       }
     } catch {
       print(error)

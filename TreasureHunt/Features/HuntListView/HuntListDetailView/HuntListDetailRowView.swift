@@ -11,39 +11,37 @@ struct HuntListDetailRowView: View {
   @EnvironmentObject private var locationProvider: LocationProvider
   let station: THStation
   let position: Int
-
+  
   @State private var horizontalOffset: CGFloat = .zero
-
+  
   var body: some View {
     VStack(alignment: .leading, spacing: 10) {
-      HStack(alignment: .center) {
-        HStack(alignment: .top) {
-          VStack(alignment: .leading, spacing: 2) {
-            Text(L10n.HuntListDetailRowView.stationName.localizedUppercase)
-              .font(.system(.caption2, design: .rounded))
-              .foregroundColor(.secondary)
-
-            Text(station.name)
-              .font(.system(.title2, design: .rounded, weight: .semibold))
-              .lineLimit(2)
-          }
-
-          Spacer()
-
-          VStack(alignment: .trailing, spacing: 2) {
-            Text(L10n.HuntListDetailRowView.distanceFromHere.localizedUppercase)
-              .font(.system(.caption2, design: .rounded))
-              .foregroundColor(.secondary)
-
-            Text(distanceToStation())
-              .font(.system(.subheadline, design: .rounded))
-          }
+      HStack(alignment: .bottom) {
+        VStack(alignment: .leading, spacing: 2) {
+          Text(station.name)
+            .font(.system(.title2, design: .rounded, weight: .semibold))
+            .lineLimit(2)
+          
+          Text(L10n.HuntListDetailRowView.stationName.localizedUppercase)
+            .font(.system(.caption2, design: .rounded))
+            .foregroundColor(.secondary)
+        }
+        
+        Spacer()
+        
+        VStack(alignment: .trailing, spacing: 2) {
+          Text(locationProvider.distanceToAsString(station.location?.location))
+            .font(.system(.subheadline, design: .rounded))
+          
+          Text(L10n.HuntListDetailRowView.distanceFromHere.localizedUppercase)
+            .font(.system(.caption2, design: .rounded))
+            .foregroundColor(.secondary)
         }
       }
     }
     .frame(maxWidth: .infinity, alignment: .leading)
     .padding()
-    .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 16, style: .circular))
+    .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: Constants.cornerRadius))
     .readSize(onChange: setHorizontalOffset)
     .overlay {
       Image(systemName: "\(position).circle.fill")
@@ -58,15 +56,6 @@ struct HuntListDetailRowView: View {
 extension HuntListDetailRowView {
   private func setHorizontalOffset(_ viewSize: CGSize) {
     horizontalOffset = -(viewSize.width / 2)
-  }
-
-  private func distanceToStation() -> String {
-    guard let location = station.location?.location,
-          let distance = locationProvider.distanceTo(location) else {
-      return "N/A"
-    }
-
-    return distance.asDistance()
   }
 }
 

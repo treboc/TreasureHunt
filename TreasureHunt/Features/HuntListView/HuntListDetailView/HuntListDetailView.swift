@@ -9,57 +9,38 @@ import SwiftUI
 import MapKit
 import RealmSwift
 
+struct NavigationLazyView<Content: View>: View {
+  let build: () -> Content
+  init(_ build: @autoclosure @escaping () -> Content) {
+    self.build = build
+  }
+  var body: Content {
+    build()
+  }
+}
+
 struct HuntListDetailView: View {
   @EnvironmentObject private var locationProvider: LocationProvider
-  @State private var huntToEdit: Hunt?
-  @State private var huntIsStarted: Bool = false
-
-  let hunt: Hunt
+  @ObservedRealmObject var hunt: Hunt
 
   var body: some View {
-    Group {
-      if huntIsStarted {
-        HuntView(hunt: hunt)
-          .toolbar(.hidden, for: .tabBar, .navigationBar)
-          .transition(.move(edge: .trailing))
-      } else {
-        huntDetails
-      }
-    }
-    .navigationTitle(hunt.name)
-    .toolbar {
-      ToolbarItemGroup(placement: .navigationBarTrailing) {
-        NavigationLink("Edit") {
-          AddHuntView(huntToEdit: hunt)
+    huntDetails
+      .navigationTitle(hunt.name)
+      .toolbar {
+        ToolbarItemGroup(placement: .navigationBarTrailing) {
+          NavigationLink {
+            AddHuntView(locationProvider: locationProvider, huntToEdit: hunt)
+          } label: {
+            Image(systemName: "square.and.pencil")
+          }
+          .accessibilityLabel(Text("Edit this hunt"))
         }
       }
-    }
-    .toolbar(.hidden, for: .tabBar)
+      .toolbar(.hidden, for: .tabBar)
   }
 }
 
 extension HuntListDetailView {
-  private var emptyListPlaceholder: some View {
-    VStack(alignment: .center, spacing: 20) {
-      Text(L10n.HuntListDetailView.noStationsPlaceholderText)
-        .font(.system(.body, design: .rounded))
-        .foregroundColor(.secondary)
-      Button(L10n.HuntListDetailView.noStationsEditHuntButtonTitle) {
-        huntToEdit = hunt
-      }
-      .buttonStyle(.borderedProminent)
-      .controlSize(.regular)
-      .foregroundStyle(.primary)
-    }
-    .padding()
-    .background(
-      RoundedRectangle(cornerRadius: 16)
-        .fill(.ultraThinMaterial)
-        .shadow(radius: 8)
-    )
-    .padding()
-  }
-
   private var huntDetails: some View {
     ScrollView {
       title
@@ -90,10 +71,10 @@ extension HuntListDetailView {
   }
 
   private var startHuntButton: some View {
-    Button(L10n.HuntListDetailView.startHuntButtonTitle) {
-      withAnimation {
-        huntIsStarted = true
-      }
+    NavigationLink(L10n.HuntListDetailView.startHuntButtonTitle) {
+      NavigationLazyView(HuntView(hunt: hunt))
+        .toolbar(.hidden, for: .tabBar, .navigationBar)
+        .transition(.move(edge: .trailing))
     }
     .shadow(radius: 5)
     .foregroundColor(Color(uiColor: .systemBackground))
@@ -102,4 +83,3 @@ extension HuntListDetailView {
     .padding(.bottom, 50)
   }
 }
-

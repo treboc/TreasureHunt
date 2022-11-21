@@ -10,6 +10,7 @@ import SwiftUI
 
 struct HuntListView: View {
   @ObservedResults(Hunt.self) private var hunts
+  @EnvironmentObject private var locationProvider: LocationProvider
   @State private var huntDeletionAlertIsShown: Bool = false
   @State private var huntToDelete: Hunt? = nil
 
@@ -21,11 +22,13 @@ struct HuntListView: View {
         } else {
           List {
             ForEach(hunts) { hunt in
-              HuntListRowNavLink(hunt: hunt)
+              HuntListRowView(hunt: hunt)
                 .swipeActions {
                   swipeToDelete(hunt)
                 }
             }
+
+            createNewHuntButton
           }
           .listStyle(.plain)
         }
@@ -35,7 +38,7 @@ struct HuntListView: View {
         Button(L10n.BtnTitle.iAmSure, role: .destructive) {
           if let huntToDelete {
             withAnimation {
-              $hunts.remove(huntToDelete)
+              HuntModelService.delete(with: huntToDelete._id)
             }
           }
         }
@@ -70,7 +73,9 @@ extension HuntListView {
 extension HuntListView {
   private var noHuntsPlaceholder: some View {
     VStack {
-      NavigationLink(destination: AddHuntView.init) {
+      NavigationLink {
+        AddHuntView(locationProvider: locationProvider)
+      } label: {
         Text(L10n.HuntListView.listPlaceholderButtonTitle)
           .fontWeight(.semibold)
           .frame(maxWidth: .infinity)
@@ -91,18 +96,22 @@ extension HuntListView {
     }
   }
 
-  struct HuntListRowNavLink: View {
-    let hunt: Hunt
-
-    var body: some View {
-      HuntListRowView(hunt: hunt)
-        .overlay(
-          NavigationLink(
-            destination: { HuntListDetailView(hunt: hunt) },
-            label: { EmptyView() }
-          ).opacity(0)
-        )
-
-    }
+  private var createNewHuntButton: some View {
+    Text(L10n.HuntListView.listPlaceholderButtonTitle)
+      .fontWeight(.semibold)
+      .frame(maxWidth: .infinity)
+      .foregroundColor(Color(uiColor: .systemBackground))
+      .padding()
+      .background(
+        RoundedRectangle(cornerRadius: Constants.cornerRadius)
+          .fill(Color.accentColor)
+      )
+      .listRowSeparator(.hidden)
+      .overlay(
+        NavigationLink(
+          destination: { AddHuntView(locationProvider: locationProvider) },
+          label: { EmptyView() }
+        ).opacity(0)
+      )
   }
 }
