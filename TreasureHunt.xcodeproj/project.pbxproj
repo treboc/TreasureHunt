@@ -26,7 +26,7 @@
 		4587B6D128F37C2000F10ED8 /* THLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4587B6D028F37C2000F10ED8 /* THLocation.swift */; };
 		4587B6D328F383C900F10ED8 /* THLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4587B6D228F383C900F10ED8 /* THLocationService.swift */; };
 		458F90E528EAACB300F9BE29 /* HapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458F90E428EAACB300F9BE29 /* HapticsManager.swift */; };
-		458F90E728EAAEB200F9BE29 /* UserDefaults.Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458F90E628EAAEB200F9BE29 /* UserDefaults.Keys.swift */; };
+		458F90E728EAAEB200F9BE29 /* UserDefaults+Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458F90E628EAAEB200F9BE29 /* UserDefaults+Keys.swift */; };
 		458F90E928EAB15500F9BE29 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458F90E828EAB15500F9BE29 /* Double+Extension.swift */; };
 		45916496292AA9E800037F44 /* THNumberedCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45916495292AA9E800037F44 /* THNumberedCircle.swift */; };
 		45A8CEE728EA228500F19E67 /* HuntViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A8CEE628EA228500F19E67 /* HuntViewModel.swift */; };
@@ -95,7 +95,7 @@
 		4587B6D028F37C2000F10ED8 /* THLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = THLocation.swift; sourceTree = "<group>"; };
 		4587B6D228F383C900F10ED8 /* THLocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = THLocationService.swift; sourceTree = "<group>"; };
 		458F90E428EAACB300F9BE29 /* HapticsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HapticsManager.swift; sourceTree = "<group>"; };
-		458F90E628EAAEB200F9BE29 /* UserDefaults.Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.Keys.swift; sourceTree = "<group>"; };
+		458F90E628EAAEB200F9BE29 /* UserDefaults+Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Keys.swift"; sourceTree = "<group>"; };
 		458F90E828EAB15500F9BE29 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		45916495292AA9E800037F44 /* THNumberedCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = THNumberedCircle.swift; sourceTree = "<group>"; };
 		45A8CEE628EA228500F19E67 /* HuntViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuntViewModel.swift; sourceTree = "<group>"; };
@@ -371,6 +371,7 @@
 		8A52024F28E0A23200C49779 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				458F90E628EAAEB200F9BE29 /* UserDefaults+Keys.swift */,
 				458F90E828EAB15500F9BE29 /* Double+Extension.swift */,
 				8AD1768828E0AE0C00A12948 /* Button+Extension.swift */,
 				8A4C4F9328E1D9BB00721C50 /* Array+Extension.swift */,
@@ -552,7 +553,7 @@
 				8A4C4F9828E1FBFE00721C50 /* RoundedNavigationTitle-ViewModifier.swift in Sources */,
 				8A52024A28E0A21900C49779 /* AddLocationView.swift in Sources */,
 				45D56EEC28F3F06A0008BC3A /* HuntModelService.swift in Sources */,
-				458F90E728EAAEB200F9BE29 /* UserDefaults.Keys.swift in Sources */,
+				458F90E728EAAEB200F9BE29 /* UserDefaults+Keys.swift in Sources */,
 				458F90E928EAB15500F9BE29 /* Double+Extension.swift in Sources */,
 				8A4C4F9128E1C0F100721C50 /* SettingsView.swift in Sources */,
 				F212393128CA539C006754E3 /* TreasureHuntApp.swift in Sources */,
