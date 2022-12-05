@@ -46,6 +46,7 @@
 		45EDD405292A2BAA00C8EF86 /* DisableAnimation+ViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EDD404292A2BAA00C8EF86 /* DisableAnimation+ViewModifier.swift */; };
 		45EDD407292A450600C8EF86 /* AddHuntView+PageSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EDD406292A450600C8EF86 /* AddHuntView+PageSelection.swift */; };
 		45EDD409292A9CE600C8EF86 /* THToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EDD408292A9CE600C8EF86 /* THToggle.swift */; };
+		45F4B53F293BD895001BD47C /* LazyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F4B53E293BD895001BD47C /* LazyView.swift */; };
 		45F99CDF290BD36C0050AC6F /* LegalNoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F99CDE290BD36C0050AC6F /* LegalNoticeView.swift */; };
 		45F99CE1290BD3B30050AC6F /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F99CE0290BD3B30050AC6F /* AboutView.swift */; };
 		45F99CE3290BD3CE0050AC6F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F99CE2290BD3CE0050AC6F /* Constants.swift */; };
@@ -73,8 +74,7 @@
 		F212393528CA539E006754E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F212393428CA539E006754E3 /* Assets.xcassets */; };
 		F212393828CA539E006754E3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F212393728CA539E006754E3 /* Preview Assets.xcassets */; };
 		F2A056A528DB7957007D7FFF /* LocationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A056A428DB7957007D7FFF /* LocationProvider.swift */; };
-		F2A056A728DB7983007D7FFF /* CLLocationCoordinate2DExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A056A628DB7983007D7FFF /* CLLocationCoordinate2DExtension.swift */; };
-		F2A056AB28DB7A63007D7FFF /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A056AA28DB7A63007D7FFF /* Coordinate.swift */; };
+		F2A056A728DB7983007D7FFF /* CLLocationCoordinate2D+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A056A628DB7983007D7FFF /* CLLocationCoordinate2D+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -117,6 +117,7 @@
 		45EDD404292A2BAA00C8EF86 /* DisableAnimation+ViewModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DisableAnimation+ViewModifier.swift"; sourceTree = "<group>"; };
 		45EDD406292A450600C8EF86 /* AddHuntView+PageSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddHuntView+PageSelection.swift"; sourceTree = "<group>"; };
 		45EDD408292A9CE600C8EF86 /* THToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = THToggle.swift; sourceTree = "<group>"; };
+		45F4B53E293BD895001BD47C /* LazyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyView.swift; sourceTree = "<group>"; };
 		45F99CDE290BD36C0050AC6F /* LegalNoticeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LegalNoticeView.swift; sourceTree = "<group>"; };
 		45F99CE0290BD3B30050AC6F /* AboutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		45F99CE2290BD3CE0050AC6F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -145,8 +146,7 @@
 		F212393428CA539E006754E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F212393728CA539E006754E3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		F2A056A428DB7957007D7FFF /* LocationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationProvider.swift; sourceTree = "<group>"; };
-		F2A056A628DB7983007D7FFF /* CLLocationCoordinate2DExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLLocationCoordinate2DExtension.swift; sourceTree = "<group>"; };
-		F2A056AA28DB7A63007D7FFF /* Coordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
+		F2A056A628DB7983007D7FFF /* CLLocationCoordinate2D+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,14 +182,12 @@
 			path = HuntListView;
 			sourceTree = "<group>";
 		};
-		45513FB328EAF82A0064A32E /* Location */ = {
+		45513FB328EAF82A0064A32E /* LocationProvider */ = {
 			isa = PBXGroup;
 			children = (
-				F2A056AA28DB7A63007D7FFF /* Coordinate.swift */,
 				F2A056A428DB7957007D7FFF /* LocationProvider.swift */,
-				F2A056A628DB7983007D7FFF /* CLLocationCoordinate2DExtension.swift */,
 			);
-			path = Location;
+			path = LocationProvider;
 			sourceTree = "<group>";
 		};
 		45513FBA28ECBDC80064A32E /* StationPicker */ = {
@@ -249,6 +247,10 @@
 			children = (
 				45435A6F2918332C00FCDB42 /* THStation.swift */,
 				45DC5FC9292B718100860167 /* THLocation */,
+		458BE2A2293C88BE00869ADF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				45F4B53E293BD895001BD47C /* LazyView.swift */,
 			);
 			path = Station;
 			sourceTree = "<group>";
@@ -312,7 +314,6 @@
 		8A4C4F9928E207AA00721C50 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				458F90E628EAAEB200F9BE29 /* UserDefaults.Keys.swift */,
 				458F90E428EAACB300F9BE29 /* HapticsManager.swift */,
 				45E188C828F545C300A055BD /* AudioPlayer */,
 				8A4C4F9F28E20CBA00721C50 /* ArrowIconManager */,
@@ -376,7 +377,9 @@
 				8AD1768828E0AE0C00A12948 /* Button+Extension.swift */,
 				8A4C4F9328E1D9BB00721C50 /* Array+Extension.swift */,
 				8A1CBD7728E3795300E0AE4B /* Color+Extension.swift */,
+				F2A056A628DB7983007D7FFF /* CLLocationCoordinate2D+Extension.swift */,
 				45DC5FCA292B7A5C00860167 /* AnyTransition+PageTransition.swift */,
+				458BE2A2293C88BE00869ADF /* Views */,
 				8A52025028E0A23200C49779 /* ViewModifier */,
 			);
 			path = Extensions;
@@ -558,6 +561,7 @@
 				8A4C4F9128E1C0F100721C50 /* SettingsView.swift in Sources */,
 				F212393128CA539C006754E3 /* TreasureHuntApp.swift in Sources */,
 				45DC5FCB292B7A5C00860167 /* AnyTransition+PageTransition.swift in Sources */,
+				45F4B53F293BD895001BD47C /* LazyView.swift in Sources */,
 				8A52025328E0A23200C49779 /* Button+PressActionsModifier.swift in Sources */,
 				45F99CDF290BD36C0050AC6F /* LegalNoticeView.swift in Sources */,
 				45EDD40129297F5600C8EF86 /* AddHuntView+IntroductionPage.swift in Sources */,
@@ -566,7 +570,7 @@
 				8A4C4F9D28E2083500721C50 /* AppearancePicker.swift in Sources */,
 				8AD1768B28E0C58200A12948 /* HuntManager.swift in Sources */,
 				457C2D532928176A0051FDD6 /* SuccessPopover+ViewModifier.swift in Sources */,
-				F2A056A728DB7983007D7FFF /* CLLocationCoordinate2DExtension.swift in Sources */,
+				F2A056A728DB7983007D7FFF /* CLLocationCoordinate2D+Extension.swift in Sources */,
 				8A52024C28E0A21900C49779 /* DirectionDistanceView.swift in Sources */,
 				45EDD3FD29297F1300C8EF86 /* AddHuntView+NamePage.swift in Sources */,
 				45513FB928ECBDC10064A32E /* StationPickerRowView.swift in Sources */,
@@ -599,7 +603,6 @@
 				45D56EEA28F3ED930008BC3A /* Hunt.swift in Sources */,
 				45513FBC28ECD2070064A32E /* HuntListRowView.swift in Sources */,
 				45916496292AA9E800037F44 /* THNumberedCircle.swift in Sources */,
-				F2A056AB28DB7A63007D7FFF /* Coordinate.swift in Sources */,
 				45EDD405292A2BAA00C8EF86 /* DisableAnimation+ViewModifier.swift in Sources */,
 				45EDD409292A9CE600C8EF86 /* THToggle.swift in Sources */,
 			);

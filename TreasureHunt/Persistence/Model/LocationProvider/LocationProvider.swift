@@ -140,12 +140,12 @@ extension LocationProvider: CLLocationManagerDelegate {
     }
   }
 
-  static func angle(coordinate: Coordinate, heading: CLLocationDirection?, deviceCoordinate: CLLocation?) -> Double {
+  static func angle(coordinate: CLLocation, heading: CLLocationDirection?, deviceCoordinate: CLLocation?) -> Double {
     guard let deviceCoordinate = deviceCoordinate,
           let heading = heading else {
       return 0
     }
-    let clCoordinate = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
+    let clCoordinate = CLLocationCoordinate2D(latitude: coordinate.coordinate.latitude, longitude: coordinate.coordinate.longitude)
     let bearing = deviceCoordinate.coordinate.bearing(to: clCoordinate)
     return bearing - heading
   }
