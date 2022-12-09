@@ -8,17 +8,17 @@
 import SwiftUI
 
 struct HuntListRowView: View {
-  let hunt: Hunt
+  let hunt: THHunt
 
   var body: some View {
     VStack(alignment: .leading, spacing: 5) {
-      Text(hunt.name)
+      Text(hunt.title ?? "No Title")
         .font(.headline)
         .fontWeight(.semibold)
 
       Group {
         Text(L10n.HuntListRowView.created) +
-        Text(hunt.createdAt, format: .dateTime)
+        Text(hunt.unwrappedCreatedAt, format: .dateTime)
       }
       .foregroundColor(.secondary)
       .font(.caption)
@@ -36,12 +36,7 @@ struct HuntListRowView: View {
     )
     .listRowInsets(.init(top: 10, leading: 10, bottom: 10, trailing: 10))
     .listRowSeparator(.hidden)
+    .listRowBackground(Color.clear)
     .contentShape(Rectangle())
-    .overlay(
-      NavigationLink(
-        destination: { HuntListDetailView(hunt: hunt) },
-        label: { EmptyView() }
-      ).opacity(0)
-    )
   }
 }

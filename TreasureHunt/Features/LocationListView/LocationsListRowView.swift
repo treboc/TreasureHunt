@@ -6,18 +6,17 @@
 //
 
 import MapKit
-import RealmSwift
 import SwiftUI
 
 struct LocationsListRowView: View {
   @EnvironmentObject private var locationProvider: LocationProvider
+  @ObservedObject var location: THLocation
   @State private var yOffset: CGFloat = 0
-  let location: THLocation
 
   var body: some View {
     HStack {
       VStack(alignment: .leading, spacing: 5) {
-        Text(location.name)
+        Text(location.unwrappedTitle)
           .font(.system(.body, design: .rounded, weight: .semibold))
           .fontWeight(.semibold)
       }
@@ -34,7 +33,7 @@ struct LocationsListRowView: View {
     .padding(.vertical, 4)
     .frame(maxWidth: .infinity, alignment: .leading)
     .overlay(alignment: .trailing) {
-      if location.isFavorite {
+      if location.isFavourite {
         Image(systemName: "star.fill")
           .foregroundColor(.yellow)
           .offset(y: yOffset)

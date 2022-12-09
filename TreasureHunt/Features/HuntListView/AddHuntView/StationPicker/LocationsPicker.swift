@@ -5,15 +5,15 @@
 //  Created by Marvin Lee Kobert on 04.10.22.
 //
 
-import RealmSwift
 import SwiftUI
 
 struct LocationsPicker: View {
-  @ObservedResults(THLocation.self) private var locations
   @EnvironmentObject var locationProvider: LocationProvider
   @Binding var chosenStations: [THLocation]
   @State private var addNewLocationViewIsShown: Bool = false
-
+  @FetchRequest(sortDescriptors: [])
+  private var locations: FetchedResults<THLocation>
+  
   private var chosenStationsSectionHeader: String {
     return L10n.AddHuntView.chosenStations(chosenStations.count)
   }
@@ -53,11 +53,11 @@ struct LocationsPicker: View {
   }
 }
 
-struct StationsPicker_Previews: PreviewProvider {
-  static var previews: some View {
-    LocationsPicker(chosenStations: .constant([]))
-  }
-}
+//struct StationsPicker_Previews: PreviewProvider {
+//  static var previews: some View {
+//    LocationsPicker(chosenStations: .constant([]))
+//  }
+//}
 
 extension LocationsPicker {
   private var createStationButton: some View {

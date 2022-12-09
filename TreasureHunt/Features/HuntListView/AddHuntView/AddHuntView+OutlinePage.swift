@@ -5,7 +5,6 @@
 //  Created by Marvin Lee Kobert on 19.11.22.
 //
 
-import RealmSwift
 import SwiftUI
 
 extension AddHuntView {
@@ -68,7 +67,7 @@ extension AddHuntView {
     private var selectableLocationView: some View {
       HStack {
         if let outlineLocation {
-          Text(outlineLocation.name)
+          Text(outlineLocation.unwrappedTitle)
               .font(.system(.title3, design: .rounded, weight: .semibold))
               .fontWeight(.semibold)
 
@@ -107,7 +106,8 @@ extension AddHuntView {
   struct LocationPicker: View {
     @EnvironmentObject private var locationProvider: LocationProvider
     @Environment(\.dismiss) private var dismiss
-    @ObservedResults(THLocation.self) private var locations
+    @FetchRequest(sortDescriptors: [])
+    private var locations: FetchedResults<THLocation>
     @Binding var location: THLocation?
     @State private var addNewLocationSheetIsShown: Bool = false
 
@@ -147,7 +147,7 @@ extension AddHuntView {
 
     private func makeRowFor(_ location: THLocation) -> some View {
       HStack {
-        Text(location.name)
+        Text(location.unwrappedTitle)
           .font(.system(.title3, design: .rounded, weight: .semibold))
           .fontWeight(.semibold)
 

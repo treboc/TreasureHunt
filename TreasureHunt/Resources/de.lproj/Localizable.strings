@@ -47,7 +47,7 @@
 "huntListDetailView.noStationsEditHuntButtonTitle" = "Jagd Bearbeiten";
 
 "huntListDetailRowView.stationName" = "Name der Station";
-"huntListDetailRowView.distanceFromHere" = "Distanz:";
+"huntListDetailRowView.distanceFromHere" = "Distanz";
 "huntListDetailRowView.question" = "Aufgabe";
 
 // AddHuntView
@@ -108,7 +108,7 @@
 "huntView.trafficWarningView.buttonTitle" = "Verstanden";
 
 // HuntView => DirectionDistanceView
-"huntView.directionDistanceView.stationOf %@ %@" = "Station %@ von %@.";
+"huntView.directionDistanceView.stationOf %@ %@" = "Station %@ von %@";
 "huntView.directionDistanceView.distanceNA" = "Distanz N/A";
 "huntView.directionDistanceView.stationNameFallback" = "Keine Station";
 

@@ -3,7 +3,6 @@
 //
 
 import MapKit
-import RealmSwift
 import SwiftUI
 
 struct AddLocationView: View {
@@ -13,7 +12,7 @@ struct AddLocationView: View {
   private var locationToEdit: THLocation?
 
   @State private var region: MKCoordinateRegion = .init()
-  @State private var name: String = ""
+  @State private var title: String = ""
   @State private var isFavorite: Bool = false
   @State private var triggerDistance: Double = 25
   @State private var showLocationCreatedOverlay: Bool = false
@@ -21,7 +20,7 @@ struct AddLocationView: View {
   @FocusState private var textFieldIsFocused
 
   private var saveButtonIsDisabled: Bool {
-    return name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    return title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
   }
 
   private var mapSpanInMeters: CLLocationDistance {
@@ -37,8 +36,8 @@ struct AddLocationView: View {
 
   init(location: THLocation) {
     self.locationToEdit = location
-    _name = State(initialValue: location.name)
-    _isFavorite = State(initialValue: location.isFavorite)
+    _title = State(initialValue: location.unwrappedTitle)
+    _isFavorite = State(initialValue: location.isFavourite)
     _triggerDistance = State(initialValue: location.triggerDistance)
     let region = MKCoordinateRegion(center: location.coordinate,
                                     latitudinalMeters: mapSpanInMeters,
@@ -49,43 +48,14 @@ struct AddLocationView: View {
   var body: some View {
     NavigationView {
       VStack(spacing: 16) {
-        VStack(alignment: .leading) {
-          HStack {
-            THNumberedCircle(number: 1)
-            Text("Name")
-              .font(.headline)
-          }
-          TextField("Name", text: $name)
-            .padding()
-            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: Constants.cornerRadius))
-            .focused($textFieldIsFocused)
-        }
-        .padding(.horizontal)
+        titleStack
 
-        VStack(alignment: .leading) {
-          HStack {
-            THNumberedCircle(number: 2)
-            Text("Position")
-              .font(.headline)
-          }
-
-          mapView
-            .overlay(alignment: .topTrailing) {
-              centerMapButton
-            }
-            .padding(.bottom, textFieldIsFocused ? 20 : 0)
-
-          if !textFieldIsFocused {
-            TriggerDistanceSlider(triggerDistance: $triggerDistance)
-          }
-
-        }
-        .padding(.horizontal)
+        mapStack
       }
       .successPopover(isPresented: $showLocationCreatedOverlay, onDismiss: reset)
       .toolbar(content: toolbarContent)
       .navigationBarTitleDisplayMode(.inline)
-      .navigationTitle(name.isEmpty ? L10n.AddStationView.navTitle : name)
+      .navigationTitle(title.isEmpty ? L10n.AddStationView.navTitle : title)
       .interactiveDismissDisabled()
     }
   }
@@ -95,19 +65,23 @@ extension AddLocationView {
   // MARK: - Methods
   private func saveButtonTapped() {
     if let locationToEdit {
-      try? THLocationService.update(locationToEdit, with: region.center, name: name, triggerDistance: triggerDistance, isFavorite: isFavorite)
+      THLocationService.updateLocation(thLocation: locationToEdit,
+                                       title: title,
+                                       latitude: region.center.latitude,
+                                       longitude: region.center.longitude,
+                                       triggerDistance: triggerDistance)
     } else {
-      let station = THLocation(coordinate: region.center,
-                            triggerDistance: triggerDistance,
-                            name: name)
-      try? THLocationService.add(station)
+      THLocationService.addLocation(title: title,
+                                    latitude: region.center.latitude,
+                                    longitude: region.center.longitude,
+                                    triggerDistance: triggerDistance)
     }
     self.showLocationCreatedOverlay = true
   }
 
   private func reset() {
     if locationToEdit == nil {
-      self.name.removeAll()
+      self.title.removeAll()
     } else {
       dismiss()
     }
@@ -143,6 +117,43 @@ extension AddLocationView {
 }
 
 extension AddLocationView {
+  // MARK: - Views
+  private var titleStack: some View {
+    VStack(alignment: .leading) {
+      HStack {
+        THNumberedCircle(number: 1)
+        Text("Name")
+          .font(.headline)
+      }
+      TextField("Title", text: $title)
+        .padding()
+        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: Constants.cornerRadius))
+        .focused($textFieldIsFocused)
+    }
+    .padding(.horizontal)
+  }
+
+  private var mapStack: some View {
+    VStack(alignment: .leading) {
+      HStack {
+        THNumberedCircle(number: 2)
+        Text("Position")
+          .font(.headline)
+      }
+
+      mapView
+        .overlay(alignment: .topTrailing) {
+          centerMapButton
+        }
+        .padding(.bottom, textFieldIsFocused ? 20 : 0)
+
+      if !textFieldIsFocused {
+        TriggerDistanceSlider(triggerDistance: $triggerDistance)
+      }
+    }
+    .padding(.horizontal)
+  }
+
   private var mapView: some View {
     Map(coordinateRegion: $region, interactionModes: [.pan])
       .overlay {

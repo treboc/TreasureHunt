@@ -9,8 +9,8 @@ import SwiftUI
 
 extension AddHuntView {
   struct NamePage: View {
+    @EnvironmentObject private var viewModel: AddHuntViewModel
     let pageIndex: PageSelection
-    @Binding var name: String
     @FocusState private var isFocused
 
     var body: some View {
@@ -18,13 +18,13 @@ extension AddHuntView {
         THNumberedCircle(number: 1)
 
         VStack(alignment: .leading) {
-          Text("Name")
+          Text("Title")
             .font(.system(.title3, design: .rounded, weight: .semibold))
           Text("Name it, so you find it again later.")
             .font(.system(.footnote, design: .rounded, weight: .regular))
             .foregroundColor(.secondary)
 
-          TextField("e.g. Kids Birthday 🥳", text: $name)
+          TextField("e.g. Kids Birthday 🥳", text: $viewModel.title)
             .padding()
             .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: Constants.cornerRadius))
             .focused($isFocused)

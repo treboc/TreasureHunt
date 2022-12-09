@@ -108,7 +108,7 @@
 "huntView.trafficWarningView.buttonTitle" = "Agree";
 
 // HuntView => DirectionDistanceView
-"huntView.directionDistanceView.stationOf %@ %@" = "Station %@ of %@.";
+"huntView.directionDistanceView.stationOf %@ %@" = "Station %@ of %@";
 "huntView.directionDistanceView.distanceNA" = "Distance N/A";
 "huntView.directionDistanceView.stationNameFallback" = "No Station";
 
