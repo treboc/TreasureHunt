@@ -5,89 +5,21 @@
 //  Created by Marvin Lee Kobert on 03.10.22.
 //
 
-import SwiftUI
+import Combine
 import MapKit
-import RealmSwift
-
-class AddHuntViewModel: ObservableObject {
-  let locationProvider: LocationProvider
-
-  var huntToEdit: Hunt?
-  
-  @Published var pageIdx: AddHuntView.PageSelection = .name
-  @Published var isBack: Bool = false
-  
-  @Published var name: String = ""
-  @Published var hasIntroduction: Bool = false
-  @Published var introduction: String = ""
-  
-  @Published var hasOutline: Bool = false
-  @Published var outline: String = ""
-  @Published var outlineLocation: THLocation?
-  
-  @Published var stations: [THStation] = []
-
-  init(locationProvider: LocationProvider) {
-    self.locationProvider = locationProvider
-  }
-
-  init(locationProvider: LocationProvider, huntToEdit: Hunt) {
-    self.locationProvider = locationProvider
-
-    self.huntToEdit = huntToEdit
-    _name = Published(initialValue: huntToEdit.name)
-    if let intro = huntToEdit.introduction {
-      _hasIntroduction = Published(initialValue: !intro.isEmpty)
-      _introduction = Published(initialValue: intro)
-    }
-    if let outline = huntToEdit.outline {
-      _hasOutline = Published(initialValue: !outline.isEmpty)
-      _outline = Published(initialValue: outline)
-    }
-
-    for station in huntToEdit.stations {
-      stations.append(station)
-    }
-  }
-
-  var saveButtonIsDisabled: Bool {
-    return name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || stations.isEmpty
-  }
-
-  func saveButtonTapped(onCompletion: @escaping (() -> Void)) {
-    if let hunt = huntToEdit?.thaw() {
-      try? HuntModelService.update(hunt, name: name, introduction: introduction, stations: stations, outline: outline)
-    } else {
-      HuntModelService.createHunt(name: name, introduction: introduction, stations: stations, outline: outline)
-    }
-    onCompletion()
-  }
-
-  func backButtonTapped() {
-    isBack = true
-    withAnimation {
-      pageIdx = pageIdx.prevPage()
-    }
-  }
-
-  func nextButtonTapped() {
-    isBack = false
-    withAnimation {
-      pageIdx = pageIdx.nextPage()
-    }
-  }
-}
+import SwiftUI
 
 struct AddHuntView: View {
   @StateObject var viewModel: AddHuntViewModel
   @Environment(\.dismiss) private var dismiss
 
   init(locationProvider: LocationProvider) {
-    let viewModel = AddHuntViewModel(locationProvider: locationProvider)
+    let viewModel = AddHuntViewModel(locationProvider: locationProvider,
+                                     huntToEdit: nil)
     _viewModel = StateObject(wrappedValue: viewModel)
   }
 
-  init(locationProvider: LocationProvider, huntToEdit: Hunt) {
+  init(locationProvider: LocationProvider, huntToEdit: THHunt) {
     let viewModel = AddHuntViewModel(locationProvider: locationProvider, huntToEdit: huntToEdit)
     _viewModel = StateObject(wrappedValue: viewModel)
   }
@@ -98,22 +30,19 @@ struct AddHuntView: View {
 
       switch viewModel.pageIdx {
       case .name:
-        NamePage(pageIndex: viewModel.pageIdx,
-                 name: $viewModel.name)
-        .transition(.pageTransition(viewModel.isBack))
+        NamePage(pageIndex: viewModel.pageIdx)
+          .transition(.pageTransition(viewModel.isBack))
       case .intro:
-        IntroductionPage(pageIndex: viewModel.pageIdx,
-                         hasIntroduction: $viewModel.hasIntroduction,
-                         introduction: $viewModel.introduction)
+        IntroductionPage()
         .transition(.pageTransition(viewModel.isBack))
       case .stations:
         StationsPicker()
           .transition(.pageTransition(viewModel.isBack))
       case .outline:
         OutlinePage(pageIndex: viewModel.pageIdx,
-                    hasOutline: $viewModel.hasOutline,
-                    outline: $viewModel.outline,
-                    outlineLocation: $viewModel.outlineLocation)
+                    hasOutline: $viewModel.hunt.hasOutline,
+                    outline: $viewModel.hunt.unwrappedOutline,
+                    outlineLocation: $viewModel.hunt.outlineLocation)
         .transition(.pageTransition(viewModel.isBack))
       }
     }
@@ -121,7 +50,7 @@ struct AddHuntView: View {
       HapticManager.shared.impact(style: .medium)
     }
     .toolbar(content: toolbarContent)
-    .navigationTitle(viewModel.name.isEmpty ? L10n.AddHuntView.navTitle : viewModel.name)
+    .navigationTitle(viewModel.navTitle)
     .roundedNavigationTitle()
     .toolbar(.hidden, for: .tabBar)
     .environmentObject(viewModel)
@@ -132,11 +61,6 @@ struct AddHuntView_Previews: PreviewProvider {
   static var previews: some View {
     AddHuntView(locationProvider: LocationProvider())
   }
-}
-
-extension AddHuntView {
-  //MARK: - Methods
-
 }
 
 extension AddHuntView {

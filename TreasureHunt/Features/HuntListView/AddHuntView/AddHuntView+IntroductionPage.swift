@@ -9,9 +9,7 @@ import SwiftUI
 
 extension AddHuntView {
   struct IntroductionPage: View {
-    let pageIndex: PageSelection
-    @Binding var hasIntroduction: Bool
-    @Binding var introduction: String
+    @EnvironmentObject private var viewModel: AddHuntViewModel
     let placeholder: String = "Just some words, to introduce the story of the hunt."
     @FocusState private var isFocused
 
@@ -26,16 +24,16 @@ extension AddHuntView {
             .font(.system(.footnote, design: .rounded, weight: .regular))
             .foregroundColor(.secondary)
 
-          THToggle(isSelected: $hasIntroduction)
+          THToggle(isSelected: $viewModel.hunt.hasIntroduction)
 
-          if hasIntroduction {
-            TextField(placeholder, text: $introduction, axis: .vertical)
+          if viewModel.hunt.hasIntroduction {
+            TextField(placeholder, text: $viewModel.hunt.unwrappedIntroduction, axis: .vertical)
               .lineLimit(3...10)
               .padding()
               .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: Constants.cornerRadius))
               .transition(.opacity.combined(with: .move(edge: .bottom)))
               .focused($isFocused)
-              .onChange(of: pageIndex) { index in
+              .onChange(of: viewModel.pageIdx) { index in
                 if index != .name {
                   isFocused = false
                 }
@@ -44,7 +42,7 @@ extension AddHuntView {
         }
       }
       .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-      .animation(.easeInOut(duration: 0.3), value: hasIntroduction)
+      .animation(.easeInOut(duration: 0.3), value: viewModel.hunt.hasIntroduction)
       .padding()
     }
   }

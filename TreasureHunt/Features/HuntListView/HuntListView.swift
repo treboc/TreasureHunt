@@ -5,14 +5,15 @@
 //  Created by Marvin Lee Kobert on 03.10.22.
 //
 
-import RealmSwift
 import SwiftUI
 
 struct HuntListView: View {
-  @ObservedResults(Hunt.self) private var hunts
   @EnvironmentObject private var locationProvider: LocationProvider
   @State private var huntDeletionAlertIsShown: Bool = false
-  @State private var huntToDelete: Hunt? = nil
+  @State private var huntToDelete: THHunt? = nil
+
+  @FetchRequest(sortDescriptors: [])
+  private var hunts: FetchedResults<THHunt>
 
   var body: some View {
     NavigationStack {
@@ -22,10 +23,15 @@ struct HuntListView: View {
         } else {
           List {
             ForEach(hunts) { hunt in
-              HuntListRowView(hunt: hunt)
-                .swipeActions {
-                  swipeToDelete(hunt)
-                }
+              LazyView(
+                HuntListRowView(hunt: hunt)
+                  .invisibleNavigationLink {
+                    HuntListDetailView(hunt: hunt)
+                  }
+              )
+              .swipeActions {
+                swipeToDelete(hunt)
+              }
             }
 
             createNewHuntButton
@@ -38,7 +44,7 @@ struct HuntListView: View {
         Button(L10n.BtnTitle.iAmSure, role: .destructive) {
           if let huntToDelete {
             withAnimation {
-              HuntModelService.delete(with: huntToDelete._id)
+              THHuntModelService.delete(huntToDelete)
             }
           }
         }
@@ -47,6 +53,14 @@ struct HuntListView: View {
       })
       .animation(.default, value: huntDeletionAlertIsShown)
       .navigationTitle(L10n.SimpleConstants.hunts)
+      .toolbar {
+        Button("Delete all") {
+          for hunt in hunts {
+            PersistenceController.shared.context.delete(hunt)
+          }
+          try? PersistenceController.shared.context.save()
+        }
+      }
     }
   }
 }
@@ -54,11 +68,12 @@ struct HuntListView: View {
 struct HuntListView_Previews: PreviewProvider {
   static var previews: some View {
     HuntListView()
+      .environment(\.managedObjectContext, PersistenceController.preview.context)
   }
 }
 
 extension HuntListView {
-  private func swipeToDelete(_ hunt: Hunt) -> some View {
+  private func swipeToDelete(_ hunt: THHunt) -> some View {
     Button {
       huntToDelete = hunt
       huntDeletionAlertIsShown = true
@@ -74,7 +89,7 @@ extension HuntListView {
   private var noHuntsPlaceholder: some View {
     VStack {
       NavigationLink {
-        AddHuntView(locationProvider: locationProvider)
+        LazyView(AddHuntView(locationProvider: locationProvider))
       } label: {
         Text(L10n.HuntListView.listPlaceholderButtonTitle)
           .fontWeight(.semibold)
@@ -107,11 +122,9 @@ extension HuntListView {
           .fill(Color.accentColor)
       )
       .listRowSeparator(.hidden)
-      .overlay(
-        NavigationLink(
-          destination: { AddHuntView(locationProvider: locationProvider) },
-          label: { EmptyView() }
-        ).opacity(0)
-      )
+      .invisibleNavigationLink {
+        LazyView(AddHuntView(locationProvider: locationProvider))
+      }
+      .listRowBackground(Color.clear)
   }
 }

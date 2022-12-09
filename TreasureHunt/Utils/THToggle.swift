@@ -14,18 +14,18 @@ struct THToggle: View {
   var body: some View {
     HStack {
       Text("Yes")
-        .onTapGesture(perform: toggleIntroduction)
-        .allowsHitTesting(!isSelected)
         .padding(.vertical, 6)
         .padding(.horizontal)
         .background(toggleBackground(isSelected, namespace: selection))
+        .allowsHitTesting(!isSelected)
+        .onTapGesture(perform: toggleIntroduction)
 
       Text("No")
-        .onTapGesture(perform: toggleIntroduction)
-        .allowsHitTesting(isSelected)
         .padding(.vertical, 6)
         .padding(.horizontal)
         .background(toggleBackground(!isSelected, namespace: selection))
+        .allowsHitTesting(isSelected)
+        .onTapGesture(perform: toggleIntroduction)
     }
   }
 

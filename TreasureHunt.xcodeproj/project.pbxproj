@@ -7,11 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		451B5AA5294075C7005DCBCA /* AddStationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451B5AA4294075C7005DCBCA /* AddStationView.swift */; };
+		451B5AA7294078E4005DCBCA /* InvisibleNavigationLink+ViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451B5AA6294078E4005DCBCA /* InvisibleNavigationLink+ViewModifier.swift */; };
 		452AA85328F69DA300F11BA5 /* LocationAuthorizationOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452AA85228F69DA300F11BA5 /* LocationAuthorizationOnboardingView.swift */; };
 		4530A10D28F14BCD00F05AE3 /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530A10C28F14BCD00F05AE3 /* QuestionView.swift */; };
 		4532DB0728FA981500C32418 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4532DB0928FA981500C32418 /* Localizable.strings */; };
 		4533508F28FC824400BC0AA0 /* AddLocationView+TriggerDistanceSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4533508E28FC824400BC0AA0 /* AddLocationView+TriggerDistanceSlider.swift */; };
-		45435A702918332C00FCDB42 /* THStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45435A6F2918332C00FCDB42 /* THStation.swift */; };
 		45513FAA28EAF2D90064A32E /* HuntListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45513FA928EAF2D90064A32E /* HuntListView.swift */; };
 		45513FB528EAFADD0064A32E /* AddHuntView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45513FB428EAFADD0064A32E /* AddHuntView.swift */; };
 		45513FB728EBD9A60064A32E /* LocationsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45513FB628EBD9A60064A32E /* LocationsPicker.swift */; };
@@ -21,10 +22,16 @@
 		45513FC128ED69130064A32E /* StationAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45513FC028ED69130064A32E /* StationAnnotationView.swift */; };
 		457C2D532928176A0051FDD6 /* SuccessPopover+ViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C2D522928176A0051FDD6 /* SuccessPopover+ViewModifier.swift */; };
 		457C2D55292818310051FDD6 /* AnimatedCheckmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C2D54292818310051FDD6 /* AnimatedCheckmark.swift */; };
-		4587B6CC28F37AFB00F10ED8 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 4587B6CB28F37AFB00F10ED8 /* Realm */; };
-		4587B6CE28F37AFB00F10ED8 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4587B6CD28F37AFB00F10ED8 /* RealmSwift */; };
-		4587B6D128F37C2000F10ED8 /* THLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4587B6D028F37C2000F10ED8 /* THLocation.swift */; };
 		4587B6D328F383C900F10ED8 /* THLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4587B6D228F383C900F10ED8 /* THLocationService.swift */; };
+		458BE2B3293CA83A00869ADF /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458BE2B2293CA83A00869ADF /* PersistenceController.swift */; };
+		458BE2B6293CA86000869ADF /* TreasureHunt.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 458BE2B4293CA86000869ADF /* TreasureHunt.xcdatamodeld */; };
+		458BE2BD293CA9DE00869ADF /* THLocation+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458BE2B7293CA9DE00869ADF /* THLocation+CoreDataClass.swift */; };
+		458BE2BE293CA9DE00869ADF /* THLocation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458BE2B8293CA9DE00869ADF /* THLocation+CoreDataProperties.swift */; };
+		458BE2BF293CA9DE00869ADF /* THHunt+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458BE2B9293CA9DE00869ADF /* THHunt+CoreDataClass.swift */; };
+		458BE2C0293CA9DE00869ADF /* THHunt+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458BE2BA293CA9DE00869ADF /* THHunt+CoreDataProperties.swift */; };
+		458BE2C1293CA9DE00869ADF /* THStation+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458BE2BB293CA9DE00869ADF /* THStation+CoreDataClass.swift */; };
+		458BE2C2293CA9DE00869ADF /* THStation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458BE2BC293CA9DE00869ADF /* THStation+CoreDataProperties.swift */; };
+		458F1B4E2944A7E300525EBC /* NSManagedObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458F1B4D2944A7E300525EBC /* NSManagedObject+Extension.swift */; };
 		458F90E528EAACB300F9BE29 /* HapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458F90E428EAACB300F9BE29 /* HapticsManager.swift */; };
 		458F90E728EAAEB200F9BE29 /* UserDefaults+Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458F90E628EAAEB200F9BE29 /* UserDefaults+Keys.swift */; };
 		458F90E928EAB15500F9BE29 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458F90E828EAB15500F9BE29 /* Double+Extension.swift */; };
@@ -32,11 +39,11 @@
 		45A8CEE728EA228500F19E67 /* HuntViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A8CEE628EA228500F19E67 /* HuntViewModel.swift */; };
 		45ABD0B9290AA9CF0010E1EF /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ABD0B8290AA9CF0010E1EF /* L10n.swift */; };
 		45ABD0BC290AAD230010E1EF /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 45ABD0BE290AAD230010E1EF /* Localizable.stringsdict */; };
+		45B0DF9C2946476A002942F0 /* THStationModelService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B0DF9B2946476A002942F0 /* THStationModelService.swift */; };
 		45B7EFE528F4BCC6006AE0FB /* SoundType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B7EFE428F4BCC6006AE0FB /* SoundType.swift */; };
 		45B7EFEB28F4BDE1006AE0FB /* error.wav in Resources */ = {isa = PBXBuildFile; fileRef = 45B7EFE928F4BDE1006AE0FB /* error.wav */; };
 		45B7EFEC28F4BDE1006AE0FB /* success.wav in Resources */ = {isa = PBXBuildFile; fileRef = 45B7EFEA28F4BDE1006AE0FB /* success.wav */; };
-		45D56EEA28F3ED930008BC3A /* Hunt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D56EE928F3ED930008BC3A /* Hunt.swift */; };
-		45D56EEC28F3F06A0008BC3A /* HuntModelService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D56EEB28F3F06A0008BC3A /* HuntModelService.swift */; };
+		45D56EEC28F3F06A0008BC3A /* THHuntModelService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D56EEB28F3F06A0008BC3A /* THHuntModelService.swift */; };
 		45DC5FCB292B7A5C00860167 /* AnyTransition+PageTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DC5FCA292B7A5C00860167 /* AnyTransition+PageTransition.swift */; };
 		45E188C728F5451700A055BD /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E188C628F5451700A055BD /* AudioPlayer.swift */; };
 		45EDD3FD29297F1300C8EF86 /* AddHuntView+NamePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EDD3FC29297F1300C8EF86 /* AddHuntView+NamePage.swift */; };
@@ -46,6 +53,7 @@
 		45EDD405292A2BAA00C8EF86 /* DisableAnimation+ViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EDD404292A2BAA00C8EF86 /* DisableAnimation+ViewModifier.swift */; };
 		45EDD407292A450600C8EF86 /* AddHuntView+PageSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EDD406292A450600C8EF86 /* AddHuntView+PageSelection.swift */; };
 		45EDD409292A9CE600C8EF86 /* THToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EDD408292A9CE600C8EF86 /* THToggle.swift */; };
+		45F4B53D293BCB72001BD47C /* AddHuntViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F4B53C293BCB72001BD47C /* AddHuntViewModel.swift */; };
 		45F4B53F293BD895001BD47C /* LazyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F4B53E293BD895001BD47C /* LazyView.swift */; };
 		45F99CDF290BD36C0050AC6F /* LegalNoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F99CDE290BD36C0050AC6F /* LegalNoticeView.swift */; };
 		45F99CE1290BD3B30050AC6F /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F99CE0290BD3B30050AC6F /* AboutView.swift */; };
@@ -78,11 +86,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		451B5AA4294075C7005DCBCA /* AddStationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStationView.swift; sourceTree = "<group>"; };
+		451B5AA6294078E4005DCBCA /* InvisibleNavigationLink+ViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InvisibleNavigationLink+ViewModifier.swift"; sourceTree = "<group>"; };
 		452AA85228F69DA300F11BA5 /* LocationAuthorizationOnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationAuthorizationOnboardingView.swift; sourceTree = "<group>"; };
 		4530A10C28F14BCD00F05AE3 /* QuestionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
 		4532DB0828FA981500C32418 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4533508E28FC824400BC0AA0 /* AddLocationView+TriggerDistanceSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddLocationView+TriggerDistanceSlider.swift"; sourceTree = "<group>"; };
-		45435A6F2918332C00FCDB42 /* THStation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = THStation.swift; sourceTree = "<group>"; };
 		45513FA928EAF2D90064A32E /* HuntListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuntListView.swift; sourceTree = "<group>"; };
 		45513FB428EAFADD0064A32E /* AddHuntView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHuntView.swift; sourceTree = "<group>"; };
 		45513FB628EBD9A60064A32E /* LocationsPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsPicker.swift; sourceTree = "<group>"; };
@@ -92,8 +101,16 @@
 		45513FC028ED69130064A32E /* StationAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationAnnotationView.swift; sourceTree = "<group>"; };
 		457C2D522928176A0051FDD6 /* SuccessPopover+ViewModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SuccessPopover+ViewModifier.swift"; sourceTree = "<group>"; };
 		457C2D54292818310051FDD6 /* AnimatedCheckmark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatedCheckmark.swift; sourceTree = "<group>"; };
-		4587B6D028F37C2000F10ED8 /* THLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = THLocation.swift; sourceTree = "<group>"; };
 		4587B6D228F383C900F10ED8 /* THLocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = THLocationService.swift; sourceTree = "<group>"; };
+		458BE2B2293CA83A00869ADF /* PersistenceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
+		458BE2B5293CA86000869ADF /* TreasureHunt.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TreasureHunt.xcdatamodel; sourceTree = "<group>"; };
+		458BE2B7293CA9DE00869ADF /* THLocation+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "THLocation+CoreDataClass.swift"; sourceTree = "<group>"; };
+		458BE2B8293CA9DE00869ADF /* THLocation+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "THLocation+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		458BE2B9293CA9DE00869ADF /* THHunt+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "THHunt+CoreDataClass.swift"; sourceTree = "<group>"; };
+		458BE2BA293CA9DE00869ADF /* THHunt+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "THHunt+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		458BE2BB293CA9DE00869ADF /* THStation+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "THStation+CoreDataClass.swift"; sourceTree = "<group>"; };
+		458BE2BC293CA9DE00869ADF /* THStation+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "THStation+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		458F1B4D2944A7E300525EBC /* NSManagedObject+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+Extension.swift"; sourceTree = "<group>"; };
 		458F90E428EAACB300F9BE29 /* HapticsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HapticsManager.swift; sourceTree = "<group>"; };
 		458F90E628EAAEB200F9BE29 /* UserDefaults+Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Keys.swift"; sourceTree = "<group>"; };
 		458F90E828EAB15500F9BE29 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
@@ -103,11 +120,11 @@
 		45ABD0B8290AA9CF0010E1EF /* L10n.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = L10n.swift; sourceTree = "<group>"; };
 		45ABD0BD290AAD230010E1EF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		45ABD0BF290AAD250010E1EF /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = de; path = de.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		45B0DF9B2946476A002942F0 /* THStationModelService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = THStationModelService.swift; sourceTree = "<group>"; };
 		45B7EFE428F4BCC6006AE0FB /* SoundType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundType.swift; sourceTree = "<group>"; };
 		45B7EFE928F4BDE1006AE0FB /* error.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = error.wav; sourceTree = "<group>"; };
 		45B7EFEA28F4BDE1006AE0FB /* success.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = success.wav; sourceTree = "<group>"; };
-		45D56EE928F3ED930008BC3A /* Hunt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hunt.swift; sourceTree = "<group>"; };
-		45D56EEB28F3F06A0008BC3A /* HuntModelService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuntModelService.swift; sourceTree = "<group>"; };
+		45D56EEB28F3F06A0008BC3A /* THHuntModelService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = THHuntModelService.swift; sourceTree = "<group>"; };
 		45DC5FCA292B7A5C00860167 /* AnyTransition+PageTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnyTransition+PageTransition.swift"; sourceTree = "<group>"; };
 		45E188C628F5451700A055BD /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		45EDD3FC29297F1300C8EF86 /* AddHuntView+NamePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddHuntView+NamePage.swift"; sourceTree = "<group>"; };
@@ -117,6 +134,7 @@
 		45EDD404292A2BAA00C8EF86 /* DisableAnimation+ViewModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DisableAnimation+ViewModifier.swift"; sourceTree = "<group>"; };
 		45EDD406292A450600C8EF86 /* AddHuntView+PageSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddHuntView+PageSelection.swift"; sourceTree = "<group>"; };
 		45EDD408292A9CE600C8EF86 /* THToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = THToggle.swift; sourceTree = "<group>"; };
+		45F4B53C293BCB72001BD47C /* AddHuntViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHuntViewModel.swift; sourceTree = "<group>"; };
 		45F4B53E293BD895001BD47C /* LazyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyView.swift; sourceTree = "<group>"; };
 		45F99CDE290BD36C0050AC6F /* LegalNoticeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LegalNoticeView.swift; sourceTree = "<group>"; };
 		45F99CE0290BD3B30050AC6F /* AboutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
@@ -154,8 +172,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4587B6CE28F37AFB00F10ED8 /* RealmSwift in Frameworks */,
-				4587B6CC28F37AFB00F10ED8 /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,6 +211,7 @@
 			children = (
 				45513FB628EBD9A60064A32E /* LocationsPicker.swift */,
 				45513FB828ECBDC10064A32E /* StationPickerRowView.swift */,
+				451B5AA4294075C7005DCBCA /* AddStationView.swift */,
 			);
 			path = StationPicker;
 			sourceTree = "<group>";
@@ -208,6 +225,7 @@
 				45EDD3FE29297F2600C8EF86 /* AddHuntView+StationsPicker.swift */,
 				45EDD40229297F9600C8EF86 /* AddHuntView+OutlinePage.swift */,
 				45EDD406292A450600C8EF86 /* AddHuntView+PageSelection.swift */,
+				45F4B53C293BCB72001BD47C /* AddHuntViewModel.swift */,
 				45513FBA28ECBDC80064A32E /* StationPicker */,
 			);
 			path = AddHuntView;
@@ -242,17 +260,33 @@
 			path = OnboardingView;
 			sourceTree = "<group>";
 		};
-		4587B6CF28F37BF800F10ED8 /* Station */ = {
+		4587B6CF28F37BF800F10ED8 /* THStation */ = {
 			isa = PBXGroup;
 			children = (
-				45435A6F2918332C00FCDB42 /* THStation.swift */,
-				45DC5FC9292B718100860167 /* THLocation */,
+				458BE2BB293CA9DE00869ADF /* THStation+CoreDataClass.swift */,
+				458BE2BC293CA9DE00869ADF /* THStation+CoreDataProperties.swift */,
+				45B0DF9B2946476A002942F0 /* THStationModelService.swift */,
+			);
+			path = THStation;
+			sourceTree = "<group>";
+		};
 		458BE2A2293C88BE00869ADF /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				45F4B53E293BD895001BD47C /* LazyView.swift */,
 			);
-			path = Station;
+			path = Views;
+			sourceTree = "<group>";
+		};
+		458BE2A6293C8C7600869ADF /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				458BE2B2293CA83A00869ADF /* PersistenceController.swift */,
+				458BE2B4293CA86000869ADF /* TreasureHunt.xcdatamodeld */,
+				458F1B4D2944A7E300525EBC /* NSManagedObject+Extension.swift */,
+				F2A056B228DB99B9007D7FFF /* Models */,
+			);
+			path = Persistence;
 			sourceTree = "<group>";
 		};
 		45B7EFE828F4BDE1006AE0FB /* Sounds */ = {
@@ -264,19 +298,21 @@
 			path = Sounds;
 			sourceTree = "<group>";
 		};
-		45D56EE828F3ED860008BC3A /* Hunt */ = {
+		45D56EE828F3ED860008BC3A /* THHunt */ = {
 			isa = PBXGroup;
 			children = (
-				45D56EE928F3ED930008BC3A /* Hunt.swift */,
-				45D56EEB28F3F06A0008BC3A /* HuntModelService.swift */,
+				458BE2B9293CA9DE00869ADF /* THHunt+CoreDataClass.swift */,
+				458BE2BA293CA9DE00869ADF /* THHunt+CoreDataProperties.swift */,
+				45D56EEB28F3F06A0008BC3A /* THHuntModelService.swift */,
 			);
-			path = Hunt;
+			path = THHunt;
 			sourceTree = "<group>";
 		};
 		45DC5FC9292B718100860167 /* THLocation */ = {
 			isa = PBXGroup;
 			children = (
-				4587B6D028F37C2000F10ED8 /* THLocation.swift */,
+				458BE2B7293CA9DE00869ADF /* THLocation+CoreDataClass.swift */,
+				458BE2B8293CA9DE00869ADF /* THLocation+CoreDataProperties.swift */,
 				4587B6D228F383C900F10ED8 /* THLocationService.swift */,
 			);
 			path = THLocation;
@@ -388,6 +424,7 @@
 		8A52025028E0A23200C49779 /* ViewModifier */ = {
 			isa = PBXGroup;
 			children = (
+				451B5AA6294078E4005DCBCA /* InvisibleNavigationLink+ViewModifier.swift */,
 				45EDD404292A2BAA00C8EF86 /* DisableAnimation+ViewModifier.swift */,
 				8A4C4F9728E1FBFE00721C50 /* RoundedNavigationTitle-ViewModifier.swift */,
 				8A52025128E0A23200C49779 /* Button+PressActionsModifier.swift */,
@@ -436,7 +473,7 @@
 			children = (
 				F212393028CA539C006754E3 /* TreasureHuntApp.swift */,
 				8A52024328E0A21900C49779 /* Features */,
-				F2A056B228DB99B9007D7FFF /* Model */,
+				458BE2A6293C8C7600869ADF /* Persistence */,
 				8A52024F28E0A23200C49779 /* Extensions */,
 				8A4C4F9928E207AA00721C50 /* Utils */,
 				4587B6C628F329FA00F10ED8 /* Resources */,
@@ -453,14 +490,15 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		F2A056B228DB99B9007D7FFF /* Model */ = {
+		F2A056B228DB99B9007D7FFF /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				45D56EE828F3ED860008BC3A /* Hunt */,
-				4587B6CF28F37BF800F10ED8 /* Station */,
-				45513FB328EAF82A0064A32E /* Location */,
+				45D56EE828F3ED860008BC3A /* THHunt */,
+				4587B6CF28F37BF800F10ED8 /* THStation */,
+				45DC5FC9292B718100860167 /* THLocation */,
+				45513FB328EAF82A0064A32E /* LocationProvider */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -480,8 +518,6 @@
 			);
 			name = TreasureHunt;
 			packageProductDependencies = (
-				4587B6CB28F37AFB00F10ED8 /* Realm */,
-				4587B6CD28F37AFB00F10ED8 /* RealmSwift */,
 			);
 			productName = TreasureHunt;
 			productReference = F212392D28CA539C006754E3 /* TreasureHunt.app */;
@@ -513,7 +549,6 @@
 			);
 			mainGroup = F212392428CA539C006754E3;
 			packageReferences = (
-				4587B6CA28F37AFB00F10ED8 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = F212392E28CA539C006754E3 /* Products */;
 			projectDirPath = "";
@@ -545,18 +580,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4587B6D128F37C2000F10ED8 /* THLocation.swift in Sources */,
 				452AA85328F69DA300F11BA5 /* LocationAuthorizationOnboardingView.swift in Sources */,
 				F2A056A528DB7957007D7FFF /* LocationProvider.swift in Sources */,
 				45E188C728F5451700A055BD /* AudioPlayer.swift in Sources */,
-				45435A702918332C00FCDB42 /* THStation.swift in Sources */,
 				4533508F28FC824400BC0AA0 /* AddLocationView+TriggerDistanceSlider.swift in Sources */,
 				45513FBE28ECD22C0064A32E /* HuntListDetailView.swift in Sources */,
 				4587B6D328F383C900F10ED8 /* THLocationService.swift in Sources */,
 				8A4C4F9828E1FBFE00721C50 /* RoundedNavigationTitle-ViewModifier.swift in Sources */,
+				458BE2BE293CA9DE00869ADF /* THLocation+CoreDataProperties.swift in Sources */,
 				8A52024A28E0A21900C49779 /* AddLocationView.swift in Sources */,
-				45D56EEC28F3F06A0008BC3A /* HuntModelService.swift in Sources */,
+				45D56EEC28F3F06A0008BC3A /* THHuntModelService.swift in Sources */,
 				458F90E728EAAEB200F9BE29 /* UserDefaults+Keys.swift in Sources */,
+				458BE2BF293CA9DE00869ADF /* THHunt+CoreDataClass.swift in Sources */,
 				458F90E928EAB15500F9BE29 /* Double+Extension.swift in Sources */,
 				8A4C4F9128E1C0F100721C50 /* SettingsView.swift in Sources */,
 				F212393128CA539C006754E3 /* TreasureHuntApp.swift in Sources */,
@@ -564,6 +599,7 @@
 				45F4B53F293BD895001BD47C /* LazyView.swift in Sources */,
 				8A52025328E0A23200C49779 /* Button+PressActionsModifier.swift in Sources */,
 				45F99CDF290BD36C0050AC6F /* LegalNoticeView.swift in Sources */,
+				458BE2C2293CA9DE00869ADF /* THStation+CoreDataProperties.swift in Sources */,
 				45EDD40129297F5600C8EF86 /* AddHuntView+IntroductionPage.swift in Sources */,
 				4530A10D28F14BCD00F05AE3 /* QuestionView.swift in Sources */,
 				8A1CBD7828E3795300E0AE4B /* Color+Extension.swift in Sources */,
@@ -577,7 +613,9 @@
 				8A4C4FA328E20FB100721C50 /* ArrowIconPicker.swift in Sources */,
 				458F90E528EAACB300F9BE29 /* HapticsManager.swift in Sources */,
 				8AD1768E28E0F14600A12948 /* LocationsListRowView.swift in Sources */,
+				458BE2C0293CA9DE00869ADF /* THHunt+CoreDataProperties.swift in Sources */,
 				8A4C4F8F28E1C0E100721C50 /* MainTabView.swift in Sources */,
+				451B5AA5294075C7005DCBCA /* AddStationView.swift in Sources */,
 				45B7EFE528F4BCC6006AE0FB /* SoundType.swift in Sources */,
 				45F99CE5290BFFBF0050AC6F /* HuntListDetailRowView.swift in Sources */,
 				8A4C4F9428E1D9BB00721C50 /* Array+Extension.swift in Sources */,
@@ -589,10 +627,14 @@
 				45F99CE3290BD3CE0050AC6F /* Constants.swift in Sources */,
 				457C2D55292818310051FDD6 /* AnimatedCheckmark.swift in Sources */,
 				8AFCFF3928E225ED000D1A0B /* MapView.swift in Sources */,
+				458BE2BD293CA9DE00869ADF /* THLocation+CoreDataClass.swift in Sources */,
+				458F1B4E2944A7E300525EBC /* NSManagedObject+Extension.swift in Sources */,
 				8A52024E28E0A21900C49779 /* HuntView.swift in Sources */,
 				45A8CEE728EA228500F19E67 /* HuntViewModel.swift in Sources */,
 				45513FB728EBD9A60064A32E /* LocationsPicker.swift in Sources */,
+				458BE2B3293CA83A00869ADF /* PersistenceController.swift in Sources */,
 				8A1CBD7628E36EC300E0AE4B /* TrafficWarningView.swift in Sources */,
+				45B0DF9C2946476A002942F0 /* THStationModelService.swift in Sources */,
 				45F99CEA290C6F5F0050AC6F /* ReadSize+ViewModifier.swift in Sources */,
 				45513FC128ED69130064A32E /* StationAnnotationView.swift in Sources */,
 				8A4C4F9B28E207C200721C50 /* AppearanceManager.swift in Sources */,
@@ -600,11 +642,14 @@
 				8A52024D28E0A21900C49779 /* LocationsListView.swift in Sources */,
 				45EDD407292A450600C8EF86 /* AddHuntView+PageSelection.swift in Sources */,
 				45513FAA28EAF2D90064A32E /* HuntListView.swift in Sources */,
-				45D56EEA28F3ED930008BC3A /* Hunt.swift in Sources */,
+				45F4B53D293BCB72001BD47C /* AddHuntViewModel.swift in Sources */,
+				458BE2B6293CA86000869ADF /* TreasureHunt.xcdatamodeld in Sources */,
 				45513FBC28ECD2070064A32E /* HuntListRowView.swift in Sources */,
 				45916496292AA9E800037F44 /* THNumberedCircle.swift in Sources */,
+				458BE2C1293CA9DE00869ADF /* THStation+CoreDataClass.swift in Sources */,
 				45EDD405292A2BAA00C8EF86 /* DisableAnimation+ViewModifier.swift in Sources */,
 				45EDD409292A9CE600C8EF86 /* THToggle.swift in Sources */,
+				451B5AA7294078E4005DCBCA /* InvisibleNavigationLink+ViewModifier.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -833,29 +878,18 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		4587B6CA28F37AFB00F10ED8 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/realm/realm-swift.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 10.31.0;
-			};
+/* Begin XCVersionGroup section */
+		458BE2B4293CA86000869ADF /* TreasureHunt.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				458BE2B5293CA86000869ADF /* TreasureHunt.xcdatamodel */,
+			);
+			currentVersion = 458BE2B5293CA86000869ADF /* TreasureHunt.xcdatamodel */;
+			path = TreasureHunt.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
 		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		4587B6CB28F37AFB00F10ED8 /* Realm */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4587B6CA28F37AFB00F10ED8 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = Realm;
-		};
-		4587B6CD28F37AFB00F10ED8 /* RealmSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4587B6CA28F37AFB00F10ED8 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = RealmSwift;
-		};
-/* End XCSwiftPackageProductDependency section */
+/* End XCVersionGroup section */
 	};
 	rootObject = F212392528CA539C006754E3 /* Project object */;
 }

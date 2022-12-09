@@ -2,17 +2,18 @@
 //  
 //
 
-import RealmSwift
 import SwiftUI
 import MapKit
 
 struct LocationsListView: View {
-  @ObservedResults(THLocation.self) private var locations
   @EnvironmentObject private var locationProvider: LocationProvider
   @AppStorage(UserDefaults.TooltipKeys.editLocations) private var editStationTooltipIsShown = true
   @State private var newLocationSheetIsShown: Bool = false
   @State private var locationToEdit: THLocation? = nil
   @State private var locationToDelete: THLocation? = nil
+
+  @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \THLocation.title, ascending: true)])
+  private var locations: FetchedResults<THLocation>
 
   var body: some View {
     NavigationStack {
@@ -111,7 +112,7 @@ extension LocationsListView {
       Button(L10n.BtnTitle.iAmSure, role: .destructive) {
         if let locationToDelete {
           withAnimation {
-            $locations.remove(locationToDelete)
+            THLocationService.deleteLocation(locationToDelete)
             self.locationToDelete = nil
           }
         }
@@ -158,24 +159,25 @@ extension LocationsListView {
   }
 
   @ViewBuilder
-  private func contextMenuContent(_ station: THLocation) -> some View {
+  private func contextMenuContent(_ location: THLocation) -> some View {
     Button {
-      THLocationService.toggleFavorite(station)
+      THLocationService.toggleFavourite(location)
     } label: {
-      if station.isFavorite {
+      if location.isFavourite {
         Label("Remove from Favorites", systemImage: "star.fill")
       } else {
         Label("Add to Favorites", systemImage: "star")
       }
     }
+
     Button {
-      locationToEdit = station
+      locationToEdit = location
     } label: {
       Label("Edit Station", systemImage: "pencil")
     }
 
     Button(role: .destructive) {
-      locationToDelete = station
+      locationToDelete = location
     } label: {
       Label("Delete", systemImage: "trash")
     }
@@ -201,13 +203,13 @@ extension LocationsListView {
     .tint(.purple)
   }
 
-  private func swipeToFavorite(_ station: THLocation) -> some View {
+  private func swipeToFavorite(_ location: THLocation) -> some View {
     Button {
       withAnimation {
-        THLocationService.toggleFavorite(station)
+        THLocationService.toggleFavourite(location)
       }
     } label: {
-      if station.isFavorite {
+      if location.isFavourite {
         Label("Unmark as Favorite", systemImage: "star.slash.fill")
           .labelStyle(.iconOnly)
       } else {

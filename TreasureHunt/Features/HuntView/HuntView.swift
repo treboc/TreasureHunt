@@ -11,7 +11,7 @@ struct HuntView: View {
   @StateObject private var huntManager: HuntManager
   @StateObject private var vm = HuntViewModel()
   
-  init(locationProvider: LocationProvider = LocationProvider(), hunt: Hunt) {
+  init(locationProvider: LocationProvider = LocationProvider(), hunt: THHunt) {
     let huntManger = HuntManager(locationProvider: locationProvider, hunt)
     _huntManager = StateObject(wrappedValue: huntManger)
   }
@@ -46,13 +46,6 @@ struct HuntView: View {
     .alert(L10n.HuntView.EndHuntAlert.title, isPresented: $vm.endSessionAlertIsShown) {
       Button(L10n.BtnTitle.cancel, role: .cancel) {}
       Button(L10n.BtnTitle.iAmSure, role: .destructive) { dismiss.callAsFunction() }
-    } message: {
-      Text(L10n.HuntView.EndHuntAlert.message)
-    }
-    .animation(.default, value: huntManager.isNearCurrentStation)
-    .alert(L10n.HuntView.EndHuntAlert.title, isPresented: $vm.endSessionAlertIsShown) {
-      Button(L10n.BtnTitle.cancel, role: .cancel) {}
-      Button(L10n.BtnTitle.iAmSure, role: .destructive, action: dismiss.callAsFunction)
     } message: {
       Text(L10n.HuntView.EndHuntAlert.message)
     }

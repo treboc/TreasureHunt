@@ -31,7 +31,7 @@ struct StationPickerRowView: View {
       if rowType == .chosen {
         positionImage
       }
-      Text(location.name)
+      Text(location.unwrappedTitle)
     }
     .frame(maxWidth: .infinity, alignment: .leading)
     .contentShape(Rectangle())
@@ -40,6 +40,9 @@ struct StationPickerRowView: View {
 
 struct StationPickerRowView_Previews: PreviewProvider {
     static var previews: some View {
-      StationPickerRowView(index: 1, location: THLocation.location, rowType: .available)
+      StationPickerRowView(index: 1,
+                           location: .exampleTHLocation(withTitle: "Testing",
+                                                        in: PersistenceController.preview.context),
+                           rowType: .available)
     }
 }

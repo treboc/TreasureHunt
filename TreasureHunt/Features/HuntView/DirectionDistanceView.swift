@@ -2,8 +2,8 @@
 //  Copyright © 2021 dasdom. All rights reserved.
 //
 
-import SwiftUI
 import MapKit
+import SwiftUI
 
 struct DirectionDistanceView: View {
   @AppStorage("arrowIcon") private var arrowIcon: ArrowIconPicker.ArrowIcon = .locationNorthFill
@@ -49,7 +49,8 @@ extension DirectionDistanceView {
   private var notNearStationView: some View {
     VStack {
       VStack {
-        Text(L10n.HuntView.DirectionDistanceView.stationOf(huntManager.currentStationNumber, huntManager.hunt.stations.count))
+        Text(L10n.HuntView.DirectionDistanceView.stationOf(huntManager.currentStationNumber,
+                                                           huntManager.hunt.stationsArray.count))
           .font(.system(.largeTitle, design: .rounded))
           .fontWeight(.semibold)
           .padding(.top)
@@ -88,13 +89,14 @@ extension DirectionDistanceView {
           .resizable()
           .frame(width: 30, height: 30)
 
-        Text(huntManager.currentStation?.name ?? L10n.HuntView.DirectionDistanceView.stationNameFallback)
+        Text(huntManager.currentStation?.unwrappedTitle ?? L10n.HuntView.DirectionDistanceView.stationNameFallback)
           .font(.system(.title, design: .rounded))
           .fontWeight(.semibold)
           .lineLimit(1)
 
         if huntManager.currentStation != nil {
-          Text(L10n.HuntView.DirectionDistanceView.stationOf(huntManager.currentStationNumber, huntManager.hunt.stations.count))
+          // TODO: Fix hard coded '1'
+          Text(L10n.HuntView.DirectionDistanceView.stationOf(huntManager.currentStationNumber, 1))
             .font(.system(.headline, design: .rounded))
             .italic()
             .foregroundColor(.secondary)

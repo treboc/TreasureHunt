@@ -2,16 +2,15 @@
 //  
 //
 
-import RealmSwift
 import SwiftUI
 
 struct QuestionView: View {
   @Environment(\.dismiss) private var dismiss
-  var station: THStation
+  @State var station: THStation
 
   var body: some View {
     VStack {
-      Text(L10n.HuntView.QuestionView.reachedStation(station.name))
+      Text(L10n.HuntView.QuestionView.reachedStation(station.unwrappedTitle))
         .font(.system(.largeTitle, design: .rounded, weight: .semibold))
         .frame(maxWidth: .infinity, alignment: .center)
         .padding(.horizontal)
@@ -49,8 +48,8 @@ struct QuestionView: View {
   }
 }
 
-struct QuestionView_Previews: PreviewProvider {
-  static var previews: some View {
-    QuestionView(station: THStation.station)
-  }
-}
+//struct QuestionView_Previews: PreviewProvider {
+//  static var previews: some View {
+//    QuestionView(station: THStation.station)
+//  }
+//}

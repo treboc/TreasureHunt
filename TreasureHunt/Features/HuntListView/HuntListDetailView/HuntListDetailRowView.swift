@@ -9,33 +9,47 @@ import SwiftUI
 
 struct HuntListDetailRowView: View {
   @EnvironmentObject private var locationProvider: LocationProvider
-  let station: THStation
+  @ObservedObject var station: THStation
   let position: Int
-  
+
+  @State private var isEditingStation: Bool = false
   @State private var horizontalOffset: CGFloat = .zero
   
   var body: some View {
     VStack(alignment: .leading, spacing: 10) {
       HStack(alignment: .bottom) {
         VStack(alignment: .leading, spacing: 2) {
-          Text(station.name)
+          Text(station.unwrappedTitle)
             .font(.system(.title2, design: .rounded, weight: .semibold))
             .lineLimit(2)
-          
+
           Text(L10n.HuntListDetailRowView.stationName.localizedUppercase)
             .font(.system(.caption2, design: .rounded))
             .foregroundColor(.secondary)
         }
-        
+
         Spacer()
-        
-        VStack(alignment: .trailing, spacing: 2) {
-          Text(locationProvider.distanceToAsString(station.location?.location))
-            .font(.system(.subheadline, design: .rounded))
-          
-          Text(L10n.HuntListDetailRowView.distanceFromHere.localizedUppercase)
-            .font(.system(.caption2, design: .rounded))
-            .foregroundColor(.secondary)
+
+        if station.location != nil {
+          VStack(alignment: .trailing, spacing: 2) {
+            Text(locationProvider.distanceToAsString(station.location?.location))
+              .font(.system(.subheadline, design: .rounded))
+
+            Text(L10n.HuntListDetailRowView.distanceFromHere.localizedUppercase)
+              .font(.system(.caption2, design: .rounded))
+              .foregroundColor(.secondary)
+          }
+        } else {
+          VStack {
+            Image(systemName: "exclamationmark.circle.fill")
+              .font(.headline)
+              .foregroundColor(.red)
+
+            Text("This Station does not have a location, tap here, to edit the station!")
+              .font(.footnote)
+              .foregroundColor(.secondary)
+          }
+          .onTapGesture { isEditingStation = true }
         }
       }
     }
@@ -50,24 +64,14 @@ struct HuntListDetailRowView: View {
         .offset(x: horizontalOffset)
     }
     .padding(.horizontal)
+    .sheet(isPresented: $isEditingStation) {
+      AddStationView(station: station)
+    }
   }
 }
 
 extension HuntListDetailRowView {
   private func setHorizontalOffset(_ viewSize: CGSize) {
     horizontalOffset = -(viewSize.width / 2)
-  }
-}
-
-struct HuntListDetailRowView_Previews: PreviewProvider {
-  static var previews: some View {
-    Group {
-      HuntListDetailRowView(station: .station, position: 1)
-
-      HuntListDetailRowView(station: .station, position: 1)
-        .padding()
-        .preferredColorScheme(.dark)
-        .previewLayout(.sizeThatFits)
-    }
   }
 }
