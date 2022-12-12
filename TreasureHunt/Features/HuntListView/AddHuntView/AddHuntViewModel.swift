@@ -14,6 +14,7 @@ class AddHuntViewModel: ObservableObject {
   @Environment(\.managedObjectContext) private var moc
 
   @Published var hunt: THHunt
+  @Published var stations: [THStation] = []
 
   var navTitle: String {
     return hunt.unwrappedTitle.isEmpty ? L10n.AddHuntView.navTitle : hunt.unwrappedTitle
@@ -27,6 +28,7 @@ class AddHuntViewModel: ObservableObject {
 
     if let huntToEdit, let childObject = try? childContext.existingObject(with: huntToEdit.objectID) as? THHunt {
       self.hunt = childObject
+      self.stations = childObject.stationsArray
     } else {
       self.hunt = THHunt(context: childContext)
     }
@@ -39,7 +41,7 @@ class AddHuntViewModel: ObservableObject {
   }
 
   func saveButtonTapped(onCompletion: @escaping (() -> Void)) {
-    THHuntModelService.updateHunt(hunt: hunt)
+    THHuntModelService.updateHunt(hunt: hunt, withStations: stations)
     onCompletion()
   }
 
@@ -57,9 +59,13 @@ class AddHuntViewModel: ObservableObject {
     }
   }
 
-  func saveNewStation(_ station: THStation) {
-    hunt.addToStations(station)
-    objectWillChange.send()
+  func saveStation(_ station: THStation) {
+    if let index = stations.firstIndex(of: station) {
+      stations[index] = station
+    } else {
+      stations.append(station)
+    }
+    self.objectWillChange.send()
   }
 }
 

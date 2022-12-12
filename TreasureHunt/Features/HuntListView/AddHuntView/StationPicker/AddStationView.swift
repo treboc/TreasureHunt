@@ -90,7 +90,7 @@ struct AddStationView: View {
   }
 
   private func saveButtonPressed() {
-    viewModel.saveNewStation(station)
+    viewModel.saveStation(station)
     dismiss()
   }
 

@@ -29,19 +29,15 @@ extension AddHuntView {
 
           List {
             Group {
-              ForEach(viewModel.hunt.stationsArray) { station in
-                StationsPickerRowView(station: station, index: Int(station.index))
+              ForEach(Array(viewModel.stations.enumerated()), id: \.element) { (i, station) in
+                StationsPickerRowView(station: station, index: Int(i))
                   .onTapGesture {
-//                    stationToEdit = station
-                    dump(viewModel.hunt.stations)
-//                    addNewStationSheetIsShown.toggle()
+                    stationToEdit = station
+                    addNewStationSheetIsShown.toggle()
                   }
               }
               .onDelete { indexSet in
-                if let index = indexSet.first {
-                  let stationToDelete = viewModel.hunt.stationsArray[index]
-                  viewModel.hunt.removeFromStations(stationToDelete)
-                }
+                viewModel.stations.remove(atOffsets: indexSet)
               }
 
               Button {
