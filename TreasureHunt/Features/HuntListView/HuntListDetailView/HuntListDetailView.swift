@@ -90,8 +90,6 @@ extension HuntListDetailView {
     let isValid = !hunt.stationsArray
       .map(\.location)
       .contains(where: { $0 == nil })
-
-    print(isValid)
     return isValid
   }
 }
