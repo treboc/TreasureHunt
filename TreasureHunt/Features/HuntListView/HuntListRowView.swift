@@ -16,12 +16,14 @@ struct HuntListRowView: View {
         .font(.headline)
         .fontWeight(.semibold)
 
-      Group {
-        Text(L10n.HuntListRowView.created) +
-        Text(hunt.unwrappedCreatedAt, format: .dateTime)
+      if let createdAt = hunt.createdAt {
+        Group {
+          Text(L10n.HuntListRowView.created) +
+          Text(createdAt, format: .dateTime)
+        }
+        .foregroundColor(.secondary)
+        .font(.caption)
       }
-      .foregroundColor(.secondary)
-      .font(.caption)
     }
     .padding(.vertical, 4)
     .frame(maxWidth: .infinity, alignment: .leading)

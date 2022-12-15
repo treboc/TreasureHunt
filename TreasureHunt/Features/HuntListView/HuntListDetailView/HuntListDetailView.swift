@@ -55,17 +55,20 @@ extension HuntListDetailView {
     .transition(.opacity)
   }
 
+  @ViewBuilder
   private var creationDateRow: some View {
-    VStack(alignment: .leading, spacing: 0) {
-      Text(L10n.HuntListDetailView.createdAt.uppercased())
-        .font(.system(.caption, design: .rounded, weight: .regular))
-        .foregroundColor(.secondary)
+    if let createdAt = hunt.createdAt {
+      VStack(alignment: .leading, spacing: 0) {
+        Text(L10n.HuntListDetailView.createdAt.uppercased())
+          .font(.system(.caption, design: .rounded, weight: .regular))
+          .foregroundColor(.secondary)
 
-      Text("\(hunt.unwrappedCreatedAt.formatted(date: .abbreviated, time: .shortened))")
-        .font(.system(.subheadline, design: .rounded, weight: .heavy))
+        Text("\(createdAt.formatted(date: .abbreviated, time: .shortened))")
+          .font(.system(.subheadline, design: .rounded, weight: .heavy))
+      }
+      .padding(.horizontal)
+      .frame(maxWidth: .infinity, alignment: .leading)
     }
-    .padding(.horizontal)
-    .frame(maxWidth: .infinity, alignment: .leading)
   }
 
   private var startHuntButton: some View {

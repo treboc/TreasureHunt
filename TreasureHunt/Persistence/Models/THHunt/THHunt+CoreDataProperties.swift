@@ -48,11 +48,6 @@ extension THHunt {
     set { title = newValue }
   }
 
-  public var unwrappedCreatedAt: Date {
-    get { createdAt ?? .now }
-    set { createdAt = newValue }
-  }
-
   public var unwrappedIntroduction: String {
     get { introduction ?? "" }
     set { introduction = newValue }

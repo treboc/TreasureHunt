@@ -14,6 +14,10 @@ struct THHuntModelService {
                          in context: NSManagedObjectContext = PersistenceController.shared.context) {
     guard let context = hunt.managedObjectContext else { return }
 
+    if hunt.createdAt == nil {
+      hunt.createdAt = .now
+    }
+
     // remove all stations
     hunt.stations = NSSet()
 
