@@ -60,7 +60,7 @@ class AddHuntViewModel: ObservableObject {
   }
 
   func saveStation(_ station: THStation) {
-    if let index = stations.firstIndex(of: station) {
+    if let index = hunt.stationsArray.firstIndex(of: station) {
       stations[index] = station
     } else {
       stations.append(station)
@@ -71,6 +71,6 @@ class AddHuntViewModel: ObservableObject {
 
 extension AddHuntViewModel {
   private func huntFormIsValid() -> Bool {
-    return !hunt.unwrappedTitle.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && !hunt.stationsArray.isEmpty
+    return !hunt.unwrappedTitle.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && !stations.isEmpty
   }
 }

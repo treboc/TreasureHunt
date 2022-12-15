@@ -10,7 +10,6 @@ import MapKit
 
 struct HuntListDetailView: View {
   @EnvironmentObject private var locationProvider: LocationProvider
-  @Environment(\.managedObjectContext) private var moc
   @ObservedObject var hunt: THHunt
 
   var body: some View {
@@ -33,13 +32,22 @@ struct HuntListDetailView: View {
 extension HuntListDetailView {
   private var huntDetails: some View {
     ScrollView {
-      title
-      ForEach(0..<hunt.stationsArray.count, id: \.self) { index in
-        HuntListDetailRowView(station: hunt.stationsArray[index], position: index + 1)
-          .listRowSeparator(.hidden)
-          .listRowInsets(.init(top: 5, leading: 0, bottom: 5, trailing: 0))
+      // CreationDate
+      creationDateRow
+
+      if hunt.hasIntroduction {
+        // Introduction
+        IntroductionView(introduction: hunt.unwrappedIntroduction)
       }
-      .listStyle(.plain)
+
+      // StationsList
+      StationsList(hunt: hunt)
+
+      if hunt.hasOutline {
+        // Outline
+        OutlineView(outline: hunt.unwrappedOutline,
+                    outlineLocation: hunt.outlineLocation)
+      }
     }
     .safeAreaInset(edge: .bottom, spacing: 20) {
       startHuntButton
@@ -47,7 +55,7 @@ extension HuntListDetailView {
     .transition(.opacity)
   }
 
-  private var title: some View {
+  private var creationDateRow: some View {
     VStack(alignment: .leading, spacing: 0) {
       Text(L10n.HuntListDetailView.createdAt.uppercased())
         .font(.system(.caption, design: .rounded, weight: .regular))
@@ -76,8 +84,11 @@ extension HuntListDetailView {
 
 extension HuntListDetailView {
   func isValidHunt() -> Bool {
-    return hunt.stationsArray
-      .map({ $0.location != nil })
-      .contains(true)
+    let isValid = !hunt.stationsArray
+      .map(\.location)
+      .contains(where: { $0 == nil })
+
+    print(isValid)
+    return isValid
   }
 }

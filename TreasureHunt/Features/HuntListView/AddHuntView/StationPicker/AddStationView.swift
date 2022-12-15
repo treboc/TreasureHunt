@@ -105,7 +105,7 @@ struct AddStationView: View {
         Spacer()
 
         VStack(alignment: .trailing) {
-          Text(locationProvider.distanceToAsString(location.location))
+          Text(locationProvider.distanceTo(location.location))
           Text(L10n.HuntListDetailRowView.distanceFromHere)
             .font(.system(.caption, design: .rounded, weight: .light))
         }

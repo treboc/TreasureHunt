@@ -74,7 +74,7 @@ extension AddHuntView {
           Spacer()
 
           VStack(alignment: .trailing) {
-            Text(locationProvider.distanceToAsString(outlineLocation.location))
+            Text(locationProvider.distanceTo(outlineLocation.location))
             Text(L10n.HuntListDetailRowView.distanceFromHere)
               .font(.system(.caption, design: .rounded, weight: .light))
           }
@@ -155,7 +155,7 @@ extension AddHuntView {
         Spacer()
 
         VStack(alignment: .trailing) {
-          Text(locationProvider.distanceToAsString(location.location))
+          Text(locationProvider.distanceTo(location.location))
           Text(L10n.HuntListDetailRowView.distanceFromHere)
             .font(.system(.caption, design: .rounded, weight: .light))
         }

@@ -7,7 +7,6 @@ import SwiftUI
 
 @main
 struct TreasureHuntApp: App {
-  let moc = PersistenceController.shared.context
   @StateObject private var appearanceManager = AppearanceManager()
   @StateObject private var locationProvider = LocationProvider()
 
@@ -23,7 +22,7 @@ struct TreasureHuntApp: App {
           registerUserDefaults()
         }
         .sheet(isPresented: $locationOnboardingIsShown, content: LocationAuthorizationOnboardingView.init)
-        .environment(\.managedObjectContext, moc)
+        .environment(\.managedObjectContext, PersistenceController.shared.context)
         .environmentObject(appearanceManager)
         .environmentObject(locationProvider)
         .tint(.primaryAccentColor)

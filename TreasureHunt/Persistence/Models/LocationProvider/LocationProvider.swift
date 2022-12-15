@@ -132,7 +132,7 @@ extension LocationProvider: CLLocationManagerDelegate {
     return nil
   }
 
-  func distanceToAsString(_ location: CLLocation?) -> String {
+  func distanceTo(_ location: CLLocation?) -> String {
     if let distance = distanceTo(location) {
       return distance.asDistance()
     } else {

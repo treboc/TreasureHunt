@@ -20,9 +20,11 @@
 		45513FBC28ECD2070064A32E /* HuntListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45513FBB28ECD2070064A32E /* HuntListRowView.swift */; };
 		45513FBE28ECD22C0064A32E /* HuntListDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45513FBD28ECD22C0064A32E /* HuntListDetailView.swift */; };
 		45513FC128ED69130064A32E /* StationAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45513FC028ED69130064A32E /* StationAnnotationView.swift */; };
+		4574F37A29476B2C007963CC /* CLLocationDistance+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4574F37929476B2C007963CC /* CLLocationDistance+Extension.swift */; };
+		4574F37C29478357007963CC /* HuntListDetailView+StationsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4574F37B29478357007963CC /* HuntListDetailView+StationsList.swift */; };
 		457C2D532928176A0051FDD6 /* SuccessPopover+ViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C2D522928176A0051FDD6 /* SuccessPopover+ViewModifier.swift */; };
 		457C2D55292818310051FDD6 /* AnimatedCheckmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C2D54292818310051FDD6 /* AnimatedCheckmark.swift */; };
-		4587B6D328F383C900F10ED8 /* THLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4587B6D228F383C900F10ED8 /* THLocationService.swift */; };
+		4587B6D328F383C900F10ED8 /* THLocationModelService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4587B6D228F383C900F10ED8 /* THLocationModelService.swift */; };
 		458BE2B3293CA83A00869ADF /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458BE2B2293CA83A00869ADF /* PersistenceController.swift */; };
 		458BE2B6293CA86000869ADF /* TreasureHunt.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 458BE2B4293CA86000869ADF /* TreasureHunt.xcdatamodeld */; };
 		458BE2BD293CA9DE00869ADF /* THLocation+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458BE2B7293CA9DE00869ADF /* THLocation+CoreDataClass.swift */; };
@@ -40,6 +42,8 @@
 		45ABD0B9290AA9CF0010E1EF /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ABD0B8290AA9CF0010E1EF /* L10n.swift */; };
 		45ABD0BC290AAD230010E1EF /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 45ABD0BE290AAD230010E1EF /* Localizable.stringsdict */; };
 		45B0DF9C2946476A002942F0 /* THStationModelService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B0DF9B2946476A002942F0 /* THStationModelService.swift */; };
+		45B0DF9E2947677E002942F0 /* HuntListDetailView+IntroductionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B0DF9D2947677E002942F0 /* HuntListDetailView+IntroductionView.swift */; };
+		45B0DFA0294767C1002942F0 /* HuntListDetailView+OutlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B0DF9F294767C1002942F0 /* HuntListDetailView+OutlineView.swift */; };
 		45B7EFE528F4BCC6006AE0FB /* SoundType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B7EFE428F4BCC6006AE0FB /* SoundType.swift */; };
 		45B7EFEB28F4BDE1006AE0FB /* error.wav in Resources */ = {isa = PBXBuildFile; fileRef = 45B7EFE928F4BDE1006AE0FB /* error.wav */; };
 		45B7EFEC28F4BDE1006AE0FB /* success.wav in Resources */ = {isa = PBXBuildFile; fileRef = 45B7EFEA28F4BDE1006AE0FB /* success.wav */; };
@@ -58,7 +62,7 @@
 		45F99CDF290BD36C0050AC6F /* LegalNoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F99CDE290BD36C0050AC6F /* LegalNoticeView.swift */; };
 		45F99CE1290BD3B30050AC6F /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F99CE0290BD3B30050AC6F /* AboutView.swift */; };
 		45F99CE3290BD3CE0050AC6F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F99CE2290BD3CE0050AC6F /* Constants.swift */; };
-		45F99CE5290BFFBF0050AC6F /* HuntListDetailRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F99CE4290BFFBF0050AC6F /* HuntListDetailRowView.swift */; };
+		45F99CE5290BFFBF0050AC6F /* HuntListDetailView+StationRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F99CE4290BFFBF0050AC6F /* HuntListDetailView+StationRowView.swift */; };
 		45F99CEA290C6F5F0050AC6F /* ReadSize+ViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F99CE9290C6F5F0050AC6F /* ReadSize+ViewModifier.swift */; };
 		8A1CBD7628E36EC300E0AE4B /* TrafficWarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1CBD7528E36EC300E0AE4B /* TrafficWarningView.swift */; };
 		8A1CBD7828E3795300E0AE4B /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1CBD7728E3795300E0AE4B /* Color+Extension.swift */; };
@@ -99,9 +103,11 @@
 		45513FBB28ECD2070064A32E /* HuntListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuntListRowView.swift; sourceTree = "<group>"; };
 		45513FBD28ECD22C0064A32E /* HuntListDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuntListDetailView.swift; sourceTree = "<group>"; };
 		45513FC028ED69130064A32E /* StationAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationAnnotationView.swift; sourceTree = "<group>"; };
+		4574F37929476B2C007963CC /* CLLocationDistance+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationDistance+Extension.swift"; sourceTree = SOURCE_ROOT; };
+		4574F37B29478357007963CC /* HuntListDetailView+StationsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HuntListDetailView+StationsList.swift"; sourceTree = "<group>"; };
 		457C2D522928176A0051FDD6 /* SuccessPopover+ViewModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SuccessPopover+ViewModifier.swift"; sourceTree = "<group>"; };
 		457C2D54292818310051FDD6 /* AnimatedCheckmark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatedCheckmark.swift; sourceTree = "<group>"; };
-		4587B6D228F383C900F10ED8 /* THLocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = THLocationService.swift; sourceTree = "<group>"; };
+		4587B6D228F383C900F10ED8 /* THLocationModelService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = THLocationModelService.swift; sourceTree = "<group>"; };
 		458BE2B2293CA83A00869ADF /* PersistenceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		458BE2B5293CA86000869ADF /* TreasureHunt.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TreasureHunt.xcdatamodel; sourceTree = "<group>"; };
 		458BE2B7293CA9DE00869ADF /* THLocation+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "THLocation+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -121,6 +127,8 @@
 		45ABD0BD290AAD230010E1EF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		45ABD0BF290AAD250010E1EF /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = de; path = de.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		45B0DF9B2946476A002942F0 /* THStationModelService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = THStationModelService.swift; sourceTree = "<group>"; };
+		45B0DF9D2947677E002942F0 /* HuntListDetailView+IntroductionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HuntListDetailView+IntroductionView.swift"; sourceTree = "<group>"; };
+		45B0DF9F294767C1002942F0 /* HuntListDetailView+OutlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HuntListDetailView+OutlineView.swift"; sourceTree = "<group>"; };
 		45B7EFE428F4BCC6006AE0FB /* SoundType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundType.swift; sourceTree = "<group>"; };
 		45B7EFE928F4BDE1006AE0FB /* error.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = error.wav; sourceTree = "<group>"; };
 		45B7EFEA28F4BDE1006AE0FB /* success.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = success.wav; sourceTree = "<group>"; };
@@ -139,7 +147,7 @@
 		45F99CDE290BD36C0050AC6F /* LegalNoticeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LegalNoticeView.swift; sourceTree = "<group>"; };
 		45F99CE0290BD3B30050AC6F /* AboutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		45F99CE2290BD3CE0050AC6F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		45F99CE4290BFFBF0050AC6F /* HuntListDetailRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuntListDetailRowView.swift; sourceTree = "<group>"; };
+		45F99CE4290BFFBF0050AC6F /* HuntListDetailView+StationRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HuntListDetailView+StationRowView.swift"; sourceTree = "<group>"; };
 		45F99CE9290C6F5F0050AC6F /* ReadSize+ViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReadSize+ViewModifier.swift"; sourceTree = "<group>"; };
 		8A1CBD7528E36EC300E0AE4B /* TrafficWarningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrafficWarningView.swift; sourceTree = "<group>"; };
 		8A1CBD7728E3795300E0AE4B /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
@@ -313,7 +321,7 @@
 			children = (
 				458BE2B7293CA9DE00869ADF /* THLocation+CoreDataClass.swift */,
 				458BE2B8293CA9DE00869ADF /* THLocation+CoreDataProperties.swift */,
-				4587B6D228F383C900F10ED8 /* THLocationService.swift */,
+				4587B6D228F383C900F10ED8 /* THLocationModelService.swift */,
 			);
 			path = THLocation;
 			sourceTree = "<group>";
@@ -331,7 +339,10 @@
 			isa = PBXGroup;
 			children = (
 				45513FBD28ECD22C0064A32E /* HuntListDetailView.swift */,
-				45F99CE4290BFFBF0050AC6F /* HuntListDetailRowView.swift */,
+				45B0DF9D2947677E002942F0 /* HuntListDetailView+IntroductionView.swift */,
+				4574F37B29478357007963CC /* HuntListDetailView+StationsList.swift */,
+				45F99CE4290BFFBF0050AC6F /* HuntListDetailView+StationRowView.swift */,
+				45B0DF9F294767C1002942F0 /* HuntListDetailView+OutlineView.swift */,
 			);
 			path = HuntListDetailView;
 			sourceTree = "<group>";
@@ -408,15 +419,16 @@
 		8A52024F28E0A23200C49779 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				458F90E628EAAEB200F9BE29 /* UserDefaults+Keys.swift */,
-				458F90E828EAB15500F9BE29 /* Double+Extension.swift */,
-				8AD1768828E0AE0C00A12948 /* Button+Extension.swift */,
-				8A4C4F9328E1D9BB00721C50 /* Array+Extension.swift */,
-				8A1CBD7728E3795300E0AE4B /* Color+Extension.swift */,
-				F2A056A628DB7983007D7FFF /* CLLocationCoordinate2D+Extension.swift */,
 				45DC5FCA292B7A5C00860167 /* AnyTransition+PageTransition.swift */,
-				458BE2A2293C88BE00869ADF /* Views */,
+				8A4C4F9328E1D9BB00721C50 /* Array+Extension.swift */,
+				8AD1768828E0AE0C00A12948 /* Button+Extension.swift */,
+				F2A056A628DB7983007D7FFF /* CLLocationCoordinate2D+Extension.swift */,
+				4574F37929476B2C007963CC /* CLLocationDistance+Extension.swift */,
+				8A1CBD7728E3795300E0AE4B /* Color+Extension.swift */,
+				458F90E828EAB15500F9BE29 /* Double+Extension.swift */,
+				458F90E628EAAEB200F9BE29 /* UserDefaults+Keys.swift */,
 				8A52025028E0A23200C49779 /* ViewModifier */,
+				458BE2A2293C88BE00869ADF /* Views */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -585,7 +597,7 @@
 				45E188C728F5451700A055BD /* AudioPlayer.swift in Sources */,
 				4533508F28FC824400BC0AA0 /* AddLocationView+TriggerDistanceSlider.swift in Sources */,
 				45513FBE28ECD22C0064A32E /* HuntListDetailView.swift in Sources */,
-				4587B6D328F383C900F10ED8 /* THLocationService.swift in Sources */,
+				4587B6D328F383C900F10ED8 /* THLocationModelService.swift in Sources */,
 				8A4C4F9828E1FBFE00721C50 /* RoundedNavigationTitle-ViewModifier.swift in Sources */,
 				458BE2BE293CA9DE00869ADF /* THLocation+CoreDataProperties.swift in Sources */,
 				8A52024A28E0A21900C49779 /* AddLocationView.swift in Sources */,
@@ -617,9 +629,11 @@
 				8A4C4F8F28E1C0E100721C50 /* MainTabView.swift in Sources */,
 				451B5AA5294075C7005DCBCA /* AddStationView.swift in Sources */,
 				45B7EFE528F4BCC6006AE0FB /* SoundType.swift in Sources */,
-				45F99CE5290BFFBF0050AC6F /* HuntListDetailRowView.swift in Sources */,
+				45F99CE5290BFFBF0050AC6F /* HuntListDetailView+StationRowView.swift in Sources */,
+				45B0DFA0294767C1002942F0 /* HuntListDetailView+OutlineView.swift in Sources */,
 				8A4C4F9428E1D9BB00721C50 /* Array+Extension.swift in Sources */,
 				45EDD40329297F9600C8EF86 /* AddHuntView+OutlinePage.swift in Sources */,
+				4574F37C29478357007963CC /* HuntListDetailView+StationsList.swift in Sources */,
 				45EDD3FF29297F2600C8EF86 /* AddHuntView+StationsPicker.swift in Sources */,
 				8AD1768928E0AE0C00A12948 /* Button+Extension.swift in Sources */,
 				45ABD0B9290AA9CF0010E1EF /* L10n.swift in Sources */,
@@ -634,6 +648,7 @@
 				45513FB728EBD9A60064A32E /* LocationsPicker.swift in Sources */,
 				458BE2B3293CA83A00869ADF /* PersistenceController.swift in Sources */,
 				8A1CBD7628E36EC300E0AE4B /* TrafficWarningView.swift in Sources */,
+				45B0DF9E2947677E002942F0 /* HuntListDetailView+IntroductionView.swift in Sources */,
 				45B0DF9C2946476A002942F0 /* THStationModelService.swift in Sources */,
 				45F99CEA290C6F5F0050AC6F /* ReadSize+ViewModifier.swift in Sources */,
 				45513FC128ED69130064A32E /* StationAnnotationView.swift in Sources */,
@@ -645,6 +660,7 @@
 				45F4B53D293BCB72001BD47C /* AddHuntViewModel.swift in Sources */,
 				458BE2B6293CA86000869ADF /* TreasureHunt.xcdatamodeld in Sources */,
 				45513FBC28ECD2070064A32E /* HuntListRowView.swift in Sources */,
+				4574F37A29476B2C007963CC /* CLLocationDistance+Extension.swift in Sources */,
 				45916496292AA9E800037F44 /* THNumberedCircle.swift in Sources */,
 				458BE2C1293CA9DE00869ADF /* THStation+CoreDataClass.swift in Sources */,
 				45EDD405292A2BAA00C8EF86 /* DisableAnimation+ViewModifier.swift in Sources */,

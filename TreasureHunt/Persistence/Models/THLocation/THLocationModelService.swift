@@ -1,5 +1,5 @@
 //
-//  THLocationService.swift
+//  THLocationModelService.swift
 //  TreasureHunt
 //
 //  Created by Marvin Lee Kobert on 10.10.22.
@@ -8,7 +8,7 @@
 import CoreLocation
 import CoreData
 
-struct THLocationService {
+struct THLocationModelService {
   static let context = PersistenceController.shared.context
 
   static func addLocation(title: String,

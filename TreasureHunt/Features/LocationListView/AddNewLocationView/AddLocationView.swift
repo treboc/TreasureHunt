@@ -65,13 +65,13 @@ extension AddLocationView {
   // MARK: - Methods
   private func saveButtonTapped() {
     if let locationToEdit {
-      THLocationService.updateLocation(thLocation: locationToEdit,
+      THLocationModelService.updateLocation(thLocation: locationToEdit,
                                        title: title,
                                        latitude: region.center.latitude,
                                        longitude: region.center.longitude,
                                        triggerDistance: triggerDistance)
     } else {
-      THLocationService.addLocation(title: title,
+      THLocationModelService.addLocation(title: title,
                                     latitude: region.center.latitude,
                                     longitude: region.center.longitude,
                                     triggerDistance: triggerDistance)

@@ -112,7 +112,7 @@ extension LocationsListView {
       Button(L10n.BtnTitle.iAmSure, role: .destructive) {
         if let locationToDelete {
           withAnimation {
-            THLocationService.deleteLocation(locationToDelete)
+            THLocationModelService.deleteLocation(locationToDelete)
             self.locationToDelete = nil
           }
         }
@@ -161,7 +161,7 @@ extension LocationsListView {
   @ViewBuilder
   private func contextMenuContent(_ location: THLocation) -> some View {
     Button {
-      THLocationService.toggleFavourite(location)
+      THLocationModelService.toggleFavourite(location)
     } label: {
       if location.isFavourite {
         Label("Remove from Favorites", systemImage: "star.fill")
@@ -206,7 +206,7 @@ extension LocationsListView {
   private func swipeToFavorite(_ location: THLocation) -> some View {
     Button {
       withAnimation {
-        THLocationService.toggleFavourite(location)
+        THLocationModelService.toggleFavourite(location)
       }
     } label: {
       if location.isFavourite {

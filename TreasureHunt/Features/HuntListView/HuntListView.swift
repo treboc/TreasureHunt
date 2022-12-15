@@ -22,7 +22,7 @@ struct HuntListView: View {
           noHuntsPlaceholder
         } else {
           List {
-            ForEach(hunts) { hunt in
+            ForEach(hunts, id: \.objectID) { hunt in
               LazyView(
                 HuntListRowView(hunt: hunt)
                   .invisibleNavigationLink {
@@ -121,10 +121,11 @@ extension HuntListView {
         RoundedRectangle(cornerRadius: Constants.cornerRadius)
           .fill(Color.accentColor)
       )
+      .listRowInsets(.init(top: 10, leading: 10, bottom: 10, trailing: 10))
       .listRowSeparator(.hidden)
+      .listRowBackground(Color.clear)
       .invisibleNavigationLink {
         LazyView(AddHuntView(locationProvider: locationProvider))
       }
-      .listRowBackground(Color.clear)
   }
 }

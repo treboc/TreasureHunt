@@ -29,11 +29,11 @@ extension AddHuntView {
 
           List {
             Group {
-              ForEach(Array(viewModel.stations.enumerated()), id: \.element) { (i, station) in
-                StationsPickerRowView(station: station, index: Int(i))
+              ForEach(0..<viewModel.stations.count, id: \.self) { index in
+                let station = viewModel.stations[index]
+                StationsPickerRowView(station: station, index: index)
                   .onTapGesture {
                     stationToEdit = station
-                    addNewStationSheetIsShown.toggle()
                   }
               }
               .onDelete { indexSet in
@@ -58,19 +58,16 @@ extension AddHuntView {
       }
       .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
       .padding()
-      .sheet(isPresented: $addNewStationSheetIsShown, onDismiss: {
-        stationToEdit = nil
-      }) {
-        if let stationToEdit {
-          AddStationView(station: stationToEdit)
-        } else {
-          AddStationView()
-        }
+      .sheet(isPresented: $addNewStationSheetIsShown) {
+        AddStationView()
+      }
+      .sheet(item: $stationToEdit) { station in
+        AddStationView(station: station)
       }
     }
 
     struct StationsPickerRowView: View {
-      let station: THStation
+      @ObservedObject var station: THStation
       let index: Int
 
       @State private var size: CGSize = .zero
@@ -88,8 +85,24 @@ extension AddHuntView {
             .fill(.regularMaterial)
         )
         .overlay {
-          THNumberedCircle(number: index + 1)
-            .offset(x: -size.width / 2, y: -size.height / 2)
+          ZStack(alignment: .topLeading) {
+            THNumberedCircle(number: index + 1)
+
+            if station.location == nil {
+              HStack(spacing: 2) {
+                Image(systemName: "exclamationmark.circle.fill")
+                  .font(.title3)
+                  .foregroundColor(.red)
+
+                Text("No Location")
+                  .font(.footnote)
+                  .foregroundColor(.secondary)
+              }
+              .offset(x: 15)
+            }
+          }
+          .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+          .offset(x: -10, y: -10)
         }
         .readSize { size in
           self.size = size
