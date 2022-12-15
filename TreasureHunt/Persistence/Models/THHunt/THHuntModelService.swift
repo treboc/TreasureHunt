@@ -10,8 +10,7 @@ import CoreData
 
 struct THHuntModelService {
   static func updateHunt(hunt: THHunt,
-                         withStations stations: [THStation],
-                         in context: NSManagedObjectContext = PersistenceController.shared.context) {
+                         withStations stations: [THStation]) {
     guard let context = hunt.managedObjectContext else { return }
 
     if hunt.createdAt == nil {
