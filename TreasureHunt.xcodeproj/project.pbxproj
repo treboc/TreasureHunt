@@ -10,7 +10,7 @@
 		451B5AA5294075C7005DCBCA /* AddStationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451B5AA4294075C7005DCBCA /* AddStationView.swift */; };
 		451B5AA7294078E4005DCBCA /* InvisibleNavigationLink+ViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451B5AA6294078E4005DCBCA /* InvisibleNavigationLink+ViewModifier.swift */; };
 		452AA85328F69DA300F11BA5 /* LocationAuthorizationOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452AA85228F69DA300F11BA5 /* LocationAuthorizationOnboardingView.swift */; };
-		4530A10D28F14BCD00F05AE3 /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530A10C28F14BCD00F05AE3 /* QuestionView.swift */; };
+		4530A10D28F14BCD00F05AE3 /* HuntView+QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530A10C28F14BCD00F05AE3 /* HuntView+QuestionView.swift */; };
 		4532DB0728FA981500C32418 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4532DB0928FA981500C32418 /* Localizable.strings */; };
 		4533508F28FC824400BC0AA0 /* AddLocationView+TriggerDistanceSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4533508E28FC824400BC0AA0 /* AddLocationView+TriggerDistanceSlider.swift */; };
 		45513FAA28EAF2D90064A32E /* HuntListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45513FA928EAF2D90064A32E /* HuntListView.swift */; };
@@ -22,6 +22,7 @@
 		45513FC128ED69130064A32E /* StationAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45513FC028ED69130064A32E /* StationAnnotationView.swift */; };
 		4574F37A29476B2C007963CC /* CLLocationDistance+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4574F37929476B2C007963CC /* CLLocationDistance+Extension.swift */; };
 		4574F37C29478357007963CC /* HuntListDetailView+StationsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4574F37B29478357007963CC /* HuntListDetailView+StationsList.swift */; };
+		457B6182294B2E1E005F3535 /* HuntView+IntroductionVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457B6181294B2E1E005F3535 /* HuntView+IntroductionVIew.swift */; };
 		457C2D532928176A0051FDD6 /* SuccessPopover+ViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C2D522928176A0051FDD6 /* SuccessPopover+ViewModifier.swift */; };
 		457C2D55292818310051FDD6 /* AnimatedCheckmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C2D54292818310051FDD6 /* AnimatedCheckmark.swift */; };
 		4587B6D328F383C900F10ED8 /* THLocationModelService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4587B6D228F383C900F10ED8 /* THLocationModelService.swift */; };
@@ -93,7 +94,7 @@
 		451B5AA4294075C7005DCBCA /* AddStationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStationView.swift; sourceTree = "<group>"; };
 		451B5AA6294078E4005DCBCA /* InvisibleNavigationLink+ViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InvisibleNavigationLink+ViewModifier.swift"; sourceTree = "<group>"; };
 		452AA85228F69DA300F11BA5 /* LocationAuthorizationOnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationAuthorizationOnboardingView.swift; sourceTree = "<group>"; };
-		4530A10C28F14BCD00F05AE3 /* QuestionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
+		4530A10C28F14BCD00F05AE3 /* HuntView+QuestionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HuntView+QuestionView.swift"; sourceTree = "<group>"; };
 		4532DB0828FA981500C32418 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4533508E28FC824400BC0AA0 /* AddLocationView+TriggerDistanceSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddLocationView+TriggerDistanceSlider.swift"; sourceTree = "<group>"; };
 		45513FA928EAF2D90064A32E /* HuntListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuntListView.swift; sourceTree = "<group>"; };
@@ -105,6 +106,7 @@
 		45513FC028ED69130064A32E /* StationAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationAnnotationView.swift; sourceTree = "<group>"; };
 		4574F37929476B2C007963CC /* CLLocationDistance+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationDistance+Extension.swift"; sourceTree = SOURCE_ROOT; };
 		4574F37B29478357007963CC /* HuntListDetailView+StationsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HuntListDetailView+StationsList.swift"; sourceTree = "<group>"; };
+		457B6181294B2E1E005F3535 /* HuntView+IntroductionVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HuntView+IntroductionVIew.swift"; sourceTree = "<group>"; };
 		457C2D522928176A0051FDD6 /* SuccessPopover+ViewModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SuccessPopover+ViewModifier.swift"; sourceTree = "<group>"; };
 		457C2D54292818310051FDD6 /* AnimatedCheckmark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatedCheckmark.swift; sourceTree = "<group>"; };
 		4587B6D228F383C900F10ED8 /* THLocationModelService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = THLocationModelService.swift; sourceTree = "<group>"; };
@@ -406,12 +408,13 @@
 			isa = PBXGroup;
 			children = (
 				8A52024928E0A21900C49779 /* HuntView.swift */,
+				457B6181294B2E1E005F3535 /* HuntView+IntroductionVIew.swift */,
+				4530A10C28F14BCD00F05AE3 /* HuntView+QuestionView.swift */,
 				45A8CEE628EA228500F19E67 /* HuntViewModel.swift */,
 				8AD1768A28E0C58200A12948 /* HuntManager.swift */,
 				8A52024628E0A21900C49779 /* DirectionDistanceView.swift */,
 				45513FC028ED69130064A32E /* StationAnnotationView.swift */,
 				8A1CBD7528E36EC300E0AE4B /* TrafficWarningView.swift */,
-				4530A10C28F14BCD00F05AE3 /* QuestionView.swift */,
 			);
 			path = HuntView;
 			sourceTree = "<group>";
@@ -613,7 +616,7 @@
 				45F99CDF290BD36C0050AC6F /* LegalNoticeView.swift in Sources */,
 				458BE2C2293CA9DE00869ADF /* THStation+CoreDataProperties.swift in Sources */,
 				45EDD40129297F5600C8EF86 /* AddHuntView+IntroductionPage.swift in Sources */,
-				4530A10D28F14BCD00F05AE3 /* QuestionView.swift in Sources */,
+				4530A10D28F14BCD00F05AE3 /* HuntView+QuestionView.swift in Sources */,
 				8A1CBD7828E3795300E0AE4B /* Color+Extension.swift in Sources */,
 				8A4C4F9D28E2083500721C50 /* AppearancePicker.swift in Sources */,
 				8AD1768B28E0C58200A12948 /* HuntManager.swift in Sources */,
@@ -633,6 +636,7 @@
 				45B0DFA0294767C1002942F0 /* HuntListDetailView+OutlineView.swift in Sources */,
 				8A4C4F9428E1D9BB00721C50 /* Array+Extension.swift in Sources */,
 				45EDD40329297F9600C8EF86 /* AddHuntView+OutlinePage.swift in Sources */,
+				457B6182294B2E1E005F3535 /* HuntView+IntroductionVIew.swift in Sources */,
 				4574F37C29478357007963CC /* HuntListDetailView+StationsList.swift in Sources */,
 				45EDD3FF29297F2600C8EF86 /* AddHuntView+StationsPicker.swift in Sources */,
 				8AD1768928E0AE0C00A12948 /* Button+Extension.swift in Sources */,

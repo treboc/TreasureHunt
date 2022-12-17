@@ -10,23 +10,31 @@ import Combine
 import MapKit
 import SwiftUI
 
+extension HuntManager {
+  enum HuntState {
+    case introduction
+    case findStation(THStation)
+    case outline
+    case finished
+  }
+}
+
 final class HuntManager: ObservableObject {
   private var cancellables = Set<AnyCancellable>()
   let audioPlayer = AudioPlayer()
 
   @ObservedObject var locationProvider: LocationProvider
+
   @Published var hunt: THHunt
-
   @Published var currentStation: THStation? = nil
-  @Published var angleToCurrentStation: Double = 0
-  @Published var distanceToCurrentStation: Double = 0
-  @Published var questionSheetIsShown: Bool = false
-  @Published var isNearCurrentStation: Bool = false
+  @Published private(set) var huntState: HuntState = .finished
 
-  var currentStationIsLastStation: Bool {
-    guard let currentStationIndex = getCurrentStationsIndex() else { return false}
-    return currentStationIndex + 1 == hunt.stationsArray.count
-  }
+  @Published private(set) var angleToCurrentStation: Double = 0
+  @Published private(set) var distanceToCurrentStation: Double = 0
+  @Published private(set) var isNearCurrentStation: Bool = false
+  @Published var questionSheetIsShown: Bool = false
+  @Published var introductionSheetIsShown: Bool = false
+
 
   var currentStationNumber: Int {
     guard
@@ -40,16 +48,31 @@ final class HuntManager: ObservableObject {
        _ hunt: THHunt) {
     self.locationProvider = locationProvider
     self.hunt = hunt
+    setupHunt()
+  }
+
+  private func setupHunt() {
+    if hunt.hasIntroduction {
+      huntState = .introduction
+    } else {
+      setFirstStation()
+    }
+
+    setupPublishers()
+  }
+
+  func setFirstStation() {
     if let firstStation = hunt.stationsArray.first {
       _currentStation = Published(initialValue: firstStation)
-      setupPublishers()
+      huntState = .findStation(firstStation)
     }
   }
 
   private func setupPublishers() {
     locationProvider
       .$angle
-      .assign(to: &$angleToCurrentStation)
+      .assign(to: \.angleToCurrentStation, on: self)
+      .store(in: &cancellables)
 
     locationProvider
       .$distance
@@ -58,8 +81,19 @@ final class HuntManager: ObservableObject {
       .sink(receiveValue: onDistanceUpdate)
       .store(in: &cancellables)
 
-    $currentStation
-      .sink(receiveValue: onStationChanged)
+    $huntState
+      .sink { state in
+        switch state {
+        case .introduction:
+          self.introductionSheetIsShown = true
+        case .findStation(let station):
+          self.onStationChanged(station)
+        case .outline:
+         break
+        case .finished:
+          break
+        }
+      }
       .store(in: &cancellables)
 
     $distanceToCurrentStation
@@ -73,7 +107,7 @@ final class HuntManager: ObservableObject {
 
   private func onStationChanged(_ station: THStation?) {
     guard let station else { return }
-    locationProvider.didChange(station)
+    locationProvider.updateCurrentStation(to: station)
   }
 
   private func onDistanceUpdate(_ distance: CLLocationDistance) {
@@ -111,8 +145,15 @@ final class HuntManager: ObservableObject {
     }
   }
 
-  private func getCurrentStationsIndex() -> Int? {
+  private func currentStationsIndex() -> Int? {
     guard let currentStation else { return nil }
     return hunt.stationsArray.firstIndex(of: currentStation)
+  }
+
+  func isLastStation() -> Bool {
+    let endIndex = hunt.stationsArray.endIndex
+    guard let currentStation,
+          let stationIndex = hunt.stationsArray.firstIndex(of: currentStation) else { return false }
+    return endIndex == stationIndex
   }
 }

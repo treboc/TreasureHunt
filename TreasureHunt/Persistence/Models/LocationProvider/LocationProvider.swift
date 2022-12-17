@@ -50,7 +50,7 @@ class LocationProvider: NSObject, ObservableObject {
     locationManager.stopUpdatingHeading()
   }
 
-  func didChange(_ station: THStation) {
+  func updateCurrentStation(to station: THStation) {
     if let location = station.location {
       currentStationLocation = location.location
       triggerDistance = location.triggerDistance

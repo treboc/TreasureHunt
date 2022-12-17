@@ -54,6 +54,12 @@ struct HuntView: View {
         QuestionView(station: station)
       }
     }
+    .sheet(isPresented: $huntManager.introductionSheetIsShown,
+           onDismiss: huntManager.setFirstStation) {
+      if let introduction = huntManager.hunt.introduction {
+        IntroductionView(introduction: introduction)
+      }
+    }
     .onAppear(perform: vm.applyIdleDimmingSetting)
     .onDisappear(perform: vm.disableIdleDimming)
   }
@@ -98,18 +104,18 @@ extension HuntView {
   }
   
   @ViewBuilder
-  private func nextStationButton() -> some View {
-    if huntManager.isNearCurrentStation && huntManager.currentStationIsLastStation == false {
-      Button(L10n.HuntView.nextStationButtonTitle) {
-        huntManager.nextStationButtonTapped()
-      }
-      .buttonStyle(.borderedProminent)
-      .controlSize(.large)
-      .foregroundColor(Color(uiColor: .systemBackground))
-      .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-    } else if huntManager.isNearCurrentStation && huntManager.currentStationIsLastStation {
-      Button(L10n.HuntView.endHuntButtonTitle) {
-        vm.endHuntButtonTapped()
+  private func nextStationEndHuntButton() -> some View {
+    if huntManager.isNearCurrentStation {
+      let isNextStationButton = huntManager.isNearCurrentStation && !huntManager.isLastStation()
+
+      Button(isNextStationButton
+             ? L10n.HuntView.nextStationButtonTitle
+             : L10n.HuntView.endHuntButtonTitle) {
+        if isNextStationButton {
+          huntManager.nextStationButtonTapped()
+        } else {
+          vm.endHuntButtonTapped()
+        }
       }
       .buttonStyle(.borderedProminent)
       .controlSize(.large)
@@ -117,12 +123,12 @@ extension HuntView {
       .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
     }
   }
-  
+
   private var bottomButtonStack: some View {
     VStack {
       Spacer()
       HStack {
-        nextStationButton()
+        nextStationEndHuntButton()
       }
       .frame(maxWidth: .infinity, alignment: .bottom)
       .padding(.bottom, 50 )
