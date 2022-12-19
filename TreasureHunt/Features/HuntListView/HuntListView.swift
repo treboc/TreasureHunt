@@ -41,13 +41,7 @@ struct HuntListView: View {
       }
       .alert(L10n.Alert.DeleteHunt.title, isPresented: $huntDeletionAlertIsShown, actions: {
         Button(L10n.BtnTitle.cancel, role: .cancel) {}
-        Button(L10n.BtnTitle.iAmSure, role: .destructive) {
-          if let huntToDelete {
-            withAnimation {
-              THHuntModelService.delete(huntToDelete)
-            }
-          }
-        }
+        Button(L10n.BtnTitle.iAmSure, role: .destructive, action: deleteHunt)
       }, message: {
         Text(L10n.Alert.DeleteHunt.message)
       })
@@ -82,6 +76,14 @@ extension HuntListView {
         .labelStyle(.iconOnly)
     }
     .tint(.red)
+  }
+
+  private func deleteHunt() {
+    if let huntToDelete {
+      withAnimation {
+        THHuntModelService.delete(huntToDelete)
+      }
+    }
   }
 }
 
