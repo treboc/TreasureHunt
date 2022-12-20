@@ -22,7 +22,7 @@
 		45513FC128ED69130064A32E /* StationAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45513FC028ED69130064A32E /* StationAnnotationView.swift */; };
 		4574F37A29476B2C007963CC /* CLLocationDistance+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4574F37929476B2C007963CC /* CLLocationDistance+Extension.swift */; };
 		4574F37C29478357007963CC /* HuntListDetailView+StationsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4574F37B29478357007963CC /* HuntListDetailView+StationsList.swift */; };
-		457B6182294B2E1E005F3535 /* HuntView+IntroductionVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457B6181294B2E1E005F3535 /* HuntView+IntroductionVIew.swift */; };
+		457B6182294B2E1E005F3535 /* HuntView+IntroductionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457B6181294B2E1E005F3535 /* HuntView+IntroductionView.swift */; };
 		457C2D532928176A0051FDD6 /* SuccessPopover+ViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C2D522928176A0051FDD6 /* SuccessPopover+ViewModifier.swift */; };
 		457C2D55292818310051FDD6 /* AnimatedCheckmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C2D54292818310051FDD6 /* AnimatedCheckmark.swift */; };
 		4587B6D328F383C900F10ED8 /* THLocationModelService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4587B6D228F383C900F10ED8 /* THLocationModelService.swift */; };
@@ -109,7 +109,7 @@
 		45513FC028ED69130064A32E /* StationAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationAnnotationView.swift; sourceTree = "<group>"; };
 		4574F37929476B2C007963CC /* CLLocationDistance+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationDistance+Extension.swift"; sourceTree = SOURCE_ROOT; };
 		4574F37B29478357007963CC /* HuntListDetailView+StationsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HuntListDetailView+StationsList.swift"; sourceTree = "<group>"; };
-		457B6181294B2E1E005F3535 /* HuntView+IntroductionVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HuntView+IntroductionVIew.swift"; sourceTree = "<group>"; };
+		457B6181294B2E1E005F3535 /* HuntView+IntroductionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HuntView+IntroductionView.swift"; sourceTree = "<group>"; };
 		457C2D522928176A0051FDD6 /* SuccessPopover+ViewModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SuccessPopover+ViewModifier.swift"; sourceTree = "<group>"; };
 		457C2D54292818310051FDD6 /* AnimatedCheckmark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatedCheckmark.swift; sourceTree = "<group>"; };
 		4587B6D228F383C900F10ED8 /* THLocationModelService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = THLocationModelService.swift; sourceTree = "<group>"; };
@@ -424,8 +424,8 @@
 			isa = PBXGroup;
 			children = (
 				8A52024928E0A21900C49779 /* HuntView.swift */,
-				457B6181294B2E1E005F3535 /* HuntView+IntroductionVIew.swift */,
 				45A7210F295078B20068DAF7 /* HuntView+BackgroundMap.swift */,
+				457B6181294B2E1E005F3535 /* HuntView+IntroductionView.swift */,
 				4530A10C28F14BCD00F05AE3 /* HuntView+QuestionView.swift */,
 				45A8CEE628EA228500F19E67 /* HuntViewModel.swift */,
 				8AD1768A28E0C58200A12948 /* HuntManager.swift */,
@@ -654,7 +654,7 @@
 				45B0DFA0294767C1002942F0 /* HuntListDetailView+OutlineView.swift in Sources */,
 				8A4C4F9428E1D9BB00721C50 /* Array+Extension.swift in Sources */,
 				45EDD40329297F9600C8EF86 /* AddHuntView+OutlinePage.swift in Sources */,
-				457B6182294B2E1E005F3535 /* HuntView+IntroductionVIew.swift in Sources */,
+				457B6182294B2E1E005F3535 /* HuntView+IntroductionView.swift in Sources */,
 				4574F37C29478357007963CC /* HuntListDetailView+StationsList.swift in Sources */,
 				45EDD3FF29297F2600C8EF86 /* AddHuntView+StationsPicker.swift in Sources */,
 				8AD1768928E0AE0C00A12948 /* Button+Extension.swift in Sources */,

@@ -46,6 +46,12 @@ struct HuntView: View {
            onDismiss: huntManager.setFirstStation) {
       if let introduction = huntManager.hunt.introduction {
         IntroductionView(introduction: introduction)
+
+      if case .showIntroduction = huntManager.huntState {
+        IntroductionView(introduction: huntManager.hunt.introduction,
+                         onDismiss: huntManager.readIntroduction)
+        .zIndex(2)
+        .transition(.opacity.combined(with: .scale))
       }
     }
     .onAppear(perform: vm.applyIdleDimmingSetting)

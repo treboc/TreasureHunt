@@ -1,5 +1,5 @@
 //
-//  HuntView+IntroductionVIew.swift
+//  HuntView+IntroductionView.swift
 //  TreasureHunt
 //
 //  Created by Marvin Lee Kobert on 15.12.22.
@@ -9,28 +9,29 @@ import SwiftUI
 
 extension HuntView {
   struct IntroductionView: View {
-    @Environment(\.dismiss) private var dismiss
     let introduction: String?
+    let onDismiss: () -> Void
 
     var body: some View {
-      NavigationStack {
+      NavigationView {
         ScrollView(.vertical, showsIndicators: false) {
           if let introduction {
-            Text(introduction)
-              .frame(maxWidth: .infinity, alignment: .leading)
-              .padding()
+            VStack {
+              Text(introduction)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding()
+
+              Button("Let's go!", action: onDismiss)
+                .foregroundColor(.label)
+                .buttonStyle(.borderedProminent)
+                .controlSize(.large)
+            }
           } else {
             noIntroductionPlaceholder
           }
         }
         .navigationTitle("Introduction")
-        .toolbar { dismissButton }
-      }
-    }
-
-    private var dismissButton: some View {
-      Button(iconName: "xmark.circle.fill") {
-        dismiss()
+        .interactiveDismissDisabled()
       }
     }
 
