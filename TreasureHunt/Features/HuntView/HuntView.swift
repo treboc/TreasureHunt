@@ -18,34 +18,9 @@ struct HuntView: View {
   
   var body: some View {
     ZStack {
-
-      arrowOverlay()
-      bottomButtonStack
-    }
-    .disabled(vm.warningRead == false)
-    .overlay {
-      if vm.warningRead == false {
-        TrafficWarningView(warningRead: $vm.warningRead)
-          .transition(.opacity.combined(with: .scale))
-          .zIndex(2)
+      if case .findStation = huntManager.huntState {
+        findStationView
       }
-    }
-    .animation(.default, value: huntManager.isNearCurrentStation)
-    .alert(L10n.HuntView.EndHuntAlert.title, isPresented: $vm.endSessionAlertIsShown) {
-      Button(L10n.BtnTitle.cancel, role: .cancel) {}
-      Button(L10n.BtnTitle.iAmSure, role: .destructive) { dismiss.callAsFunction() }
-    } message: {
-      Text(L10n.HuntView.EndHuntAlert.message)
-    }
-    .sheet(isPresented: $huntManager.questionSheetIsShown) {
-      if let station = huntManager.currentStation {
-        QuestionView(station: station)
-      }
-    }
-    .sheet(isPresented: $huntManager.introductionSheetIsShown,
-           onDismiss: huntManager.setFirstStation) {
-      if let introduction = huntManager.hunt.introduction {
-        IntroductionView(introduction: introduction)
 
       if case .showIntroduction = huntManager.huntState {
         IntroductionView(introduction: huntManager.hunt.introduction,
@@ -61,7 +36,7 @@ struct HuntView: View {
 
 extension HuntView {
   @ViewBuilder
-  private func arrowOverlay() -> some View {
+  private var arrowOverlay: some View {
     DirectionDistanceView(huntManager: huntManager)
       .shadow(radius: 5)
       .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
@@ -70,7 +45,7 @@ extension HuntView {
   }
   
   @ViewBuilder
-  private func roundEndHuntButton() -> some View {
+  private var roundEndHuntButton: some View {
     if huntManager.isNearCurrentStation == false {
       Image(systemName: "xmark")
         .resizable()
@@ -84,7 +59,7 @@ extension HuntView {
   }
   
   @ViewBuilder
-  private func roundShowMapButton() -> some View {
+  private var roundShowMapButton: some View {
     if huntManager.isNearCurrentStation == false {
       Image(systemName: "map")
         .resizable()
@@ -97,37 +72,65 @@ extension HuntView {
     }
   }
   
-  @ViewBuilder
-  private func nextStationEndHuntButton() -> some View {
-    if huntManager.isNearCurrentStation {
-      let isNextStationButton = huntManager.isNearCurrentStation && !huntManager.isLastStation()
-
-      Button(isNextStationButton
-             ? L10n.HuntView.nextStationButtonTitle
-             : L10n.HuntView.endHuntButtonTitle) {
-        if isNextStationButton {
-          huntManager.nextStationButtonTapped()
-        } else {
-          vm.endHuntButtonTapped()
-        }
-      }
-      .buttonStyle(.borderedProminent)
-      .controlSize(.large)
-      .foregroundColor(Color(uiColor: .systemBackground))
-      .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+  private var setNextStationButton: some View {
+    Button(L10n.HuntView.nextStationButtonTitle) {
+      huntManager.nextStationButtonTapped()
+      print("tapped")
     }
+    .buttonStyle(.borderedProminent)
+    .controlSize(.large)
+    .foregroundColor(Color(uiColor: .systemBackground))
+    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+  }
+
+  private var endHuntButton: some View {
+    Button(L10n.HuntView.endHuntButtonTitle) {
+      vm.endHuntButtonTapped()
+    }
+    .buttonStyle(.borderedProminent)
+    .controlSize(.large)
+    .foregroundColor(Color(uiColor: .systemBackground))
+    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
   }
 
   private var bottomButtonStack: some View {
     VStack {
       Spacer()
       HStack {
-        nextStationEndHuntButton()
+        if huntManager.isNearCurrentStation {
+          if huntManager.isLastStation && !huntManager.hunt.hasOutline {
+            endHuntButton
+          } else {
+            setNextStationButton
+          }
+        }
       }
       .frame(maxWidth: .infinity, alignment: .bottom)
       .padding(.bottom, 50 )
-      .overlay(roundShowMapButton(), alignment: .bottomTrailing)
-      .overlay(roundEndHuntButton(), alignment: .bottomLeading)
+      .overlay(roundShowMapButton, alignment: .bottomTrailing)
+      .overlay(roundEndHuntButton, alignment: .bottomLeading)
+    }
+  }
+
+  private var findStationView: some View {
+    ZStack {
+      BackgroundMapView(isClear: huntManager.isNearCurrentStation || vm.mapIsShown)
+      arrowOverlay
+      bottomButtonStack
+    }
+    .disabled(vm.warningRead == false)
+    .overlay {
+      if vm.warningRead == false {
+        TrafficWarningView(warningRead: $vm.warningRead)
+          .transition(.opacity.combined(with: .scale))
+      }
+    }
+    .animation(.default, value: huntManager.isNearCurrentStation)
+    .alert(L10n.HuntView.EndHuntAlert.title, isPresented: $vm.endSessionAlertIsShown) {
+      Button(L10n.BtnTitle.cancel, role: .cancel) {}
+      Button(L10n.BtnTitle.iAmSure, role: .destructive) { dismiss.callAsFunction() }
+    } message: {
+      Text(L10n.HuntView.EndHuntAlert.message)
     }
   }
 }

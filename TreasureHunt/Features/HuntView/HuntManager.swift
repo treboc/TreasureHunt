@@ -11,11 +11,38 @@ import MapKit
 import SwiftUI
 
 extension HuntManager {
-  enum HuntState {
-    case introduction
-    case findStation(THStation)
-    case outline
+  enum HuntState: Equatable {
+    case showIntroduction
+    case findStation(station: THStation)
+    case findOutline(outlineLocation: THLocation)
+    case showOutline
     case finished
+  }
+}
+
+extension HuntManager {
+  var currentStationNumber: Int {
+    guard
+      let currentStation,
+      let currentStationIndex = hunt.stationsArray.firstIndex(of: currentStation)
+    else { return 0 }
+    return currentStationIndex + 1
+  }
+
+  var isLastStation: Bool {
+    guard let currentStation,
+          let stationIndex = hunt.stationsArray.firstIndex(of: currentStation) else { return false }
+    return stationIndex + 1 == hunt.stationsArray.count
+  }
+
+  var isNearCurrentStation: Bool {
+    guard let location = currentStation?.location else { return false }
+    return distanceToCurrentStation <= location.triggerDistance
+  }
+
+  private var currentStationsIndex: Int? {
+    guard let currentStation else { return nil }
+    return hunt.stationsArray.firstIndex(of: currentStation)
   }
 }
 
@@ -27,44 +54,35 @@ final class HuntManager: ObservableObject {
 
   @Published var hunt: THHunt
   @Published var currentStation: THStation? = nil
-  @Published private(set) var huntState: HuntState = .finished
+  @Published var outlineLocation: THLocation? = nil
 
   @Published private(set) var angleToCurrentStation: Double = 0
   @Published private(set) var distanceToCurrentStation: Double = 0
-  @Published private(set) var isNearCurrentStation: Bool = false
-  @Published var questionSheetIsShown: Bool = false
-  @Published var introductionSheetIsShown: Bool = false
 
+  @Published private(set) var huntState: HuntState = .finished
 
-  var currentStationNumber: Int {
-    guard
-      let currentStation,
-      let currentStationIndex = hunt.stationsArray.firstIndex(of: currentStation)
-    else { return 0 }
-    return currentStationIndex + 1
-  }
 
   init(locationProvider: LocationProvider = LocationProvider(),
        _ hunt: THHunt) {
     self.locationProvider = locationProvider
     self.hunt = hunt
-    setupHunt()
+    initialSetup()
   }
 
-  private func setupHunt() {
-    if hunt.hasIntroduction {
-      huntState = .introduction
-    } else {
-      setFirstStation()
-    }
-
+  private func initialSetup() {
+    setFirstStation()
     setupPublishers()
+
+    if hunt.hasIntroduction {
+      huntState = .showIntroduction
+    } else if let currentStation {
+      huntState = .findStation(station: currentStation)
+    }
   }
 
-  func setFirstStation() {
+  private func setFirstStation() {
     if let firstStation = hunt.stationsArray.first {
       _currentStation = Published(initialValue: firstStation)
-      huntState = .findStation(firstStation)
     }
   }
 
@@ -81,79 +99,68 @@ final class HuntManager: ObservableObject {
       .sink(receiveValue: onDistanceUpdate)
       .store(in: &cancellables)
 
-    $huntState
-      .sink { state in
-        switch state {
-        case .introduction:
-          self.introductionSheetIsShown = true
-        case .findStation(let station):
-          self.onStationChanged(station)
-        case .outline:
-         break
-        case .finished:
-          break
-        }
-      }
-      .store(in: &cancellables)
-
-    $distanceToCurrentStation
-      .map { [weak self] in
-        guard let location = self?.currentStation?.location else { return false }
-        return $0 <= location.triggerDistance
-      }
-      .assign(to: \.isNearCurrentStation, on: self)
+    $currentStation
+      .map(\.?.location)
+      .sink(receiveValue: changeLocation)
       .store(in: &cancellables)
   }
 
-  private func onStationChanged(_ station: THStation?) {
-    guard let station else { return }
-    locationProvider.updateCurrentStation(to: station)
+  private func changeLocation(_ location: THLocation?) {
+    guard let location else { return }
+    locationProvider.updateCurrentLocation(to: location)
   }
 
   private func onDistanceUpdate(_ distance: CLLocationDistance) {
-    guard distance > 0 else { return }
+    guard let currentStation,
+              distance > 0
+    else { return }
+
     self.distanceToCurrentStation = distance
     HapticManager.shared.triggerFeedback(on: distance)
 
-    if isNearCurrentStation {
+    if isNearCurrentStation && !currentStation.isCompleted {
       audioPlayer.enteredStation()
       showQuestion()
     }
   }
 
   private func showQuestion() {
-    if !(currentStation?.isCompleted ?? false) {
-      questionSheetIsShown = true
+    guard let currentStation,
+          !currentStation.isCompleted
+    else { return }
+    if !currentStation.unwrappedTask.isEmpty {
+      huntState = .showIntroduction
     }
+  }
+
+  private func setNextStation() {
+    guard
+      let currentIndex = currentStationsIndex,
+      currentIndex < hunt.stationsArray.count,
+      let nextStation = hunt.stationsArray[safe: currentIndex + 1]
+    else { return }
+
+    self.currentStation = nextStation
+    huntState = .findStation(station: nextStation)
   }
 
   func nextStationButtonTapped() {
     currentStation?.isCompleted = true
     audioPlayer.leftStation()
-    setCurrentToNextStation()
-  }
 
-  private func setCurrentToNextStation() {
-    guard
-      let currentStation,
-      let currentIndex = hunt.stationsArray.firstIndex(of: currentStation)
-    else { return }
-
-    if currentIndex + 1 < hunt.stationsArray.count {
-      let nextStation = hunt.stationsArray[currentIndex + 1]
-      self.currentStation = nextStation
+    if isLastStation && hunt.hasOutline {
+      changeLocation(hunt.outlineLocation)
+      outlineLocation = hunt.outlineLocation
+    } else {
+      setNextStation()
     }
   }
 
-  private func currentStationsIndex() -> Int? {
-    guard let currentStation else { return nil }
-    return hunt.stationsArray.firstIndex(of: currentStation)
-  }
-
-  func isLastStation() -> Bool {
-    let endIndex = hunt.stationsArray.endIndex
-    guard let currentStation,
-          let stationIndex = hunt.stationsArray.firstIndex(of: currentStation) else { return false }
-    return endIndex == stationIndex
+  func readIntroduction() {
+    if let currentStation {
+      withAnimation {
+        huntState = .findStation(station: currentStation)
+      }
+    }
   }
 }
