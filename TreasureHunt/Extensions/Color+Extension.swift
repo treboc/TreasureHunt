@@ -8,9 +8,11 @@
 import SwiftUI
 
 extension Color {
-  public static var primaryAccentColor: Color {
+  static var primaryAccentColor: Color {
     Color("PrimaryAccentColor")
   }
+
+  static let label = Color(uiColor: .systemBackground)
 }
 
 extension UIColor {

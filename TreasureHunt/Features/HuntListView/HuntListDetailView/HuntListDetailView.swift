@@ -77,7 +77,7 @@ extension HuntListDetailView {
         .toolbar(.hidden, for: .tabBar, .navigationBar)
     }
     .shadow(radius: 5)
-    .foregroundColor(Color(uiColor: .systemBackground))
+    .foregroundColor(.label)
     .buttonStyle(.borderedProminent)
     .controlSize(.large)
     .padding(.bottom, 50)
