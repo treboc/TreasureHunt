@@ -16,20 +16,8 @@ struct HuntView: View {
     _huntManager = StateObject(wrappedValue: huntManger)
   }
   
-  private var blurRadius: CGFloat {
-    (huntManager.isNearCurrentStation || vm.mapIsShown) ? 0 : 20
-  }
-  
   var body: some View {
     ZStack {
-      Map(coordinateRegion: $vm.region,
-          showsUserLocation: true,
-          userTrackingMode: .constant(.follow)
-      )
-      .ignoresSafeArea()
-      .allowsHitTesting(false)
-      .blur(radius: blurRadius)
-      .animation(.default, value: blurRadius)
 
       arrowOverlay()
       bottomButtonStack

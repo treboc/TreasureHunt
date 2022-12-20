@@ -14,7 +14,6 @@ final class HuntViewModel: ObservableObject {
   @Published var warningRead: Bool = false
   @Published var endSessionAlertIsShown: Bool = false
   @Published var mapIsShown: Bool = false
-  @Published var region = MKCoordinateRegion(center: .init(), latitudinalMeters: 100, longitudinalMeters: 100)
 
   func showMap() {
     mapIsShown = true
