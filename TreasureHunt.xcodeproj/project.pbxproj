@@ -39,6 +39,8 @@
 		458F90E728EAAEB200F9BE29 /* UserDefaults+Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458F90E628EAAEB200F9BE29 /* UserDefaults+Keys.swift */; };
 		458F90E928EAB15500F9BE29 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458F90E828EAB15500F9BE29 /* Double+Extension.swift */; };
 		45916496292AA9E800037F44 /* THNumberedCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45916495292AA9E800037F44 /* THNumberedCircle.swift */; };
+		45A1A5072951BD1600E43E2B /* DirectionDistanceView+NotNearStationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A1A5062951BD1600E43E2B /* DirectionDistanceView+NotNearStationView.swift */; };
+		45A1A50A2951BDC700E43E2B /* DirectionDistanceView+NearStationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A1A5092951BDC700E43E2B /* DirectionDistanceView+NearStationView.swift */; };
 		45A8CEE728EA228500F19E67 /* HuntViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A8CEE628EA228500F19E67 /* HuntViewModel.swift */; };
 		45ABD0B9290AA9CF0010E1EF /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ABD0B8290AA9CF0010E1EF /* L10n.swift */; };
 		45ABD0BC290AAD230010E1EF /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 45ABD0BE290AAD230010E1EF /* Localizable.stringsdict */; };
@@ -123,6 +125,8 @@
 		458F90E628EAAEB200F9BE29 /* UserDefaults+Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Keys.swift"; sourceTree = "<group>"; };
 		458F90E828EAB15500F9BE29 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		45916495292AA9E800037F44 /* THNumberedCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = THNumberedCircle.swift; sourceTree = "<group>"; };
+		45A1A5062951BD1600E43E2B /* DirectionDistanceView+NotNearStationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DirectionDistanceView+NotNearStationView.swift"; sourceTree = "<group>"; };
+		45A1A5092951BDC700E43E2B /* DirectionDistanceView+NearStationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DirectionDistanceView+NearStationView.swift"; sourceTree = "<group>"; };
 		45A8CEE628EA228500F19E67 /* HuntViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuntViewModel.swift; sourceTree = "<group>"; };
 		45ABD0B5290AA6630010E1EF /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		45ABD0B8290AA9CF0010E1EF /* L10n.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = L10n.swift; sourceTree = "<group>"; };
@@ -299,6 +303,16 @@
 			path = Persistence;
 			sourceTree = "<group>";
 		};
+		45A1A5082951BD1B00E43E2B /* DirectionDistanceView */ = {
+			isa = PBXGroup;
+			children = (
+				8A52024628E0A21900C49779 /* DirectionDistanceView.swift */,
+				45A1A5062951BD1600E43E2B /* DirectionDistanceView+NotNearStationView.swift */,
+				45A1A5092951BDC700E43E2B /* DirectionDistanceView+NearStationView.swift */,
+			);
+			path = DirectionDistanceView;
+			sourceTree = "<group>";
+		};
 		45B7EFE828F4BDE1006AE0FB /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
@@ -412,7 +426,7 @@
 				4530A10C28F14BCD00F05AE3 /* HuntView+QuestionView.swift */,
 				45A8CEE628EA228500F19E67 /* HuntViewModel.swift */,
 				8AD1768A28E0C58200A12948 /* HuntManager.swift */,
-				8A52024628E0A21900C49779 /* DirectionDistanceView.swift */,
+				45A1A5082951BD1B00E43E2B /* DirectionDistanceView */,
 				45513FC028ED69130064A32E /* StationAnnotationView.swift */,
 				8A1CBD7528E36EC300E0AE4B /* TrafficWarningView.swift */,
 			);
@@ -621,6 +635,7 @@
 				8A4C4F9D28E2083500721C50 /* AppearancePicker.swift in Sources */,
 				8AD1768B28E0C58200A12948 /* HuntManager.swift in Sources */,
 				457C2D532928176A0051FDD6 /* SuccessPopover+ViewModifier.swift in Sources */,
+				45A1A5072951BD1600E43E2B /* DirectionDistanceView+NotNearStationView.swift in Sources */,
 				F2A056A728DB7983007D7FFF /* CLLocationCoordinate2D+Extension.swift in Sources */,
 				8A52024C28E0A21900C49779 /* DirectionDistanceView.swift in Sources */,
 				45EDD3FD29297F1300C8EF86 /* AddHuntView+NamePage.swift in Sources */,
@@ -647,6 +662,7 @@
 				8AFCFF3928E225ED000D1A0B /* MapView.swift in Sources */,
 				458BE2BD293CA9DE00869ADF /* THLocation+CoreDataClass.swift in Sources */,
 				458F1B4E2944A7E300525EBC /* NSManagedObject+Extension.swift in Sources */,
+				45A1A50A2951BDC700E43E2B /* DirectionDistanceView+NearStationView.swift in Sources */,
 				8A52024E28E0A21900C49779 /* HuntView.swift in Sources */,
 				45A8CEE728EA228500F19E67 /* HuntViewModel.swift in Sources */,
 				45513FB728EBD9A60064A32E /* LocationsPicker.swift in Sources */,
