@@ -50,13 +50,11 @@ class LocationProvider: NSObject, ObservableObject {
     locationManager.stopUpdatingHeading()
   }
 
-  func updateCurrentStation(to station: THStation) {
-    if let location = station.location {
-      currentStationLocation = location.location
-      triggerDistance = location.triggerDistance
-      distance = distanceTo(location.location) ?? 0
-      start()
-    }
+  func updateCurrentLocation(to location: THLocation) {
+    currentStationLocation = location.location
+    triggerDistance = location.triggerDistance
+    distance = distanceTo(location.location) ?? 0
+    start()
   }
 
   func checkLocationAuthorization(locationOnboardingIsShown: inout Bool) {
