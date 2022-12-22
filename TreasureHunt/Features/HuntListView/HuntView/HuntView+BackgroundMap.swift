@@ -10,7 +10,7 @@ import SwiftUI
 
 extension HuntView {
   struct BackgroundMapView: View {
-    let isClear: Bool
+    let showsMap: Bool
 
     @State private var region = MKCoordinateRegion(center: .init(),
                                                    latitudinalMeters: 100,
@@ -22,8 +22,8 @@ extension HuntView {
           userTrackingMode: .constant(.follow))
       .ignoresSafeArea()
       .allowsHitTesting(false)
-      .blur(radius: isClear ? 0 : 20)
-      .animation(.default, value: isClear)
+      .blur(radius: showsMap ? 0 : 20)
+      .animation(.default, value: showsMap)
     }
   }
 }
@@ -31,7 +31,7 @@ extension HuntView {
 #if DEBUG
 struct BackgroundMapView_Previews: PreviewProvider {
   static var previews: some View {
-    HuntView.BackgroundMapView(isClear: true)
+    HuntView.BackgroundMapView(showsMap: true)
   }
 }
 #endif
