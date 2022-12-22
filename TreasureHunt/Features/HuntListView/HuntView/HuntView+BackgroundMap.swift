@@ -11,7 +11,6 @@ import SwiftUI
 extension HuntView {
   struct BackgroundMapView: View {
     let showsMap: Bool
-
     @State private var region = MKCoordinateRegion(center: .init(),
                                                    latitudinalMeters: 100,
                                                    longitudinalMeters: 100)

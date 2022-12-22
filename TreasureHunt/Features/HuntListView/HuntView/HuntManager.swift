@@ -129,8 +129,6 @@ final class HuntManager: ObservableObject {
     }
   }
 
-
-
   func didTapNextStationButton() {
     if case .findStation(let station) = huntState {
       THStationModelService.completeStation(station)
