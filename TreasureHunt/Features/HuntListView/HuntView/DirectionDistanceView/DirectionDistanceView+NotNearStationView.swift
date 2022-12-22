@@ -42,12 +42,16 @@ extension DirectionView {
 
     var body: some View {
       VStack {
-        VStack {
-          Text(L10n.HuntView.DirectionDistanceView.stationOf(stationNumber, numberOfStations))
-            .font(.system(.largeTitle, design: .rounded))
-            .fontWeight(.semibold)
-            .padding(.top)
+        Group {
+          if stationNumber != 0 {
+            Text(L10n.HuntView.DirectionDistanceView.stationOf(stationNumber, numberOfStations))
+          } else {
+            Text("Last Location")
+          }
         }
+        .font(.system(.largeTitle, design: .rounded))
+        .fontWeight(.semibold)
+        .padding(.top)
 
         Spacer()
 
