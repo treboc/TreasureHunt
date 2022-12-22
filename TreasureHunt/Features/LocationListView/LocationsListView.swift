@@ -27,6 +27,7 @@ struct LocationsListView: View {
       .safeAreaInset(edge: .bottom) {
         locationUpdateInfoText
       }
+      .gradientBackground()
       .navigationTitle(L10n.LocationsListView.navTitle)
       .roundedNavigationTitle()
       .sheet(isPresented: $newLocationSheetIsShown) {
@@ -98,6 +99,7 @@ extension LocationsListView {
         }
     }
     .listStyle(.plain)
+    .scrollContentBackground(.hidden)
     .safeAreaInset(edge: .bottom) {
       if editStationTooltipIsShown {
         editStationTooltipView

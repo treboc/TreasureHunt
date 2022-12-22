@@ -39,6 +39,8 @@ struct HuntListView: View {
           .listStyle(.plain)
         }
       }
+      .scrollContentBackground(.hidden)
+      .gradientBackground()
       .alert(L10n.Alert.DeleteHunt.title, isPresented: $huntDeletionAlertIsShown, actions: {
         Button(L10n.BtnTitle.cancel, role: .cancel) {}
         Button(L10n.BtnTitle.iAmSure, role: .destructive, action: deleteHunt)

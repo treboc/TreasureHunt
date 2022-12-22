@@ -37,6 +37,8 @@ struct SettingsView: View {
           }
         }
       }
+      .scrollContentBackground(.hidden)
+      .gradientBackground()
       .navigationTitle(L10n.SettingsView.navTitle)
       .roundedNavigationTitle()
     }

@@ -43,9 +43,11 @@ struct LocationsListRowView: View {
     .background(
       RoundedRectangle(cornerRadius: 8)
         .fill(.regularMaterial)
+        .shadow(radius: 4)
     )
     .listRowInsets(.init(top: 10, leading: 10, bottom: 10, trailing: 10))
     .listRowSeparator(.hidden)
+    .listRowBackground(Color.clear)
     .contentShape(Rectangle())
     .readSize { size in
       yOffset = -(size.height / 2)

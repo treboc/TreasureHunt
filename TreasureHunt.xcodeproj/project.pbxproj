@@ -210,8 +210,8 @@
 		45513FA828EAF2CD0064A32E /* HuntListView */ = {
 			isa = PBXGroup;
 			children = (
-				45513FBB28ECD2070064A32E /* HuntListRowView.swift */,
 				45513FA928EAF2D90064A32E /* HuntListView.swift */,
+				45513FBB28ECD2070064A32E /* HuntListRowView.swift */,
 				45513FBF28ED68F20064A32E /* AddHuntView */,
 				45F99CE6290BFFD00050AC6F /* HuntListDetailView */,
 				8A52024828E0A21900C49779 /* HuntView */,

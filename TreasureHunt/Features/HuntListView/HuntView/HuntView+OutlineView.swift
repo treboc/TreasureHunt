@@ -30,6 +30,8 @@ extension HuntView {
             noOutlinePlaceholder
           }
         }
+        .scrollContentBackground(.hidden)
+        .gradientBackground()
         .navigationTitle("Introduction")
         .interactiveDismissDisabled()
       }
