@@ -58,6 +58,8 @@ extension DirectionView {
       )
       .padding(.horizontal)
       .transition(.opacity.combined(with: .scale))
+      .shadow(radius: 5)
+      .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
     }
   }
 }
