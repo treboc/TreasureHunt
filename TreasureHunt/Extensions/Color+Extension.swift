@@ -8,10 +8,17 @@
 import SwiftUI
 
 extension Color {
+  // --- Accent Colors
   static var primaryAccentColor: Color {
     Color("PrimaryAccentColor")
   }
 
+  // --- Background Colors
+  public static var primaryBackground: Color {
+    Color("PrimaryBackground")
+  }
+
+  // --- UIColor Shortcuts
   static let label = Color(uiColor: .systemBackground)
 }
 
