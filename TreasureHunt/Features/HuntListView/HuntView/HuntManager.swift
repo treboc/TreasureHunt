@@ -11,38 +11,47 @@ import MapKit
 import SwiftUI
 
 extension HuntManager {
+  enum HuntError: LocalizedError {
+    case noStations
+  }
+
   enum HuntState: Equatable {
-    case showIntroduction
+    case showIntroduction(introduction: String)
     case findStation(station: THStation)
+    case showTask(task: String)
     case findOutline(outlineLocation: THLocation)
-    case showOutline
+    case showOutline(outline: String)
     case finished
   }
-}
 
-extension HuntManager {
   var currentStationNumber: Int {
     guard
-      let currentStation,
-      let currentStationIndex = hunt.stationsArray.firstIndex(of: currentStation)
+      case .findStation(let station) = huntState,
+      let currentStationIndex = hunt.stationsArray.firstIndex(of: station)
     else { return 0 }
     return currentStationIndex + 1
   }
 
   var isLastStation: Bool {
-    guard let currentStation,
-          let stationIndex = hunt.stationsArray.firstIndex(of: currentStation) else { return false }
+    guard case .findStation(let station) = huntState,
+          let stationIndex = hunt.stationsArray.firstIndex(of: station) else { return false }
     return stationIndex + 1 == hunt.stationsArray.count
   }
 
-  var isNearCurrentStation: Bool {
-    guard let location = currentStation?.location else { return false }
-    return distanceToCurrentStation <= location.triggerDistance
+  var isNearCurrentLocation: Bool {
+    var location: THLocation? = nil
+    if case .findStation(let station) = huntState {
+      location = station.location
+    } else if case .findOutline(let outline) = huntState {
+      location = outline
+    }
+
+    return distanceToCurrentLocation <= location?.triggerDistance ?? 25
   }
 
   private var currentStationsIndex: Int? {
-    guard let currentStation else { return nil }
-    return hunt.stationsArray.firstIndex(of: currentStation)
+    guard case .findStation(let station) = huntState else { return nil }
+    return hunt.stationsArray.firstIndex(of: station)
   }
 }
 
@@ -52,15 +61,12 @@ final class HuntManager: ObservableObject {
 
   @ObservedObject var locationProvider: LocationProvider
 
-  @Published var hunt: THHunt
-  @Published var currentStation: THStation? = nil
-  @Published var outlineLocation: THLocation? = nil
+  @Published private(set) var hunt: THHunt
+  @Published var error: HuntError? = nil
 
   @Published private(set) var angleToCurrentStation: Double = 0
-  @Published private(set) var distanceToCurrentStation: Double = 0
-
+  @Published private(set) var distanceToCurrentLocation: Double = 0
   @Published private(set) var huntState: HuntState = .finished
-
 
   init(locationProvider: LocationProvider = LocationProvider(),
        _ hunt: THHunt) {
@@ -70,23 +76,16 @@ final class HuntManager: ObservableObject {
   }
 
   private func initialSetup() {
-    setFirstStation()
-    setupPublishers()
+    setupObservers()
 
     if hunt.hasIntroduction {
-      huntState = .showIntroduction
-    } else if let currentStation {
-      huntState = .findStation(station: currentStation)
+      huntState = .showIntroduction(introduction: hunt.unwrappedIntroduction)
+    } else {
+      setFirstStation()
     }
   }
 
-  private func setFirstStation() {
-    if let firstStation = hunt.stationsArray.first {
-      _currentStation = Published(initialValue: firstStation)
-    }
-  }
-
-  private func setupPublishers() {
+  private func setupObservers() {
     locationProvider
       .$angle
       .assign(to: \.angleToCurrentStation, on: self)
@@ -99,9 +98,14 @@ final class HuntManager: ObservableObject {
       .sink(receiveValue: onDistanceUpdate)
       .store(in: &cancellables)
 
-    $currentStation
-      .map(\.?.location)
-      .sink(receiveValue: changeLocation)
+    $huntState
+      .sink { [weak self] huntState in
+        if case .findStation(let station) = huntState {
+          self?.changeLocation(station.location)
+        } else if case .findOutline(let outlineLocation) = huntState {
+          self?.changeLocation(outlineLocation)
+        }
+      }
       .store(in: &cancellables)
   }
 
@@ -111,25 +115,44 @@ final class HuntManager: ObservableObject {
   }
 
   private func onDistanceUpdate(_ distance: CLLocationDistance) {
-    guard let currentStation,
-              distance > 0
-    else { return }
+    guard distance > 0 else { return }
 
-    self.distanceToCurrentStation = distance
+    self.distanceToCurrentLocation = distance
     HapticManager.shared.triggerFeedback(on: distance)
 
-    if isNearCurrentStation && !currentStation.isCompleted {
-      audioPlayer.enteredStation()
-      showQuestion()
+    if shouldShowTask() {
+      showTask()
+    }
+
+    if shouldShowOutline() {
+      showOutline()
     }
   }
 
-  private func showQuestion() {
-    guard let currentStation,
-          !currentStation.isCompleted
-    else { return }
-    if !currentStation.unwrappedTask.isEmpty {
-      huntState = .showIntroduction
+
+
+  func didTapNextStationButton() {
+    if case .findStation(let station) = huntState {
+      THStationModelService.completeStation(station)
+    }
+
+    if isLastStation && hunt.hasOutline {
+      setOutlineLocation()
+    } else {
+      setNextStation()
+    }
+
+    audioPlayer.leftStation()
+  }
+
+  func setFirstStation() {
+    do {
+      let firstStation = try getFirstStation()
+      self.huntState = .findStation(station: firstStation)
+    } catch let error as HuntError {
+      self.error = error
+    } catch {
+      fatalError("Error not implemented, \(error)")
     }
   }
 
@@ -140,27 +163,37 @@ final class HuntManager: ObservableObject {
       let nextStation = hunt.stationsArray[safe: currentIndex + 1]
     else { return }
 
-    self.currentStation = nextStation
     huntState = .findStation(station: nextStation)
   }
 
-  func nextStationButtonTapped() {
-    currentStation?.isCompleted = true
-    audioPlayer.leftStation()
-
-    if isLastStation && hunt.hasOutline {
-      changeLocation(hunt.outlineLocation)
-      outlineLocation = hunt.outlineLocation
-    } else {
-      setNextStation()
-    }
+  private func setOutlineLocation() {
+    guard let outlineLocation = hunt.outlineLocation else { return }
+    huntState = .findOutline(outlineLocation: outlineLocation)
   }
 
-  func readIntroduction() {
-    if let currentStation {
-      withAnimation {
-        huntState = .findStation(station: currentStation)
-      }
+  private func getFirstStation() throws -> THStation {
+    if let firstStation = hunt.stationsArray.first {
+      return firstStation
     }
+    throw HuntError.noStations
+  }
+
+  private func shouldShowTask() -> Bool {
+    guard case .findStation(let station) = huntState else { return false }
+    return isNearCurrentLocation && !station.isCompleted && !station.unwrappedTask.isEmpty
+  }
+
+  private func showTask() {
+    guard case .findStation(let station) = huntState else { return }
+    huntState = .showTask(task: station.unwrappedTask)
+  }
+
+  private func shouldShowOutline() -> Bool {
+    guard case .findOutline = huntState else { return false }
+    return isNearCurrentLocation && hunt.hasOutline
+  }
+
+  private func showOutline() {
+    huntState = .showOutline(outline: hunt.unwrappedOutline)
   }
 }
