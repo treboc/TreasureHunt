@@ -9,32 +9,39 @@ import SwiftUI
 
 struct TrafficWarningView: View {
   @Binding var warningRead: Bool
-  
+
+  @ViewBuilder
   var body: some View {
-    VStack(spacing: 30) {
-      HStack {
-        Text(L10n.HuntView.TrafficWarningView.title)
-          .font(.system(.largeTitle, design: .rounded))
-          .fontWeight(.black)
-        Spacer()
-        Text("⚠️")
-          .font(.largeTitle)
-      }
-      
-      Text(L10n.HuntView.TrafficWarningView.message)
-        .frame(maxWidth: .infinity, alignment: .leading)
-      
-      Button(L10n.HuntView.TrafficWarningView.buttonTitle) {
-        withAnimation {
-          warningRead = true
+    if !warningRead {
+      VStack(spacing: 30) {
+        HStack {
+          Text(L10n.HuntView.TrafficWarningView.title)
+            .font(.system(.largeTitle, design: .rounded))
+            .fontWeight(.black)
+          Spacer()
+          Text("⚠️")
+            .font(.largeTitle)
         }
+        
+        Text(L10n.HuntView.TrafficWarningView.message)
+          .frame(maxWidth: .infinity, alignment: .leading)
+        
+        Button(L10n.HuntView.TrafficWarningView.buttonTitle) {
+          withAnimation {
+            warningRead = true
+          }
+        }
+        .buttonStyle(.borderedProminent)
+        .padding(.bottom)
       }
-      .buttonStyle(.borderedProminent)
-      .padding(.bottom)
+      .padding()
+      .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 16))
+      .padding()
+      .frame(maxWidth: .infinity, maxHeight: .infinity)
+      .background(.thinMaterial)
+      .ignoresSafeArea()
+      .transition(.opacity)
     }
-    .padding()
-    .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 16))
-    .padding()
   }
 }
 
