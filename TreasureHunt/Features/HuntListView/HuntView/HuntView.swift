@@ -42,6 +42,11 @@ extension HuntView {
       .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
       .opacity(vm.mapIsShown ? 0.2 : 1)
       .animation(.default, value: vm.mapIsShown)
+    private var directionOverlay: some View {
+      DirectionView(huntManager: huntManager)
+        .opacity(uiIsTranslucent ? 0.2 : 1)
+        .animation(.default, value: uiIsTranslucent)
+    }
   }
   
   @ViewBuilder

@@ -1,5 +1,5 @@
 //
-//  DirectionDistanceView+NearStationView.swift
+//  DirectionView+NearStationView.swift
 //  TreasureHunt
 //
 //  Created by Marvin Lee Kobert on 20.12.22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-extension DirectionDistanceView {
+extension DirectionView {
   struct NearStationView: View {
     let isCompleted: Bool
     let stationTitle: String
@@ -66,7 +66,7 @@ extension DirectionDistanceView {
 struct NearStationVIew_Previews: PreviewProvider {
   static let namespace = Namespace()
   static var previews: some View {
-    DirectionDistanceView.NearStationView(isCompleted: true,
+    DirectionView.NearStationView(isCompleted: true,
                                           stationTitle: "Dummy Station",
                                           stationNo: 1,
                                           stationsCount: 4,

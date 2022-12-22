@@ -1,5 +1,5 @@
 //
-//  DirectionDistanceView+NotNearStationView.swift
+//  DirectionView+NotNearStationView.swift
 //  TreasureHunt
 //
 //  Created by Marvin Lee Kobert on 20.12.22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-extension DirectionDistanceView {
+extension DirectionView {
   struct NotNearstationView: View {
     @AppStorage("arrowIcon") private var arrowIcon: ArrowIconPicker.ArrowIcon = .locationNorthFill
 
@@ -80,7 +80,7 @@ struct NotNearStationView_Previews: PreviewProvider {
   static let namespace: Namespace = Namespace()
 
   static var previews: some View {
-    DirectionDistanceView.NotNearstationView(stationNumber: 1,
+    DirectionView.NotNearstationView(stationNumber: 1,
                                              numberOfStations: 5,
                                              angle: 23,
                                              distanceToStation: 123,

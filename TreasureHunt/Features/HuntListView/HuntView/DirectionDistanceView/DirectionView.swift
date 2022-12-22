@@ -4,13 +4,13 @@
 
 import SwiftUI
 
-struct DirectionDistanceView: View {
+struct DirectionView: View {
   @ObservedObject var huntManager: HuntManager
   @Namespace private var arrow
 
   var body: some View {
-    if huntManager.isNearCurrentStation {
-      if let station = huntManager.currentStation {
+    if huntManager.isNearCurrentLocation {
+      if case .findStation(let station) = huntManager.huntState {
         NearStationView(isCompleted: station.isCompleted,
                         stationTitle: station.unwrappedTitle,
                         stationNo: huntManager.currentStationNumber,
@@ -21,7 +21,7 @@ struct DirectionDistanceView: View {
       NotNearstationView(stationNumber: huntManager.currentStationNumber,
                          numberOfStations: huntManager.hunt.stationsArray.count,
                          angle: huntManager.angleToCurrentStation,
-                         distanceToStation: huntManager.distanceToCurrentStation,
+                         distanceToStation: huntManager.distanceToCurrentLocation,
                          namespace: arrow)
     }
   }
