@@ -32,4 +32,8 @@ struct THStationModelService {
       return newStation(in: childContext)
     }
   }
+
+  static func completeStation(_ station: THStation) {
+    station.isCompleted = true
+  }
 }
