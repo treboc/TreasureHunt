@@ -7,14 +7,49 @@
 
 import SwiftUI
 
-struct HuntView_OutlineView: View {
+extension HuntView {
+  struct OutlineView: View {
+    let outline: String?
+    let didTapEndHuntButton: () -> Void
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+      NavigationView {
+        ScrollView(.vertical, showsIndicators: false) {
+          if let outline {
+            VStack {
+              Text(outline)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding()
+
+              Button("End Hunt", action: didTapEndHuntButton)
+                .foregroundColor(.label)
+                .buttonStyle(.borderedProminent)
+                .controlSize(.large)
+            }
+          } else {
+            noOutlinePlaceholder
+          }
+        }
+        .navigationTitle("Introduction")
+        .interactiveDismissDisabled()
+      }
     }
+
+    private var noOutlinePlaceholder: some View {
+      Text("No Introduction Set")
+        .font(.title3)
+        .fontWeight(.semibold)
+        .foregroundColor(.secondary)
+    }
+  }
 }
 
-struct HuntView_OutlineView_Previews: PreviewProvider {
-    static var previews: some View {
-        HuntView_OutlineView()
+#if DEBUG
+struct OutlineView_Previews: PreviewProvider {
+  static var previews: some View {
+    HuntView.OutlineView(outline: "This is just a sample outline") {
+      print("dismissed")
     }
+  }
 }
+#endif

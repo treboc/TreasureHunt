@@ -34,7 +34,7 @@ struct HuntView: View {
         IntroductionView(introduction: introduction,
                          onDismiss: huntManager.setFirstStation)
       case .showOutline(let outline):
-        Text(outline)
+        OutlineView(outline: outline, didTapEndHuntButton: { dismiss() })
       case .finished:
         Text("Finished")
       }

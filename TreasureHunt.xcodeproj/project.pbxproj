@@ -68,6 +68,7 @@
 		45F99CE3290BD3CE0050AC6F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F99CE2290BD3CE0050AC6F /* Constants.swift */; };
 		45F99CE5290BFFBF0050AC6F /* HuntListDetailView+StationRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F99CE4290BFFBF0050AC6F /* HuntListDetailView+StationRowView.swift */; };
 		45F99CEA290C6F5F0050AC6F /* ReadSize+ViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F99CE9290C6F5F0050AC6F /* ReadSize+ViewModifier.swift */; };
+		45FA5B522954664B00A02411 /* HuntView+OutlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA5B512954664B00A02411 /* HuntView+OutlineView.swift */; };
 		45FA5B54295467C400A02411 /* GradientBackground-ViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA5B53295467C400A02411 /* GradientBackground-ViewModifier.swift */; };
 		8A1CBD7628E36EC300E0AE4B /* TrafficWarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1CBD7528E36EC300E0AE4B /* TrafficWarningView.swift */; };
 		8A1CBD7828E3795300E0AE4B /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1CBD7728E3795300E0AE4B /* Color+Extension.swift */; };
@@ -158,6 +159,7 @@
 		45F99CE2290BD3CE0050AC6F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		45F99CE4290BFFBF0050AC6F /* HuntListDetailView+StationRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HuntListDetailView+StationRowView.swift"; sourceTree = "<group>"; };
 		45F99CE9290C6F5F0050AC6F /* ReadSize+ViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReadSize+ViewModifier.swift"; sourceTree = "<group>"; };
+		45FA5B512954664B00A02411 /* HuntView+OutlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HuntView+OutlineView.swift"; sourceTree = "<group>"; };
 		45FA5B53295467C400A02411 /* GradientBackground-ViewModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GradientBackground-ViewModifier.swift"; sourceTree = "<group>"; };
 		8A1CBD7528E36EC300E0AE4B /* TrafficWarningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrafficWarningView.swift; sourceTree = "<group>"; };
 		8A1CBD7728E3795300E0AE4B /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
@@ -428,6 +430,7 @@
 				8A52024928E0A21900C49779 /* HuntView.swift */,
 				45A7210F295078B20068DAF7 /* HuntView+BackgroundMap.swift */,
 				457B6181294B2E1E005F3535 /* HuntView+IntroductionView.swift */,
+				45FA5B512954664B00A02411 /* HuntView+OutlineView.swift */,
 				4530A10C28F14BCD00F05AE3 /* HuntView+QuestionView.swift */,
 				45A8CEE628EA228500F19E67 /* HuntViewModel.swift */,
 				8AD1768A28E0C58200A12948 /* HuntManager.swift */,
@@ -671,6 +674,7 @@
 				458F1B4E2944A7E300525EBC /* NSManagedObject+Extension.swift in Sources */,
 				45A1A50A2951BDC700E43E2B /* DirectionDistanceView+NearStationView.swift in Sources */,
 				8A52024E28E0A21900C49779 /* HuntView.swift in Sources */,
+				45FA5B522954664B00A02411 /* HuntView+OutlineView.swift in Sources */,
 				45A8CEE728EA228500F19E67 /* HuntViewModel.swift in Sources */,
 				45513FB728EBD9A60064A32E /* LocationsPicker.swift in Sources */,
 				458BE2B3293CA83A00869ADF /* PersistenceController.swift in Sources */,
