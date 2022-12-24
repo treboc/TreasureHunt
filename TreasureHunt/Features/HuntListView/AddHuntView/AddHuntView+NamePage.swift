@@ -27,21 +27,25 @@ extension AddHuntView {
             .padding()
             .roundedBackground()
             .focused($isFocused)
-            .onChange(of: viewModel.pageIndex) { index in
-              if index != .name {
-                isFocused = false
-              }
-            }
-          
+            .onChange(of: viewModel.pageIndex, perform: dismissFocusOnChange)
+
           Spacer()
         }
       }
-      .onTapGesture {
-        if isFocused {
-          isFocused = false
-        }
-      }
+      .onTapGesture(perform: dismissFocus)
       .padding()
+    }
+
+    private func dismissFocusOnChange(of pageIndex: PageSelection) {
+      if pageIndex != .name {
+        isFocused = false
+      }
+    }
+
+    private func dismissFocus() {
+      if isFocused {
+        isFocused = false
+      }
     }
   }
 }
