@@ -14,6 +14,7 @@ struct HuntListDetailView: View {
 
   var body: some View {
     huntDetails
+      .gradientBackground()
       .navigationTitle(hunt.unwrappedTitle)
       .toolbar {
         ToolbarItemGroup(placement: .navigationBarTrailing) {
