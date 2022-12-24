@@ -141,7 +141,7 @@ extension AddHuntView {
         .toolbar {
           Button(iconName: "xmark.circle.fill", action: dismiss.callAsFunction)
         }
-        .navigationTitle("Location")
+        .navigationTitle(L10n.LocationsListView.navTitle)
       }
     }
 

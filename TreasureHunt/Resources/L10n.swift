@@ -77,29 +77,19 @@ internal enum L10n {
     }
   }
   internal enum AddStationView {
-    /// New Station
-    internal static let navTitle = L10n.tr("Localizable", "addStationView.navTitle", fallback: "New Station")
-    internal enum DetailPage {
-      /// Add a name.
-      internal static let description = L10n.tr("Localizable", "addStationView.detailPage.description", fallback: "Add a name.")
-      /// z.B. At the old mill
-      internal static let nameTextFieldPlaceholder = L10n.tr("Localizable", "addStationView.detailPage.nameTextFieldPlaceholder", fallback: "z.B. At the old mill")
-      /// Name of the Station
-      internal static let nameTextFieldTitle = L10n.tr("Localizable", "addStationView.detailPage.nameTextFieldTitle", fallback: "Name of the Station")
-      /// 2. Details
-      internal static let title = L10n.tr("Localizable", "addStationView.detailPage.title", fallback: "2. Details")
-    }
+    /// Location
+    internal static let location = L10n.tr("Localizable", "addStationView.location", fallback: "Location")
+    /// Neue Station
+    internal static let navTitle = L10n.tr("Localizable", "addStationView.navTitle", fallback: "Neue Station")
+    /// Task
+    internal static let task = L10n.tr("Localizable", "addStationView.task", fallback: "Task")
+    /// Title
+    internal static let title = L10n.tr("Localizable", "addStationView.title", fallback: "Title")
     internal enum PagePicker {
       /// Details
       internal static let details = L10n.tr("Localizable", "addStationView.pagePicker.details", fallback: "Details")
       /// Position
       internal static let position = L10n.tr("Localizable", "addStationView.pagePicker.position", fallback: "Position")
-    }
-    internal enum PositionPage {
-      /// Move the map, so that the center is at this point where the station sould be.
-      internal static let description = L10n.tr("Localizable", "addStationView.positionPage.description", fallback: "Move the map, so that the center is at this point where the station sould be.")
-      /// 1. Position
-      internal static let title = L10n.tr("Localizable", "addStationView.positionPage.title", fallback: "1. Position")
     }
     internal enum TriggerDistanceSlider {
       /// Defines from which distance a station is triggered.

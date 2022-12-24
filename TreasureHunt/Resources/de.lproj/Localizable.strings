@@ -100,12 +100,9 @@
 
 // AddStationView
 "addStationView.navTitle" = "Neue Station";
-"addStationView.positionPage.title" = "1. Position";
-"addStationView.positionPage.description" = "Schiebe die Mitte der Karte an die Stelle, an der diese Station sein soll.";
-"addStationView.detailPage.title" = "2. Details";
-"addStationView.detailPage.description" = "Füge noch einen Namen hinzu.";
-"addStationView.detailPage.nameTextFieldTitle" = "Name der Station";
-"addStationView.detailPage.nameTextFieldPlaceholder" = "z.B. an der alten Mühle";
+"addStationView.title" = "Name";
+"addStationView.task" = "Aufgabe";
+"addStationView.location" = "Standort";
 
 // AddStationView+PagePicker
 "addStationView.pagePicker.position" = "Position";

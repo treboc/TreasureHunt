@@ -99,13 +99,10 @@
 "locationsListRowView.noQuestion" = "No question on this station.";
 
 // AddStationView
-"addStationView.navTitle" = "New Station";
-"addStationView.positionPage.title" = "1. Position";
-"addStationView.positionPage.description" = "Move the map, so that the center is at this point where the station sould be.";
-"addStationView.detailPage.title" = "2. Details";
-"addStationView.detailPage.description" = "Add a name.";
-"addStationView.detailPage.nameTextFieldTitle" = "Name of the Station";
-"addStationView.detailPage.nameTextFieldPlaceholder" = "z.B. At the old mill";
+"addStationView.navTitle" = "Neue Station";
+"addStationView.title" = "Title";
+"addStationView.task" = "Task";
+"addStationView.location" = "Location";
 
 // AddStationView+PagePicker
 "addStationView.pagePicker.position" = "Position";

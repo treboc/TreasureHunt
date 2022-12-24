@@ -49,7 +49,6 @@ struct AddLocationView: View {
     NavigationView {
       VStack(spacing: 16) {
         titleStack
-
         mapStack
       }
       .successPopover(isPresented: $showLocationCreatedOverlay, onDismiss: reset)

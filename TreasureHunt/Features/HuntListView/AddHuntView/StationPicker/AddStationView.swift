@@ -30,58 +30,64 @@ struct AddStationView: View {
   var body: some View {
     NavigationStack {
       ScrollView(.vertical) {
-        // Name
-        HStack(alignment: .firstTextBaseline) {
-          THNumberedCircle(number: 1)
+        VStack {
+          // Name
+          HStack(alignment: .firstTextBaseline) {
+            THNumberedCircle(number: 1)
 
-          VStack(alignment: .leading, spacing: Constants.rowSpacing) {
-            Text("Name")
-              .font(.headline)
-            TextField("Name", text: $station.unwrappedTitle)
-              .padding()
-              .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: Constants.cornerRadius))
+            VStack(alignment: .leading, spacing: Constants.rowSpacing) {
+              Text(L10n.AddStationView.title)
+                .font(.headline)
+              TextField(L10n.AddStationView.title, text: $station.unwrappedTitle)
+                .padding()
+                .roundedBackground()
+            }
           }
-        }
 
-        // Task
-        HStack(alignment: .firstTextBaseline) {
-          THNumberedCircle(number: 2)
-          VStack(alignment: .leading, spacing: Constants.rowSpacing) {
-            Text("Task")
-              .font(.headline)
-            TextField("Task", text: $station.unwrappedTask)
-              .lineLimit(1...5)
-              .padding()
-              .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: Constants.cornerRadius))
+          // Task
+          HStack(alignment: .firstTextBaseline) {
+            THNumberedCircle(number: 2)
+            VStack(alignment: .leading, spacing: Constants.rowSpacing) {
+              Text(L10n.AddStationView.task)
+                .font(.headline)
+              TextField(L10n.AddStationView.task, text: $station.unwrappedTask)
+                .lineLimit(1...5)
+                .padding()
+                .roundedBackground()
+            }
           }
-        }
 
-        // Location
-        HStack(alignment: .firstTextBaseline) {
-          THNumberedCircle(number: 3)
-          VStack(alignment: .leading, spacing: Constants.rowSpacing) {
-            Text("Location")
-              .font(.headline)
+          // Location
+          HStack(alignment: .firstTextBaseline) {
+            THNumberedCircle(number: 3)
+            VStack(alignment: .leading, spacing: Constants.rowSpacing) {
+              Text(L10n.AddStationView.location)
+                .font(.headline)
 
-            selectableLocationView
+              selectableLocationView
+            }
           }
-        }
-        .sheet(isPresented: $locationSelectionSheetIsShown) {
-          AddHuntView.LocationPicker(location: $station.location)
-        }
+          .sheet(isPresented: $locationSelectionSheetIsShown) {
+            AddHuntView.LocationPicker(location: $station.location)
+          }
 
-        HStack {
-          Spacer()
+          HStack {
+            Spacer()
 
-          Button("Save", action: saveButtonPressed)
-            .buttonStyle(.borderedProminent)
-            .controlSize(.large)
-            .disabled(!isValidStation)
+            Button("Save", action: saveButtonPressed)
+              .buttonStyle(.borderedProminent)
+              .controlSize(.large)
+              .disabled(!isValidStation)
+          }
+          .padding(.top, Constants.rowSpacing)
         }
-        .padding(.top, Constants.rowSpacing)
+        .padding(.horizontal)
       }
-      .padding(.horizontal)
-      .navigationTitle(station.unwrappedTitle.isEmpty ? "New Station" : station.unwrappedTitle)
+      .navigationTitle(
+        station.unwrappedTitle.isEmpty
+        ? L10n.AddStationView.navTitle
+        : station.unwrappedTitle
+      )
       .roundedNavigationTitle()
       .toolbar {
         Button(iconName: "xmark.circle.fill", action: dismiss.callAsFunction)
@@ -111,9 +117,9 @@ struct AddStationView: View {
         }
       } else {
         VStack {
-          Text("No Location Selected")
+          Text(L10n.AddHuntView.OutroPage.SelectableLocationView.noLocationSelected)
             .font(.system(.body, design: .rounded, weight: .semibold))
-          Text("Tap to select one.")
+          Text(L10n.AddHuntView.OutroPage.SelectableLocationView.noLocationSelected)
             .font(.system(.footnote, design: .rounded, weight: .semibold))
             .foregroundColor(.secondary)
         }
@@ -122,10 +128,7 @@ struct AddStationView: View {
     }
     .padding(.vertical, 4)
     .padding()
-    .background(
-      RoundedRectangle(cornerRadius: Constants.cornerRadius)
-        .fill(.regularMaterial)
-    )
+    .roundedBackground()
     .contentShape(Rectangle())
     .onTapGesture {
       locationSelectionSheetIsShown = true
