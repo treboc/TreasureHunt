@@ -36,9 +36,7 @@ class AddHuntViewModel: ObservableObject {
     self.locationProvider = locationProvider
   }
 
-  var saveButtonIsDisabled: Bool {
-    return !huntFormIsValid()
-  }
+
 
   func saveButtonTapped(onCompletion: @escaping (() -> Void)) {
     THHuntModelService.updateHunt(hunt: hunt, withStations: stations)
@@ -70,7 +68,7 @@ class AddHuntViewModel: ObservableObject {
 }
 
 extension AddHuntViewModel {
-  private func huntFormIsValid() -> Bool {
+  var isValidHunt: Bool {
     return !hunt.unwrappedTitle.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && !stations.isEmpty
   }
 }

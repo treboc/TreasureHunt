@@ -34,7 +34,7 @@ struct AddHuntView: View {
           .transition(.pageTransition(viewModel.isBack))
       case .intro:
         IntroductionPage()
-        .transition(.pageTransition(viewModel.isBack))
+          .transition(.pageTransition(viewModel.isBack))
       case .stations:
         StationsPicker()
           .transition(.pageTransition(viewModel.isBack))
@@ -73,43 +73,46 @@ extension AddHuntView {
           dismiss()
         }
       }
-      .disabled(viewModel.saveButtonIsDisabled)
+      .disabled(viewModel.isValidHunt == false)
     }
   }
 
   private func navButtonStack() -> some View {
     HStack {
-      Button("Back", action: viewModel.backButtonTapped)
-      .buttonStyle(.bordered)
-      .opacity(viewModel.pageIdx == .name ? 0 : 1)
+      Button(L10n.BtnTitle.back, action: viewModel.backButtonTapped)
+        .buttonStyle(.bordered)
+        .opacity(viewModel.pageIdx == .name ? 0 : 1)
 
       Spacer()
-
-      ZStack {
-        Circle()
-          .trim(from: 0, to: CGFloat(viewModel.pageIdx.rawValue + 1) * 0.25)
-          .stroke(Color.accentColor, style: StrokeStyle(lineWidth: 5, lineCap: .round, lineJoin: .round))
-          .rotationEffect(.degrees(90))
-
-        if !viewModel.saveButtonIsDisabled {
-          Image(systemName: "checkmark")
-            .font(.system(.headline, design: .rounded))
-            .foregroundColor(.accentColor)
-        } else {
-          Text("\(viewModel.pageIdx.rawValue + 1)")
-            .font(.system(.headline, design: .rounded))
-            .foregroundColor(.accentColor)
-        }
-      }
-      .frame(height: 30)
-      .animation(.default, value: viewModel.pageIdx)
-
+      addHuntProgressCircularView
       Spacer()
 
-      Button("Next", action: viewModel.nextButtonTapped)
-      .buttonStyle(.bordered)
-      .opacity(viewModel.pageIdx == .outline ? 0 : 1)
+      Button(L10n.BtnTitle.next, action: viewModel.nextButtonTapped)
+        .buttonStyle(.bordered)
+        .opacity(viewModel.pageIdx == .outline ? 0 : 1)
     }
     .padding(.horizontal)
+  }
+
+  private var addHuntProgressCircularView: some View {
+    let foregroundColor: Color = viewModel.isValidHunt ? .green : .accentColor
+
+    return ZStack {
+      Circle()
+        .trim(from: 0, to: CGFloat(viewModel.pageIdx.rawValue + 1) * 0.25)
+        .stroke(foregroundColor, style: StrokeStyle(lineWidth: 5, lineCap: .round, lineJoin: .round))
+        .rotationEffect(.degrees(90))
+
+      if viewModel.isValidHunt {
+        Image(systemName: "checkmark")
+          .font(.system(.headline, design: .rounded))
+      } else {
+        Text("\(viewModel.pageIdx.rawValue + 1)")
+          .font(.system(.headline, design: .rounded))
+      }
+    }
+    .foregroundColor(foregroundColor)
+    .frame(height: 30)
+    .animation(.default, value: viewModel.pageIdx)
   }
 }
