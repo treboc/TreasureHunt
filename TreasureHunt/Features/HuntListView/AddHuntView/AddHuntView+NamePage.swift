@@ -25,7 +25,7 @@ extension AddHuntView {
 
           TextField(L10n.AddHuntView.NamePage.namePlaceholder, text: $viewModel.hunt.unwrappedTitle)
             .padding()
-            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: Constants.cornerRadius))
+            .roundedBackground()
             .focused($isFocused)
             .onChange(of: viewModel.pageIndex) { index in
               if index != .name {

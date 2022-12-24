@@ -29,7 +29,7 @@ extension AddHuntView {
             TextField(L10n.AddHuntView.IntroductionPage.textFieldPlaceholder, text: $viewModel.hunt.unwrappedIntroduction, axis: .vertical)
               .lineLimit(3...10)
               .padding()
-              .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: Constants.cornerRadius))
+              .roundedBackground()
               .transition(.opacity.combined(with: .move(edge: .bottom)))
               .focused($isFocused)
               .onChange(of: viewModel.pageIndex) { index in
