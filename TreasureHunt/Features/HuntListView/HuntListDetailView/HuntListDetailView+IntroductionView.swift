@@ -23,7 +23,7 @@ extension HuntListDetailView {
       .overlay(alignment: .leading) {
         // Introduction
         Text("Introduction")
-          .foregroundColor(.black)
+          .foregroundColor(.label)
           .padding(10)
           .background(
             RoundedRectangle(cornerRadius: Constants.cornerRadius)
@@ -41,3 +41,4 @@ extension HuntListDetailView {
     }
   }
 }
+
