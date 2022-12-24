@@ -111,7 +111,7 @@
 		45513FBB28ECD2070064A32E /* HuntListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuntListRowView.swift; sourceTree = "<group>"; };
 		45513FBD28ECD22C0064A32E /* HuntListDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuntListDetailView.swift; sourceTree = "<group>"; };
 		45513FC028ED69130064A32E /* StationAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationAnnotationView.swift; sourceTree = "<group>"; };
-		4574F37929476B2C007963CC /* CLLocationDistance+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationDistance+Extension.swift"; sourceTree = SOURCE_ROOT; };
+		4574F37929476B2C007963CC /* CLLocationDistance+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CLLocationDistance+Extension.swift"; path = "TreasureHunt/Extensions/CLLocationDistance+Extension.swift"; sourceTree = SOURCE_ROOT; };
 		4574F37B29478357007963CC /* HuntListDetailView+StationsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HuntListDetailView+StationsList.swift"; sourceTree = "<group>"; };
 		457B6181294B2E1E005F3535 /* HuntView+IntroductionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HuntView+IntroductionView.swift"; sourceTree = "<group>"; };
 		457C2D522928176A0051FDD6 /* SuccessPopover+ViewModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SuccessPopover+ViewModifier.swift"; sourceTree = "<group>"; };
