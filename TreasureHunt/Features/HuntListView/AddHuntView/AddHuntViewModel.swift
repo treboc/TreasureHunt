@@ -20,7 +20,7 @@ class AddHuntViewModel: ObservableObject {
     return hunt.unwrappedTitle.isEmpty ? L10n.AddHuntView.navTitle : hunt.unwrappedTitle
   }
 
-  @Published var pageIdx: AddHuntView.PageSelection = .name
+  @Published var pageIndex: AddHuntView.PageSelection = .name
   @Published var isBack: Bool = false
 
   init(locationProvider: LocationProvider, huntToEdit: THHunt?) {
@@ -46,14 +46,14 @@ class AddHuntViewModel: ObservableObject {
   func backButtonTapped() {
     isBack = true
     withAnimation {
-      pageIdx = pageIdx.prevPage()
+      pageIndex = pageIndex.prevPage()
     }
   }
 
   func nextButtonTapped() {
     isBack = false
     withAnimation {
-      pageIdx = pageIdx.nextPage()
+      pageIndex = pageIndex.nextPage()
     }
   }
 

@@ -17,17 +17,17 @@ extension AddHuntView {
         THNumberedCircle(number: 1)
 
         VStack(alignment: .leading) {
-          Text("Title")
+          Text(L10n.AddHuntView.NamePage.name)
             .font(.system(.title3, design: .rounded, weight: .semibold))
-          Text("Name it, so you find it again later.")
+          Text(L10n.AddHuntView.NamePage.nameHint)
             .font(.system(.footnote, design: .rounded, weight: .regular))
             .foregroundColor(.secondary)
 
-          TextField("e.g. Kids Birthday 🥳", text: $viewModel.hunt.unwrappedTitle)
+          TextField(L10n.AddHuntView.NamePage.namePlaceholder, text: $viewModel.hunt.unwrappedTitle)
             .padding()
             .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: Constants.cornerRadius))
             .focused($isFocused)
-            .onChange(of: viewModel.pageIdx) { index in
+            .onChange(of: viewModel.pageIndex) { index in
               if index != .name {
                 isFocused = false
               }

@@ -10,6 +10,8 @@
 "simpleConstants.hunts" = "Hunt";
 "simpleConstants.station" = "Station";
 "simpleConstants.stations" = "Stations";
+"simpleConstants.yes" = "Yes";
+"simpleConstants.no" = "No";
 
 // ButtonTitles
 "btnTitle.delete" = "Delete";
@@ -17,6 +19,8 @@
 "btnTitle.save" = "Save";
 "btnTitle.cancel" = "Cancel";
 "btnTitle.iAmSure" = "Yes, I'm sure.";
+"btnTitle.back" = "Back";
+"btnTitle.next" = "Next";
 
 // Alerts
 "alert.deleteHunt.title" = "Are you sure?";
@@ -51,20 +55,38 @@
 "huntListDetailRowView.question" = "Question";
 
 // AddHuntView
-"addHuntView.name" = "Name of the Hunt";
-"addHuntView.namePlaceholder" = "Kids Birthday Party 🎁";
+// AddHuntView+NamePage
+"addHuntView.namePage.name" = "Title";
+"addHuntView.namePage.nameHint" = "Name it, so you find it again later.";
+"addHuntView.namePage.namePlaceholder" = "e.g. Kids Birthday 🥳";
+
+// AddHuntView+IntroductionPage
+"addHuntView.introductionPage.hasHuntIntroduction" = "Does your hunt has an introduction?";
+"addHuntView.introductionPage.hasHuntIntroductionHint" = "Here you could put some form of introduction to your hunt or story. This text will show up when starting the hunt.";
+"addHuntView.introductionPage.textFieldPlaceholder" = "Introduce your hunt";
+
+// AddHuntView+StationsPicker
+"addHuntView.stationsPicker.title" = "The Stations";
+"addHuntView.stationsPicker.description" = "Here you create the stations that must be passed afterwards in the hunt.";
+"addHuntView.stationsPicker.addStation" = "Create a Station";
+
+// AddHuntView+OutroPage
+"addHuntView.outroPage.hasHuntOutro" = "Should your hunt has an outro?";
+"addHuntView.outroPage.hasHuntOutroDescription" = "Here you could add a text, that will be displayed when reaching the location added to the outro.";
+"addHuntView.outroPage.textFieldPlaceholder" = "Outro to your hunt";
+
+// AddHuntView+OutroPage
+// LocationPicker
+"addHuntView.outroPage.selectableLocationView.noLocationSelected" = "No Location Selected";
+"addHuntView.outroPage.selectableLocationView.noLocationSelectedSubheadline" = "Tap to select one.";
+"addHuntView.outroPage.locationPicker.addLocationBtnTitle" = "Add Location";
+
 "addHuntView.editStations" = "Chose Stations";
 "addHuntView.chosenStations %@" = "Chosen Stations (%@ / 50)";
 "addHuntView.noChosenStations" = "No Stations Chosen";
 "addHuntView.navTitle" = "New Hunt";
 "addHuntView.overview" = "Overview";
 "addHuntView.stationsOverview" = "Overview of all Stations";
-
-// StationsPicker
-"stationsPicker.navTitle" = "Stations Picker";
-"stationsPicker.addStationButtonTitle" = "Create Station";
-"stationsPicker.noChosenStations" = "No Station Chosen Yet";
-"stationsPicker.availableStations" = "Available Stations";
 
 // LocationsListView
 "locationsListView.navTitle" = "Locations";

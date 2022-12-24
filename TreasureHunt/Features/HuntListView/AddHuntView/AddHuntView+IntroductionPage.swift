@@ -10,7 +10,6 @@ import SwiftUI
 extension AddHuntView {
   struct IntroductionPage: View {
     @EnvironmentObject private var viewModel: AddHuntViewModel
-    let placeholder: String = "Just some words, to introduce the story of the hunt."
     @FocusState private var isFocused
 
     var body: some View {
@@ -18,22 +17,22 @@ extension AddHuntView {
         THNumberedCircle(number: 2)
 
         VStack(alignment: .leading) {
-          Text("Does your hunt has an introduction?")
+          Text(L10n.AddHuntView.IntroductionPage.hasHuntIntroduction)
             .font(.system(.title3, design: .rounded, weight: .semibold))
-          Text("Here you could put some form of introduction to your hunt or story. This text will show up when starting the hunt.")
+          Text(L10n.AddHuntView.IntroductionPage.hasHuntIntroductionHint)
             .font(.system(.footnote, design: .rounded, weight: .regular))
             .foregroundColor(.secondary)
 
           THToggle(isSelected: $viewModel.hunt.hasIntroduction)
 
           if viewModel.hunt.hasIntroduction {
-            TextField(placeholder, text: $viewModel.hunt.unwrappedIntroduction, axis: .vertical)
+            TextField(L10n.AddHuntView.IntroductionPage.textFieldPlaceholder, text: $viewModel.hunt.unwrappedIntroduction, axis: .vertical)
               .lineLimit(3...10)
               .padding()
               .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: Constants.cornerRadius))
               .transition(.opacity.combined(with: .move(edge: .bottom)))
               .focused($isFocused)
-              .onChange(of: viewModel.pageIdx) { index in
+              .onChange(of: viewModel.pageIndex) { index in
                 if index != .name {
                   isFocused = false
                 }

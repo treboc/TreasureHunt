@@ -19,9 +19,9 @@ extension AddHuntView {
 
         VStack {
           VStack(alignment: .leading, spacing: 0) {
-            Text("The stations")
+            Text(L10n.AddHuntView.StationsPicker.title)
               .font(.system(.title3, design: .rounded, weight: .semibold))
-            Text("Here you create the stations that must be passed afterwards in the hunt.")
+            Text(L10n.AddHuntView.StationsPicker.description)
               .font(.system(.footnote, design: .rounded, weight: .regular))
               .foregroundColor(.secondary)
           }
@@ -43,7 +43,7 @@ extension AddHuntView {
               Button {
                 addNewStationSheetIsShown = true
               } label: {
-                Text(viewModel.hunt.stationsArray.isEmpty ? "Create your first station" : "Add another station")
+                Text(L10n.AddHuntView.StationsPicker.addStation)
                   .frame(maxWidth: .infinity)
                   .foregroundColor(Color(uiColor: .systemBackground))
               }
