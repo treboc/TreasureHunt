@@ -5,6 +5,7 @@
   Created by Marvin Lee Kobert on 15.10.22.
   
 */
+
 // SimpleConstants
 "simpleConstants.hunt" = "Hunts";
 "simpleConstants.hunts" = "Hunt";
@@ -44,15 +45,18 @@
 "huntListRowView.created" = "Created: ";
 
 // HuntListDetailView
-"huntListDetailView.huntName" = "Name";
-"huntListDetailView.createdAt" = "Created On";
+"huntListDetailView.huntName" = "Title";
+"huntListDetailView.createdAt" = "Created at";
 "huntListDetailView.startHuntButtonTitle" = "Start Hunt";
-"huntListDetailView.noStationsPlaceholderText" = "This hunt has no stations yet, please at atleast one.";
-"huntListDetailView.noStationsEditHuntButtonTitle" = "Edit Hunt";
 
-"huntListDetailRowView.stationName" = "Stations Name";
-"huntListDetailRowView.distanceFromHere" = "Distance";
-"huntListDetailRowView.question" = "Question";
+// HuntListDetailView+IntroductionView
+"huntListDetailView.introductionView.title" = "Intro";
+
+// HuntListDetailView+StationsList
+"huntListDetailView.stationsList.title" = "Stations";
+
+// HuntListDetailView+OutroView
+"huntListDetailView.outroView.title" = "Outro";
 
 // AddHuntView
 // AddHuntView+NamePage
@@ -104,16 +108,20 @@
 "addStationView.task" = "Task";
 "addStationView.location" = "Location";
 
-// AddStationView+PagePicker
-"addStationView.pagePicker.position" = "Position";
-"addStationView.pagePicker.details" = "Details";
+// AddLocationView
+// AddLocationView+TitleStack
+"addLocationView.navTitle" = "New Location";
+"addLocationView.title" = "Title";
 
-// AddStationView+TriggerDistanceSlider
-"addStationView.triggerDistanceSlider.minDistance" = "Min. Distance";
-"addStationView.triggerDistanceSlider.description" = "Distance to the station, that must be fallen short to trigger the station.";
-"addStationView.triggerDistanceSlider.a11yLabel" = "Distance Slider";
-"addStationView.triggerDistanceSlider.a11yValue %@" = "Minimum Distance: %@";
-"addStationView.triggerDistanceSlider.a11yHint" = "Defines from which distance a station is triggered.";
+// AddLocationView+MapStack
+"addLocationView.position" = "Position";
+
+// AddLocationView+TriggerDistanceSlider
+"addLocationView.triggerDistanceSlider.minDistance" = "Min. Distance";
+"addLocationView.triggerDistanceSlider.description" = "Radius to the location that must be entered to trigger the event at the location.";
+"addLocationView.triggerDistanceSlider.a11yLabel" = "Distance Slider";
+"addLocationView.triggerDistanceSlider.a11yValue %@" = "Minimum Distance: %@";
+"addLocationView.triggerDistanceSlider.a11yHint" = "distance from which a location is triggered.";
 
 // HuntView
 "huntView.endHuntAlert.title" = "Are you sure?";

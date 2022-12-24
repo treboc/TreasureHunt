@@ -38,7 +38,7 @@ struct TrafficWarningView: View {
       .background(
         RoundedRectangle(cornerRadius: Constants.cornerRadius)
           .fill(.ultraThinMaterial)
-          .shadow(radius: Constants.Shadows.border)
+          .shadow(radius: Constants.Shadows.firstLevel)
       )
       .padding()
       .frame(maxWidth: .infinity, maxHeight: .infinity)

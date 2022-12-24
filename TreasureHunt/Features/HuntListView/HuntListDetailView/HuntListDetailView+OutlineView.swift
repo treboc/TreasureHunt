@@ -23,12 +23,11 @@ extension HuntListDetailView {
       }
       .frame(maxWidth: .infinity, alignment: .leading)
       .padding()
-      .roundedBackground()
+      .roundedBackground(shadowRadius: Constants.Shadows.secondLevel)
       .readSize(onChange: setTitleLabelOffset)
       .overlay(alignment: .leading) {
-        // Introduction
         Text("Outro")
-          .foregroundColor(.black)
+          .foregroundColor(.label)
           .padding(10)
           .background(
             RoundedRectangle(cornerRadius: Constants.cornerRadius)

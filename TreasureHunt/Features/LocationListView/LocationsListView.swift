@@ -80,23 +80,27 @@ extension LocationsListView {
   }
 
   private var locationsList: some View {
-    List(locations) { location in
-      LocationsListRowView(location: location)
-        .onTapGesture {
-          locationToEdit = location
+    VStack(spacing: Constants.rowSpacing) {
+      List {
+        ForEach(locations) { location in
+          LocationsListRowView(location: location)
+            .onTapGesture {
+              locationToEdit = location
+            }
+            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+              HStack {
+                swipeToDelete(location)
+                swipeToEdit(location)
+              }
+            }
+            .swipeActions(edge: .leading, allowsFullSwipe: true) {
+              swipeToFavorite(location)
+            }
+            .contextMenu {
+              contextMenuContent(location)
+            }
         }
-        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-          HStack {
-            swipeToDelete(location)
-            swipeToEdit(location)
-          }
-        }
-        .swipeActions(edge: .leading, allowsFullSwipe: true) {
-          swipeToFavorite(location)
-        }
-        .contextMenu {
-          contextMenuContent(location)
-        }
+      }
     }
     .listStyle(.plain)
     .scrollContentBackground(.hidden)

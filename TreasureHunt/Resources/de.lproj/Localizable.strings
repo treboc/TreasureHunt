@@ -47,12 +47,15 @@
 "huntListDetailView.huntName" = "Name";
 "huntListDetailView.createdAt" = "Erstellt am";
 "huntListDetailView.startHuntButtonTitle" = "Jagd starten";
-"huntListDetailView.noStationsPlaceholderText" = "Diese Jagd hat keine Stationen, bitte füge zuerst mindestens eine hinzu.";
-"huntListDetailView.noStationsEditHuntButtonTitle" = "Jagd Bearbeiten";
 
-"huntListDetailRowView.stationName" = "Name der Station";
-"huntListDetailRowView.distanceFromHere" = "Distanz";
-"huntListDetailRowView.question" = "Aufgabe";
+// HuntListDetailView+IntroductionView
+"huntListDetailView.introductionView.title" = "Einleitung";
+
+// HuntListDetailView+StationsList
+"huntListDetailView.stationsList.title" = "Stationen";
+
+// HuntListDetailView+OutroView
+"huntListDetailView.outroView.title" = "Outro";
 
 // AddHuntView
 // AddHuntView+NamePage
@@ -108,12 +111,20 @@
 "addStationView.pagePicker.position" = "Position";
 "addStationView.pagePicker.details" = "Details";
 
-// AddStationView+TriggerDistanceSlider
-"addStationView.triggerDistanceSlider.minDistance" = "Min. Distanz";
-"addStationView.triggerDistanceSlider.description" = "Distanz, die unterschritten werden muss, um diese Station zu aktivieren.";
-"addStationView.triggerDistanceSlider.a11yLabel" = "Distanzregler";
-"addStationView.triggerDistanceSlider.a11yValue %@" = "Minimale Distanz: %@";
-"addStationView.triggerDistanceSlider.a11yHint" = "Legt fest, ab welcher Entfernung eine Station ausgelöst wird.";
+// AddLocationView
+// AddLocationView+TitleStack
+"addLocationView.navTitle" = "Neuer Standort";
+"addLocationView.title" = "Name";
+
+// AddLocationView+MapStack
+"addLocationView.position" = "Position";
+
+// AddLocationView+TriggerDistanceSlider
+"addLocationView.triggerDistanceSlider.minDistance" = "Min. Distanz";
+"addLocationView.triggerDistanceSlider.description" = "Radius, der betreten werden muss, um das Ereignis des Standortes auszulösen.";
+"addLocationView.triggerDistanceSlider.a11yLabel" = "Distanzregler";
+"addLocationView.triggerDistanceSlider.a11yValue %@" = "Minimale Distanz: %@";
+"addLocationView.triggerDistanceSlider.a11yHint" = "Legt fest, ab welcher Entfernung eine Station ausgelöst wird.";
 
 // HuntView
 "huntView.endHuntAlert.title" = "Bist du sicher?";

@@ -40,12 +40,8 @@ struct LocationsListRowView: View {
       }
     }
     .padding()
-    .background(
-      RoundedRectangle(cornerRadius: 8)
-        .fill(.regularMaterial)
-        .shadow(radius: Constants.Shadows.firstLevel)
-    )
-    .listRowInsets(.init(top: 10, leading: 10, bottom: 10, trailing: 10))
+    .roundedBackground()
+    .listRowInsets(.init(top: Constants.rowSpacing, leading: 10, bottom: Constants.rowSpacing, trailing: 10))
     .listRowSeparator(.hidden)
     .listRowBackground(Color.clear)
     .contentShape(Rectangle())

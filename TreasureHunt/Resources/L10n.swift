@@ -76,6 +76,28 @@ internal enum L10n {
       internal static let title = L10n.tr("Localizable", "addHuntView.stationsPicker.title", fallback: "The Stations")
     }
   }
+  internal enum AddLocationView {
+    /// New Location
+    internal static let navTitle = L10n.tr("Localizable", "addLocationView.navTitle", fallback: "New Location")
+    /// Position
+    internal static let position = L10n.tr("Localizable", "addLocationView.position", fallback: "Position")
+    /// Title
+    internal static let title = L10n.tr("Localizable", "addLocationView.title", fallback: "Title")
+    internal enum TriggerDistanceSlider {
+      /// distance from which a location is triggered.
+      internal static let a11yHint = L10n.tr("Localizable", "addLocationView.triggerDistanceSlider.a11yHint", fallback: "distance from which a location is triggered.")
+      /// Distance Slider
+      internal static let a11yLabel = L10n.tr("Localizable", "addLocationView.triggerDistanceSlider.a11yLabel", fallback: "Distance Slider")
+      /// Minimum Distance: %@
+      internal static func a11yValue(_ p1: Any) -> String {
+        return L10n.tr("Localizable", "addLocationView.triggerDistanceSlider.a11yValue %@", String(describing: p1), fallback: "Minimum Distance: %@")
+      }
+      /// Radius to the location that must be entered to trigger the event at the location.
+      internal static let description = L10n.tr("Localizable", "addLocationView.triggerDistanceSlider.description", fallback: "Radius to the location that must be entered to trigger the event at the location.")
+      /// Min. Distance
+      internal static let minDistance = L10n.tr("Localizable", "addLocationView.triggerDistanceSlider.minDistance", fallback: "Min. Distance")
+    }
+  }
   internal enum AddStationView {
     /// Location
     internal static let location = L10n.tr("Localizable", "addStationView.location", fallback: "Location")
@@ -85,26 +107,6 @@ internal enum L10n {
     internal static let task = L10n.tr("Localizable", "addStationView.task", fallback: "Task")
     /// Title
     internal static let title = L10n.tr("Localizable", "addStationView.title", fallback: "Title")
-    internal enum PagePicker {
-      /// Details
-      internal static let details = L10n.tr("Localizable", "addStationView.pagePicker.details", fallback: "Details")
-      /// Position
-      internal static let position = L10n.tr("Localizable", "addStationView.pagePicker.position", fallback: "Position")
-    }
-    internal enum TriggerDistanceSlider {
-      /// Defines from which distance a station is triggered.
-      internal static let a11yHint = L10n.tr("Localizable", "addStationView.triggerDistanceSlider.a11yHint", fallback: "Defines from which distance a station is triggered.")
-      /// Distance Slider
-      internal static let a11yLabel = L10n.tr("Localizable", "addStationView.triggerDistanceSlider.a11yLabel", fallback: "Distance Slider")
-      /// Minimum Distance: %@
-      internal static func a11yValue(_ p1: Any) -> String {
-        return L10n.tr("Localizable", "addStationView.triggerDistanceSlider.a11yValue %@", String(describing: p1), fallback: "Minimum Distance: %@")
-      }
-      /// Distance to the station, that must be fallen short to trigger the station.
-      internal static let description = L10n.tr("Localizable", "addStationView.triggerDistanceSlider.description", fallback: "Distance to the station, that must be fallen short to trigger the station.")
-      /// Min. Distance
-      internal static let minDistance = L10n.tr("Localizable", "addStationView.triggerDistanceSlider.minDistance", fallback: "Min. Distance")
-    }
   }
   internal enum Alert {
     internal enum DeleteHunt {

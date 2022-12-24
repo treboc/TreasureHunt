@@ -54,7 +54,7 @@ struct AddLocationView: View {
       .successPopover(isPresented: $showLocationCreatedOverlay, onDismiss: reset)
       .toolbar(content: toolbarContent)
       .navigationBarTitleDisplayMode(.inline)
-      .navigationTitle(title.isEmpty ? L10n.AddStationView.navTitle : title)
+      .navigationTitle(title.isEmpty ? L10n.AddLocationView.navTitle : title)
       .interactiveDismissDisabled()
     }
   }
@@ -121,12 +121,12 @@ extension AddLocationView {
     VStack(alignment: .leading) {
       HStack {
         THNumberedCircle(number: 1)
-        Text("Name")
+        Text(L10n.AddLocationView.title)
           .font(.headline)
       }
-      TextField("Title", text: $title)
+      TextField(L10n.AddLocationView.title, text: $title)
         .padding()
-        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: Constants.cornerRadius))
+        .roundedBackground()
         .focused($textFieldIsFocused)
     }
     .padding(.horizontal)
@@ -136,7 +136,7 @@ extension AddLocationView {
     VStack(alignment: .leading) {
       HStack {
         THNumberedCircle(number: 2)
-        Text("Position")
+        Text(L10n.AddLocationView.position)
           .font(.headline)
       }
 
@@ -170,6 +170,7 @@ extension AddLocationView {
       .overlay(alignment: .bottom) { coordinatesOverlay }
       .frame(maxHeight: .infinity)
       .clipShape(RoundedRectangle(cornerRadius: Constants.cornerRadius))
+      .roundedBackground()
       .onChange(of: triggerDistance) { _ in setMapSpan() }
   }
 

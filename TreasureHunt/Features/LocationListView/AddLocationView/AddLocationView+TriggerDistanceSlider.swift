@@ -26,14 +26,14 @@ extension AddLocationView {
         Slider(value: $triggerDistance, in: 5...300, step: 5)
 
         HStack {
-          Text(L10n.AddStationView.TriggerDistanceSlider.minDistance)
+          Text(L10n.AddLocationView.TriggerDistanceSlider.minDistance)
           Spacer()
           Text(distanceString)
         }
         .font(.footnote)
         .accessibilityHidden(true)
 
-        Text(L10n.AddStationView.TriggerDistanceSlider.description)
+        Text(L10n.AddLocationView.TriggerDistanceSlider.description)
           .foregroundColor(.secondary)
           .font(.caption)
           .padding(.top, 5)
@@ -42,9 +42,9 @@ extension AddLocationView {
         HapticManager.shared.impact(style: .soft)
       }
       .padding(.vertical)
-      .accessibilityLabel(L10n.AddStationView.TriggerDistanceSlider.a11yLabel)
-      .accessibilityValue(Text(L10n.AddStationView.TriggerDistanceSlider.a11yValue(distanceString)))
-      .accessibilityHint(L10n.AddStationView.TriggerDistanceSlider.a11yHint)
+      .accessibilityLabel(L10n.AddLocationView.TriggerDistanceSlider.a11yLabel)
+      .accessibilityValue(Text(L10n.AddLocationView.TriggerDistanceSlider.a11yValue(distanceString)))
+      .accessibilityHint(L10n.AddLocationView.TriggerDistanceSlider.a11yHint)
     }
   }
 }

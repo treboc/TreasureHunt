@@ -36,12 +36,12 @@ extension AddHuntView {
                         axis: .vertical)
               .lineLimit(3...10)
               .padding()
-              .roundedBackground(shadowRadius: Constants.Shadows.firstLevel)
+              .roundedBackground()
               .focused($isFocused)
               .onChange(of: viewModel.pageIndex, perform: dismissFocusOnChangeOf)
 
               selectableLocationView
-                .roundedBackground(shadowRadius: Constants.Shadows.firstLevel)
+                .roundedBackground()
             }
             .transition(.opacity.combined(with: .move(edge: .bottom)))
           }
@@ -163,7 +163,7 @@ extension AddHuntView {
       .background(
         RoundedRectangle(cornerRadius: Constants.cornerRadius)
           .fill(.regularMaterial)
-          .shadow(radius: Constants.Shadows.border)
+          .shadow(radius: Constants.Shadows.firstLevel)
       )
       .contentShape(Rectangle())
     }

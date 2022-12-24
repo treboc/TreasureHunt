@@ -97,7 +97,7 @@ extension HuntView {
         .background(
           Circle()
             .fill(.thinMaterial)
-            .shadow(radius: Constants.Shadows.border)
+            .shadow(radius: Constants.Shadows.firstLevel)
         )
         .frame(width: 44, height: 44, alignment: .center)
         .foregroundColor(.primaryAccentColor)
@@ -115,7 +115,7 @@ extension HuntView {
         .background(
           Circle()
             .fill(.thinMaterial)
-            .shadow(radius: Constants.Shadows.border)
+            .shadow(radius: Constants.Shadows.firstLevel)
         )
         .frame(width: 44, height: 44, alignment: .center)
         .foregroundColor(.primaryAccentColor)
