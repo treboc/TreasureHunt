@@ -30,7 +30,7 @@ struct AddHuntView: View {
 
       switch viewModel.pageIdx {
       case .name:
-        NamePage(pageIndex: viewModel.pageIdx)
+        NamePage()
           .transition(.pageTransition(viewModel.isBack))
       case .intro:
         IntroductionPage()
@@ -38,12 +38,9 @@ struct AddHuntView: View {
       case .stations:
         StationsPicker()
           .transition(.pageTransition(viewModel.isBack))
-      case .outline:
-        OutlinePage(pageIndex: viewModel.pageIdx,
-                    hasOutline: $viewModel.hunt.hasOutline,
-                    outline: $viewModel.hunt.unwrappedOutline,
-                    outlineLocation: $viewModel.hunt.outlineLocation)
-        .transition(.pageTransition(viewModel.isBack))
+      case .outro:
+        OutroPage()
+          .transition(.pageTransition(viewModel.isBack))
       }
     }
     .onChange(of: viewModel.pageIdx) { _ in
@@ -79,7 +76,7 @@ extension AddHuntView {
 
   private func navButtonStack() -> some View {
     HStack {
-      Button(L10n.BtnTitle.back, action: viewModel.backButtonTapped)
+      Button("Back", action: viewModel.backButtonTapped)
         .buttonStyle(.bordered)
         .opacity(viewModel.pageIdx == .name ? 0 : 1)
 
@@ -87,9 +84,9 @@ extension AddHuntView {
       addHuntProgressCircularView
       Spacer()
 
-      Button(L10n.BtnTitle.next, action: viewModel.nextButtonTapped)
+      Button("Next", action: viewModel.nextButtonTapped)
         .buttonStyle(.bordered)
-        .opacity(viewModel.pageIdx == .outline ? 0 : 1)
+        .opacity(viewModel.pageIdx == .outro ? 0 : 1)
     }
     .padding(.horizontal)
   }

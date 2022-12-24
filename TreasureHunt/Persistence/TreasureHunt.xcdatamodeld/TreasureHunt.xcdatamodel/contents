@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21512" systemVersion="22A400" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21512" systemVersion="22C65" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="THHunt" representedClassName="THHunt" syncable="YES">
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="hasIntroduction" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="hasOutline" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="hasOutro" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="introduction" optional="YES" attributeType="String"/>
-        <attribute name="outline" optional="YES" attributeType="String"/>
+        <attribute name="outro" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
-        <relationship name="outlineLocation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="THLocation" inverseName="hunt" inverseEntity="THLocation"/>
+        <relationship name="outroLocation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="THLocation" inverseName="hunt" inverseEntity="THLocation"/>
         <relationship name="stations" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="THStation" inverseName="hunt" inverseEntity="THStation"/>
     </entity>
     <entity name="THLocation" representedClassName="THLocation" syncable="YES">
@@ -17,7 +17,7 @@
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <attribute name="triggerDistance" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <relationship name="hunt" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="THHunt" inverseName="outlineLocation" inverseEntity="THHunt"/>
+        <relationship name="hunt" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="THHunt" inverseName="outroLocation" inverseEntity="THHunt"/>
         <relationship name="station" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="THStation" inverseName="location" inverseEntity="THStation"/>
     </entity>
     <entity name="THStation" representedClassName="THStation" syncable="YES">

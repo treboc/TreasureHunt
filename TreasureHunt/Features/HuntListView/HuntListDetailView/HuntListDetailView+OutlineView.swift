@@ -1,5 +1,5 @@
 //
-//  HuntListDetailView+OutlineView.swift
+//  HuntListDetailView+OutroView.swift
 //  TreasureHunt
 //
 //  Created by Marvin Lee Kobert on 12.12.22.
@@ -8,17 +8,17 @@
 import SwiftUI
 
 extension HuntListDetailView {
-  struct OutlineView: View {
-    let outline: String
-    var outlineLocation: THLocation? = nil
+  struct OutroView: View {
+    let outro: String
+    var outroLocation: THLocation? = nil
     @State private var size: CGSize = .zero
 
     var body: some View {
       VStack(alignment: .leading, spacing: 10) {
-        Text(outline)
+        Text(outro)
 
-        if let outlineLocation {
-          Text(outlineLocation.unwrappedTitle)
+        if let outroLocation {
+          Text(outroLocation.unwrappedTitle)
         }
       }
       .frame(maxWidth: .infinity, alignment: .leading)
@@ -27,7 +27,7 @@ extension HuntListDetailView {
       .readSize(onChange: setTitleLabelOffset)
       .overlay(alignment: .leading) {
         // Introduction
-        Text("Outline")
+        Text("Outro")
           .foregroundColor(.black)
           .padding(10)
           .background(

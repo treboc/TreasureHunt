@@ -10,7 +10,6 @@ import SwiftUI
 extension AddHuntView {
   struct NamePage: View {
     @EnvironmentObject private var viewModel: AddHuntViewModel
-    let pageIndex: PageSelection
     @FocusState private var isFocused
 
     var body: some View {
@@ -28,7 +27,7 @@ extension AddHuntView {
             .padding()
             .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: Constants.cornerRadius))
             .focused($isFocused)
-            .onChange(of: pageIndex) { index in
+            .onChange(of: viewModel.pageIdx) { index in
               if index != .name {
                 isFocused = false
               }

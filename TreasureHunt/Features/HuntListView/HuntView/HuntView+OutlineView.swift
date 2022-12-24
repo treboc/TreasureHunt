@@ -1,5 +1,5 @@
 //
-//  HuntView+OutlineView.swift
+//  HuntView+OutroView.swift
 //  TreasureHunt
 //
 //  Created by Marvin Lee Kobert on 22.12.22.
@@ -8,16 +8,16 @@
 import SwiftUI
 
 extension HuntView {
-  struct OutlineView: View {
-    let outline: String?
+  struct OutroView: View {
+    let outro: String?
     let didTapEndHuntButton: () -> Void
 
     var body: some View {
       NavigationView {
         ScrollView(.vertical, showsIndicators: false) {
-          if let outline {
+          if let outro {
             VStack {
-              Text(outline)
+              Text(outro)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
 
@@ -49,7 +49,7 @@ extension HuntView {
 #if DEBUG
 struct OutlineView_Previews: PreviewProvider {
   static var previews: some View {
-    HuntView.OutlineView(outline: "This is just a sample outline") {
+    HuntView.OutroView(outro: "This is just a sample outline") {
       print("dismissed")
     }
   }

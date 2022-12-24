@@ -19,7 +19,7 @@ struct HuntView: View {
   var body: some View {
     ZStack {
       switch huntManager.huntState {
-      case .findStation, .findOutline:
+      case .findStation, .findOutro:
         FindLocationView(huntManager: huntManager,
                          showsMap: (vm.mapIsShown || huntManager.isNearCurrentLocation),
                          uiIsTranslucent: vm.mapIsShown)
@@ -33,8 +33,8 @@ struct HuntView: View {
       case .showIntroduction(let introduction):
         IntroductionView(introduction: introduction,
                          onDismiss: huntManager.setFirstStation)
-      case .showOutline(let outline):
-        OutlineView(outline: outline, didTapEndHuntButton: { dismiss() })
+      case .showOutro(let outline):
+        OutroView(outro: outline, didTapEndHuntButton: { dismiss() })
       case .finished:
         Text("Finished")
       }
@@ -74,7 +74,7 @@ extension HuntView {
       Spacer()
       HStack {
         if huntManager.isNearCurrentLocation {
-          if huntManager.isLastStation && !huntManager.hunt.hasOutline {
+          if huntManager.isLastStation && !huntManager.hunt.hasOutro {
             endHuntButton
           } else {
             setNextStationButton

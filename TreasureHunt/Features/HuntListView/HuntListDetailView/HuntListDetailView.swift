@@ -29,12 +29,12 @@ extension HuntListDetailView {
       if hunt.hasIntroduction {
         IntroductionView(introduction: hunt.unwrappedIntroduction)
       }
-
+      
       StationsList(hunt: hunt)
-
-      if hunt.hasOutline {
-        OutlineView(outline: hunt.unwrappedOutline,
-                    outlineLocation: hunt.outlineLocation)
+      
+      if hunt.hasOutro {
+        OutroView(outro: hunt.unwrappedOutro,
+                  outroLocation: hunt.outroLocation)
       }
     }
     .safeAreaInset(edge: .bottom, spacing: 20) {

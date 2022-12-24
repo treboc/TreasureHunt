@@ -19,10 +19,10 @@ extension THHunt {
   @NSManaged public var id: UUID?
   @NSManaged public var createdAt: Date?
   @NSManaged public var hasIntroduction: Bool
-  @NSManaged public var hasOutline: Bool
-  @NSManaged public var outline: String?
+  @NSManaged public var hasOutro: Bool
+  @NSManaged public var outro: String?
   @NSManaged public var introduction: String?
-  @NSManaged public var outlineLocation: THLocation?
+  @NSManaged public var outroLocation: THLocation?
   @NSManaged public var stations: NSSet?
 
   var centerLocation: CLLocationCoordinate2D {
@@ -53,15 +53,14 @@ extension THHunt {
     set { introduction = newValue }
   }
 
-  public var unwrappedOutline: String {
-    get { outline ?? "" }
-    set { outline = newValue }
+  public var unwrappedOutro: String {
+    get { outro ?? "" }
+    set { outro = newValue }
   }
 }
 
 // MARK: Generated accessors for stations
 extension THHunt {
-
   @objc(addStationsObject:)
   @NSManaged public func addToStations(_ value: THStation)
 
@@ -73,9 +72,6 @@ extension THHunt {
 
   @objc(removeStations:)
   @NSManaged public func removeFromStations(_ values: NSSet)
-
 }
 
-extension THHunt : Identifiable {
-
-}
+extension THHunt : Identifiable {}

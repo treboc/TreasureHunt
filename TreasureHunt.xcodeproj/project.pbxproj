@@ -59,7 +59,7 @@
 		45EDD3FD29297F1300C8EF86 /* AddHuntView+NamePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EDD3FC29297F1300C8EF86 /* AddHuntView+NamePage.swift */; };
 		45EDD3FF29297F2600C8EF86 /* AddHuntView+StationsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EDD3FE29297F2600C8EF86 /* AddHuntView+StationsPicker.swift */; };
 		45EDD40129297F5600C8EF86 /* AddHuntView+IntroductionPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EDD40029297F5600C8EF86 /* AddHuntView+IntroductionPage.swift */; };
-		45EDD40329297F9600C8EF86 /* AddHuntView+OutlinePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EDD40229297F9600C8EF86 /* AddHuntView+OutlinePage.swift */; };
+		45EDD40329297F9600C8EF86 /* AddHuntView+OutroPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EDD40229297F9600C8EF86 /* AddHuntView+OutroPage.swift */; };
 		45EDD405292A2BAA00C8EF86 /* DisableAnimation+ViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EDD404292A2BAA00C8EF86 /* DisableAnimation+ViewModifier.swift */; };
 		45EDD407292A450600C8EF86 /* AddHuntView+PageSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EDD406292A450600C8EF86 /* AddHuntView+PageSelection.swift */; };
 		45EDD409292A9CE600C8EF86 /* THToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EDD408292A9CE600C8EF86 /* THToggle.swift */; };
@@ -152,7 +152,7 @@
 		45EDD3FC29297F1300C8EF86 /* AddHuntView+NamePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddHuntView+NamePage.swift"; sourceTree = "<group>"; };
 		45EDD3FE29297F2600C8EF86 /* AddHuntView+StationsPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddHuntView+StationsPicker.swift"; sourceTree = "<group>"; };
 		45EDD40029297F5600C8EF86 /* AddHuntView+IntroductionPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddHuntView+IntroductionPage.swift"; sourceTree = "<group>"; };
-		45EDD40229297F9600C8EF86 /* AddHuntView+OutlinePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddHuntView+OutlinePage.swift"; sourceTree = "<group>"; };
+		45EDD40229297F9600C8EF86 /* AddHuntView+OutroPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddHuntView+OutroPage.swift"; sourceTree = "<group>"; };
 		45EDD404292A2BAA00C8EF86 /* DisableAnimation+ViewModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DisableAnimation+ViewModifier.swift"; sourceTree = "<group>"; };
 		45EDD406292A450600C8EF86 /* AddHuntView+PageSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddHuntView+PageSelection.swift"; sourceTree = "<group>"; };
 		45EDD408292A9CE600C8EF86 /* THToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = THToggle.swift; sourceTree = "<group>"; };
@@ -248,7 +248,7 @@
 				45EDD3FC29297F1300C8EF86 /* AddHuntView+NamePage.swift */,
 				45EDD40029297F5600C8EF86 /* AddHuntView+IntroductionPage.swift */,
 				45EDD3FE29297F2600C8EF86 /* AddHuntView+StationsPicker.swift */,
-				45EDD40229297F9600C8EF86 /* AddHuntView+OutlinePage.swift */,
+				45EDD40229297F9600C8EF86 /* AddHuntView+OutroPage.swift */,
 				45EDD406292A450600C8EF86 /* AddHuntView+PageSelection.swift */,
 				45F4B53C293BCB72001BD47C /* AddHuntViewModel.swift */,
 				45513FBA28ECBDC80064A32E /* StationPicker */,
@@ -666,7 +666,7 @@
 				45F99CE5290BFFBF0050AC6F /* HuntListDetailView+StationRowView.swift in Sources */,
 				45B0DFA0294767C1002942F0 /* HuntListDetailView+OutlineView.swift in Sources */,
 				8A4C4F9428E1D9BB00721C50 /* Array+Extension.swift in Sources */,
-				45EDD40329297F9600C8EF86 /* AddHuntView+OutlinePage.swift in Sources */,
+				45EDD40329297F9600C8EF86 /* AddHuntView+OutroPage.swift in Sources */,
 				457B6182294B2E1E005F3535 /* HuntView+IntroductionView.swift in Sources */,
 				4574F37C29478357007963CC /* HuntListDetailView+StationsList.swift in Sources */,
 				45EDD3FF29297F2600C8EF86 /* AddHuntView+StationsPicker.swift in Sources */,

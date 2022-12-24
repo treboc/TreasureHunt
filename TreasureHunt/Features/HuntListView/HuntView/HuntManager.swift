@@ -19,8 +19,8 @@ extension HuntManager {
     case showIntroduction(introduction: String)
     case findStation(station: THStation)
     case showTask(task: String)
-    case findOutline(outlineLocation: THLocation)
-    case showOutline(outline: String)
+    case findOutro(outroLocation: THLocation)
+    case showOutro(outro: String)
     case finished
   }
 
@@ -42,7 +42,7 @@ extension HuntManager {
     var location: THLocation? = nil
     if case .findStation(let station) = huntState {
       location = station.location
-    } else if case .findOutline(let outline) = huntState {
+    } else if case .findOutro(let outline) = huntState {
       location = outline
     }
 
@@ -102,7 +102,7 @@ final class HuntManager: ObservableObject {
       .sink { [weak self] huntState in
         if case .findStation(let station) = huntState {
           self?.changeLocation(station.location)
-        } else if case .findOutline(let outlineLocation) = huntState {
+        } else if case .findOutro(let outlineLocation) = huntState {
           self?.changeLocation(outlineLocation)
         }
       }
@@ -124,8 +124,8 @@ final class HuntManager: ObservableObject {
       showTask()
     }
 
-    if shouldShowOutline() {
-      showOutline()
+    if shouldShowOutro() {
+      showOutro()
     }
   }
 
@@ -134,7 +134,7 @@ final class HuntManager: ObservableObject {
       THStationModelService.completeStation(station)
     }
 
-    if isLastStation && hunt.hasOutline {
+    if isLastStation && hunt.hasOutro {
       setOutlineLocation()
     } else {
       setNextStation()
@@ -165,8 +165,8 @@ final class HuntManager: ObservableObject {
   }
 
   private func setOutlineLocation() {
-    guard let outlineLocation = hunt.outlineLocation else { return }
-    huntState = .findOutline(outlineLocation: outlineLocation)
+    guard let outroLocation = hunt.outroLocation else { return }
+    huntState = .findOutro(outroLocation: outroLocation)
   }
 
   private func getFirstStation() throws -> THStation {
@@ -186,12 +186,12 @@ final class HuntManager: ObservableObject {
     huntState = .showTask(task: station.unwrappedTask)
   }
 
-  private func shouldShowOutline() -> Bool {
-    guard case .findOutline = huntState else { return false }
-    return isNearCurrentLocation && hunt.hasOutline
+  private func shouldShowOutro() -> Bool {
+    guard case .findOutro = huntState else { return false }
+    return isNearCurrentLocation && hunt.hasOutro
   }
 
-  private func showOutline() {
-    huntState = .showOutline(outline: hunt.unwrappedOutline)
+  private func showOutro() {
+    huntState = .showOutro(outro: hunt.unwrappedOutro)
   }
 }

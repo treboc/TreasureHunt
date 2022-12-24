@@ -9,7 +9,7 @@ import Foundation
 
 extension AddHuntView {
   enum PageSelection: Int {
-    case name, intro, stations, outline
+    case name, intro, stations, outro
 
     func nextPage() -> PageSelection {
       if self == .name {
@@ -17,14 +17,14 @@ extension AddHuntView {
       } else if self == .intro {
         return .stations
       } else if self == .stations {
-        return .outline
+        return .outro
       } else {
         return self
       }
     }
 
     func prevPage() -> PageSelection {
-      if self == .outline {
+      if self == .outro {
         return .stations
       } else if self == .stations {
         return .intro

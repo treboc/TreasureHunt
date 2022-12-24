@@ -1,5 +1,5 @@
 //
-//  AddHuntView+OutlinePage.swift
+//  AddHuntView+OutroPage.swift
 //  TreasureHunt
 //
 //  Created by Marvin Lee Kobert on 19.11.22.
@@ -8,12 +8,9 @@
 import SwiftUI
 
 extension AddHuntView {
-  struct OutlinePage: View {
+  struct OutroPage: View {
     @EnvironmentObject private var locationProvider: LocationProvider
-    let pageIndex: PageSelection
-    @Binding var hasOutline: Bool
-    @Binding var outline: String
-    @Binding var outlineLocation: THLocation?
+    @EnvironmentObject private var viewModel: AddHuntViewModel
     @FocusState var isFocused
 
     @State private var outlineLocationSelectionSheetIsShown: Bool = false
@@ -31,16 +28,18 @@ extension AddHuntView {
               .foregroundColor(.secondary)
           }
 
-          THToggle(isSelected: $hasOutline)
+          THToggle(isSelected: $viewModel.hunt.hasOutro)
 
-          if hasOutline {
-            TextField("This text will show up.", text: $outline, axis: .vertical)
+          if viewModel.hunt.hasOutro {
+            TextField("This text will show up.",
+                      text: $viewModel.hunt.outro.boundString,
+                      axis: .vertical)
               .lineLimit(3...10)
               .padding()
               .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: Constants.cornerRadius))
               .transition(.opacity.combined(with: .move(edge: .bottom)))
               .focused($isFocused)
-              .onChange(of: pageIndex) { index in
+              .onChange(of: viewModel.pageIdx) { index in
                 if index != .name {
                   isFocused = false
                 }
@@ -51,11 +50,11 @@ extension AddHuntView {
           }
         }
         .sheet(isPresented: $outlineLocationSelectionSheetIsShown) {
-          LocationPicker(location: $outlineLocation)
+          LocationPicker(location: $viewModel.hunt.outroLocation)
         }
       }
       .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-      .animation(.easeInOut(duration: 0.3), value: hasOutline)
+      .animation(.easeInOut(duration: 0.3), value: viewModel.hunt.hasOutro)
       .padding()
       .onTapGesture {
         if isFocused {
@@ -66,15 +65,15 @@ extension AddHuntView {
 
     private var selectableLocationView: some View {
       HStack {
-        if let outlineLocation {
-          Text(outlineLocation.unwrappedTitle)
+        if let outroLocation = viewModel.hunt.outroLocation {
+          Text(outroLocation.unwrappedTitle)
               .font(.system(.title3, design: .rounded, weight: .semibold))
               .fontWeight(.semibold)
 
           Spacer()
 
           VStack(alignment: .trailing) {
-            Text(locationProvider.distanceTo(outlineLocation.location))
+            Text(locationProvider.distanceTo(outroLocation.location))
             Text(L10n.HuntListDetailRowView.distanceFromHere)
               .font(.system(.caption, design: .rounded, weight: .light))
           }
