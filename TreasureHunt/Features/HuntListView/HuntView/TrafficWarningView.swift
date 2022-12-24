@@ -35,7 +35,11 @@ struct TrafficWarningView: View {
         .padding(.bottom)
       }
       .padding()
-      .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 16))
+      .background(
+        RoundedRectangle(cornerRadius: Constants.cornerRadius)
+          .fill(.ultraThinMaterial)
+          .shadow(radius: Constants.Shadows.border)
+      )
       .padding()
       .frame(maxWidth: .infinity, maxHeight: .infinity)
       .background(.thinMaterial)
