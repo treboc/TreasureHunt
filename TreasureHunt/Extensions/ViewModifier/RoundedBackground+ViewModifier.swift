@@ -22,8 +22,8 @@ struct RoundedBackground: ViewModifier {
 }
 
 extension View {
-  func roundedBackground(_ cornerRadius: CGFloat = Constants.cornerRadius,
-                         _ shadowRadius: CGFloat = Constants.Shadows.secondLevel) -> some View {
+  func roundedBackground(cornerRadius: CGFloat = Constants.cornerRadius,
+                         shadowRadius: CGFloat = Constants.Shadows.secondLevel) -> some View {
     modifier(
       RoundedBackground(cornerRadius: cornerRadius,
                         shadowRadius: shadowRadius)
