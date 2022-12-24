@@ -13,6 +13,7 @@
 		4530A10D28F14BCD00F05AE3 /* HuntView+QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530A10C28F14BCD00F05AE3 /* HuntView+QuestionView.swift */; };
 		4532DB0728FA981500C32418 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4532DB0928FA981500C32418 /* Localizable.strings */; };
 		4533508F28FC824400BC0AA0 /* AddLocationView+TriggerDistanceSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4533508E28FC824400BC0AA0 /* AddLocationView+TriggerDistanceSlider.swift */; };
+		454E91E429571B2500A3BF25 /* RoundedBackground+ViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454E91E329571B2500A3BF25 /* RoundedBackground+ViewModifier.swift */; };
 		45513FAA28EAF2D90064A32E /* HuntListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45513FA928EAF2D90064A32E /* HuntListView.swift */; };
 		45513FB528EAFADD0064A32E /* AddHuntView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45513FB428EAFADD0064A32E /* AddHuntView.swift */; };
 		45513FB728EBD9A60064A32E /* LocationsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45513FB628EBD9A60064A32E /* LocationsPicker.swift */; };
@@ -102,6 +103,7 @@
 		4530A10C28F14BCD00F05AE3 /* HuntView+QuestionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HuntView+QuestionView.swift"; sourceTree = "<group>"; };
 		4532DB0828FA981500C32418 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4533508E28FC824400BC0AA0 /* AddLocationView+TriggerDistanceSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddLocationView+TriggerDistanceSlider.swift"; sourceTree = "<group>"; };
+		454E91E329571B2500A3BF25 /* RoundedBackground+ViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RoundedBackground+ViewModifier.swift"; sourceTree = "<group>"; };
 		45513FA928EAF2D90064A32E /* HuntListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuntListView.swift; sourceTree = "<group>"; };
 		45513FB428EAFADD0064A32E /* AddHuntView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHuntView.swift; sourceTree = "<group>"; };
 		45513FB628EBD9A60064A32E /* LocationsPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsPicker.swift; sourceTree = "<group>"; };
@@ -461,6 +463,7 @@
 		8A52025028E0A23200C49779 /* ViewModifier */ = {
 			isa = PBXGroup;
 			children = (
+				454E91E329571B2500A3BF25 /* RoundedBackground+ViewModifier.swift */,
 				8A52025128E0A23200C49779 /* Button+PressActionsModifier.swift */,
 				45EDD404292A2BAA00C8EF86 /* DisableAnimation+ViewModifier.swift */,
 				45FA5B53295467C400A02411 /* GradientBackground-ViewModifier.swift */,
@@ -673,6 +676,7 @@
 				458BE2BD293CA9DE00869ADF /* THLocation+CoreDataClass.swift in Sources */,
 				458F1B4E2944A7E300525EBC /* NSManagedObject+Extension.swift in Sources */,
 				45A1A50A2951BDC700E43E2B /* DirectionDistanceView+NearStationView.swift in Sources */,
+				454E91E429571B2500A3BF25 /* RoundedBackground+ViewModifier.swift in Sources */,
 				8A52024E28E0A21900C49779 /* HuntView.swift in Sources */,
 				45FA5B522954664B00A02411 /* HuntView+OutlineView.swift in Sources */,
 				45A8CEE728EA228500F19E67 /* HuntViewModel.swift in Sources */,

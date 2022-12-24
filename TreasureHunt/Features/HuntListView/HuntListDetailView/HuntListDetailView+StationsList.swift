@@ -21,11 +21,7 @@ extension HuntListDetailView {
       }
       .frame(maxWidth: .infinity, alignment: .leading)
       .padding()
-      .background(
-       RoundedRectangle(cornerRadius: Constants.cornerRadius)
-        .fill(.thinMaterial)
-        .shadow(radius: 4)
-      )
+      .roundedBackground()
       .readSize(onChange: setTitleLabelOffset)
       .overlay(alignment: .leading) {
         Text("Stations")

@@ -18,7 +18,7 @@ extension HuntListDetailView {
       }
       .frame(maxWidth: .infinity, alignment: .leading)
       .padding()
-      .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: Constants.cornerRadius))
+      .roundedBackground()
       .readSize(onChange: setTitleLabelOffset)
       .overlay(alignment: .leading) {
         // Introduction
