@@ -16,16 +16,7 @@ struct HuntListDetailView: View {
     huntDetails
       .gradientBackground()
       .navigationTitle(hunt.unwrappedTitle)
-      .toolbar {
-        ToolbarItemGroup(placement: .navigationBarTrailing) {
-          NavigationLink {
-            AddHuntView(locationProvider: locationProvider, huntToEdit: hunt)
-          } label: {
-            Image(systemName: "square.and.pencil")
-          }
-          .accessibilityLabel(Text("Edit this hunt"))
-        }
-      }
+      .toolbar { editHuntNavigationLink }
       .toolbar(.hidden, for: .tabBar)
   }
 }
@@ -33,19 +24,15 @@ struct HuntListDetailView: View {
 extension HuntListDetailView {
   private var huntDetails: some View {
     ScrollView {
-      // CreationDate
-      creationDateRow
+      creationDateView
 
       if hunt.hasIntroduction {
-        // Introduction
         IntroductionView(introduction: hunt.unwrappedIntroduction)
       }
 
-      // StationsList
       StationsList(hunt: hunt)
 
       if hunt.hasOutline {
-        // Outline
         OutlineView(outline: hunt.unwrappedOutline,
                     outlineLocation: hunt.outlineLocation)
       }
@@ -57,7 +44,7 @@ extension HuntListDetailView {
   }
 
   @ViewBuilder
-  private var creationDateRow: some View {
+  private var creationDateView: some View {
     if let createdAt = hunt.createdAt {
       VStack(alignment: .leading, spacing: 0) {
         Text(L10n.HuntListDetailView.createdAt.uppercased())
@@ -81,8 +68,16 @@ extension HuntListDetailView {
     .foregroundColor(.label)
     .buttonStyle(.borderedProminent)
     .controlSize(.large)
-    .padding(.bottom, 50)
     .disabled(!isValidHunt())
+  }
+
+  private var editHuntNavigationLink: some View {
+    NavigationLink {
+      AddHuntView(locationProvider: locationProvider, huntToEdit: hunt)
+    } label: {
+      Image(systemName: "square.and.pencil")
+    }
+    .accessibilityLabel(Text("Edit this hunt"))
   }
 }
 
