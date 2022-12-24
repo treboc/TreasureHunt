@@ -56,7 +56,7 @@ extension HuntListDetailView {
       .background(
         RoundedRectangle(cornerRadius: Constants.cornerRadius)
           .fill(.thinMaterial)
-          .shadow(radius: 2)
+          .shadow(radius: Constants.Shadows.firstLevel)
       )
       .readSize(onChange: setHorizontalOffset)
       .overlay(alignment: .leading) {

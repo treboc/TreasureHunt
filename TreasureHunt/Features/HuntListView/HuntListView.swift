@@ -49,6 +49,7 @@ struct HuntListView: View {
       })
       .animation(.default, value: huntDeletionAlertIsShown)
       .navigationTitle(L10n.SimpleConstants.hunts)
+      #if DEBUG
       .toolbar {
         Button("Delete all") {
           for hunt in hunts {
@@ -57,6 +58,7 @@ struct HuntListView: View {
           try? PersistenceController.shared.context.save()
         }
       }
+      #endif
     }
   }
 }

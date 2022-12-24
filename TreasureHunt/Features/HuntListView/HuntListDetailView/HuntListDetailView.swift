@@ -76,7 +76,7 @@ extension HuntListDetailView {
       LazyView(HuntView(hunt: hunt))
         .toolbar(.hidden, for: .tabBar, .navigationBar)
     }
-    .shadow(radius: 5)
+    .shadow(radius: Constants.Shadows.secondLevel)
     .foregroundColor(.label)
     .buttonStyle(.borderedProminent)
     .controlSize(.large)

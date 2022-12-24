@@ -134,7 +134,7 @@ extension LocationsListView {
       .background(
         RoundedRectangle(cornerRadius: 16)
           .fill(.ultraThinMaterial)
-          .shadow(radius: 8)
+          .shadow(radius: Constants.Shadows.secondLevel)
           .overlay(alignment: .topTrailing) {
             Image(systemName: "x.circle.fill")
               .font(.title2)

@@ -43,7 +43,7 @@ struct LocationsListRowView: View {
     .background(
       RoundedRectangle(cornerRadius: 8)
         .fill(.regularMaterial)
-        .shadow(radius: 4)
+        .shadow(radius: Constants.Shadows.firstLevel)
     )
     .listRowInsets(.init(top: 10, leading: 10, bottom: 10, trailing: 10))
     .listRowSeparator(.hidden)

@@ -29,7 +29,7 @@ struct SuccessPopover<PresetingOn>: View where PresetingOn: View {
         .background(
           RoundedRectangle(cornerRadius: Constants.cornerRadius)
             .fill(.ultraThinMaterial)
-            .shadow(radius: 3)
+            .shadow(radius: Constants.Shadows.firstLevel)
         )
         .padding(30)
         .onAppear {

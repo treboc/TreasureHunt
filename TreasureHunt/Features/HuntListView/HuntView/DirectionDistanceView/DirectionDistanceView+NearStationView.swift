@@ -54,11 +54,11 @@ extension DirectionView {
       .background(
         RoundedRectangle(cornerRadius: 16)
           .fill(.thinMaterial)
-          .shadow(radius: 5)
+          .shadow(radius: Constants.Shadows.firstLevel)
       )
       .padding(.horizontal)
       .transition(.opacity.combined(with: .scale))
-      .shadow(radius: 5)
+      .shadow(radius: Constants.Shadows.firstLevel)
       .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
     }
   }

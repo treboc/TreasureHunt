@@ -28,7 +28,7 @@ extension HuntListDetailView {
           .background(
             RoundedRectangle(cornerRadius: Constants.cornerRadius)
               .fill(.tint)
-              .shadow(radius: 3)
+              .shadow(radius: Constants.Shadows.firstLevel)
           )
           .offset(x: 10, y: -(size.height / 2) - 10)
       }

@@ -18,4 +18,10 @@ enum Constants {
 
   static let cornerRadius: CGFloat = 8
   static let rowSpacing: CGFloat = 8
+
+  enum Shadows {
+    static let border: CGFloat = 1
+    static let firstLevel: CGFloat = 4
+    static let secondLevel: CGFloat = 8
+  }
 }

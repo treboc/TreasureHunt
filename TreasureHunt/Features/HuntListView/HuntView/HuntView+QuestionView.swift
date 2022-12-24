@@ -28,7 +28,7 @@ extension HuntView {
         .background(
           RoundedRectangle(cornerRadius: 16)
             .fill(.ultraThinMaterial)
-            .shadow(radius: 5, y: 5)
+            .shadow(radius: Constants.Shadows.firstLevel)
         )
         Spacer()
 
@@ -37,7 +37,7 @@ extension HuntView {
           .padding(50)
           .controlSize(.large)
           .buttonStyle(.borderedProminent)
-          .shadow(radius: 5)
+          .shadow(radius: Constants.Shadows.firstLevel)
       }
       .padding()
       .interactiveDismissDisabled()
