@@ -14,6 +14,7 @@ struct THToggle: View {
   var body: some View {
     HStack {
       Text("Yes")
+        .foregroundColor(isSelected ? .label : .primary)
         .padding(.vertical, 6)
         .padding(.horizontal)
         .background(toggleBackground(isSelected, namespace: selection))
@@ -21,6 +22,7 @@ struct THToggle: View {
         .onTapGesture(perform: toggleIntroduction)
 
       Text("No")
+        .foregroundColor(!isSelected ? .label : .primary)
         .padding(.vertical, 6)
         .padding(.horizontal)
         .background(toggleBackground(!isSelected, namespace: selection))
