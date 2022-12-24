@@ -26,7 +26,7 @@ struct LocationsListRowView: View {
       VStack(alignment: .trailing) {
         Text(locationProvider.distanceTo(location.location))
           .font(.system(.footnote, design: .rounded))
-        Text(L10n.HuntListDetailRowView.distanceFromHere)
+        Text(L10n.HuntListDetailRowView.distance)
           .font(.system(.caption, design: .rounded, weight: .light))
       }
     }

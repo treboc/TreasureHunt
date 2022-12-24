@@ -24,8 +24,7 @@ extension HuntListDetailView {
       .roundedBackground(shadowRadius: Constants.Shadows.secondLevel)
       .readSize(onChange: setTitleLabelOffset)
       .overlay(alignment: .leading) {
-        Text("Stations")
-          .foregroundColor(.label)
+        Text(L10n.HuntListDetailView.StationsList.title)          .foregroundColor(.label)
           .padding(10)
           .background(
             RoundedRectangle(cornerRadius: Constants.cornerRadius)

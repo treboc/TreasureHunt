@@ -140,23 +140,27 @@ internal enum L10n {
   }
   internal enum HuntListDetailRowView {
     /// Distance
-    internal static let distanceFromHere = L10n.tr("Localizable", "huntListDetailRowView.distanceFromHere", fallback: "Distance")
-    /// Question
-    internal static let question = L10n.tr("Localizable", "huntListDetailRowView.question", fallback: "Question")
-    /// Stations Name
-    internal static let stationName = L10n.tr("Localizable", "huntListDetailRowView.stationName", fallback: "Stations Name")
+    internal static let distance = L10n.tr("Localizable", "huntListDetailRowView.distance", fallback: "Distance")
   }
   internal enum HuntListDetailView {
-    /// Created On
-    internal static let createdAt = L10n.tr("Localizable", "huntListDetailView.createdAt", fallback: "Created On")
-    /// Name
-    internal static let huntName = L10n.tr("Localizable", "huntListDetailView.huntName", fallback: "Name")
-    /// Edit Hunt
-    internal static let noStationsEditHuntButtonTitle = L10n.tr("Localizable", "huntListDetailView.noStationsEditHuntButtonTitle", fallback: "Edit Hunt")
-    /// This hunt has no stations yet, please at atleast one.
-    internal static let noStationsPlaceholderText = L10n.tr("Localizable", "huntListDetailView.noStationsPlaceholderText", fallback: "This hunt has no stations yet, please at atleast one.")
+    /// Created at
+    internal static let createdAt = L10n.tr("Localizable", "huntListDetailView.createdAt", fallback: "Created at")
+    /// Title
+    internal static let huntName = L10n.tr("Localizable", "huntListDetailView.huntName", fallback: "Title")
     /// Start Hunt
     internal static let startHuntButtonTitle = L10n.tr("Localizable", "huntListDetailView.startHuntButtonTitle", fallback: "Start Hunt")
+    internal enum IntroductionView {
+      /// Intro
+      internal static let title = L10n.tr("Localizable", "huntListDetailView.introductionView.title", fallback: "Intro")
+    }
+    internal enum OutroView {
+      /// Outro
+      internal static let title = L10n.tr("Localizable", "huntListDetailView.outroView.title", fallback: "Outro")
+    }
+    internal enum StationsList {
+      /// Stations
+      internal static let title = L10n.tr("Localizable", "huntListDetailView.stationsList.title", fallback: "Stations")
+    }
   }
   internal enum HuntListRowView {
     /// Created: 

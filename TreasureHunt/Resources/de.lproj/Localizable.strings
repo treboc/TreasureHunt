@@ -57,6 +57,9 @@
 // HuntListDetailView+OutroView
 "huntListDetailView.outroView.title" = "Outro";
 
+// HuntListDetailRowView
+"huntListDetailRowView.distance" = "Distanz";
+
 // AddHuntView
 // AddHuntView+NamePage
 "addHuntView.namePage.name" = "Name";

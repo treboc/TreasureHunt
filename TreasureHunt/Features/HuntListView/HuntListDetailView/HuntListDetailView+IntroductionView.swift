@@ -21,7 +21,7 @@ extension HuntListDetailView {
       .roundedBackground(shadowRadius: Constants.Shadows.secondLevel)
       .readSize(onChange: setTitleLabelOffset)
       .overlay(alignment: .leading) {
-        Text("Introduction")
+        Text(L10n.HuntListDetailView.IntroductionView.title)
           .foregroundColor(.label)
           .padding(10)
           .background(

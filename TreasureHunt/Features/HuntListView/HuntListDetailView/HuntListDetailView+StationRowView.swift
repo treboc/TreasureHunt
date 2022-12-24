@@ -30,7 +30,7 @@ extension HuntListDetailView {
               Text(locationProvider.distanceTo(station.location?.location))
                 .font(.system(.subheadline, design: .rounded))
 
-              Text(L10n.HuntListDetailRowView.distanceFromHere.localizedUppercase)
+              Text(L10n.HuntListDetailRowView.distance.localizedUppercase)
                 .font(.system(.caption2, design: .rounded))
                 .foregroundColor(.secondary)
             }
