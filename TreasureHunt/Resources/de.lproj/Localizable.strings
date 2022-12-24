@@ -10,6 +10,8 @@
 "simpleConstants.hunts" = "Jagd";
 "simpleConstants.station" = "Station";
 "simpleConstants.stations" = "Stationen";
+"simpleConstants.yes" = "Ja";
+"simpleConstants.no" = "Nein";
 
 // ButtonTitles
 "btnTitle.delete" = "Löschen";
@@ -17,12 +19,14 @@
 "btnTitle.save" = "Speichern";
 "btnTitle.cancel" = "Abbrechen";
 "btnTitle.iAmSure" = "Ja, ich bin sicher.";
+"btnTitle.back" = "Zurück";
+"btnTitle.next" = "Weiter";
 
 // Alerts
 "alert.deleteHunt.title" = "Bist du sicher?";
 "alert.deleteHunt.message" = "Die Jagd wird gelöscht. Dies kann nicht rückgängig gemacht werden.";
 "alert.deleteStation.title" = "Bist du sicher?";
-"alert.deleteStation.message" = "Die ausgewählte Station wird gelöscht und aus jeder Jagd entfernt, in der sie genutzt wird. Dies kann nicht rückgängig gemacht werden."; //
+"alert.deleteStation.message" = "Die ausgewählte Station wird gelöscht und aus jeder Jagd entfernt, in der sie genutzt wird. Dies kann nicht rückgängig gemacht werden.";
 
 // A11yLabels
 "a11yLabel.createHunt" = "Jagd Erstellen";
@@ -51,20 +55,32 @@
 "huntListDetailRowView.question" = "Aufgabe";
 
 // AddHuntView
-"addHuntView.name" = "Name der Jagd";
-"addHuntView.namePlaceholder" = "Kindergeburtstag 🎁";
+// AddHuntView+NamePage
+"addHuntView.namePage.name" = "Name";
+"addHuntView.namePage.nameHint" = "Nur notwendig, damit du sie hinterher wieder findest.";
+"addHuntView.namePage.namePlaceholder" = "z.B. Kindergeburtstag 🥳";
+
+// AddHuntView+IntroductionPage
+"addHuntView.introductionPage.hasHuntIntroduction" = "Hat deine Jagd eine Einleitung?";
+"addHuntView.introductionPage.hasHuntIntroductionHint" = "Hier könntest du eine Einleitung für deine Jagd einfügen. Dieser Text wird angezeigt, wenn du deine Jagd startest.";
+"addHuntView.introductionPage.textFieldPlaceholder" = "Einleitung zu deiner Jagd";
+
+// AddHuntView+StationsPicker
+"addHuntView.stationsPicker.title" = "Die Stationen";
+"addHuntView.stationsPicker.description" = "Hier erstellst du die Stationen, die später in der Jagd passiert werden sollen.";
+"addHuntView.stationsPicker.addStation" = "Erstelle eine Station";
+
+// AddHuntView+OutroPage
+"addHuntView.outroPage.hasHuntOutro" = "Soll deine Jagd ein Outro haben?";
+"addHuntView.outroPage.hasHuntOutroDescription" = "Hier könntest du dann ein Outro für deine Jagd einfügen. Dieser Text wird angezeigt, wenn die Jagd endet und der dazugehörige Ort erreicht wurde.";
+"addHuntView.outroPage.textFieldPlaceholder" = "Outro zu deiner Jagd";
+
 "addHuntView.editStations" = "Stationen wählen";
 "addHuntView.chosenStations %@" = "Ausgewählte Stationen (%@ / 50)";
 "addHuntView.noChosenStations" = "Noch keine Station ausgewählt";
 "addHuntView.navTitle" = "Neue Jagd";
 "addHuntView.overview" = "Übersicht";
 "addHuntView.stationsOverview" = "Übersicht über alle Stationen";
-
-// StationsPicker
-"stationsPicker.navTitle" = "Wähle Stationen";
-"stationsPicker.addStationButtonTitle" = "Station erstellen";
-"stationsPicker.noChosenStations" = "Noch keine Station gewählt";
-"stationsPicker.availableStations" = "Verfügbare Stationen";
 
 // LocationsListView
 "locationsListView.navTitle" = "Standorte";

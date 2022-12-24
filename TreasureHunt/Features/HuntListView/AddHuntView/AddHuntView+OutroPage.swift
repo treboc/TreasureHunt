@@ -12,7 +12,6 @@ extension AddHuntView {
     @EnvironmentObject private var locationProvider: LocationProvider
     @EnvironmentObject private var viewModel: AddHuntViewModel
     @FocusState var isFocused
-
     @State private var outlineLocationSelectionSheetIsShown: Bool = false
 
     var body: some View {
@@ -21,9 +20,9 @@ extension AddHuntView {
 
         VStack(alignment: .leading, spacing: Constants.rowSpacing) {
           VStack(alignment: .leading, spacing: 0) {
-            Text("Does your hunt has an outline?")
+            Text(L10n.AddHuntView.OutroPage.hasHuntOutro)
               .font(.system(.title3, design: .rounded, weight: .semibold))
-            Text("Let your hunt end with some text, if you want. This will be displayed when reaching the last station.")
+            Text(L10n.AddHuntView.OutroPage.hasHuntOutroDescription)
               .font(.system(.footnote, design: .rounded, weight: .regular))
               .foregroundColor(.secondary)
           }
@@ -31,22 +30,20 @@ extension AddHuntView {
           THToggle(isSelected: $viewModel.hunt.hasOutro)
 
           if viewModel.hunt.hasOutro {
-            TextField("This text will show up.",
-                      text: $viewModel.hunt.outro.boundString,
-                      axis: .vertical)
+            Group {
+              TextField(L10n.AddHuntView.OutroPage.textFieldPlaceholder,
+                        text: $viewModel.hunt.outro.boundString,
+                        axis: .vertical)
               .lineLimit(3...10)
               .padding()
-              .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: Constants.cornerRadius))
-              .transition(.opacity.combined(with: .move(edge: .bottom)))
+              .roundedBackground(shadowRadius: Constants.Shadows.firstLevel)
               .focused($isFocused)
-              .onChange(of: viewModel.pageIdx) { index in
-                if index != .name {
-                  isFocused = false
-                }
-              }
+              .onChange(of: viewModel.pageIndex, perform: dismissFocusOnChangeOf)
 
-            selectableLocationView
-              .transition(.opacity.combined(with: .move(edge: .bottom)))
+              selectableLocationView
+                .roundedBackground(shadowRadius: Constants.Shadows.firstLevel)
+            }
+            .transition(.opacity.combined(with: .move(edge: .bottom)))
           }
         }
         .sheet(isPresented: $outlineLocationSelectionSheetIsShown) {
@@ -56,11 +53,7 @@ extension AddHuntView {
       .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
       .animation(.easeInOut(duration: 0.3), value: viewModel.hunt.hasOutro)
       .padding()
-      .onTapGesture {
-        if isFocused {
-          isFocused = false
-        }
-      }
+      .onTapGesture { dismissFocus() }
     }
 
     private var selectableLocationView: some View {
@@ -90,16 +83,25 @@ extension AddHuntView {
       }
       .padding(.vertical, 4)
       .padding()
-      .background(
-        RoundedRectangle(cornerRadius: Constants.cornerRadius)
-          .fill(.regularMaterial)
-      )
       .contentShape(Rectangle())
       .onTapGesture {
         outlineLocationSelectionSheetIsShown = true
       }
     }
+
+    private func dismissFocusOnChangeOf(_ index: AddHuntView.PageSelection) {
+      if index != .name {
+        isFocused = false
+      }
+    }
+
+    private func dismissFocus() {
+      if isFocused {
+        isFocused = false
+      }
+    }
   }
+
 
   //MARK: - LocationPicker
   struct LocationPicker: View {
@@ -163,6 +165,7 @@ extension AddHuntView {
       .background(
         RoundedRectangle(cornerRadius: Constants.cornerRadius)
           .fill(.regularMaterial)
+          .shadow(radius: Constants.Shadows.border)
       )
       .contentShape(Rectangle())
     }

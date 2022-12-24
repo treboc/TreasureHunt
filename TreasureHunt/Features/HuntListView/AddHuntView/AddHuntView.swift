@@ -28,7 +28,7 @@ struct AddHuntView: View {
     VStack {
       navButtonStack()
 
-      switch viewModel.pageIdx {
+      switch viewModel.pageIndex {
       case .name:
         NamePage()
           .transition(.pageTransition(viewModel.isBack))
@@ -40,10 +40,12 @@ struct AddHuntView: View {
           .transition(.pageTransition(viewModel.isBack))
       case .outro:
         OutroPage()
+      case .outro:
+        OutroPage()
           .transition(.pageTransition(viewModel.isBack))
       }
     }
-    .onChange(of: viewModel.pageIdx) { _ in
+    .onChange(of: viewModel.pageIndex) { _ in
       HapticManager.shared.impact(style: .medium)
     }
     .toolbar(content: toolbarContent)
@@ -76,17 +78,17 @@ extension AddHuntView {
 
   private func navButtonStack() -> some View {
     HStack {
-      Button("Back", action: viewModel.backButtonTapped)
+      Button(L10n.BtnTitle.back, action: viewModel.backButtonTapped)
         .buttonStyle(.bordered)
-        .opacity(viewModel.pageIdx == .name ? 0 : 1)
+        .opacity(viewModel.pageIndex == .name ? 0 : 1)
 
       Spacer()
       addHuntProgressCircularView
       Spacer()
 
-      Button("Next", action: viewModel.nextButtonTapped)
+      Button(L10n.BtnTitle.next, action: viewModel.nextButtonTapped)
         .buttonStyle(.bordered)
-        .opacity(viewModel.pageIdx == .outro ? 0 : 1)
+        .opacity(viewModel.pageIndex == .outro ? 0 : 1)
     }
     .padding(.horizontal)
   }
@@ -96,7 +98,7 @@ extension AddHuntView {
 
     return ZStack {
       Circle()
-        .trim(from: 0, to: CGFloat(viewModel.pageIdx.rawValue + 1) * 0.25)
+        .trim(from: 0, to: CGFloat(viewModel.pageIndex.rawValue + 1) * 0.25)
         .stroke(foregroundColor, style: StrokeStyle(lineWidth: 5, lineCap: .round, lineJoin: .round))
         .rotationEffect(.degrees(90))
 
@@ -104,12 +106,12 @@ extension AddHuntView {
         Image(systemName: "checkmark")
           .font(.system(.headline, design: .rounded))
       } else {
-        Text("\(viewModel.pageIdx.rawValue + 1)")
+        Text("\(viewModel.pageIndex.rawValue + 1)")
           .font(.system(.headline, design: .rounded))
       }
     }
     .foregroundColor(foregroundColor)
     .frame(height: 30)
-    .animation(.default, value: viewModel.pageIdx)
+    .animation(.default, value: viewModel.pageIndex)
   }
 }
