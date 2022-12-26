@@ -50,7 +50,7 @@
 		45B0DF9C2946476A002942F0 /* THStationModelService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B0DF9B2946476A002942F0 /* THStationModelService.swift */; };
 		45B0DF9E2947677E002942F0 /* HuntListDetailView+IntroductionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B0DF9D2947677E002942F0 /* HuntListDetailView+IntroductionView.swift */; };
 		45B0DFA0294767C1002942F0 /* HuntListDetailView+OutlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B0DF9F294767C1002942F0 /* HuntListDetailView+OutlineView.swift */; };
-		45B7EFE528F4BCC6006AE0FB /* SoundType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B7EFE428F4BCC6006AE0FB /* SoundType.swift */; };
+		45B7EFE528F4BCC6006AE0FB /* AudioPlayer+SoundType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B7EFE428F4BCC6006AE0FB /* AudioPlayer+SoundType.swift */; };
 		45B7EFEB28F4BDE1006AE0FB /* error.wav in Resources */ = {isa = PBXBuildFile; fileRef = 45B7EFE928F4BDE1006AE0FB /* error.wav */; };
 		45B7EFEC28F4BDE1006AE0FB /* success.wav in Resources */ = {isa = PBXBuildFile; fileRef = 45B7EFEA28F4BDE1006AE0FB /* success.wav */; };
 		45D56EEC28F3F06A0008BC3A /* THHuntModelService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D56EEB28F3F06A0008BC3A /* THHuntModelService.swift */; };
@@ -143,7 +143,7 @@
 		45B0DF9B2946476A002942F0 /* THStationModelService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = THStationModelService.swift; sourceTree = "<group>"; };
 		45B0DF9D2947677E002942F0 /* HuntListDetailView+IntroductionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HuntListDetailView+IntroductionView.swift"; sourceTree = "<group>"; };
 		45B0DF9F294767C1002942F0 /* HuntListDetailView+OutlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HuntListDetailView+OutlineView.swift"; sourceTree = "<group>"; };
-		45B7EFE428F4BCC6006AE0FB /* SoundType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundType.swift; sourceTree = "<group>"; };
+		45B7EFE428F4BCC6006AE0FB /* AudioPlayer+SoundType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AudioPlayer+SoundType.swift"; sourceTree = "<group>"; };
 		45B7EFE928F4BDE1006AE0FB /* error.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = error.wav; sourceTree = "<group>"; };
 		45B7EFEA28F4BDE1006AE0FB /* success.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = success.wav; sourceTree = "<group>"; };
 		45D56EEB28F3F06A0008BC3A /* THHuntModelService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = THHuntModelService.swift; sourceTree = "<group>"; };
@@ -358,7 +358,7 @@
 			isa = PBXGroup;
 			children = (
 				45E188C628F5451700A055BD /* AudioPlayer.swift */,
-				45B7EFE428F4BCC6006AE0FB /* SoundType.swift */,
+				45B7EFE428F4BCC6006AE0FB /* AudioPlayer+SoundType.swift */,
 			);
 			path = AudioPlayer;
 			sourceTree = "<group>";
@@ -662,7 +662,7 @@
 				458BE2C0293CA9DE00869ADF /* THHunt+CoreDataProperties.swift in Sources */,
 				8A4C4F8F28E1C0E100721C50 /* MainTabView.swift in Sources */,
 				451B5AA5294075C7005DCBCA /* AddStationView.swift in Sources */,
-				45B7EFE528F4BCC6006AE0FB /* SoundType.swift in Sources */,
+				45B7EFE528F4BCC6006AE0FB /* AudioPlayer+SoundType.swift in Sources */,
 				45F99CE5290BFFBF0050AC6F /* HuntListDetailView+StationRowView.swift in Sources */,
 				45B0DFA0294767C1002942F0 /* HuntListDetailView+OutlineView.swift in Sources */,
 				8A4C4F9428E1D9BB00721C50 /* Array+Extension.swift in Sources */,
