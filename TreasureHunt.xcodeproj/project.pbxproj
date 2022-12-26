@@ -297,7 +297,9 @@
 		458BE2A2293C88BE00869ADF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				45EDD408292A9CE600C8EF86 /* THToggle.swift */,
 				45F4B53E293BD895001BD47C /* LazyView.swift */,
+				45916495292AA9E800037F44 /* THNumberedCircle.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -391,8 +393,6 @@
 				45E188C828F545C300A055BD /* AudioPlayer */,
 				8A4C4F9F28E20CBA00721C50 /* ArrowIconManager */,
 				8A4C4F9E28E2086300721C50 /* AppearanceManager */,
-				45EDD408292A9CE600C8EF86 /* THToggle.swift */,
-				45916495292AA9E800037F44 /* THNumberedCircle.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
