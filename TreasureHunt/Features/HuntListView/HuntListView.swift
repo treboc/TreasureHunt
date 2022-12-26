@@ -17,27 +17,23 @@ struct HuntListView: View {
 
   var body: some View {
     NavigationStack {
-      ZStack {
-        if hunts.isEmpty {
-          noHuntsPlaceholder
-        } else {
-          List {
-            ForEach(hunts, id: \.objectID) { hunt in
-              LazyView(
-                HuntListRowView(hunt: hunt)
-                  .invisibleNavigationLink {
-                    HuntListDetailView(hunt: hunt)
-                  }
-              )
-              .swipeActions {
-                swipeToDelete(hunt)
+      List {
+        ForEach(hunts, id: \.objectID) { hunt in
+          LazyView(
+            HuntListRowView(hunt: hunt)
+              .invisibleNavigationLink {
+                HuntListDetailView(hunt: hunt)
               }
-            }
-
-            createNewHuntButton
+          )
+          .swipeActions {
+            swipeToDelete(hunt)
           }
-          .listStyle(.plain)
         }
+        createNewHuntButton
+      }
+      .listStyle(.plain)
+      .emptyState(hunts.isEmpty) {
+        noHuntsPlaceholder
       }
       .scrollContentBackground(.hidden)
       .gradientBackground()
