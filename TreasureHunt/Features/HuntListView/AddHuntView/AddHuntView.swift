@@ -28,22 +28,19 @@ struct AddHuntView: View {
     VStack {
       navButtonStack()
 
-      switch viewModel.pageIndex {
-      case .name:
-        NamePage()
-          .transition(.pageTransition(viewModel.isBack))
-      case .intro:
-        IntroductionPage()
-          .transition(.pageTransition(viewModel.isBack))
-      case .stations:
-        StationsPicker()
-          .transition(.pageTransition(viewModel.isBack))
-      case .outro:
-        OutroPage()
-      case .outro:
-        OutroPage()
-          .transition(.pageTransition(viewModel.isBack))
+      Group {
+        switch viewModel.pageIndex {
+        case .name:
+          NamePage()
+        case .intro:
+          IntroductionPage()
+        case .stations:
+          StationsPicker()
+        case .outro:
+          OutroPage()
+        }
       }
+      .transition(.pageTransition(viewModel.isBack))
     }
     .onChange(of: viewModel.pageIndex) { _ in
       HapticManager.shared.impact(style: .medium)
