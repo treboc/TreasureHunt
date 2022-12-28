@@ -25,13 +25,21 @@ struct TrafficWarningView: View {
         
         Text(L10n.HuntView.TrafficWarningView.message)
           .frame(maxWidth: .infinity, alignment: .leading)
-        
-        Button(L10n.HuntView.TrafficWarningView.buttonTitle) {
+
+        Button {
           withAnimation {
             warningRead = true
           }
+        } label: {
+          Text(L10n.HuntView.TrafficWarningView.buttonTitle)
+            .foregroundColor(.label)
+            .padding()
+            .background(
+              RoundedRectangle(cornerRadius: Constants.cornerRadius)
+                .fill(Color.accentColor)
+                .shadow(radius: Constants.Shadows.firstLevel)
+            )
         }
-        .buttonStyle(.borderedProminent)
         .padding(.bottom)
       }
       .padding()

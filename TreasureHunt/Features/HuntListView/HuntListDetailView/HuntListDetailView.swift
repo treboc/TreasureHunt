@@ -60,14 +60,20 @@ extension HuntListDetailView {
   }
 
   private var startHuntButton: some View {
-    NavigationLink(L10n.HuntListDetailView.startHuntButtonTitle) {
+    NavigationLink {
       LazyView(HuntView(hunt: hunt))
         .toolbar(.hidden, for: .tabBar, .navigationBar)
+    } label: {
+      Text(L10n.HuntListDetailView.startHuntButtonTitle)
+        .foregroundColor(.label)
+        .padding()
+        .background(
+          RoundedRectangle(cornerRadius: Constants.cornerRadius)
+            .fill(Color.accentColor)
+            .shadow(radius: Constants.Shadows.firstLevel)
+        )
     }
-    .shadow(radius: Constants.Shadows.secondLevel)
-    .foregroundColor(.label)
-    .buttonStyle(.borderedProminent)
-    .controlSize(.large)
+    .buttonStyle(.plain)
     .disabled(!isValidHunt())
   }
 
