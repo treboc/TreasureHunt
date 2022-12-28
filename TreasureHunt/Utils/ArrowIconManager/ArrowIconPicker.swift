@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ArrowIconPicker: View {
+  @EnvironmentObject var themeManager: ThemeManager
   @AppStorage("arrowIcon") private var arrowIcon: ArrowIcon = .locationNorthFill
 
   var body: some View {
@@ -20,6 +21,7 @@ struct ArrowIconPicker: View {
     .pickerStyle(.menu)
     .accessibilityElement()
     .accessibilityLabel(Text("\(arrowIcon.name)"))
+    .rebuildOnChange(of: themeManager.tintColor)
   }
 }
 

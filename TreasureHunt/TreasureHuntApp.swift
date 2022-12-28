@@ -8,6 +8,7 @@ import SwiftUI
 @main
 struct TreasureHuntApp: App {
   @StateObject private var appearanceManager = AppearanceManager()
+  @StateObject private var themeManager = ThemeManager()
   @StateObject private var locationProvider = LocationProvider()
 
   @AppStorage(UserDefaults.SettingsKeys.locationAuthViewIsShown)
@@ -24,8 +25,9 @@ struct TreasureHuntApp: App {
         .sheet(isPresented: $locationOnboardingIsShown, content: LocationAuthorizationOnboardingView.init)
         .environment(\.managedObjectContext, PersistenceController.shared.context)
         .environmentObject(appearanceManager)
+        .environmentObject(themeManager)
         .environmentObject(locationProvider)
-        .tint(.primaryAccentColor)
+        .tint(themeManager.tintColor)
     }
   }
 

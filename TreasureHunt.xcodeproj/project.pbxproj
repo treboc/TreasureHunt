@@ -44,6 +44,7 @@
 		45A1A50A2951BDC700E43E2B /* DirectionDistanceView+NearStationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A1A5092951BDC700E43E2B /* DirectionDistanceView+NearStationView.swift */; };
 		45A72110295078B20068DAF7 /* HuntView+BackgroundMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7210F295078B20068DAF7 /* HuntView+BackgroundMap.swift */; };
 		45A77A0629599A8E002C88B9 /* EmptyState+ViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A77A0529599A8E002C88B9 /* EmptyState+ViewModifier.swift */; };
+		45A77A092959A436002C88B9 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A77A082959A436002C88B9 /* ThemeManager.swift */; };
 		45A77A0B2959AB0A002C88B9 /* RebuildableView+ViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A77A0A2959AB0A002C88B9 /* RebuildableView+ViewModifier.swift */; };
 		45A8CEE728EA228500F19E67 /* HuntViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A8CEE628EA228500F19E67 /* HuntViewModel.swift */; };
 		45ABD0B9290AA9CF0010E1EF /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ABD0B8290AA9CF0010E1EF /* L10n.swift */; };
@@ -136,6 +137,7 @@
 		45A1A5092951BDC700E43E2B /* DirectionDistanceView+NearStationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DirectionDistanceView+NearStationView.swift"; sourceTree = "<group>"; };
 		45A7210F295078B20068DAF7 /* HuntView+BackgroundMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HuntView+BackgroundMap.swift"; sourceTree = "<group>"; };
 		45A77A0529599A8E002C88B9 /* EmptyState+ViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EmptyState+ViewModifier.swift"; sourceTree = "<group>"; };
+		45A77A082959A436002C88B9 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
 		45A77A0A2959AB0A002C88B9 /* RebuildableView+ViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RebuildableView+ViewModifier.swift"; sourceTree = "<group>"; };
 		45A8CEE628EA228500F19E67 /* HuntViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuntViewModel.swift; sourceTree = "<group>"; };
 		45ABD0B5290AA6630010E1EF /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -327,6 +329,15 @@
 			path = DirectionDistanceView;
 			sourceTree = "<group>";
 		};
+		45A77A072959A428002C88B9 /* ThemeManager */ = {
+			isa = PBXGroup;
+			children = (
+				45A77A082959A436002C88B9 /* ThemeManager.swift */,
+			);
+			name = ThemeManager;
+			path = AppearanceManager/ThemeManager;
+			sourceTree = "<group>";
+		};
 		45B7EFE828F4BDE1006AE0FB /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
@@ -394,6 +405,7 @@
 				458F90E428EAACB300F9BE29 /* HapticsManager.swift */,
 				45E188C828F545C300A055BD /* AudioPlayer */,
 				8A4C4F9F28E20CBA00721C50 /* ArrowIconManager */,
+				45A77A072959A428002C88B9 /* ThemeManager */,
 				8A4C4F9E28E2086300721C50 /* AppearanceManager */,
 			);
 			path = Utils;
@@ -640,6 +652,7 @@
 				45D56EEC28F3F06A0008BC3A /* THHuntModelService.swift in Sources */,
 				458F90E728EAAEB200F9BE29 /* UserDefaults+Keys.swift in Sources */,
 				458BE2BF293CA9DE00869ADF /* THHunt+CoreDataClass.swift in Sources */,
+				45A77A092959A436002C88B9 /* ThemeManager.swift in Sources */,
 				458F90E928EAB15500F9BE29 /* Double+Extension.swift in Sources */,
 				8A4C4F9128E1C0F100721C50 /* SettingsView.swift in Sources */,
 				F212393128CA539C006754E3 /* TreasureHuntApp.swift in Sources */,
@@ -857,7 +870,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = PrimaryAccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TreasureHunt/Preview Content\"";
@@ -888,7 +900,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = PrimaryAccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TreasureHunt/Preview Content\"";

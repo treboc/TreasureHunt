@@ -11,7 +11,10 @@ struct HuntView: View {
   @StateObject private var huntManager: HuntManager
   @StateObject private var vm = HuntViewModel()
   
-  init(locationProvider: LocationProvider = LocationProvider(), hunt: THHunt) {
+  init(
+    locationProvider: LocationProvider = LocationProvider(),
+    hunt: THHunt
+  ) {
     let huntManger = HuntManager(locationProvider: locationProvider, hunt)
     _huntManager = StateObject(wrappedValue: huntManger)
   }
@@ -50,6 +53,7 @@ struct HuntView: View {
     }
     .onAppear(perform: vm.applyIdleDimmingSetting)
     .onDisappear(perform: vm.disableIdleDimming)
+    .tint(.accentColor)
   }
 }
 
@@ -100,12 +104,12 @@ extension HuntView {
             .shadow(radius: Constants.Shadows.firstLevel)
         )
         .frame(width: 44, height: 44, alignment: .center)
-        .foregroundColor(.primaryAccentColor)
+        .foregroundColor(.accentColor)
         .onTapGesture(perform: vm.endHuntButtonTapped)
         .padding([.bottom, .leading], 20)
     }
   }
-  
+
   @ViewBuilder
   private var roundShowMapButton: some View {
     if huntManager.isNearCurrentLocation == false {
@@ -118,7 +122,7 @@ extension HuntView {
             .shadow(radius: Constants.Shadows.firstLevel)
         )
         .frame(width: 44, height: 44, alignment: .center)
-        .foregroundColor(.primaryAccentColor)
+        .foregroundColor(.accentColor)
         .pressAction(onPress: vm.showMap, onRelease: vm.hideMap)
         .padding([.bottom, .trailing], 20)
     }

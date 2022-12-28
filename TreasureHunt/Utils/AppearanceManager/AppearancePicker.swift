@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AppearancePicker: View {
  @EnvironmentObject var appearanceManager: AppearanceManager
+ @EnvironmentObject var themeManager: ThemeManager
 
  var body: some View {
   Picker(L10n.SettingsView.AppearancePicker.title, selection: $appearanceManager.appearance) {
@@ -19,5 +20,6 @@ struct AppearancePicker: View {
   .pickerStyle(.menu)
   .accessibilityElement()
   .accessibilityLabel(Text("\(L10n.SettingsView.AppearancePicker.title), \(appearanceManager.appearance.title)"))
+  .rebuildOnChange(of: themeManager.tintColor)
  }
 }
