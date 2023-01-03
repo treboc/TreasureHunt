@@ -7,12 +7,18 @@
 
 import SwiftUI
 
+extension Color {
+  static let labelColor: Color = ThemeManager.shared.theme.labelColor
+}
+
 public class ThemeManager: ObservableObject {
-  public enum Theme: String, CaseIterable {
+  public enum Theme: String, CaseIterable, Identifiable {
     case orange
     case red
     case green
     case purple
+
+    public var id: String { self.rawValue }
 
     var tintColor: Color {
       switch self {
@@ -22,11 +28,19 @@ public class ThemeManager: ObservableObject {
       case .purple: return .purple
       }
     }
+
+    var labelColor: Color {
+      return tintColor.isDarkColor ? .white : .black
+    }
   }
 
   // MARK: - Private
   private static let themeKey = "theme"
-  @AppStorage(ThemeManager.themeKey) private var theme: Theme = .orange
+  @AppStorage(ThemeManager.themeKey) var theme: Theme = .orange
+
+  static let shared = ThemeManager()
+
+  private init() {}
 }
 
 extension ThemeManager {
@@ -41,6 +55,32 @@ extension ThemeManager {
 
   func currentThemeIsEqual(to theme: Theme) -> Bool {
     self.theme == theme
+  }
+}
+
+struct ThemeKey: EnvironmentKey {
+  static var defaultValue: ThemeManager.Theme = ThemeManager.shared.theme
+}
+
+extension EnvironmentValues {
+  var theme: ThemeManager.Theme {
+    get { self[ThemeKey.self] }
+    set { self[ThemeKey.self] = newValue }
+  }
+}
+
+struct ThemeModifier: ViewModifier {
+  @ObservedObject private var themeManger = ThemeManager.shared
+
+  func body(content: Content) -> some View {
+    content
+      .environment(\.theme, themeManger.theme)
+  }
+}
+
+extension View {
+  func themed() -> some View {
+    modifier(ThemeModifier())
   }
 }
 

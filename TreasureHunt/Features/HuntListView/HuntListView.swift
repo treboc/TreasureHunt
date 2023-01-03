@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HuntListView: View {
   @EnvironmentObject private var locationProvider: LocationProvider
+  @Environment(\.theme) private var theme
   @State private var huntDeletionAlertIsShown: Bool = false
   @State private var huntToDelete: THHunt? = nil
 
@@ -117,11 +118,11 @@ extension HuntListView {
     Text(L10n.HuntListView.listPlaceholderButtonTitle)
       .fontWeight(.semibold)
       .frame(maxWidth: .infinity)
-      .foregroundColor(Color(uiColor: .systemBackground))
+      .foregroundColor(theme.labelColor)
       .padding()
       .background(
         RoundedRectangle(cornerRadius: Constants.cornerRadius)
-          .fill(Color.accentColor)
+          .fill(Color.accentColor.gradient)
       )
       .listRowInsets(.init(top: 10, leading: 10, bottom: 10, trailing: 10))
       .listRowSeparator(.hidden)

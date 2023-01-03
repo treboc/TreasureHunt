@@ -11,32 +11,30 @@ struct LocationsListView: View {
   @State private var newLocationSheetIsShown: Bool = false
   @State private var locationToEdit: THLocation? = nil
   @State private var locationToDelete: THLocation? = nil
+  @State private var lastLocationUpdateIsShown: Bool = true
 
   @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \THLocation.title, ascending: true)])
   private var locations: FetchedResults<THLocation>
 
   var body: some View {
     NavigationStack {
-      ZStack {
-        if locations.isEmpty {
+      locationsList
+        .emptyState(locations.isEmpty) {
           noLocationsPlaceholder
-        } else {
-          locationsList
         }
-      }
-      .safeAreaInset(edge: .bottom) {
-        locationUpdateInfoText
-      }
-      .gradientBackground()
-      .navigationTitle(L10n.LocationsListView.navTitle)
-      .roundedNavigationTitle()
-      .sheet(isPresented: $newLocationSheetIsShown) {
-        AddLocationView(location: locationProvider.currentLocation)
-      }
-      .sheet(item: $locationToEdit) { location in
-        AddLocationView(location: location)
-      }
-      .toolbar(content: toolbarContent)
+        .safeAreaInset(edge: .bottom) {
+          locationUpdateInfoText
+        }
+        .gradientBackground()
+        .navigationTitle(L10n.LocationsListView.navTitle)
+        .roundedNavigationTitle()
+        .sheet(isPresented: $newLocationSheetIsShown) {
+          AddLocationView(location: locationProvider.currentLocation)
+        }
+        .sheet(item: $locationToEdit) { location in
+          AddLocationView(location: location)
+        }
+        .toolbar(content: toolbarContent)
     }
   }
 }

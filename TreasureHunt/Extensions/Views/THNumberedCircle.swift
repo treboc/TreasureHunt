@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct THNumberedCircle: View {
+  @Environment(\.theme.tintColor) private var tintColor
   let number: Int
 
   var body: some View {
     Image(systemName: "\(number).circle.fill")
-      .foregroundColor(.accentColor)
+      .foregroundColor(tintColor)
       .font(.title3)
   }
 }

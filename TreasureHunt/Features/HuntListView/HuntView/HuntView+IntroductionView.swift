@@ -14,13 +14,17 @@ extension HuntView {
 
     var body: some View {
       NavigationView {
-        ScrollView(.vertical, showsIndicators: false) {
+        Group {
           if let introduction {
             VStack {
-              Text(introduction)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding()
-
+              ScrollView(.vertical, showsIndicators: false) {
+                Text(introduction)
+                  .frame(maxWidth: .infinity, alignment: .leading)
+                  .padding()
+              }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .overlay(alignment: .bottom) {
               Button("Let's go!", action: onDismiss)
                 .foregroundColor(.label)
                 .buttonStyle(.borderedProminent)

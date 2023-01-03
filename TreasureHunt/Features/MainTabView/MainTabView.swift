@@ -8,27 +8,30 @@
 import SwiftUI
 
 struct MainTabView: View {
+  @Environment(\.theme.tintColor) private var tintColor
+  
   var body: some View {
     TabView {
       HuntListView()
         .tabItem {
           Label(L10n.MainTabView.TabItem.huntList,
-                systemImage: "shippingbox")
+                systemImage: "signpost.right.and.left.circle")
         }
 
       LocationsListView()
         .tabItem {
           Label(L10n.MainTabView.TabItem.stationList,
-                systemImage: "dot.circle.and.hand.point.up.left.fill")
+                systemImage: "mappin.circle")
         }
 
       SettingsView()
         .tabItem {
           Label(L10n.MainTabView.TabItem.settings,
-                systemImage: "gear")
+                systemImage: "gear.circle")
         }
     }
     .toolbarBackground(.visible, for: .tabBar)
+    .tint(tintColor)
   }
 }
 

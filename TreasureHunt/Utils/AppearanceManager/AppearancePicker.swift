@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AppearancePicker: View {
  @EnvironmentObject var appearanceManager: AppearanceManager
- @EnvironmentObject var themeManager: ThemeManager
+ @ObservedObject var themeManager = ThemeManager.shared
 
  var body: some View {
   Picker(L10n.SettingsView.AppearancePicker.title, selection: $appearanceManager.appearance) {

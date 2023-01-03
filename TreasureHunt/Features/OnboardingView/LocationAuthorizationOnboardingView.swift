@@ -10,6 +10,7 @@ import CoreLocation
 
 struct LocationAuthorizationOnboardingView: View {
   @Environment(\.dismiss) private var dismiss
+  @Environment(\.theme.tintColor) private var tintColor
   @EnvironmentObject private var locationProvider: LocationProvider
 
   private var authorizationStatus: CLAuthorizationStatus {
@@ -27,6 +28,7 @@ struct LocationAuthorizationOnboardingView: View {
       }
     }
     .interactiveDismissDisabled()
+    .tint(tintColor)
   }
 }
 
@@ -88,7 +90,7 @@ extension LocationAuthorizationOnboardingView {
       VStack(alignment: .leading, spacing: 5) {
         Button {
           locationProvider.locationManager.requestWhenInUseAuthorization()
-          locationProvider.locationManager.requestLocation()
+//          locationProvider.locationManager.requestLocation()
         } label: {
           Label("Standort freigeben", systemImage: "location")
         }

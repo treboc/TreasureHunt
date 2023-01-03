@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ArrowIconPicker: View {
-  @EnvironmentObject var themeManager: ThemeManager
+  @ObservedObject private var themeManager = ThemeManager.shared
   @AppStorage("arrowIcon") private var arrowIcon: ArrowIcon = .locationNorthFill
 
   var body: some View {

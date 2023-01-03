@@ -80,6 +80,7 @@ extension LocationProvider: CLLocationManagerDelegate {
     case .authorizedWhenInUse, .authorizedAlways:
       print("authorizedWhenInUse")
       UserDefaults.standard.set(false, forKey: UserDefaults.SettingsKeys.locationAuthViewIsShown)
+      locationManager.requestLocation()
     default:
       self.error = .wrongAuthorization(manager.authorizationStatus)
       print("No authorization")

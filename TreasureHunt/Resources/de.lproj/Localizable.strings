@@ -172,5 +172,8 @@
 "settingsView.arrowPicker.locationNorth" = "Position";
 "settingsView.arrowPicker.locationNorthFill" = "Position (gefüllt)";
 
+// SettingsView => ThemePickerView
+"settingsView.themePickerView.accentColorDescription" = "Akzentfarbe";
+
 // SettingsView => LegalNoticeView
 "settingsView.legalNoticeView.navTitle" = "Impressum";

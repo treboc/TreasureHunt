@@ -281,6 +281,10 @@ internal enum L10n {
       /// Legal Notice
       internal static let navTitle = L10n.tr("Localizable", "settingsView.legalNoticeView.navTitle", fallback: "Legal Notice")
     }
+    internal enum ThemePickerView {
+      /// Akzentfarbe
+      internal static let accentColorDescription = L10n.tr("Localizable", "settingsView.themePickerView.accentColorDescription", fallback: "Akzentfarbe")
+    }
   }
   internal enum SimpleConstants {
     /// Localizable.strings

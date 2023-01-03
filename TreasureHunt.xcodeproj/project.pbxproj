@@ -56,6 +56,8 @@
 		45B7EFEB28F4BDE1006AE0FB /* error.wav in Resources */ = {isa = PBXBuildFile; fileRef = 45B7EFE928F4BDE1006AE0FB /* error.wav */; };
 		45B7EFEC28F4BDE1006AE0FB /* success.wav in Resources */ = {isa = PBXBuildFile; fileRef = 45B7EFEA28F4BDE1006AE0FB /* success.wav */; };
 		45D56EEC28F3F06A0008BC3A /* THHuntModelService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D56EEB28F3F06A0008BC3A /* THHuntModelService.swift */; };
+		45D90D1C295CFB0A00870DC0 /* ThemePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D90D1B295CFB0A00870DC0 /* ThemePickerView.swift */; };
+		45D90D1E295CFCB700870DC0 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D90D1D295CFCB700870DC0 /* UIColor+Extension.swift */; };
 		45DC5FCB292B7A5C00860167 /* AnyTransition+PageTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DC5FCA292B7A5C00860167 /* AnyTransition+PageTransition.swift */; };
 		45E188C728F5451700A055BD /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E188C628F5451700A055BD /* AudioPlayer.swift */; };
 		45EDD3FD29297F1300C8EF86 /* AddHuntView+NamePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EDD3FC29297F1300C8EF86 /* AddHuntView+NamePage.swift */; };
@@ -151,6 +153,8 @@
 		45B7EFE928F4BDE1006AE0FB /* error.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = error.wav; sourceTree = "<group>"; };
 		45B7EFEA28F4BDE1006AE0FB /* success.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = success.wav; sourceTree = "<group>"; };
 		45D56EEB28F3F06A0008BC3A /* THHuntModelService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = THHuntModelService.swift; sourceTree = "<group>"; };
+		45D90D1B295CFB0A00870DC0 /* ThemePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePickerView.swift; sourceTree = "<group>"; };
+		45D90D1D295CFCB700870DC0 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		45DC5FCA292B7A5C00860167 /* AnyTransition+PageTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnyTransition+PageTransition.swift"; sourceTree = "<group>"; };
 		45E188C628F5451700A055BD /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		45EDD3FC29297F1300C8EF86 /* AddHuntView+NamePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddHuntView+NamePage.swift"; sourceTree = "<group>"; };
@@ -333,6 +337,7 @@
 			isa = PBXGroup;
 			children = (
 				45A77A082959A436002C88B9 /* ThemeManager.swift */,
+				45D90D1B295CFB0A00870DC0 /* ThemePickerView.swift */,
 			);
 			name = ThemeManager;
 			path = AppearanceManager/ThemeManager;
@@ -470,6 +475,7 @@
 				458F90E828EAB15500F9BE29 /* Double+Extension.swift */,
 				454E91E529579D5D00A3BF25 /* Optional+BoundString.swift */,
 				458F90E628EAAEB200F9BE29 /* UserDefaults+Keys.swift */,
+				45D90D1D295CFCB700870DC0 /* UIColor+Extension.swift */,
 				8A52025028E0A23200C49779 /* ViewModifier */,
 				458BE2A2293C88BE00869ADF /* Views */,
 			);
@@ -698,6 +704,7 @@
 				45A1A50A2951BDC700E43E2B /* DirectionDistanceView+NearStationView.swift in Sources */,
 				454E91E429571B2500A3BF25 /* RoundedBackground+ViewModifier.swift in Sources */,
 				8A52024E28E0A21900C49779 /* HuntView.swift in Sources */,
+				45D90D1E295CFCB700870DC0 /* UIColor+Extension.swift in Sources */,
 				45FA5B522954664B00A02411 /* HuntView+OutlineView.swift in Sources */,
 				45A8CEE728EA228500F19E67 /* HuntViewModel.swift in Sources */,
 				458BE2B3293CA83A00869ADF /* PersistenceController.swift in Sources */,
@@ -722,6 +729,7 @@
 				458BE2C1293CA9DE00869ADF /* THStation+CoreDataClass.swift in Sources */,
 				45EDD405292A2BAA00C8EF86 /* DisableAnimation+ViewModifier.swift in Sources */,
 				45EDD409292A9CE600C8EF86 /* THToggle.swift in Sources */,
+				45D90D1C295CFB0A00870DC0 /* ThemePickerView.swift in Sources */,
 				451B5AA7294078E4005DCBCA /* InvisibleNavigationLink+ViewModifier.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

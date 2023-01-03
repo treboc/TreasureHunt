@@ -34,10 +34,10 @@ extension HuntListDetailView {
               .fill(.tint)
               .shadow(radius: Constants.Shadows.firstLevel)
           )
-          .offset(x: 10, y: -(size.height / 2) - 10)
+          .offset(x: 10, y: -(size.height / 2) - 15)
       }
       .padding(.horizontal)
-      .padding(.top, 30)
+      .padding(.top, 40)
     }
 
     private func setTitleLabelOffset(_ size: CGSize) {
